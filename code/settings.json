@@ -22,21 +22,19 @@
     "explorer.confirmDragAndDrop": false,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-
     // Formatting Optional.
-    "editor.formatOnSave": false,
-    "editor.formatOnPaste": false,
-    // "prettier.eslintIntegration": true,
-    // "eslint.run": "onType",
-    // "eslint.autoFixOnSave": true,
-
+    //"editor.formatOnSave": true,
+    //"editor.formatOnPaste": false,
+    //"html.format.indentInnerHtml": true,
+    //"html.format.wrapLineLength": 99999,
+    "eslint.run": "onType",
+    "eslint.autoFixOnSave": true,
     // MacOS Only Settings.
     "workbench.fontAliasing": "auto",
     "terminal.integrated.macOptionIsMeta": true,
     "workbench.statusBar.feedback.visible": false,
-
     // Misc Settings.
-    "editor.tabSize": 2,
+    "editor.tabSize": 1,
     "editor.multiCursorModifier": "ctrlCmd",
     "emmet.triggerExpansionOnTab": true,
     "window.zoomLevel": 0,
@@ -46,5 +44,8 @@
     "java.errors.incompleteClasspath.severity": "ignore",
     "nativescript.analytics.enabled": false,
     "vsicons.dontShowNewVersionMessage": true,
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "python.linting.enabled": false,
+    "python.venvPath": "~/Envs",
+    "python.pythonPath": "/Users/jukka/Venvs/bwa2018djangoproject/bin/python3"
 }
