@@ -22,18 +22,11 @@
     "explorer.confirmDragAndDrop": false,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    // Formatting Optional.
-    //"editor.formatOnSave": true,
-    //"editor.formatOnPaste": false,
-    //"html.format.indentInnerHtml": true,
-    //"html.format.wrapLineLength": 99999,
     "eslint.run": "onType",
     "eslint.autoFixOnSave": true,
-    // MacOS Only Settings.
     "workbench.fontAliasing": "auto",
     "terminal.integrated.macOptionIsMeta": true,
     "workbench.statusBar.feedback.visible": false,
-    // Misc Settings.
     "editor.tabSize": 1,
     "editor.multiCursorModifier": "ctrlCmd",
     "emmet.triggerExpansionOnTab": true,
