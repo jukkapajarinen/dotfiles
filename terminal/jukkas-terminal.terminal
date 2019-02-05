@@ -1283,6 +1283,8 @@
 	DXUNgw2HDY4Nlw2cDakNrA25Db4Nxg3JDdsN3g3jAAAAAAAAAgEAAAAAAAAALwAAAAAA
 	AAAAAAAAAAAADeU=
 	</data>
+	<key>ConvertNewlinesOnPaste</key>
+	<false/>
 	<key>CursorBlink</key>
 	<true/>
 	<key>CursorColor</key>
@@ -1382,6 +1384,32 @@
 	AIUAjACsANYA2ADaANwA4wDoAO4A8ADyAPQA+QEBDU0NTw1UDV8NaA12DXoNgQ2KDY8N
 	nA2fDawNsQ25DbwNzg3RDdYAAAAAAAACAQAAAAAAAAAvAAAAAAAAAAAAAAAAAAAN2A==
 	</data>
+	<key>ShowActiveProcessArgumentsInTitle</key>
+	<true/>
+	<key>ShowActiveProcessInTitle</key>
+	<true/>
+	<key>ShowActivityIndicatorInTab</key>
+	<true/>
+	<key>ShowCommandKeyInTitle</key>
+	<true/>
+	<key>ShowComponentsWhenTabHasCustomTitle</key>
+	<false/>
+	<key>ShowDimensionsInTitle</key>
+	<false/>
+	<key>ShowRepresentedURLInTabTitle</key>
+	<false/>
+	<key>ShowRepresentedURLInTitle</key>
+	<false/>
+	<key>ShowRepresentedURLPathInTitle</key>
+	<true/>
+	<key>ShowShellCommandInTitle</key>
+	<false/>
+	<key>ShowTTYNameInTabTitle</key>
+	<true/>
+	<key>ShowTTYNameInTitle</key>
+	<true/>
+	<key>ShowWindowSettingsNameInTitle</key>
+	<false/>
 	<key>TextBoldColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGKyxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -1533,7 +1561,7 @@
 	AAAAAAAAAAAAAA2z
 	</data>
 	<key>WindowTitle</key>
-	<string>Shades of Purple</string>
+	<string>Jukka's Terminal</string>
 	<key>name</key>
 	<string>Shades of Purple</string>
 	<key>shellExitAction</key>
