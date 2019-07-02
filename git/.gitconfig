@@ -3,5 +3,3 @@
 [user]
 	name = Jukka Pajarinen
 	email = jukkapajarinen91@gmail.com
-[credential]
-	helper = osxkeychain
