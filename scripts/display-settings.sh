@@ -5,10 +5,8 @@ profile=$1;
 
 # Home (Retina 13inch and Acer 4K 43inch)
 if [[ $profile == "home" ]]; then
-  xrandr --output eDP-1 --mode 1920x1200;
-  xrandr --output eDP-1 --left-of HDMI-2;
-  xrandr --output HDMI-2 --mode 3840x2160;
-  xrandr --output HDMI-2 --right-of eDP-1;
+  xrandr --output eDP-1 --mode 1920x1200 --left-of HDMI-2;
+  xrandr --output HDMI-2 --primary --mode 3840x2160 --right-of eDP-1;
 
 # TODO: Other profiles
 elif [[ $profile == "other" ]]; then
