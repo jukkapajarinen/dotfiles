@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Start pulseaudio daemon
+pulseaudio --daemonize
+
 # Set natural scrolling for mouse and modifier keys
 xmodmap ~/.Xmodmap
 
