@@ -8,7 +8,7 @@ scriptDir=$(cd "$(dirname $0)" && pwd);
 homeDir=${scriptDir///dotfiles/};
 
 # Print the directory paths
-echo "Host operating system is: $([ $macos ] && echo MacOS || echo Linux)";
+echo "Host operating system is: $([ $macos == true ] && echo MacOS || echo Linux)";
 echo "Script executed in: $scriptDir";
 echo "Home directory detected as: $homeDir";
 
@@ -22,14 +22,22 @@ fi
 ln -s $scriptDir/bash/.bash_profile $homeDir/.bash_profile;
 ln -s $scriptDir/git/.gitconfig $homeDir/.gitconfig;
 
+# Create MacOS-only symlinks
+[ $macos == true ] && mkdir -p $homeDir/Library/Application\ Support/Code/User/;
+[ $macos == true ] && ln -s $scriptDir/vscode/settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
+[ $macos == true ] && ln -s $scriptDir/vscode/keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
+
 # Create Linux-only symlinks
 [ $macos == false ] && mkdir -p $homeDir/.config/i3;
 [ $macos == false ] && mkdir -p $homeDir/.config/rofi;
+[ $macos == false ] && mkdir -p $homeDir/.config/Code/User/;
 [ $macos == false ] && ln -s $scriptDir/i3/config $homeDir/.config/i3/config;
 [ $macos == false ] && ln -s $scriptDir/rofi/config $homeDir/.config/rofi/config;
 [ $macos == false ] && ln -s $scriptDir/xorg/Xresources $homeDir/.Xresources;
 [ $macos == false ] && ln -s $scriptDir/xorg/xsessionrc $homeDir/.xsessionrc;
 [ $macos == false ] && ln -s $scriptDir/xorg/Xmodmap $homeDir/.Xmodmap;
+[ $macos == false ] && ln -s $scriptDir/vscode/settings.json $homeDir/.config/Code/User/settings.json;
+[ $macos == false ] && ln -s $scriptDir/vscode/keybindings.json $homeDir/.config/Code/User/keybindings.json;
 [ $macos == false ] && ln -s $scriptDir/xdm/Xresources /etc/X11/xdm/Xresources;
 [ $macos == false ] && ln -s $scriptDir/apt/sources.list /etc/apt/sources.list;
 [ $macos == false ] && ln -s $scriptDir/apt/preferences /etc/apt/preferences;
