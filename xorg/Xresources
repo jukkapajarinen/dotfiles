@@ -1,0 +1,5 @@
+! Xterm terminal emulator
+xterm*selectToClipboard: true
+xterm*foreground: green
+xterm*background: black
+

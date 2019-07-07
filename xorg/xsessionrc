@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Set natural scrolling for mouse and modifier keys
+xmodmap ~/.Xmodmap
+
+# Custom display-settings script using xrandr
+bash ~/dotfiles/scripts/display-settings.sh home
