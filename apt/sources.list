@@ -1,0 +1,25 @@
+# Debian Main Repositories
+deb http://ftp.fi.debian.org/debian/ buster main contrib non-free
+deb-src http://ftp.fi.debian.org/debian/ buster main contrib non-free
+deb http://ftp.fi.debian.org/debian/ buster-updates main contrib non-free
+deb-src http://ftp.fi.debian.org/debian/ buster-updates main contrib non-free
+deb http://ftp.fi.debian.org/debian buster-backports main contrib non-free
+deb-src http://ftp.fi.debian.org/debian buster-backports main contrib non-free
+deb http://deb.debian.org/debian-security buster/updates main
+deb-src http://deb.debian.org/debian-security buster/updates main
+
+# Ubuntu Multiverse
+deb http://mirrors.nic.funet.fi/ubuntu bionic main
+deb-src http://mirrors.nic.funet.fi/ubuntu bionic main
+
+# Spotify Repository
+deb [arch=amd64] http://repository.spotify.com stable non-free
+
+# Visual Studio Code Repository
+deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+
+# Docker Repository
+deb [arch=amd64] https://download.docker.com/linux/debian buster stable
+
+# MEGAsync (Debian 10) Repository
+deb [arch=amd64] https://mega.nz/linux/MEGAsync/Debian_10.0/ ./
