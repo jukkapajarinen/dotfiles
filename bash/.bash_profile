@@ -22,12 +22,18 @@ export LESS_TERMCAP_so=$(printf '\e[01;34m')
 export LESS_TERMCAP_ue=$(printf '\e[0m')
 export LESS_TERMCAP_us=$(printf '\e[04;33m')
 
-# Aliases
+# My aliases
 #alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 #alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 #alias resetLaunchPad='defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock'
 #alias disableDock='defaults write com.apple.dock tilesize -int 1; defaults write com.apple.dock autohide-time-modifier -float 9999999999; killall Dock'
 #alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock'
 
-# Environment variables
+# My environment variables
+export PATH=$PATH:/usr/sbin
 export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# My executable things
+#bash ~/dotfiles/scripts/display-settings.sh home
