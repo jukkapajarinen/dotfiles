@@ -33,5 +33,7 @@
     "javascript.updateImportsOnFileMove.enabled": "always",
     "terminal.integrated.shell.linux": "/bin/bash",
     "terminal.integrated.shellArgs.linux": ["-l"],
-    "terminal.integrated.shellArgs.osx": ["-l"]
+    "terminal.integrated.shellArgs.osx": ["-l"],
+    "terminal.external.linuxExec": "alacritty",
+    // "terminal.external.osxExec": "alacritty"
 }

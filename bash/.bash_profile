@@ -32,6 +32,7 @@ export LESS_TERMCAP_us=$(printf '\e[04;33m');
 [ $macos == true ] && alias resetLaunchPad='defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock';
 [ $macos == true ] && alias disableDock='defaults write com.apple.dock tilesize -int 1; defaults write com.apple.dock autohide-time-modifier -float 9999999999; killall Dock';
 [ $macos == true ] && alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock';
+[ $macos != true ] && alias open='xdg-open';
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q; docker volume rm $(docker volume ls -q);';
 
 # My environment variables
