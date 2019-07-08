@@ -1,10 +1,16 @@
-# Debian Main Repositories
+# Debian Main Repository
 deb http://ftp.fi.debian.org/debian/ buster main contrib non-free
 deb-src http://ftp.fi.debian.org/debian/ buster main contrib non-free
+
+# Debian Updates Repository
 deb http://ftp.fi.debian.org/debian/ buster-updates main contrib non-free
 deb-src http://ftp.fi.debian.org/debian/ buster-updates main contrib non-free
+
+# Debian Backports Repository
 deb http://ftp.fi.debian.org/debian buster-backports main contrib non-free
 deb-src http://ftp.fi.debian.org/debian buster-backports main contrib non-free
+
+# Debian Security Updates Repository
 deb http://deb.debian.org/debian-security buster/updates main
 deb-src http://deb.debian.org/debian-security buster/updates main
 
@@ -23,3 +29,6 @@ deb [arch=amd64] https://download.docker.com/linux/debian buster stable
 
 # MEGAsync (Debian 10) Repository
 deb [arch=amd64] https://mega.nz/linux/MEGAsync/Debian_10.0/ ./
+
+# Alacritty PPA Repository
+deb [arch=amd64] http://ppa.launchpad.net/mmstick76/alacritty/ubuntu bionic main
