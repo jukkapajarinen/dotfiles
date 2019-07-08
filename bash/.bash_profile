@@ -7,10 +7,10 @@ date_now() { date '+%a%e %b %H.%M.%S'; }
 tty_name() { tty | sed -e "s:/dev/::"; }
 
 # My PS1
-export PROMPT_COMMAND='PS1="\[\033[0;35m\]\u\[\033[0;37m\] @ \[\033[0;33m\]\h\[\033[0;37m\] / \[\033[0;34m\]\w\[\033[0;37m\]\[\033[0;32m\]$(parse_git_branch)\[\033[0;37m\] \$ \[\033[0;0m\]"';
+export PROMPT_COMMAND='PS1="\[\033[0;91m\]\u\[\033[0;37m\] @ \[\033[0;93m\]\h\[\033[0;37m\] / \[\033[0;94m\]\w\[\033[0;37m\]\[\033[0;92m\]$(parse_git_branch)\[\033[0;37m\] \$ \[\033[0;0m\]"';
 
 # My Message of the Day
-echo -e "\033[0;35m$(date_now)\033[0;0m | \033[0;33m$(tty_name)\033[0;0m | \033[0;34mBe awesome today!\033[0;0m 🚀";
+echo -e "\033[0;91m$(date_now)\033[0;0m | \033[0;93m$(tty_name)\033[0;0m | \033[0;94mBe awesome today!\033[0;0m 🚀";
 
 # My Custom Colors
 [ $macos == true ] && alias ls='ls -G' # *BSD/MacOS version
@@ -42,3 +42,4 @@ export LC_ALL="en_US.UTF-8";
 
 # My executable things
 #bash ~/dotfiles/scripts/display-settings.sh home;
+[[ -z $DISPLAY ]] && startx && logout;
