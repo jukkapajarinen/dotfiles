@@ -8,3 +8,6 @@ xmodmap ~/.Xmodmap
 
 # Custom display-settings script using xrandr
 bash ~/dotfiles/scripts/display-settings.sh home
+
+# Set the solid background color
+xsetroot -solid "#2d2b55"
