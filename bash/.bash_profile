@@ -10,12 +10,14 @@ tty_name() { tty | sed -e "s:/dev/::"; }
 export PROMPT_COMMAND='PS1="\[\033[0;35m\]\u\[\033[0;37m\] @ \[\033[0;33m\]\h\[\033[0;37m\] / \[\033[0;34m\]\w\[\033[0;37m\]\[\033[0;32m\]$(parse_git_branch)\[\033[0;37m\] \$ \[\033[0;0m\]"';
 
 # My Message of the Day
-echo -e "\033[0;35m$(date_now)\033[0;0m | \033[0;33m$(tty_name)\033[0;0m | \033[0;34mBe awesome today!\033[0;0m 😎";
+echo -e "\033[0;35m$(date_now)\033[0;0m | \033[0;33m$(tty_name)\033[0;0m | \033[0;34mBe awesome today!\033[0;0m 🚀";
 
 # My Custom Colors
 [ $macos == true ] && alias ls='ls -G' # *BSD/MacOS version
 [ $macos == false ] && alias ls='ls --color=auto' # GNU/Linux version;
 alias grep='grep --color=auto';
+alias diff='diff --color=auto';
+alias dmesg='dmesg --color=auto';
 export LESS_TERMCAP_mb=$(printf '\e[01;34m');
 export LESS_TERMCAP_md=$(printf '\e[01;35m');
 export LESS_TERMCAP_me=$(printf '\e[0m');
