@@ -1,5 +1,41 @@
-! Xterm terminal emulator
+! XTerm settings
+xterm*loginShell: true
+xterm*termName: xterm-256color
+xterm*locale: true
+xterm*utf8: always
+xterm*utf8Fonts: always
+xterm*saveLines: 4096
 xterm*selectToClipboard: true
-xterm*foreground: green
-xterm*background: black
+xterm*cursorBlink: true
+xterm*faceName: Fira Code
+xterm*faceSize: 10
+xterm*renderFont: true
+xterm*translations: #override \n\
+  Ctrl <Key>V: insert-selection(CLIPBOARD) \n\
+  Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
+  Ctrl Shift <Key>C: copy-selection(CLIPBOARD)
 
+! XTerm ANSI colors
+xterm*foreground: #fcfcfc
+xterm*background: #1e1d40
+xterm*color0: #000000
+xterm*color1: #d90429
+xterm*color2: #3ad900
+xterm*color3: #fad000
+xterm*color4: #6943ff
+xterm*color5: #ff2c70
+xterm*color6: #80fcff
+xterm*color7: #c7c7c7
+xterm*color8: #808080
+xterm*color9: #ff0000
+xterm*color10: #33ff00
+xterm*color11: #ffff00
+xterm*color12: #0066ff
+xterm*color13: #cc00ff
+xterm*color14: #00ffff
+xterm*color15: #ffffff
+xterm*pointerColor: #fcfcfc
+xterm*cursorColor: #fad000
+
+! Miscellaneous settings
+Xcursor.size: 16
