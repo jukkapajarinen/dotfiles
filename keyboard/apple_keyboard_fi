@@ -1,0 +1,6 @@
+# Apple MacBook/Magic Keyboard (intl.) - Finnish
+XKBMODEL="macbook79"
+XKBLAYOUT="fi"
+XKBVARIANT=""
+XKBOPTIONS="lv3:alt_switch"
+BACKSPACE="guess"

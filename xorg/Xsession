@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Start pulseaudio daemon
+pulseaudio --daemonize;
+
+# Custom display-settings script using xrandr
+bash ~/dotfiles/scripts/display-settings.sh home;
+
+# Set the solid background color
+xsetroot -solid '#2d2b55';
+
+# Set custom keycode and pointer mappings
+xkbcomp ~/.xkbmap $DISPLAY;
+
+# Start i3 window manager
+exec i3;
