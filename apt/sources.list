@@ -32,3 +32,6 @@ deb [arch=amd64] https://mega.nz/linux/MEGAsync/Debian_10.0/ ./
 
 # Alacritty PPA Repository
 deb [arch=amd64] http://ppa.launchpad.net/mmstick76/alacritty/ubuntu bionic main
+
+# Unofficial Polybar Repository
+deb [arch=amd64] https://download.opensuse.org/repositories/home:/stevenpusser:/polybar/Debian_Testing/ ./

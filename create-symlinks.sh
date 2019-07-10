@@ -35,6 +35,7 @@ ln -s $scriptDir/git/.gitconfig $homeDir/.gitconfig;
 [ $macos == false ] && mkdir -p $homeDir/.config/Code/User/;
 [ $macos == false ] && ln -s $scriptDir/i3/config $homeDir/.config/i3/config;
 [ $macos == false ] && ln -s $scriptDir/rofi/config $homeDir/.config/rofi/config;
+[ $macos == false ] && ln -s $scriptDir/polybar/config $homeDir/.config/polybar/config;
 [ $macos == false ] && ln -s $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 [ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi /etc/default/keyboard;
 [ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi_cmd_ctrl_xkbmap $homeDir/.xkbmap;
