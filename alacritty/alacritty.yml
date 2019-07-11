@@ -8,6 +8,10 @@ shell:
   args:
     - --login
 
+# Full window decorations
+window:
+  decorations: full
+
 # Use Fira Code font
 font:
   normal:
