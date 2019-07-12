@@ -1,19 +1,10 @@
 # General customizations
-default_border pixel 1
-font pango:Fira Code 10
-client.focused #fad000 #fad000 #1e1d40 #fad000 #fad000
-client.focused_inactive #fad000 #fad000 #1e1d40 #fad000 #fad000
-client.unfocused #fcfcfc #fcfcfc #1e1d40 #fcfcfc #fcfcfc
-client.urgent #fad000 #fad000 #1e1d40 #fad000 #fad000
-client.placeholder #fcfcfc #fcfcfc #1e1d40 #fcfcfc #fcfcfc
-client.background #1e1d40
+for_window [class="^-"] border pixel 0
 
 # Set my goofy variables for easier keybindings
 set $Ctrl Mod4
 set $Opt Mod5
 set $Cmd Control
-
-bindysym $Opt exec alacritty
 
 # General controls
 bindsym $Cmd+q kill
