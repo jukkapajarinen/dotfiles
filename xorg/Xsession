@@ -9,6 +9,9 @@ bash ~/dotfiles/scripts/display-settings.sh home;
 # Set the solid background color
 xsetroot -solid '#2d2b55';
 
+# Set the background image
+feh --no-fehbg --bg-fill ~/Pictures/eat-code-sleep-wallpaper-4k.png
+
 # Set custom keyboard mappings
 xkbcomp ~/.xkbmap $DISPLAY;
 

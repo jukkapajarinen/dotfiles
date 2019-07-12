@@ -31,6 +31,7 @@ ln -s $scriptDir/git/.gitconfig $homeDir/.gitconfig;
 # Create Linux-only symlinks
 [ $macos == false ] && mkdir -p $homeDir/.config/i3;
 [ $macos == false ] && mkdir -p $homeDir/.config/rofi;
+[ $macos == false ] && mkdir -p $homeDir/.config/polybar;
 [ $macos == false ] && mkdir -p $homeDir/.config/alacritty;
 [ $macos == false ] && mkdir -p $homeDir/.config/Code/User/;
 [ $macos == false ] && ln -s $scriptDir/i3/config $homeDir/.config/i3/config;
