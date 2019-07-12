@@ -19,8 +19,10 @@ if ! { [[ $scriptDir == *"home"* ]] || [[ $scriptDir == *"Users"* ]]; }; then
 fi
 
 # Create cross-platform symlinks
+mkdir -p $homeDir/.config/alacritty;
 ln -s $scriptDir/bash/.bash_profile $homeDir/.bash_profile;
 ln -s $scriptDir/git/.gitconfig $homeDir/.gitconfig;
+ln -s $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 
 # Create MacOS-only symlinks
 [ $macos == true ] && mkdir -p $homeDir/Library/Application\ Support/Code/User/;
@@ -28,18 +30,15 @@ ln -s $scriptDir/git/.gitconfig $homeDir/.gitconfig;
 [ $macos == true ] && ln -s $scriptDir/vscode/settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
 [ $macos == true ] && ln -s $scriptDir/vscode/keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
 [ $macos == true ] && ln -s $scriptDir/spectacle.app/Shortcuts.json $homeDir/Library/Application\ Support/Spectacle/Shortcuts.json;
-#TODO: add alacritty config symlink for macos
 
 # Create Linux-only symlinks
 [ $macos == false ] && mkdir -p $homeDir/.config/i3;
 [ $macos == false ] && mkdir -p $homeDir/.config/rofi;
 [ $macos == false ] && mkdir -p $homeDir/.config/polybar;
-[ $macos == false ] && mkdir -p $homeDir/.config/alacritty;
 [ $macos == false ] && mkdir -p $homeDir/.config/Code/User/;
 [ $macos == false ] && ln -s $scriptDir/i3/config $homeDir/.config/i3/config;
 [ $macos == false ] && ln -s $scriptDir/rofi/config $homeDir/.config/rofi/config;
 [ $macos == false ] && ln -s $scriptDir/polybar/config $homeDir/.config/polybar/config;
-[ $macos == false ] && ln -s $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 [ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi /etc/default/keyboard;
 [ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi.xkbmap $homeDir/.xkbmap;
 [ $macos == false ] && ln -s $scriptDir/xorg/Xresources $homeDir/.Xresources;
