@@ -17,11 +17,26 @@ bindysym $Opt exec alacritty
 
 # General controls
 bindsym $Cmd+q kill
-bindsym $Cmd+Shift+t exec alacritty
+bindsym $Cmd+$Ctrl+t exec alacritty
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
 bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
 bindsym $Cmd+Shift+4 exec "scrot -e 'mv $f ~/Desktop/'"
+
+# Xf86 keybindings
+bindsym XF86MonBrightnessDown exec "i3-nagbar -t 'warning' -m 'XF86MonBrightnessDown'"
+bindsym XF86MonBrightnessUp exec "i3-nagbar -t 'warning' -m 'XF86MonBrightnessUp'"
+bindsym XF86LaunchA exec "i3-nagbar -t 'warning' -m 'XF86LaunchA'"
+bindsym XF86LaunchB exec "rofi -modi run -show run"
+bindsym XF86KbdBrightnessDown exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessDown'"
+bindsym XF86KbdBrightnessUp exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessUp'"
+bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+bindsym XF86AudioMute exec "pulsemixer --id 0 --toggle-mute"
+bindsym XF86AudioLowerVolume exec "pulsemixer --id 0 --change-volume -1"
+bindsym XF86AudioRaiseVolume exec "pulsemixer --id 0 --change-volume +1"
+bindsym XF86Eject exec "i3-nagbar -t 'warning' -m 'XF86Eject'"
 
 # Change focused window
 bindsym $Cmd+$Opt+Left focus left
@@ -70,9 +85,9 @@ bindsym $Cmd+$Opt+Shift+9 move container to workspace 9
 bindsym $Cmd+$Opt+Shift+0 move container to workspace 10
 
 # Top-level i3 controls
-bindsym $Cmd+$Opt+Shift+c reload
-bindsym $Cmd+$Opt+Shift+r restart
-bindsym $Cmd+$Opt+Shift+e exec "i3-msg exit"
+bindsym $Cmd+$Ctrl+Shift+c reload
+bindsym $Cmd+$Ctrl+Shift+r restart
+bindsym $Cmd+$Ctrl+Shift+e exec "i3-msg exit"
 
 # Autostart applications
 exec --no-startup-id $HOME/dotfiles/scripts/launch_polybar.sh
