@@ -39,7 +39,7 @@ ln -s $scriptDir/git/.gitconfig $homeDir/.gitconfig;
 [ $macos == false ] && ln -s $scriptDir/polybar/config $homeDir/.config/polybar/config;
 [ $macos == false ] && ln -s $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 [ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi /etc/default/keyboard;
-[ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi_cmd_ctrl_xkbmap $homeDir/.xkbmap;
+[ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi.xkbmap $homeDir/.xkbmap;
 [ $macos == false ] && ln -s $scriptDir/xorg/Xresources $homeDir/.Xresources;
 [ $macos == false ] && ln -s $scriptDir/xorg/Xsession $homeDir/.Xsession;
 [ $macos == false ] && ln -s $scriptDir/vscode/settings.json $homeDir/.config/Code/User/settings.json;
