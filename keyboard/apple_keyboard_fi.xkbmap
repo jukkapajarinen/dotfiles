@@ -1385,7 +1385,7 @@ xkb_symbols "pc_macintosh_vndr/fi_inet(evdev)_level3(alt_switch)" {
     };
     key <LALT> {
         type= "ONE_LEVEL",
-        symbols[Group1]= [ ISO_Level3_Shift ]
+        symbols[Group1]= [ Alt_L ]
     };
     key <SPCE> {         [           space ] };
     key <CAPS> {         [       Caps_Lock ] };
@@ -1486,7 +1486,7 @@ xkb_symbols "pc_macintosh_vndr/fi_inet(evdev)_level3(alt_switch)" {
     };
     key <RALT> {
         type= "ONE_LEVEL",
-        symbols[Group1]= [ ISO_Level3_Shift ]
+        symbols[Group1]= [ Alt_R ]
     };
     key <LNFD> {         [        Linefeed ] };
     key <HOME> {         [            Home ] };

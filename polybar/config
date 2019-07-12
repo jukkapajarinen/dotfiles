@@ -138,6 +138,6 @@ type = custom/menu
 format-overline = ${colors.red}
 label-open = Logout?
 label-close = No
-label-separator = " | "
+label-separator = " "
 menu-0-0 = Yes
 menu-0-0-exec = "i3-msg exit"

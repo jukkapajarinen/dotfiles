@@ -10,65 +10,69 @@ client.background #1e1d40
 
 # Set my goofy variables for easier keybindings
 set $Ctrl Mod4
-set $Option Alt
+set $Opt Mod1
 set $Cmd Control
 
+bindysym $Opt exec alacritty
+
 # General controls
-bindsym $Cmd+Shift+q kill
-bindsym $Cmd+Shift+Return exec alacritty
+bindsym $Cmd+q kill
+bindsym $Cmd+Shift+t exec alacritty
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
+bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
+bindsym $Cmd+Shift+4 exec "scrot -e 'mv $f ~/Desktop/'"
 
 # Change focused window
-bindsym $Cmd+$Ctrl+Left focus left
-bindsym $Cmd+$Ctrl+Down focus down
-bindsym $Cmd+$Ctrl+Up focus up
-bindsym $Cmd+$Ctrl+Right focus right
+bindsym $Cmd+$Opt+Left focus left
+bindsym $Cmd+$Opt+Down focus down
+bindsym $Cmd+$Opt+Up focus up
+bindsym $Cmd+$Opt+Right focus right
 
 # Controls for focused window
-bindsym $Cmd+$Ctrl+Shift+Left move left
-bindsym $Cmd+$Ctrl+Shift+Down move down
-bindsym $Cmd+$Ctrl+Shift+Up move up
-bindsym $Cmd+$Ctrl+Shift+Right move right
-bindsym $Cmd+$Ctrl+f fullscreen toggle
+bindsym $Cmd+$Opt+Shift+Left move left
+bindsym $Cmd+$Opt+Shift+Down move down
+bindsym $Cmd+$Opt+Shift+Up move up
+bindsym $Cmd+$Opt+Shift+Right move right
+bindsym $Cmd+$Opt+f fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $Cmd+$Ctrl+s layout stacking
-bindsym $Cmd+$Ctrl+w layout tabbed
-bindsym $Cmd+$Ctrl+e layout toggle split
+bindsym $Cmd+$Opt+s layout stacking
+bindsym $Cmd+$Opt+w layout tabbed
+bindsym $Cmd+$Opt+e layout toggle split
 
 # Toggle floating mode
-bindsym $Cmd+$Ctrl+space floating toggle
-floating_modifier $Cmd+$Ctrl
+bindsym $Cmd+$Opt+space floating toggle
+floating_modifier $Cmd+$Opt
 
 # Switch to workspace
-bindsym $Ctrl+1 workspace 1
-bindsym $Ctrl+2 workspace 2
-bindsym $Ctrl+3 workspace 3
-bindsym $Ctrl+4 workspace 4
-bindsym $Ctrl+5 workspace 5
-bindsym $Ctrl+6 workspace 6
-bindsym $Ctrl+7 workspace 7
-bindsym $Ctrl+8 workspace 8
-bindsym $Ctrl+9 workspace 9
-bindsym $Ctrl+0 workspace 10
+bindsym $Cmd+$Opt+1 workspace 1
+bindsym $Cmd+$Opt+2 workspace 2
+bindsym $Cmd+$Opt+3 workspace 3
+bindsym $Cmd+$Opt+4 workspace 4
+bindsym $Cmd+$Opt+5 workspace 5
+bindsym $Cmd+$Opt+6 workspace 6
+bindsym $Cmd+$Opt+7 workspace 7
+bindsym $Cmd+$Opt+8 workspace 8
+bindsym $Cmd+$Opt+9 workspace 9
+bindsym $Cmd+$Opt+0 workspace 10
 
 # Move focused container to workspace
-bindsym $Ctrl+Shift+1 move container to workspace 1
-bindsym $Ctrl+Shift+2 move container to workspace 2
-bindsym $Ctrl+Shift+3 move container to workspace 3
-bindsym $Ctrl+Shift+4 move container to workspace 4
-bindsym $Ctrl+Shift+5 move container to workspace 5
-bindsym $Ctrl+Shift+6 move container to workspace 6
-bindsym $Ctrl+Shift+7 move container to workspace 7
-bindsym $Ctrl+Shift+8 move container to workspace 8
-bindsym $Ctrl+Shift+9 move container to workspace 9
-bindsym $Ctrl+Shift+0 move container to workspace 10
+bindsym $Cmd+$Opt+Shift+1 move container to workspace 1
+bindsym $Cmd+$Opt+Shift+2 move container to workspace 2
+bindsym $Cmd+$Opt+Shift+3 move container to workspace 3
+bindsym $Cmd+$Opt+Shift+4 move container to workspace 4
+bindsym $Cmd+$Opt+Shift+5 move container to workspace 5
+bindsym $Cmd+$Opt+Shift+6 move container to workspace 6
+bindsym $Cmd+$Opt+Shift+7 move container to workspace 7
+bindsym $Cmd+$Opt+Shift+8 move container to workspace 8
+bindsym $Cmd+$Opt+Shift+9 move container to workspace 9
+bindsym $Cmd+$Opt+Shift+0 move container to workspace 10
 
 # Top-level i3 controls
-bindsym $Ctrl+Shift+c reload
-bindsym $Ctrl+Shift+r restart
-bindsym $Ctrl+Shift+e exec "i3-msg exit"
+bindsym $Cmd+$Opt+Shift+c reload
+bindsym $Cmd+$Opt+Shift+r restart
+bindsym $Cmd+$Opt+Shift+e exec "i3-msg exit"
 
 # Autostart applications
 exec --no-startup-id $HOME/dotfiles/scripts/launch_polybar.sh
