@@ -10,7 +10,7 @@ bash ~/dotfiles/scripts/display-settings.sh home;
 xsetroot -solid '#2d2b55';
 
 # Set the background image
-feh --no-fehbg --bg-fill ~/Pictures/eat-code-sleep-wallpaper-4k.png
+feh --no-fehbg --bg-fill ~/Pictures/minimal-mountains_3840x2160.jpg
 
 # Set custom keyboard mappings
 xkbcomp ~/.xkbmap $DISPLAY;
