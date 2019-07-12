@@ -24,8 +24,10 @@ ln -s $scriptDir/git/.gitconfig $homeDir/.gitconfig;
 
 # Create MacOS-only symlinks
 [ $macos == true ] && mkdir -p $homeDir/Library/Application\ Support/Code/User/;
+[ $macos == true ] && mkdir -p $homeDir/Library/Application\ Support/Spectacle/;
 [ $macos == true ] && ln -s $scriptDir/vscode/settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
 [ $macos == true ] && ln -s $scriptDir/vscode/keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
+[ $macos == true ] && ln -s $scriptDir/spectacle.app/Shortcuts.json $homeDir/Library/Application\ Support/Spectacle/Shortcuts.json;
 #TODO: add alacritty config symlink for macos
 
 # Create Linux-only symlinks
