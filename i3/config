@@ -10,7 +10,7 @@ client.background #1e1d40
 
 # Set my goofy variables for easier keybindings
 set $Ctrl Mod4
-set $Opt Mod1
+set $Opt Mod5
 set $Cmd Control
 
 bindysym $Opt exec alacritty

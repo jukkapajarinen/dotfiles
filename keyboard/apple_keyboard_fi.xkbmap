@@ -1385,7 +1385,7 @@ xkb_symbols "pc_macintosh_vndr/fi_inet(evdev)_level3(alt_switch)" {
     };
     key <LALT> {
         type= "ONE_LEVEL",
-        symbols[Group1]= [ Alt_L ]
+        symbols[Group1]= [ ISO_Level3_Shift ]
     };
     key <SPCE> {         [           space ] };
     key <CAPS> {         [       Caps_Lock ] };
@@ -1486,7 +1486,7 @@ xkb_symbols "pc_macintosh_vndr/fi_inet(evdev)_level3(alt_switch)" {
     };
     key <RALT> {
         type= "ONE_LEVEL",
-        symbols[Group1]= [ Alt_R ]
+        symbols[Group1]= [ ISO_Level3_Shift ]
     };
     key <LNFD> {         [        Linefeed ] };
     key <HOME> {         [            Home ] };
@@ -1619,15 +1619,15 @@ xkb_symbols "pc_macintosh_vndr/fi_inet(evdev)_level3(alt_switch)" {
     modifier_map Shift { <LFSH> };
     modifier_map Shift { <RTSH> };
     modifier_map Lock { <CAPS> };
-    modifier_map Mod2 { <NMLK> };
-    modifier_map Mod5 { <LVL3> };
-    modifier_map Mod4 { <LCTL> };
     modifier_map Control { <RCTL> };
     modifier_map Control { <LWIN> };
     modifier_map Control { <RWIN> };
-    modifier_map Mod5 { <MDSW> };
     modifier_map Mod1 { <ALT> };
     modifier_map Mod1 { <META> };
+    modifier_map Mod2 { <NMLK> };
+    modifier_map Mod4 { <LCTL> };
+    modifier_map Mod5 { <LVL3> };
+    modifier_map Mod5 { <MDSW> };
 };
 
 xkb_geometry "macintosh(macbook79)" {
