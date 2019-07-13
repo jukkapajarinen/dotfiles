@@ -27,7 +27,7 @@ border-color = ${colors.yellow}
 module-margin = 2
 font-0 = "Fira Code:pixelsize=12:bold"
 modules-left = i3
-modules-center = pulseaudio cpu memory wlan battery temperature date logout
+modules-center = pulseaudio cpu memory filesystem wlan battery temperature date logout
 tray-position = right
 tray-padding = 2
 tray-maxsize = 16
@@ -83,6 +83,14 @@ format-prefix-foreground = ${colors.foreground}
 format-overline = ${colors.yellow}
 label = "%percentage_used%%"
 
+[module/filesystem]
+type = internal/fs
+interval = 1
+mount-0 = "/"
+format-mounted = "Disk: <label-mounted>"
+label-mounted = "%percentage_used%%"
+format-mounted-overline = ${colors.cyan}
+
 [module/wlan]
 type = internal/network
 interface = "wlp3s0"
@@ -128,7 +136,7 @@ label-warn-foreground = ${colors.red}
 [module/date]
 type = internal/date
 interval = 1
-date = "%d.%m.%Y"
+date = "%a %d.%m.%Y"
 time = "%H:%M:%S"
 format-overline = ${colors.green}
 label = "%date% %time%"

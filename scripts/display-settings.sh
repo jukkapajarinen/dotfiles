@@ -17,3 +17,6 @@ else
   echo "Error: You did not specify any known profile!";
   exit 1;
 fi
+
+# Inform user that the script ended
+echo "Display settings finished.";

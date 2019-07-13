@@ -12,3 +12,6 @@ do
   # Try to set horizontal scrolling
   xinput set-prop $deviceId "libinput Horizontal Scroll Enabled" 1 &>/dev/null;
 done
+
+# Inform user that the script ended
+echo "Pointer settings finished.";

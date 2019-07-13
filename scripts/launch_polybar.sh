@@ -15,4 +15,5 @@ for monitor in $(polybar -m | cut -d":" -f1); do
   [ $monitor != $primary ] && export MONITOR=$monitor && polybar --reload topbar &
 done
 
-echo "Polybar launced.";
+# Inform user that the script ended
+echo "Polybar launching finished.";

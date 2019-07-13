@@ -70,7 +70,7 @@ mouse:
 
 # Mouse event bindings
 mouse_bindings:
-  - { mouse: Middle, action: None }
+  - { mouse: Middle, action: PasteSelection }
 
 # Keyboard event bindings
 key_bindings:

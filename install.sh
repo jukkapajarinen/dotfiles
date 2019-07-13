@@ -18,38 +18,47 @@ if ! { [[ $scriptDir == *"home"* ]] || [[ $scriptDir == *"Users"* ]]; }; then
   exit 1;
 fi
 
+# Create initial variable for ln
+ln="ln -s";
+
+# Read possible --force or -f from the cli args
+if [[ $1 == "--force" ]] || [[ $1 == "-f" ]]; then
+  read -p "Are you sure to force installation? (files will be overwritten) [Y/n] " yn;
+  [[ $yn =~ [yY](es)* ]] && ln="ln -sf" || exit 0;
+fi
+
 # Create cross-platform symlinks
 mkdir -p $homeDir/.config/alacritty;
-ln -s $scriptDir/bash/.bash_profile $homeDir/.bash_profile;
-ln -s $scriptDir/git/.gitconfig $homeDir/.gitconfig;
-ln -s $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
+$ln $scriptDir/bash/.bash_profile $homeDir/.bash_profile;
+$ln $scriptDir/git/.gitconfig $homeDir/.gitconfig;
+$ln $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 
 # Create MacOS-only symlinks
 [ $macos == true ] && mkdir -p $homeDir/Library/Application\ Support/Code/User/;
 [ $macos == true ] && mkdir -p $homeDir/Library/Application\ Support/Spectacle/;
-[ $macos == true ] && ln -s $scriptDir/vscode/settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
-[ $macos == true ] && ln -s $scriptDir/vscode/keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
-[ $macos == true ] && ln -s $scriptDir/spectacle.app/Shortcuts.json $homeDir/Library/Application\ Support/Spectacle/Shortcuts.json;
+[ $macos == true ] && $ln $scriptDir/vscode/settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
+[ $macos == true ] && $ln $scriptDir/vscode/keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
+[ $macos == true ] && $ln $scriptDir/spectacle.app/Shortcuts.json $homeDir/Library/Application\ Support/Spectacle/Shortcuts.json;
 
 # Create Linux-only symlinks
 [ $macos == false ] && mkdir -p $homeDir/.config/i3;
 [ $macos == false ] && mkdir -p $homeDir/.config/rofi;
 [ $macos == false ] && mkdir -p $homeDir/.config/polybar;
 [ $macos == false ] && mkdir -p $homeDir/.config/Code/User/;
-[ $macos == false ] && ln -s $scriptDir/i3/config $homeDir/.config/i3/config;
-[ $macos == false ] && ln -s $scriptDir/rofi/config $homeDir/.config/rofi/config;
-[ $macos == false ] && ln -s $scriptDir/polybar/config $homeDir/.config/polybar/config;
-[ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi /etc/default/keyboard;
-[ $macos == false ] && ln -s $scriptDir/keyboard/apple_keyboard_fi.xkbmap $homeDir/.xkbmap;
-[ $macos == false ] && ln -s $scriptDir/xorg/Xresources $homeDir/.Xresources;
-[ $macos == false ] && ln -s $scriptDir/xorg/Xsession $homeDir/.Xsession;
-[ $macos == false ] && ln -s $scriptDir/vscode/settings.json $homeDir/.config/Code/User/settings.json;
-[ $macos == false ] && ln -s $scriptDir/vscode/keybindings.json $homeDir/.config/Code/User/keybindings.json;
-[ $macos == false ] && ln -s $scriptDir/apt/sources.list /etc/apt/sources.list;
-[ $macos == false ] && ln -s $scriptDir/apt/preferences /etc/apt/preferences;
-[ $macos == false ] && ln -s /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
-[ $macos == false ] && ln -s /usr/bin/i3 /etc/alternatives/x-window-manager;
-[ $macos == false ] && ln -s /usr/bin/alacritty /etc/alternatives/x-terminal-emulator;
+[ $macos == false ] && $ln $scriptDir/i3/config $homeDir/.config/i3/config;
+[ $macos == false ] && $ln $scriptDir/rofi/config $homeDir/.config/rofi/config;
+[ $macos == false ] && $ln $scriptDir/polybar/config $homeDir/.config/polybar/config;
+[ $macos == false ] && $ln $scriptDir/keyboard/apple_keyboard_fi /etc/default/keyboard;
+[ $macos == false ] && $ln $scriptDir/keyboard/apple_keyboard_fi.xkbmap $homeDir/.xkbmap;
+[ $macos == false ] && $ln $scriptDir/xorg/Xresources $homeDir/.Xresources;
+[ $macos == false ] && $ln $scriptDir/xorg/Xsession $homeDir/.Xsession;
+[ $macos == false ] && $ln $scriptDir/vscode/settings.json $homeDir/.config/Code/User/settings.json;
+[ $macos == false ] && $ln $scriptDir/vscode/keybindings.json $homeDir/.config/Code/User/keybindings.json;
+[ $macos == false ] && $ln $scriptDir/apt/sources.list /etc/apt/sources.list;
+[ $macos == false ] && $ln $scriptDir/apt/preferences /etc/apt/preferences;
+[ $macos == false ] && $ln /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
+[ $macos == false ] && $ln /usr/bin/i3 /etc/alternatives/x-window-manager;
+[ $macos == false ] && $ln /usr/bin/alacritty /etc/alternatives/x-terminal-emulator;
 
 # Print info that execution finished
-echo "Script execution ended."
+echo "Installation finished."
