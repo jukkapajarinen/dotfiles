@@ -28,6 +28,8 @@ export LESS_TERMCAP_us=$(printf '\e[04;33m');
 
 # My common aliases
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q; docker volume rm $(docker volume ls -q);';
+alias exportVSCodeExtensions='code --list-extensions > ~/dotfiles/vscode/extensions.list';
+alias importVSCodeExtensions='cat ~/dotfiles/vscode/extensions.list | xargs -L 1 code --install-extension';
 
 # My MacOS aliases
 [ $macos == true ] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';

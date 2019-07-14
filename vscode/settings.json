@@ -1,6 +1,6 @@
 {
     "workbench.colorTheme": "Shades of Purple",
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "vscode-great-icons",
     "workbench.list.horizontalScrolling": true,
     "workbench.editor.closeOnFileDelete": true,
     "workbench.editor.highlightModifiedTabs": true,
@@ -32,7 +32,6 @@
     "explorer.confirmDragAndDrop": false,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
-    "files.exclude": { "**/.git": false },
     "diffEditor.ignoreTrimWhitespace": true,
     "editor.tabSize": 2,
     "editor.multiCursorModifier": "ctrlCmd",
