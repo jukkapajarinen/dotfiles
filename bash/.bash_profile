@@ -43,10 +43,13 @@ alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); 
 [ $macos == false ] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh home"';
 
 # My common environment variables
-export PATH=$PATH:/usr/sbin:/usr/local/sbin;
+export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin";
 export LANG="en_US.UTF-8";
 export LANGUAGE="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
+
+# My MacOS environment variables
+[ $macos == true ] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
 
 # My Linux environment variables
 [ $macos == false ] && export QT_STYLE_OVERRIDE="Adwaita";
