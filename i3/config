@@ -1,14 +1,34 @@
 # General customizations
 for_window [class="^.*"] border pixel 1
+focus_follows_mouse no
+hide_edge_borders none
 
 # Set my goofy variables for easier keybindings
 set $Ctrl Mod4
-set $Opt Mod5
 set $Cmd Control
+set $Opt Mod5
+set $t3 tslash
+set $f3 dstroke
+set $s3 ssharp
+set $w3 lstroke
+set $e3 EuroSign
+set $one3 copyright
+set $two3 at
+set $three3 sterling
+set $four3 dollar
+set $five3 onehalf
+set $six3 threequarters
+set $seven3 bar
+set $eight3 bracketleft
+set $nine3 bracketright
+set $zero3 braceright
+set $r4 registered
+set $c4 copyright
+set $l4 Lstroke
 
 # General controls
 bindsym $Cmd+q kill
-bindsym $Cmd+$Ctrl+t exec alacritty
+bindsym $Cmd+$Opt+$Ctrl+$t3 exec alacritty
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
 bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
@@ -30,56 +50,41 @@ bindsym XF86AudioRaiseVolume exec "pulsemixer --id 0 --change-volume +1"
 bindsym XF86Eject exec "i3-nagbar -t 'warning' -m 'XF86Eject'"
 
 # Change focused window
-bindsym $Cmd+$Opt+Left focus left
-bindsym $Cmd+$Opt+Down focus down
-bindsym $Cmd+$Opt+Up focus up
-bindsym $Cmd+$Opt+Right focus right
+bindsym $Cmd+$Opt+Shift+Left focus left
+bindsym $Cmd+$Opt+Shift+Down focus down
+bindsym $Cmd+$Opt+Shift+Up focus up
+bindsym $Cmd+$Opt+Shift+Right focus right
 
 # Controls for focused window
-bindsym $Cmd+$Opt+Shift+Left move left
-bindsym $Cmd+$Opt+Shift+Down move down
-bindsym $Cmd+$Opt+Shift+Up move up
-bindsym $Cmd+$Opt+Shift+Right move right
-bindsym $Cmd+$Opt+f fullscreen toggle
+bindsym $Cmd+$Opt+Left move left
+bindsym $Cmd+$Opt+Down move down
+bindsym $Cmd+$Opt+Up move up
+bindsym $Cmd+$Opt+Right move right
+bindsym $Cmd+$Opt+$f3 fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $Cmd+$Opt+s layout stacking
-bindsym $Cmd+$Opt+w layout tabbed
-bindsym $Cmd+$Opt+e layout toggle split
+bindsym $Cmd+$Opt+$s3 layout stacking
+bindsym $Cmd+$Opt+$w3 layout tabbed
+bindsym $Cmd+$Opt+$e3 layout toggle split
 
 # Toggle floating mode
 bindsym $Cmd+$Opt+space floating toggle
 floating_modifier $Cmd+$Opt
 
 # Switch to workspace
-bindsym $Cmd+$Opt+1 workspace 1
-bindsym $Cmd+$Opt+2 workspace 2
-bindsym $Cmd+$Opt+3 workspace 3
-bindsym $Cmd+$Opt+4 workspace 4
-bindsym $Cmd+$Opt+5 workspace 5
-bindsym $Cmd+$Opt+6 workspace 6
-bindsym $Cmd+$Opt+7 workspace 7
-bindsym $Cmd+$Opt+8 workspace 8
-bindsym $Cmd+$Opt+9 workspace 9
-bindsym $Cmd+$Opt+0 workspace 10
+bindsym $Cmd+$Opt+$one3 workspace 1
+bindsym $Cmd+$Opt+$two3 workspace 2
 
-# Move focused container to workspace
-bindsym $Cmd+$Opt+Shift+1 move container to workspace 1
-bindsym $Cmd+$Opt+Shift+2 move container to workspace 2
-bindsym $Cmd+$Opt+Shift+3 move container to workspace 3
-bindsym $Cmd+$Opt+Shift+4 move container to workspace 4
-bindsym $Cmd+$Opt+Shift+5 move container to workspace 5
-bindsym $Cmd+$Opt+Shift+6 move container to workspace 6
-bindsym $Cmd+$Opt+Shift+7 move container to workspace 7
-bindsym $Cmd+$Opt+Shift+8 move container to workspace 8
-bindsym $Cmd+$Opt+Shift+9 move container to workspace 9
-bindsym $Cmd+$Opt+Shift+0 move container to workspace 10
+# Move focused container to left/right display
+bindsym $Cmd+$Opt+$Ctrl+Left move container to output left; focus output left
+bindsym $Cmd+$Opt+$Ctrl+Right move container to output right; focus output right
 
 # Top-level i3 controls
-bindsym $Cmd+$Ctrl+Shift+c reload
-bindsym $Cmd+$Ctrl+Shift+r restart
-bindsym $Cmd+$Ctrl+Shift+e exec "i3-msg exit"
+bindsym $Cmd+$Opt+$Ctrl+Shift+$r4 restart
+bindsym $Cmd+$Opt+$Ctrl+Shift+$c4 reload
+bindsym $Cmd+$Opt+$Ctrl+Shift+$l4 exec "i3-nagbar -m 'Do you really want to logout?' -b 'Yes!' 'i3-msg exit'"
 
-# Autostart applications
+# Autostart configuration
+exec --no-startup-id "xdotool key Control+ISO_Level3_Shift+1"
 exec --no-startup-id $HOME/dotfiles/scripts/launch_polybar.sh
 exec --no-startup-id megasync
