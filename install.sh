@@ -18,33 +18,34 @@ if ! { [[ $scriptDir == *"home"* ]] || [[ $scriptDir == *"Users"* ]]; }; then
   exit 1;
 fi
 
-# Create initial variable for ln
-ln="ln -s";
+# Declare installation commands
+mkdir="mkdir -p";
+ln="ln -sv";
 
 # Read possible --force or -f from the cli args
 if [[ $1 == "--force" ]] || [[ $1 == "-f" ]]; then
   read -p "Are you sure to force installation? (files will be overwritten) [Y/n] " yn;
-  [[ $yn =~ [yY](es)* ]] && ln="ln -sf" || exit 0;
+  [[ $yn =~ [yY](es)* ]] && ln="ln -svf" || exit 0;
 fi
 
 # Create cross-platform symlinks
-mkdir -p $homeDir/.config/alacritty;
+$mkdir $homeDir/.config/alacritty;
 $ln $scriptDir/bash/.bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/git/.gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 
 # Create MacOS-only symlinks
-[ $macos == true ] && mkdir -p $homeDir/Library/Application\ Support/Code/User/;
-[ $macos == true ] && mkdir -p $homeDir/Library/Application\ Support/Spectacle/;
+[ $macos == true ] && $mkdir $homeDir/Library/Application\ Support/Code/User/;
+[ $macos == true ] && $mkdir $homeDir/Library/Application\ Support/Spectacle/;
 [ $macos == true ] && $ln $scriptDir/vscode/settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
 [ $macos == true ] && $ln $scriptDir/vscode/keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
 [ $macos == true ] && $ln $scriptDir/spectacle.app/Shortcuts.json $homeDir/Library/Application\ Support/Spectacle/Shortcuts.json;
 
 # Create Linux-only symlinks
-[ $macos == false ] && mkdir -p $homeDir/.config/i3;
-[ $macos == false ] && mkdir -p $homeDir/.config/rofi;
-[ $macos == false ] && mkdir -p $homeDir/.config/polybar;
-[ $macos == false ] && mkdir -p $homeDir/.config/Code/User/;
+[ $macos == false ] && $mkdir $homeDir/.config/i3;
+[ $macos == false ] && $mkdir $homeDir/.config/rofi;
+[ $macos == false ] && $mkdir $homeDir/.config/polybar;
+[ $macos == false ] && $mkdir $homeDir/.config/Code/User/;
 [ $macos == false ] && $ln $scriptDir/i3/config $homeDir/.config/i3/config;
 [ $macos == false ] && $ln $scriptDir/rofi/config $homeDir/.config/rofi/config;
 [ $macos == false ] && $ln $scriptDir/polybar/config $homeDir/.config/polybar/config;
