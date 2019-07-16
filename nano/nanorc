@@ -1,0 +1,44 @@
+## Automatically indent a newly created line.
+set autoindent
+
+## Remember the used search/replace strings for the next session.
+set historylog
+
+## Display line numbers to the left of the text.
+set linenumbers
+
+## Enable vim-style lock-files.
+set locking
+
+## Enable mouse support, if available for your system.
+set mouse
+
+## Don't wrap text at all.
+set nowrap
+
+## Use smooth scrolling as the default.
+set smooth
+
+## Allow nano to be suspended.
+set suspend
+
+## Use this tab size instead of the default; it must be greater than 0.
+set tabsize 2
+
+## Convert typed tabs to spaces.
+set tabstospaces
+
+## Snip whitespace at the end of lines when justifying or hard-wrapping.
+set trimblanks
+
+## Paint the interface elements of nano.
+set titlecolor brightwhite,blue
+set statuscolor brightwhite,blue
+set errorcolor brightwhite,red
+set selectedcolor brightwhite,magenta
+set numbercolor blue
+set keycolor yellow
+set functioncolor blue
+
+## Setup of syntax coloring.
+include "/usr/share/nano/*.nanorc"

@@ -32,6 +32,7 @@ fi
 $mkdir $homeDir/.config/alacritty;
 $ln $scriptDir/bash/.bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/git/.gitconfig $homeDir/.gitconfig;
+$ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 $ln $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 
 # Create MacOS-only symlinks
