@@ -57,4 +57,4 @@ export LC_ALL="en_US.UTF-8";
 [ $macos == false ] && export QT_STYLE_OVERRIDE="Adwaita";
 
 # Start X for Linux systems
-[ $macos == false ] && [[ -z $DISPLAY ]] && startx && logout;
+[ $macos == false ] && [[ -z $DISPLAY ]] && which startx && startx && logout;

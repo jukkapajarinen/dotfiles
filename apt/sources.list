@@ -15,8 +15,7 @@ deb http://deb.debian.org/debian-security buster/updates main
 deb-src http://deb.debian.org/debian-security buster/updates main
 
 # Ubuntu Multiverse
-deb http://mirrors.nic.funet.fi/ubuntu bionic main
-deb-src http://mirrors.nic.funet.fi/ubuntu bionic main
+deb [arch=amd64] http://mirrors.nic.funet.fi/ubuntu bionic main
 
 # Spotify Repository
 deb [arch=amd64] http://repository.spotify.com stable non-free
