@@ -1,18 +1,14 @@
 # Debian Main Repository
 deb http://ftp.fi.debian.org/debian/ buster main contrib non-free
-deb-src http://ftp.fi.debian.org/debian/ buster main contrib non-free
 
 # Debian Updates Repository
 deb http://ftp.fi.debian.org/debian/ buster-updates main contrib non-free
-deb-src http://ftp.fi.debian.org/debian/ buster-updates main contrib non-free
 
 # Debian Backports Repository
 deb http://ftp.fi.debian.org/debian buster-backports main contrib non-free
-deb-src http://ftp.fi.debian.org/debian buster-backports main contrib non-free
 
 # Debian Security Updates Repository
 deb http://deb.debian.org/debian-security buster/updates main
-deb-src http://deb.debian.org/debian-security buster/updates main
 
 # Ubuntu Multiverse
 deb [arch=amd64] http://mirrors.nic.funet.fi/ubuntu bionic main
