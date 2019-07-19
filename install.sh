@@ -64,6 +64,8 @@ $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln /usr/bin/i3 /etc/alternatives/x-window-manager;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln /usr/bin/alacritty /etc/alternatives/x-terminal-emulator;
+[[ $macos == false ]] && which proftpd > /dev/null && $ln $scriptDir/daemons/proftpd.conf /etc/proftpd/proftpd.conf;
+[[ $macos == false ]] && which smbd > /dev/null && $ln $scriptDir/daemons/smb.conf /etc/samba/smb.conf;
 
 # Print info that execution finished
 echo "Installation finished."
