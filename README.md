@@ -9,7 +9,7 @@ Clone this repo to your **home** directory and keep it there.
 cd ~; git clone https://github.com/jukkapajarinen/dotfiles.git
 ```
 
-Run the `install.sh` script in **bash** *(supported options are `-f` or `--force` to force installation and `--cli-only` to omit gui confs).*
+Run the `install.sh` script in **bash** *(supported options are `-f` or `--force` to force installation and `--cli-only` to omit gui configurations).*
 ```
 sudo ./dotfiles/install.sh --force
 ```
