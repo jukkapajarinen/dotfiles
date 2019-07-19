@@ -10,7 +10,7 @@ tty_name() { tty | sed -e "s:/dev/::"; }
 export PROMPT_COMMAND='PS1="\[\033[0;91m\]\u\[\033[0;37m\] @ \[\033[0;93m\]\h\[\033[0;37m\] / \[\033[0;94m\]\w\[\033[0;37m\]\[\033[0;92m\]$(parse_git_branch)\[\033[0;37m\] \$ \[\033[0;0m\]"';
 
 # My message of the day
-neofetch; echo -e "\033[0;91m$(date_now)\033[0;0m | \033[0;93m$(tty_name)\033[0;0m | \033[0;94mBe awesome today!\033[0;0m 🚀";
+clear; neofetch; echo -e "\033[0;91m$(date_now)\033[0;0m | \033[0;93m$(tty_name)\033[0;0m | \033[0;94mBe awesome today!\033[0;0m 🚀";
 
 # My custom colors
 [ $macos == true ] && alias ls='ls -G' # *BSD/MacOS version
