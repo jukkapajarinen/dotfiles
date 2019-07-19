@@ -66,6 +66,7 @@ $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln /usr/bin/alacritty /etc/alternatives/x-terminal-emulator;
 [[ $macos == false ]] && which proftpd > /dev/null && $ln $scriptDir/daemons/proftpd.conf /etc/proftpd/proftpd.conf;
 [[ $macos == false ]] && which smbd > /dev/null && $ln $scriptDir/daemons/smb.conf /etc/samba/smb.conf;
+[[ $macos == false ]] && which sshd > /dev/null && $ln $scriptDir/daemons/sshd.conf /etc/ssh/sshd_config;
 
 # Print info that execution finished
 echo "Installation finished."
