@@ -35,9 +35,9 @@ bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
 bindsym $Cmd+Shift+4 exec "scrot -e 'mv $f ~/Desktop/'"
 
 # Xf86 keybindings
-bindsym XF86MonBrightnessDown exec "i3-nagbar -t 'warning' -m 'XF86MonBrightnessDown'"
-bindsym XF86MonBrightnessUp exec "i3-nagbar -t 'warning' -m 'XF86MonBrightnessUp'"
-bindsym XF86LaunchA exec "i3-nagbar -t 'warning' -m 'XF86LaunchA'"
+bindsym XF86MonBrightnessDown exec "$HOME/dotfiles/scripts/adjust-brightness.sh all down"
+bindsym XF86MonBrightnessUp exec "$HOME/dotfiles/scripts/adjust-brightness.sh all up"
+bindsym XF86LaunchA exec "$HOME/dotfiles/scripts/adjust-brightness.sh all reset"
 bindsym XF86LaunchB exec "rofi -modi run -show run"
 bindsym XF86KbdBrightnessDown exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessDown'"
 bindsym XF86KbdBrightnessUp exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessUp'"
