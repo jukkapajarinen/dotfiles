@@ -49,35 +49,29 @@ bindsym XF86AudioLowerVolume exec "pulsemixer --id 0 --change-volume -1"
 bindsym XF86AudioRaiseVolume exec "pulsemixer --id 0 --change-volume +1"
 bindsym XF86Eject exec "i3-nagbar -t 'warning' -m 'XF86Eject'"
 
-# Change focused window
-bindsym $Cmd+$Opt+Shift+Left focus left
-bindsym $Cmd+$Opt+Shift+Down focus down
-bindsym $Cmd+$Opt+Shift+Up focus up
-bindsym $Cmd+$Opt+Shift+Right focus right
-
 # Controls for focused window
-bindsym $Cmd+$Opt+Left move left
-bindsym $Cmd+$Opt+Down move down
-bindsym $Cmd+$Opt+Up move up
-bindsym $Cmd+$Opt+Right move right
-bindsym $Cmd+$Opt+$f3 fullscreen toggle
+bindsym $Cmd+$Opt+$Ctrl+Left move left
+bindsym $Cmd+$Opt+$Ctrl+Down move down
+bindsym $Cmd+$Opt+$Ctrl+Up move up
+bindsym $Cmd+$Opt+$Ctrl+Right move right
+bindsym $Cmd+$Opt+$Ctrl+$f3 fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $Cmd+$Opt+$s3 layout stacking
-bindsym $Cmd+$Opt+$w3 layout tabbed
-bindsym $Cmd+$Opt+$e3 layout toggle split
+bindsym $Cmd+$Opt+$Ctrl+$s3 layout stacking
+bindsym $Cmd+$Opt+$Ctrl+$w3 layout tabbed
+bindsym $Cmd+$Opt+$Ctrl+$e3 layout toggle split
 
 # Toggle floating mode
-bindsym $Cmd+$Opt+space floating toggle
-floating_modifier $Cmd+$Opt
+bindsym $Cmd+$Opt+$Ctrl+space floating toggle
+floating_modifier $Cmd+$Opt+$Ctrl
 
 # Switch to workspace
-bindsym $Cmd+$Opt+$one3 workspace 1
-bindsym $Cmd+$Opt+$two3 workspace 2
+bindsym $Cmd+$Opt+$Ctrl+$one3 workspace 1
+bindsym $Cmd+$Opt+$Ctrl+$two3 workspace 2
 
 # Move focused container to left/right display
-bindsym $Cmd+$Opt+$Ctrl+Left move container to output left; focus output left
-bindsym $Cmd+$Opt+$Ctrl+Right move container to output right; focus output right
+bindsym $Cmd+$Opt+$Ctrl+Shift+Left move container to output left; focus output left
+bindsym $Cmd+$Opt+$Ctrl+Shift+Right move container to output right; focus output right
 
 # Top-level i3 controls
 bindsym $Cmd+$Opt+$Ctrl+Shift+$r4 restart
