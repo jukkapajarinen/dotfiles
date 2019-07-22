@@ -6,29 +6,30 @@ hide_edge_borders none
 # Set my goofy variables for easier keybindings
 set $Ctrl Mod4
 set $Cmd Control
-set $Opt Mod5
-set $t3 tslash
-set $f3 dstroke
-set $s3 ssharp
-set $w3 lstroke
-set $e3 EuroSign
-set $one3 copyright
-set $two3 at
-set $three3 sterling
-set $four3 dollar
-set $five3 onehalf
-set $six3 threequarters
-set $seven3 bar
-set $eight3 bracketleft
-set $nine3 bracketright
-set $zero3 braceright
-set $r4 registered
-set $c4 copyright
-set $l4 Lstroke
+set $Opt Mod1
+set $Opt2 Mod5
+# set $t3 tslash
+# set $f3 dstroke
+# set $s3 ssharp
+# set $w3 lstroke
+# set $e3 EuroSign
+# set $one3 copyright
+# set $two3 at
+# set $three3 sterling
+# set $four3 dollar
+# set $five3 onehalf
+# set $six3 threequarters
+# set $seven3 bar
+# set $eight3 bracketleft
+# set $nine3 bracketright
+# set $zero3 braceright
+# set $r4 registered
+# set $c4 copyright
+# set $l4 Lstroke
 
 # General controls
 bindsym $Cmd+q kill
-bindsym $Cmd+$Opt+$Ctrl+$t3 exec alacritty
+bindsym $Cmd+$Opt+$Ctrl+t exec alacritty
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
 bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
@@ -54,29 +55,29 @@ bindsym $Cmd+$Opt+$Ctrl+Left move left
 bindsym $Cmd+$Opt+$Ctrl+Down move down
 bindsym $Cmd+$Opt+$Ctrl+Up move up
 bindsym $Cmd+$Opt+$Ctrl+Right move right
-bindsym $Cmd+$Opt+$Ctrl+$f3 fullscreen toggle
+bindsym $Cmd+$Opt+$Ctrl+f fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $Cmd+$Opt+$Ctrl+$s3 layout stacking
-bindsym $Cmd+$Opt+$Ctrl+$w3 layout tabbed
-bindsym $Cmd+$Opt+$Ctrl+$e3 layout toggle split
+bindsym $Cmd+$Opt+$Ctrl+s layout stacking
+bindsym $Cmd+$Opt+$Ctrl+w layout tabbed
+bindsym $Cmd+$Opt+$Ctrl+e layout toggle split
 
 # Toggle floating mode
 bindsym $Cmd+$Opt+$Ctrl+space floating toggle
 floating_modifier $Cmd+$Opt+$Ctrl
 
 # Switch to workspace
-bindsym $Cmd+$Opt+$Ctrl+$one3 workspace 1
-bindsym $Cmd+$Opt+$Ctrl+$two3 workspace 2
+bindsym $Cmd+$Opt+$Ctrl+1 workspace 1
+bindsym $Cmd+$Opt+$Ctrl+2 workspace 2
 
 # Move focused container to left/right display
 bindsym $Cmd+$Opt+$Ctrl+Shift+Left move container to output left; focus output left
 bindsym $Cmd+$Opt+$Ctrl+Shift+Right move container to output right; focus output right
 
 # Top-level i3 controls
-bindsym $Cmd+$Opt+$Ctrl+Shift+$r4 restart
-bindsym $Cmd+$Opt+$Ctrl+Shift+$c4 reload
-bindsym $Cmd+$Opt+$Ctrl+Shift+$l4 exec "i3-nagbar -m 'Do you really want to logout?' -b 'Yes!' 'i3-msg exit'"
+bindsym $Cmd+$Opt+$Ctrl+Shift+r restart
+bindsym $Cmd+$Opt+$Ctrl+Shift+c reload
+bindsym $Cmd+$Opt+$Ctrl+Shift+l exec "i3-nagbar -m 'Do you really want to logout?' -b 'Yes!' 'i3-msg exit'"
 
 # Autostart configuration
 exec --no-startup-id "xdotool key Control+ISO_Level3_Shift+1"

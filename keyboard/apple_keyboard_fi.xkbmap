@@ -1385,7 +1385,7 @@ xkb_symbols "pc_macintosh_vndr/fi_inet(evdev)_level3(alt_switch)" {
     };
     key <LALT> {
         type= "ONE_LEVEL",
-        symbols[Group1]= [ ISO_Level3_Shift ]
+        symbols[Group1]= [ Alt_L ]
     };
     key <SPCE> {         [           space ] };
     key <CAPS> {         [       Caps_Lock ] };
@@ -1622,12 +1622,9 @@ xkb_symbols "pc_macintosh_vndr/fi_inet(evdev)_level3(alt_switch)" {
     modifier_map Control { <RCTL> };
     modifier_map Control { <LWIN> };
     modifier_map Control { <RWIN> };
-    modifier_map Mod1 { <ALT> };
-    modifier_map Mod1 { <META> };
-    modifier_map Mod2 { <NMLK> };
+    modifier_map Mod1 { <LALT> };
     modifier_map Mod4 { <LCTL> };
-    modifier_map Mod5 { <LVL3> };
-    modifier_map Mod5 { <MDSW> };
+    modifier_map Mod5 { <RALT> };
 };
 
 xkb_geometry "macintosh(macbook79)" {
