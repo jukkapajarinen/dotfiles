@@ -46,7 +46,7 @@ export LANG="en_US.UTF-8";
 export LANGUAGE="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 [ $macos == true ] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
-[ $macos == false ] && export QT_STYLE_OVERRIDE="Adwaita";
+[ $macos == false ] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
 
 # Start X for Linux systems
 [ $macos == false ] && [[ -z $DISPLAY ]] && which startx > /dev/null && startx && logout;
