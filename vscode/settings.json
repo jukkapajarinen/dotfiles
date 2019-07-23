@@ -9,6 +9,7 @@
     "terminal.integrated.cursorBlinking": true,
     "terminal.integrated.cursorStyle": "block",
     "terminal.integrated.rendererType": "dom",
+    "terminal.integrated.fontSize": 14,
     "editor.fontSize": 14,
     "editor.lineHeight": 20,
     "editor.letterSpacing": 0.5,
