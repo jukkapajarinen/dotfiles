@@ -2,17 +2,23 @@
 [ "$(uname -s)" == "Darwin" ] && macos=true || macos=false;
 
 # My custom functions
-parse_git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'; }
+parse_git_branch() { git branch 2> /dev/null | grep \* | awk '{print "("$2")"}'; }
+parse_git_status() { [ "$(git status -s)" == "" ] && echo "✔️" || echo "❌"; }
+git_info() { git status &> /dev/null && echo " $(parse_git_branch) $(parse_git_status)";}
 date_now() { date '+%a %d.%m.%Y %H:%M:%S'; }
 tty_name() { tty | sed -e "s:/dev/::"; }
 
-# My custom PS1
-export PROMPT_COMMAND='PS1="\[\033[0;91m\]\u\[\033[0;37m\] @ \[\033[0;93m\]\h\[\033[0;37m\] / \[\033[0;94m\]\w\[\033[0;37m\]\[\033[0;92m\]$(parse_git_branch)\[\033[0;37m\] \$ \[\033[0;0m\]"';
-
-# My message of the day
-clear; which neofetch > /dev/null && neofetch; echo -e "\033[0;91m$(date_now)\033[0;0m | \033[0;93m$(tty_name)\033[0;0m | \033[0;94mBe awesome today!\033[0;0m 🚀";
-
 # My custom colors
+RESET_COLOR="\033[0;0m";
+BG_YELLOW="\033[0;30;103m";
+FG_GRAY="\033[0;37m";
+FG_RED="\033[0;91m";
+FG_GREEN="\033[0;92m";
+FG_YELLOW="\033[0;93m";
+FG_BLUE="\033[0;94m";
+FG_MAGENTA="\033[0;95m";
+FG_CYAN="\033[0;96m";
+FG_WHITE="\033[0;97m";
 [ $macos == true ] && alias ls='ls -G' # *BSD/MacOS version
 [ $macos == false ] && alias ls='ls --color=auto' # GNU/Linux version;
 alias grep='grep --color=auto';
@@ -25,6 +31,11 @@ export LESS_TERMCAP_se=$(printf '\e[0m');
 export LESS_TERMCAP_so=$(printf '\e[01;34m');
 export LESS_TERMCAP_ue=$(printf '\e[0m');
 export LESS_TERMCAP_us=$(printf '\e[04;33m');
+
+# My custom PS1 and MOTD
+[ "$SSH_CONNECTION" == "" ] && export PROMPT_COMMAND='PS1="\[${FG_RED}\]\u\[${FG_GRAY}\] @ \[${FG_YELLOW}\]\h\[${FG_GRAY}\] / \[${FG_BLUE}\]\w\[${FG_GRAY}\]\[${FG_GREEN}\]$(git_info)\[${FG_GRAY}\] $ \[${RESET_COLOR}\]"';
+[ "$SSH_CONNECTION" == "" ] || export PROMPT_COMMAND='PS1="\[${FG_RED}\]\u\[${FG_GRAY}\] @ \[${BG_YELLOW}\]\h\[${FG_GRAY}\] / \[${FG_BLUE}\]\w\[${FG_GRAY}\]\[${FG_GREEN}\]$(git_info)\[${FG_GRAY}\] $ \[${RESET_COLOR}\]"';
+clear; which neofetch > /dev/null && neofetch; echo -e "${FG_RED}$(date_now)${FG_GRAY} | ${FG_YELLOW}$(tty_name)${FG_GRAY} | ${FG_BLUE}Be awesome today! 🚀${RESET_COLOR}";
 
 # My aliases
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q; docker volume rm $(docker volume ls -q);';
