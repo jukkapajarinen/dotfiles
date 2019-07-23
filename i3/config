@@ -80,6 +80,6 @@ bindsym $Cmd+$Opt+$Ctrl+Shift+c reload
 bindsym $Cmd+$Opt+$Ctrl+Shift+l exec "i3-nagbar -m 'Do you really want to logout?' -b 'Yes!' 'i3-msg exit'"
 
 # Autostart configuration
-exec --no-startup-id "xdotool key Control+ISO_Level3_Shift+1"
+exec --no-startup-id "xdotool key control+alt+super+1"
 exec --no-startup-id $HOME/dotfiles/scripts/launch_polybar.sh
 exec --no-startup-id megasync
