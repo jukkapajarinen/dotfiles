@@ -40,11 +40,12 @@ fi
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/i3;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/rofi;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/polybar;
+[[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/gtk-3.0;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/Code/User/;
 
 # Create symlinks
-$ln $scriptDir/bash/.bash_profile $homeDir/.bash_profile;
-$ln $scriptDir/git/.gitconfig $homeDir/.gitconfig;
+$ln $scriptDir/bash/bash_profile $homeDir/.bash_profile;
+$ln $scriptDir/git/gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 [[ $cliOnly == false ]] && $ln $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 [[ $cliOnly == false ]] && [[ $macos == true ]] && $ln $scriptDir/vscode/settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
@@ -53,8 +54,11 @@ $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/i3/config $homeDir/.config/i3/config;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/rofi/config $homeDir/.config/rofi/config;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/polybar/config $homeDir/.config/polybar/config;
+[[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/gtk/gtk2 $homeDir/.gtkrc-2.0;
+[[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/gtk/gtk3 $homeDir/.config/gtk-3.0/settings.ini;
 [[ $macos == false ]] && $ln $scriptDir/keyboard/apple_keyboard_fi /etc/default/keyboard;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/keyboard/apple_keyboard_fi.xkbmap $homeDir/.xkbmap;
+[[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/xorg/xvkbd $homeDir/.xvkbd;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/xorg/Xresources $homeDir/.Xresources;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/xorg/Xsession $homeDir/.Xsession;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/vscode/settings.json $homeDir/.config/Code/User/settings.json;
