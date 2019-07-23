@@ -1,5 +1,5 @@
 [core]
 	editor = nano
-[user]
-	name = Jukka Pajarinen
-	email = jukkapajarinen91@gmail.com
+	commentChar = @
+[include]
+	path = ~/.gituser
