@@ -46,7 +46,6 @@
     "git.alwaysSignOff": true,
     "breadcrumbs.enabled": true,
     "cssrem.rootFontSize": 20,
-    "php.executablePath": "/usr/bin/php",
     "eslint.nodePath": "/usr/local/bin/node",
     "eslint.validate": ["javascript"],
     "eslint.options": { "configFile": "./.eslintrc.json" },

@@ -3,7 +3,7 @@
 
 # My custom functions
 parse_git_branch() { git status &> /dev/null && (git branch 2> /dev/null | grep \* | awk '{print " ("$2")"}'); }
-parse_git_status() { git status &> /dev/null && ([ "$(git status -s)" == "" ] && echo -e "${FG_GREEN} [✓]" || echo -e "${FG_RED} [x]"); }
+parse_git_status() { git status &> /dev/null && ([ "$(git status -s)" == "" ] && echo -e "\[${FG_GREEN}\] [✓]" || echo -e "\[${FG_RED}\] [x]"); }
 date_now() { date '+%a %d.%m.%Y %H:%M:%S'; }
 tty_name() { tty | sed -e "s:/dev/::"; }
 
