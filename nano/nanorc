@@ -41,4 +41,4 @@ set keycolor yellow
 set functioncolor blue
 
 ## Setup of syntax coloring.
-include "/usr/share/nano/*.nanorc"
+include "/usr/local/share/nano/*.nanorc"

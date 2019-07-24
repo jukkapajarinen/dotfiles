@@ -47,6 +47,7 @@ fi
 $ln $scriptDir/bash/bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/git/gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
+[[ $macos == false ]] && $ln /usr/share/nano /usr/local/share/nano;
 [[ $cliOnly == false ]] && $ln $scriptDir/alacritty/alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 [[ $cliOnly == false ]] && [[ $macos == true ]] && $ln $scriptDir/vscode/settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
 [[ $cliOnly == false ]] && [[ $macos == true ]] && $ln $scriptDir/vscode/keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
