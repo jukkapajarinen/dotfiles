@@ -40,6 +40,8 @@ clear; which neofetch > /dev/null && neofetch; echo -e "${FG_RED}$(date_now)${FG
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q; docker volume rm $(docker volume ls -q);';
 alias exportVSCodeExtensions='code --list-extensions > ~/dotfiles/vscode/extensions.list';
 alias importVSCodeExtensions='cat ~/dotfiles/vscode/extensions.list | xargs -L 1 code --install-extension';
+alias gl='git log --name-only --graph --oneline';
+alias gs='git status -s -b';
 [ $macos == true ] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';
 [ $macos == true ] && alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app';
 [ $macos == true ] && alias resetLaunchPad='defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock';
@@ -49,6 +51,9 @@ alias importVSCodeExtensions='cat ~/dotfiles/vscode/extensions.list | xargs -L 1
 [ $macos == false ] && alias resetPointers='bash ~/dotfiles/scripts/pointer-settings.sh';
 [ $macos == false ] && alias resetKeyboards='bash ~/dotfiles/scripts/keyboard-settings.sh';
 [ $macos == false ] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh home"';
+
+# Optional extra aliases
+ls ~/.bash_aliases_extra &> /dev/null && bash ~/.bash_aliases_extra;
 
 # My environment variables
 export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin";
