@@ -53,7 +53,7 @@ alias gs='git status -s -b';
 [ $macos == false ] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh home"';
 
 # Optional extra aliases
-ls ~/.bash_aliases_extra &> /dev/null && bash ~/.bash_aliases_extra;
+ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
 
 # My environment variables
 export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin";
