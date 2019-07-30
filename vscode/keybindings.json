@@ -2,6 +2,8 @@
   // Toggle terminal with either ctrl or cmd
   { "key": "cmd+shift+[Equal]", "command": "workbench.action.terminal.toggleTerminal" },
   { "key": "ctrl+shift+[Equal]", "command": "workbench.action.terminal.toggleTerminal" },
+  { "key": "cmd+shift+[Minus]", "command": "workbench.action.terminal.new" },
+  { "key": "ctrl+shift+[Minus]", "command": "workbench.action.terminal.new" },
 
   // Integrated terminal or editor splitting harmonization
   { "key": "ctrl+shift+alt+meta+[digit7]", "command": "workbench.action.terminal.split", "when": "terminalFocus" },
