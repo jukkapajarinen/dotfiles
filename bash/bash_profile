@@ -47,6 +47,8 @@ alias gs='git status -s -b';
 [ $macos == true ] && alias resetLaunchPad='defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock';
 [ $macos == true ] && alias disableDock='defaults write com.apple.dock tilesize -int 1; defaults write com.apple.dock autohide-time-modifier -float 9999999999; killall Dock';
 [ $macos == true ] && alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock';
+[ $macos == true ] && alias disableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores true';
+[ $macos == true ] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
 [ $macos == false ] && alias open='xdg-open';
 [ $macos == false ] && alias resetPointers='bash ~/dotfiles/scripts/pointer-settings.sh';
 [ $macos == false ] && alias resetKeyboards='bash ~/dotfiles/scripts/keyboard-settings.sh';
