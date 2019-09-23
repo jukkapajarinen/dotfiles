@@ -38,7 +38,7 @@ export LESS_TERMCAP_us=$(printf '\e[04;33m');
 clear; which neofetch > /dev/null && neofetch; echo -e "${FG_RED}$(date_now)${FG_GRAY} | ${FG_YELLOW}$(tty_name)${FG_GRAY} | ${FG_BLUE}Be awesome today! 🚀${RESET_COLOR}";
 
 # My aliases
-alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q; docker volume rm $(docker volume ls -q);';
+alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
 alias exportVSCodeExtensions='code --list-extensions > ~/dotfiles/vscode/extensions.list';
 alias importVSCodeExtensions='cat ~/dotfiles/vscode/extensions.list | xargs -L 1 code --install-extension';
 alias gl='git log --name-only --graph --oneline';
