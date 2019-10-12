@@ -66,6 +66,7 @@ export LC_ALL="en_US.UTF-8";
 [ $macos == true ] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
 [ $macos == false ] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
 [ $macos == false ] && export GTK_THEME="Adwaita:dark";
+[ $macos == true ] && export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Start X for Linux systems
 [ $macos == false ] && [[ -z $DISPLAY ]] && which startx > /dev/null && startx && logout;
