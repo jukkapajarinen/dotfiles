@@ -4,7 +4,7 @@ conky.config = {
     out_to_console = true,
     background = false,
     max_text_width = 0,
-    update_interval = 2.0,
+    update_interval = 1.0,
     total_run_times = 0,
     short_units = true,
     if_up_strictness = 'address',
@@ -19,6 +19,6 @@ conky.text = [[
     { "full_text": "SSD: ${fs_used_perc /}%", "color": "\#ffffff" },
     { "full_text": "Bat: ${battery_percent BAT0}%", "color": "\#ffffff" },
     { "full_text": "Vol: ${exec pactl list sinks | grep -m 1 'Volume:' | awk '{print $5}'}", "color": "\#ffffff" },
-    { "full_text": "Time: ${time %d.%m.%y} ${time %H:%M} ", "color": "\#ffffff" }
+    { "full_text": "Time: ${time %d.%m.%y} ${time %H:%M:%S} ", "color": "\#ffffff" }
 ],
 ]];
