@@ -35,7 +35,19 @@ export LESS_TERMCAP_us=$(printf '\e[04;33m');
 # My custom PS1 and MOTD
 [ "$SSH_CONNECTION" == "" ] && export PROMPT_COMMAND='PS1="\[${FG_RED}\]\u\[${FG_GRAY}\] @ \[${FG_YELLOW}\]\h\[${FG_GRAY}\] / \[${FG_BLUE}\]\W\[${FG_GRAY}\]\[${FG_GREEN}\]$(git_branch)\[${FG_GRAY}\]$(git_status)\[${FG_MAGENTA}\]$(git_user)\[${FG_GRAY}\] $ \[${RESET_COLOR}\]"';
 [ "$SSH_CONNECTION" == "" ] || export PROMPT_COMMAND='PS1="\[${FG_RED}\]\u\[${FG_GRAY}\] @ \[${BG_YELLOW}\]\h\[${FG_GRAY}\] / \[${FG_BLUE}\]\W\[${FG_GRAY}\]\[${FG_GREEN}\]$(git_branch)\[${FG_GRAY}\]$(git_status)\[${FG_MAGENTA}\]$(git_user)\[${FG_GRAY}\] $ \[${RESET_COLOR}\]"';
-clear; which neofetch > /dev/null && neofetch; echo -e "${FG_RED}$(date_now)${FG_GRAY} | ${FG_YELLOW}$(tty_name)${FG_GRAY} | ${FG_BLUE}Be awesome today! 🚀${RESET_COLOR}";
+clear; echo -e "${FG_RED}$(date_now)${FG_GRAY} | ${FG_YELLOW}$(tty_name)${FG_GRAY} | ${FG_BLUE}Be awesome today! 🚀${RESET_COLOR}";
+
+# My environment variables
+export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin";
+export LANG="en_US.UTF-8";
+export LANGUAGE="en_US.UTF-8";
+export LC_ALL="en_US.UTF-8";
+[ $macos == true ] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
+[ $macos == false ] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
+[ $macos == false ] && export GTK_THEME="Adwaita:dark";
+[ $macos == true ] && export BASH_SILENCE_DEPRECATION_WARNING=1;
+[ $macos == true ] && export ANDROID_HOME=/usr/local/Caskroom/android-sdk/4333796;
+[ $macos == true ] && export PATH="$PATH:$ANDROID_HOME/platform-tools/";
 
 # My aliases
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
@@ -54,19 +66,10 @@ alias gs='git status -s -b';
 [ $macos == false ] && alias resetPointers='bash ~/dotfiles/scripts/pointer-settings.sh';
 [ $macos == false ] && alias resetKeyboards='bash ~/dotfiles/scripts/keyboard-settings.sh';
 [ $macos == false ] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh home"';
+[ $macos == true ] && alias emu="$ANDROID_HOME/tools/emulator";
 
 # Optional extra aliases
 ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
-
-# My environment variables
-export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin";
-export LANG="en_US.UTF-8";
-export LANGUAGE="en_US.UTF-8";
-export LC_ALL="en_US.UTF-8";
-[ $macos == true ] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
-[ $macos == false ] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
-[ $macos == false ] && export GTK_THEME="Adwaita:dark";
-[ $macos == true ] && export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Start X for Linux systems
 [ $macos == false ] && [[ -z $DISPLAY ]] && which startx > /dev/null && startx && logout;
