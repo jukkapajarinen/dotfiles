@@ -70,6 +70,12 @@ floating_modifier $Cmd+$Opt+$Ctrl
 # Switch to workspace
 bindsym $Cmd+$Opt+$Ctrl+1 workspace 1
 bindsym $Cmd+$Opt+$Ctrl+2 workspace 2
+bindsym $Cmd+$Opt+$Ctrl+3 workspace 3
+bindsym $Cmd+$Opt+$Ctrl+4 workspace 4
+bindsym $Cmd+$Opt+$Ctrl+Shift+1 move container to workspace 1;
+bindsym $Cmd+$Opt+$Ctrl+Shift+2 move container to workspace 2;
+bindsym $Cmd+$Opt+$Ctrl+Shift+3 move container to workspace 3;
+bindsym $Cmd+$Opt+$Ctrl+Shift+4 move container to workspace 4;
 
 # Move focused container to left/right display
 bindsym $Cmd+$Opt+$Ctrl+Shift+Left move container to output left; focus output left
