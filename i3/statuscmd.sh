@@ -1,3 +1,9 @@
 #!/bin/bash
-echo "TODO: @jukkapajarinen";
-tail -f /dev/null;
+
+# Print the json header for i3bar
+echo '{"version":1}'
+echo '['
+echo '[],'
+
+# Run json-formatted conky
+exec conky -c ~/.conkyrc

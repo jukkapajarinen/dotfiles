@@ -53,6 +53,7 @@ $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 [[ $cliOnly == false ]] && [[ $macos == true ]] && $ln $scriptDir/vscode/keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
 [[ $cliOnly == false ]] && [[ $macos == true ]] && $ln $scriptDir/spectacle.app/Shortcuts.json $homeDir/Library/Application\ Support/Spectacle/Shortcuts.json;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/i3/config $homeDir/.config/i3/config;
+[[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/conky/conkyrc $homeDir/.conkyrc;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/rofi/config $homeDir/.config/rofi/config;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/polybar/config $homeDir/.config/polybar/config;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/gtk/gtk2 $homeDir/.gtkrc-2.0;
