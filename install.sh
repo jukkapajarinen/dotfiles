@@ -68,7 +68,7 @@ $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 [[ $macos == false ]] && $ln $scriptDir/apt/preferences /etc/apt/preferences;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln /usr/bin/i3 /etc/alternatives/x-window-manager;
-[[ $cliOnly == false ]] && [[ $macos == false ]] && $ln /usr/bin/alacritty /etc/alternatives/x-terminal-emulator;
+[[ $cliOnly == false ]] && [[ $macos == false ]] && $ln /usr/bin/xterm /etc/alternatives/x-terminal-emulator;
 [[ $macos == false ]] && which proftpd > /dev/null && $ln $scriptDir/daemons/proftpd.conf /etc/proftpd/proftpd.conf;
 [[ $macos == false ]] && which smbd > /dev/null && $ln $scriptDir/daemons/smb.conf /etc/samba/smb.conf;
 [[ $macos == false ]] && which sshd > /dev/null && $ln $scriptDir/daemons/sshd.conf /etc/ssh/sshd_config;

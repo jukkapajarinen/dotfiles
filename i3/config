@@ -30,7 +30,7 @@ set $Opt2 Mod5
 
 # General controls
 bindsym $Cmd+q kill
-bindsym $Cmd+$Opt+$Ctrl+t exec alacritty
+bindsym $Cmd+$Opt+$Ctrl+t exec "xterm"
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
 bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
