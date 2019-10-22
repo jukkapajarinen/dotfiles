@@ -1,0 +1,54 @@
+[Default Applications]
+
+; Firefox Dev Edition
+x-scheme-handler/http=userapp-Firefox Developer Edition-9FNI4Z.desktop
+x-scheme-handler/https=userapp-Firefox Developer Edition-9FNI4Z.desktop
+x-scheme-handler/ftp=userapp-Firefox Developer Edition-9FNI4Z.desktop
+x-scheme-handler/chrome=userapp-Firefox Developer Edition-9FNI4Z.desktop
+text/html=userapp-Firefox Developer Edition-9FNI4Z.desktop
+application/x-extension-htm=userapp-Firefox Developer Edition-9FNI4Z.desktop
+application/x-extension-html=userapp-Firefox Developer Edition-9FNI4Z.desktop
+application/x-extension-shtml=userapp-Firefox Developer Edition-9FNI4Z.desktop
+application/xhtml+xml=userapp-Firefox Developer Edition-9FNI4Z.desktop
+application/x-extension-xhtml=userapp-Firefox Developer Edition-9FNI4Z.desktop
+application/x-extension-xht=userapp-Firefox Developer Edition-9FNI4Z.desktop
+
+; Image files
+image/bmp=feh.desktop
+image/gif=feh.desktop
+image/jpeg=feh.desktop
+image/png=feh.desktop
+image/tiff=feh.desktop
+image/webp=feh.desktop
+image/svg+xml=feh.desktop
+
+; Miscellaneous files
+application/pdf=atril.desktop
+inode/directory=pcmanfm.desktop
+
+; Text files
+text/plain=code.desktop
+text/css=code.desktop
+text/rtf=code.desktop
+text/xml=code.desktop
+text/csv=code.desktop
+text/calendar=code.desktop
+application/json=code.desktop
+application/php=code.desktop
+
+; Audio/Video files
+audio/mpeg=vlc.desktop
+audio/aac=vlc.desktop
+audio/midi=vlc.desktop
+audio/x-midi=vlc.desktop
+audio/ogg=vlc.desktop
+audio/opus=vlc.desktop
+audio/wav=vlc.desktop
+audio/webm=vlc.desktop
+video/mpeg=vlc.desktop
+video/x-msvideo=vlc.desktop
+video/ogg=vlc.desktop
+video/mp2t=vlc.desktop
+video/webm=vlc.desktop
+video/3gpp=vlc.desktop
+video/3gpp2=vlc.desktop

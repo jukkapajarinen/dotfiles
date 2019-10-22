@@ -58,6 +58,7 @@ $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/polybar/config $homeDir/.config/polybar/config;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/gtk/gtk2 $homeDir/.gtkrc-2.0;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/gtk/gtk3 $homeDir/.config/gtk-3.0/settings.ini;
+[[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/mime/mimeapps.list $homeDir/.config/mimeapps.list;
 [[ $macos == false ]] && $ln $scriptDir/keyboard/apple_keyboard_fi /etc/default/keyboard;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/keyboard/apple_keyboard_fi.xkbmap $homeDir/.xkbmap;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/xorg/xvkbd $homeDir/.xvkbd;
