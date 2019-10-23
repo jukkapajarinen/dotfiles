@@ -40,7 +40,6 @@ fi
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/i3;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/rofi;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/dunst;
-#[[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/polybar;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/gtk-3.0;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $mkdir $homeDir/.config/Code/User/;
 
@@ -57,7 +56,6 @@ $ln $scriptDir/nano/nanorc $homeDir/.nanorc;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/conky/conkyrc $homeDir/.conkyrc;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/rofi/config $homeDir/.config/rofi/config;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/dunst/dunstrc $homeDir/.config/dunst/dunstrc;
-#[[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/polybar/config $homeDir/.config/polybar/config;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/gtk/gtk2 $homeDir/.gtkrc-2.0;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/gtk/gtk3 $homeDir/.config/gtk-3.0/settings.ini;
 [[ $cliOnly == false ]] && [[ $macos == false ]] && $ln $scriptDir/mime/mimeapps.list $homeDir/.config/mimeapps.list;
