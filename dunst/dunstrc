@@ -1,0 +1,28 @@
+[global]
+    geometry = "256x5-10+30"
+    frame_width = 1
+    frame_color = "#6943ff"
+    separator_color = "#6943ff"
+    padding = 10
+    horizontal_padding = 10
+    font = Fira Code 10
+    markup = full
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    browser = /usr/bin/firefox-dev -new-tab
+
+[urgency_low]
+    background = "#1e1d40"
+    foreground = "#6943ff"
+    timeout = 10
+
+[urgency_normal]
+    background = "#1e1d40"
+    foreground = "#6943ff"
+    timeout = 10
+
+[urgency_critical]
+    background = "#1e1d40"
+    foreground = "#d90429"
+    frame_color = "#d90429"
+    timeout = 0
