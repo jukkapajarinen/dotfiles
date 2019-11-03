@@ -77,7 +77,9 @@ $ln $scriptDir/nano_config $homeDir/.nanorc;
 [[ "$cliOnly" == "false" ]] && [[ "$linux" == "true" ]] && $ln /usr/bin/xterm /etc/alternatives/x-terminal-emulator;
 
 # Install additional things
-cat $scriptDir/vscode_extensions | xargs -L 1 code --install-extension;
+[[ "$cliOnly" == "false" ]] && [[ "$macos" == "true" ]] && vscodeDataDir="$homeDir/Library/Application\ Support/Code/";
+[[ "$cliOnly" == "false" ]] && [[ "$linux" == "true" ]] && vscodeDataDir="$homeDir/.config/Code/";
+[[ "$cliOnly" == "false" ]] && cat $scriptDir/vscode_extensions | xargs -L 1 code --user-data-dir=$vscodeDataDir --install-extension;
 
 # Print info that execution finished
 echo "Installation finished."
