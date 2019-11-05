@@ -1,24 +1,23 @@
 conky.config = {
-    out_to_x = false,
-    own_window = false,
-    out_to_console = true,
-    background = false,
-    max_text_width = 0,
-    update_interval = 0.25,
-    total_run_times = 0,
-    short_units = true,
-    if_up_strictness = 'address',
-    override_utf8_locale = false,
-    cpu_avg_samples = 2,
+  out_to_x = false,
+  own_window = false,
+  out_to_console = true,
+  background = false,
+  max_text_width = 0,
+  update_interval = 0.25,
+  total_run_times = 0,
+  short_units = true,
+  if_up_strictness = 'address',
+  override_utf8_locale = false,
+  cpu_avg_samples = 2,
 };
 
 conky.text = [[
 [
-    { "full_text": "CPU: ${cpu cpu0}%", "color": "\#ffffff" },
-    { "full_text": "Mem: ${memperc}%", "color": "\#ffffff" },
-    { "full_text": "SSD: ${fs_used_perc /}%", "color": "\#ffffff" },
-    { "full_text": "Bat: ${battery_percent BAT0}%", "color": "\#ffffff" },
-    { "full_text": "Vol: ${exec pactl list sinks | grep -m 1 'Volume:' | awk '{print $5}'}", "color": "\#ffffff" },
-    { "full_text": "Time: ${time %d.%m.%y} ${time %H:%M:%S} ", "color": "\#ffffff" }
+  { "full_text": "CPU: ${cpu cpu0}%", "color": "\#3ad900" },
+  { "full_text": "Mem: ${memperc}%", "color": "\#fad000" },
+  { "full_text": "SSD: ${fs_used_perc /}%", "color": "\#ff2c70" },
+  { "full_text": "Bat: ${battery_percent BAT0}%", "color": "\#80fcff" },
+  { "full_text": "${time %d.%m.%Y} ${time %H:%M:%S} ", "color": "\#ffffff" }
 ],
 ]];

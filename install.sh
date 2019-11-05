@@ -74,7 +74,7 @@ $ln $scriptDir/nano_config $homeDir/.nanorc;
 [[ "$cliOnly" == "false" ]] && [[ "$linux" == "true" ]] && $ln $scriptDir/vscode_keybindings.json $homeDir/.config/Code/User/keybindings.json;
 [[ "$cliOnly" == "false" ]] && [[ "$linux" == "true" ]] && $ln /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
 [[ "$cliOnly" == "false" ]] && [[ "$linux" == "true" ]] && $ln /usr/bin/i3 /etc/alternatives/x-window-manager;
-[[ "$cliOnly" == "false" ]] && [[ "$linux" == "true" ]] && $ln /usr/bin/xterm /etc/alternatives/x-terminal-emulator;
+[[ "$cliOnly" == "false" ]] && [[ "$linux" == "true" ]] && $ln /usr/bin/urxvt /etc/alternatives/x-terminal-emulator;
 
 # Install additional things
 [[ "$cliOnly" == "false" ]] && [[ "$macos" == "true" ]] && vscodeDataDir="$homeDir/Library/Application\ Support/Code/";

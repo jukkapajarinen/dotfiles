@@ -1,10 +1,10 @@
 # General customizations
 for_window [class=".*"] border pixel 0
-gaps inner 20
+gaps inner 16
 focus_follows_mouse no
 hide_edge_borders none
 
-# Set my goofy variables for easier keybindings
+# Goofy variables for easier keybindings
 set $Ctrl Mod4
 set $Cmd Control
 set $Opt Mod1
@@ -28,9 +28,40 @@ set $Opt2 Mod5
 # set $c4 copyright
 # set $l4 Lstroke
 
+# Workspace variable names
+set $ws1 " 1 "
+set $ws2 " 2 "
+set $ws3 " 3 "
+set $ws4 " 4 "
+set $ws5 " 5 "
+set $ws6 " 6 "
+set $ws7 " 7 "
+set $ws8 " 8 "
+set $ws9 " 9 "
+
+# Workspace settings
+bindsym $Cmd+$Opt+$Ctrl+1 workspace $ws1
+bindsym $Cmd+$Opt+$Ctrl+2 workspace $ws2
+bindsym $Cmd+$Opt+$Ctrl+3 workspace $ws3
+bindsym $Cmd+$Opt+$Ctrl+4 workspace $ws4
+bindsym $Cmd+$Opt+$Ctrl+5 workspace $ws5
+bindsym $Cmd+$Opt+$Ctrl+6 workspace $ws6
+bindsym $Cmd+$Opt+$Ctrl+7 workspace $ws7
+bindsym $Cmd+$Opt+$Ctrl+8 workspace $ws8
+bindsym $Cmd+$Opt+$Ctrl+9 workspace $ws9
+bindsym $Cmd+$Opt+$Ctrl+Shift+1 move container to workspace $ws1
+bindsym $Cmd+$Opt+$Ctrl+Shift+2 move container to workspace $ws2
+bindsym $Cmd+$Opt+$Ctrl+Shift+3 move container to workspace $ws3
+bindsym $Cmd+$Opt+$Ctrl+Shift+4 move container to workspace $ws4
+bindsym $Cmd+$Opt+$Ctrl+Shift+5 move container to workspace $ws5
+bindsym $Cmd+$Opt+$Ctrl+Shift+6 move container to workspace $ws6
+bindsym $Cmd+$Opt+$Ctrl+Shift+7 move container to workspace $ws7
+bindsym $Cmd+$Opt+$Ctrl+Shift+8 move container to workspace $ws8
+bindsym $Cmd+$Opt+$Ctrl+Shift+9 move container to workspace $ws9
+
 # General controls
 bindsym $Cmd+q kill
-bindsym $Cmd+$Opt+$Ctrl+t exec "xterm"
+bindsym $Cmd+$Opt+$Ctrl+t exec "urxvt"
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
 bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
@@ -67,26 +98,6 @@ bindsym $Cmd+$Opt+$Ctrl+e layout toggle split
 bindsym $Cmd+$Opt+$Ctrl+space floating toggle
 floating_modifier $Cmd+$Opt+$Ctrl
 
-# Switch to workspace
-bindsym $Cmd+$Opt+$Ctrl+1 workspace 1
-bindsym $Cmd+$Opt+$Ctrl+2 workspace 2
-bindsym $Cmd+$Opt+$Ctrl+3 workspace 3
-bindsym $Cmd+$Opt+$Ctrl+4 workspace 4
-bindsym $Cmd+$Opt+$Ctrl+5 workspace 5
-bindsym $Cmd+$Opt+$Ctrl+6 workspace 6
-bindsym $Cmd+$Opt+$Ctrl+7 workspace 7
-bindsym $Cmd+$Opt+$Ctrl+8 workspace 8
-bindsym $Cmd+$Opt+$Ctrl+9 workspace 9
-bindsym $Cmd+$Opt+$Ctrl+Shift+1 move container to workspace 1
-bindsym $Cmd+$Opt+$Ctrl+Shift+2 move container to workspace 2
-bindsym $Cmd+$Opt+$Ctrl+Shift+3 move container to workspace 3
-bindsym $Cmd+$Opt+$Ctrl+Shift+4 move container to workspace 4
-bindsym $Cmd+$Opt+$Ctrl+Shift+5 move container to workspace 5
-bindsym $Cmd+$Opt+$Ctrl+Shift+6 move container to workspace 6
-bindsym $Cmd+$Opt+$Ctrl+Shift+7 move container to workspace 7
-bindsym $Cmd+$Opt+$Ctrl+Shift+8 move container to workspace 8
-bindsym $Cmd+$Opt+$Ctrl+Shift+9 move container to workspace 9
-
 # Move focused container to left/right display
 bindsym $Cmd+$Opt+$Ctrl+Shift+Left move container to output left; focus output left
 bindsym $Cmd+$Opt+$Ctrl+Shift+Right move container to output right; focus output right
@@ -102,18 +113,20 @@ bar {
   status_command $HOME/dotfiles/scripts/i3_statuscmd.sh
   output primary
   tray_output primary
+  tray_padding 8
   workspace_buttons yes
   font pango:Fira Code 10
+  separator_symbol " "
   position top
-  height 20
+  height 32
   colors {
     background #1e1d40
     statusline #6943ff
     separator #6943ff
     focused_workspace #6943ff #6943ff #1e1d40
     active_workspace #6943ff #6943ff #1e1d40
-    inactive_workspace #6943ff #1e1d40 #6943ff
-    urgent_workspace #6943ff #1e1d40 #6943ff
-    binding_mode #6943ff #1e1d40 #6943ff
+    inactive_workspace #1e1d40 #1e1d40 #6943ff
+    urgent_workspace #1e1d40 #1e1d40 #6943ff
+    binding_mode #1e1d40 #1e1d40 #6943ff
   }
 }

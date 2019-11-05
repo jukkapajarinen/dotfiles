@@ -28,8 +28,5 @@ deb [arch=amd64] https://mega.nz/linux/MEGAsync/Debian_10.0/ ./
 # Oracle VirtualBox
 deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian buster contrib
 
-# Alacritty PPA Repository
-deb [arch=amd64] http://ppa.launchpad.net/mmstick76/alacritty/ubuntu bionic main
-
 # Official Regolith Linux PPA Repository
 deb [arch=amd64] http://ppa.launchpad.net/kgilmer/regolith-stable/ubuntu bionic main

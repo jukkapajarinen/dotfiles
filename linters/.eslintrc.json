@@ -1,19 +1,19 @@
 {
   "env": {
-      "browser": true,
-      "commonjs": true,
-      "es6": true
+    "browser": true,
+    "commonjs": true,
+    "es6": true
   },
   "extends": "eslint:recommended",
   "parserOptions": { "ecmaVersion": 6 },
   "rules": {
-      "no-console": 0,
-      "no-undef": 0,
-      "no-unused-vars": 0,
-      "indent": ["error", 2, { "SwitchCase": 1 }],
-      "linebreak-style": ["error", "unix"],
-      "semi": ["error", "always"],
-      "space-before-function-paren": ["error", { "anonymous": "always", "named": "always", "asyncArrow": "always" }],
-      "brace-style": ["error", "stroustrup", { "allowSingleLine": true }]
+    "no-console": 0,
+    "no-undef": 0,
+    "no-unused-vars": 0,
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "linebreak-style": ["error", "unix"],
+    "semi": ["error", "always"],
+    "space-before-function-paren": ["error", { "anonymous": "always", "named": "always", "asyncArrow": "always" }],
+    "brace-style": ["error", "stroustrup", { "allowSingleLine": true }]
   }
 }

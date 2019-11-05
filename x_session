@@ -10,7 +10,7 @@ bash ~/dotfiles/scripts/display-settings.sh home;
 xsetroot -solid '#2d2b55';
 
 # Set the background image
-feh --no-fehbg --bg-fill ~/Pictures/minimal-red-hills_3840x2160.jpg
+feh --no-fehbg --bg-fill ~/Pictures/simpleOutlook-ridge-4096x2160.png;
 
 # Set custom keyboard mappings
 bash ~/dotfiles/scripts/keyboard-settings.sh;
@@ -18,9 +18,13 @@ bash ~/dotfiles/scripts/keyboard-settings.sh;
 # Set custom pointer settings
 bash ~/dotfiles/scripts/pointer-settings.sh;
 
+# Set XResources
+xrdb ~/.Xresources;
+
 # Auto-start applications
-#bash megasync &;
-#bash xterm &;
+nm-applet &
+pasystray &
+megasync &
 
 # Start i3-gaps window manager
 exec i3;
