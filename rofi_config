@@ -1,9 +1,9 @@
 ! General customizations
 rofi.hide-scrollbar: true
 rofi.font: Fira Code 10
-rofi.color-normal: #1e1d40, #ffffff, #1e1d40, #6943ff, #1e1d40
-rofi.color-urgent: #1e1d40, #ffffff, #1e1d40, #6943ff, #1e1d40
-rofi.color-active: #1e1d40, #ffffff, #1e1d40, #6943ff, #1e1d40
+rofi.color-normal: #1e1d40, #ffffff, #1e1d40, #6943ff, #ffffff
+rofi.color-urgent: #1e1d40, #ffffff, #1e1d40, #6943ff, #ffffff
+rofi.color-active: #1e1d40, #ffffff, #1e1d40, #6943ff, #ffffff
 rofi.color-window: #1e1d40, #6943ff, #1e1d40
 
 ! Custom keybindings
