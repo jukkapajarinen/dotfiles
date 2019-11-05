@@ -79,5 +79,8 @@ alias gs='git status -s -b';
 # Optional extra aliases
 ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
 
+# Bash extensions
+which thefuck > /dev/null && eval $(thefuck --alias fuck);
+
 # Start X for Linux systems
 [[ "$linux" == "true" ]] && [[ -z $DISPLAY ]] && which startx > /dev/null && startx && logout;
