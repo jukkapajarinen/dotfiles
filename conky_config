@@ -18,6 +18,6 @@ conky.text = [[
   { "full_text": "Mem: ${memperc}%", "color": "\#fad000" },
   { "full_text": "SSD: ${fs_used_perc /}%", "color": "\#ff2c70" },
   { "full_text": "Bat: ${battery_percent BAT0}%", "color": "\#80fcff" },
-  { "full_text": "${time %d.%m.%Y} ${time %H:%M:%S} ", "color": "\#ffffff" }
+  { "full_text": "${time %a %d.%m.%Y} ${time %H:%M:%S} ", "color": "\#ffffff" }
 ],
 ]];
