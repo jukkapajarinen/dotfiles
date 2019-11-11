@@ -108,7 +108,7 @@ bindsym $Cmd+$Opt+$Ctrl+Shift+Right move container to output right; focus output
 # Top-level i3 controls
 bindsym $Cmd+$Opt+$Ctrl+Shift+r restart
 bindsym $Cmd+$Opt+$Ctrl+Shift+c reload
-bindsym $Cmd+$Opt+$Ctrl+Shift+l exec "i3-nagbar -m 'Do you really want to logout?' -b 'Yes!' 'i3-msg exit'"
+bindsym $Cmd+$Opt+$Ctrl+Shift+l exec "i3lock -c 1e1d40"
 
 # i3bar configuration
 bar {
