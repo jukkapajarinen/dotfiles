@@ -116,6 +116,11 @@ bar {
   i3bar_command i3bar
   status_command $HOME/dotfiles/scripts/i3_statuscmd.sh
   output primary
+  output eDP-1
+  output HDMI-2
+  output HDMI-1
+  output DP-1
+  output DP-2
   tray_output primary
   tray_padding 8
   workspace_buttons yes
