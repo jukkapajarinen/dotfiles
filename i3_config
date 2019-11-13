@@ -106,9 +106,9 @@ bindsym $Cmd+$Opt+Shift+Left move container to output left; focus output left
 bindsym $Cmd+$Opt+Shift+Right move container to output right; focus output right
 
 # Top-level i3 controls
-bindsym $Cmd+$Opt+$Ctrl+Shift+r restart
-bindsym $Cmd+$Opt+$Ctrl+Shift+c reload
-bindsym $Cmd+$Opt+$Ctrl+Shift+l exec "i3lock -c 1e1d40"
+bindsym $Cmd+$Opt+Shift+r restart
+bindsym $Cmd+$Opt+Shift+c reload
+bindsym $Cmd+$Opt+Shift+l exec "i3lock -c 1e1d40"
 
 # i3bar configuration
 bar {
