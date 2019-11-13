@@ -41,26 +41,26 @@ set $ws9 " 9 "
 set $ws10 " 10 "
 
 # Workspace settings
-bindsym $Cmd+$Opt+$Ctrl+1 workspace $ws1
-bindsym $Cmd+$Opt+$Ctrl+2 workspace $ws2
-bindsym $Cmd+$Opt+$Ctrl+3 workspace $ws3
-bindsym $Cmd+$Opt+$Ctrl+4 workspace $ws4
-bindsym $Cmd+$Opt+$Ctrl+5 workspace $ws5
-bindsym $Cmd+$Opt+$Ctrl+6 workspace $ws6
-bindsym $Cmd+$Opt+$Ctrl+7 workspace $ws7
-bindsym $Cmd+$Opt+$Ctrl+8 workspace $ws8
-bindsym $Cmd+$Opt+$Ctrl+9 workspace $ws9
-bindsym $Cmd+$Opt+$Ctrl+0 workspace $ws10
-bindsym $Cmd+$Opt+$Ctrl+Shift+1 move container to workspace $ws1
-bindsym $Cmd+$Opt+$Ctrl+Shift+2 move container to workspace $ws2
-bindsym $Cmd+$Opt+$Ctrl+Shift+3 move container to workspace $ws3
-bindsym $Cmd+$Opt+$Ctrl+Shift+4 move container to workspace $ws4
-bindsym $Cmd+$Opt+$Ctrl+Shift+5 move container to workspace $ws5
-bindsym $Cmd+$Opt+$Ctrl+Shift+6 move container to workspace $ws6
-bindsym $Cmd+$Opt+$Ctrl+Shift+7 move container to workspace $ws7
-bindsym $Cmd+$Opt+$Ctrl+Shift+8 move container to workspace $ws8
-bindsym $Cmd+$Opt+$Ctrl+Shift+9 move container to workspace $ws9
-bindsym $Cmd+$Opt+$Ctrl+Shift+0 move container to workspace $ws10
+bindsym $Cmd+$Opt+1 workspace $ws1
+bindsym $Cmd+$Opt+2 workspace $ws2
+bindsym $Cmd+$Opt+3 workspace $ws3
+bindsym $Cmd+$Opt+4 workspace $ws4
+bindsym $Cmd+$Opt+5 workspace $ws5
+bindsym $Cmd+$Opt+6 workspace $ws6
+bindsym $Cmd+$Opt+7 workspace $ws7
+bindsym $Cmd+$Opt+8 workspace $ws8
+bindsym $Cmd+$Opt+9 workspace $ws9
+bindsym $Cmd+$Opt+0 workspace $ws10
+bindsym $Cmd+$Opt+Shift+1 move container to workspace $ws1
+bindsym $Cmd+$Opt+Shift+2 move container to workspace $ws2
+bindsym $Cmd+$Opt+Shift+3 move container to workspace $ws3
+bindsym $Cmd+$Opt+Shift+4 move container to workspace $ws4
+bindsym $Cmd+$Opt+Shift+5 move container to workspace $ws5
+bindsym $Cmd+$Opt+Shift+6 move container to workspace $ws6
+bindsym $Cmd+$Opt+Shift+7 move container to workspace $ws7
+bindsym $Cmd+$Opt+Shift+8 move container to workspace $ws8
+bindsym $Cmd+$Opt+Shift+9 move container to workspace $ws9
+bindsym $Cmd+$Opt+Shift+0 move container to workspace $ws10
 
 # General controls
 bindsym $Cmd+q kill
@@ -86,24 +86,24 @@ bindsym XF86AudioRaiseVolume exec "pulsemixer --id 0 --change-volume +1"
 bindsym XF86Eject exec "i3-nagbar -t 'warning' -m 'XF86Eject'"
 
 # Controls for focused window
-bindsym $Cmd+$Opt+$Ctrl+Left move left
-bindsym $Cmd+$Opt+$Ctrl+Down move down
-bindsym $Cmd+$Opt+$Ctrl+Up move up
-bindsym $Cmd+$Opt+$Ctrl+Right move right
-bindsym $Cmd+$Opt+$Ctrl+f fullscreen toggle
+bindsym $Cmd+$Opt+Left move left
+bindsym $Cmd+$Opt+Down move down
+bindsym $Cmd+$Opt+Up move up
+bindsym $Cmd+$Opt+Right move right
+bindsym $Cmd+$Opt+Shift+f fullscreen toggle
 
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $Cmd+$Opt+$Ctrl+s layout stacking
-bindsym $Cmd+$Opt+$Ctrl+w layout tabbed
-bindsym $Cmd+$Opt+$Ctrl+e layout toggle split
+bindsym $Cmd+$Opt+Shift+s layout stacking
+bindsym $Cmd+$Opt+Shift+w layout tabbed
+bindsym $Cmd+$Opt+Shift+e layout toggle split
 
 # Toggle floating mode
-bindsym $Cmd+$Opt+$Ctrl+space floating toggle
-floating_modifier $Cmd+$Opt+$Ctrl
+bindsym $Cmd+$Opt+Shift+space floating toggle
+floating_modifier $Cmd+$Opt+Shift
 
 # Move focused container to left/right display
-bindsym $Cmd+$Opt+$Ctrl+Shift+Left move container to output left; focus output left
-bindsym $Cmd+$Opt+$Ctrl+Shift+Right move container to output right; focus output right
+bindsym $Cmd+$Opt+Shift+Left move container to output left; focus output left
+bindsym $Cmd+$Opt+Shift+Right move container to output right; focus output right
 
 # Top-level i3 controls
 bindsym $Cmd+$Opt+$Ctrl+Shift+r restart
