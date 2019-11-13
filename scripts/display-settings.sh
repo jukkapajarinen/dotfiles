@@ -8,6 +8,11 @@ if [[ $profile == "home" ]]; then
   xrandr --output eDP-1 --mode 1920x1200 --left-of HDMI-2;
   xrandr --output HDMI-2 --primary --mode 3840x2160 --right-of eDP-1;
 
+# TODO: Actual auto profile
+elif [[ $profile == "auto" ]]; then
+  xrandr --output eDP-1 --mode 1920x1200 --left-of HDMI-2;
+  xrandr --output HDMI-2 --primary --mode 3840x2160 --right-of eDP-1;
+
 # TODO: Other profiles
 elif [[ $profile == "other" ]]; then
   echo "TODO: Other profiles";

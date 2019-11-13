@@ -109,6 +109,7 @@ bindsym $Cmd+$Opt+Shift+Right move container to output right; focus output right
 bindsym $Cmd+$Opt+Shift+r restart
 bindsym $Cmd+$Opt+Shift+c reload
 bindsym $Cmd+$Opt+Shift+l exec "i3lock -c 1e1d40"
+bindsym $Cmd+$Opt+Shift+z exec "$HOME/dotfiles/scripts/reset-x-environment.sh; "
 
 # i3bar configuration
 bar {

@@ -74,8 +74,8 @@ alias gs='git status -s -b';
 [[ "$linux" == "true" ]] && alias open='xdg-open';
 [[ "$linux" == "true" ]] && alias resetPointers='bash ~/dotfiles/scripts/pointer-settings.sh';
 [[ "$linux" == "true" ]] && alias resetKeyboards='bash ~/dotfiles/scripts/keyboard-settings.sh';
-[[ "$linux" == "true" ]] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh home"';
-[[ "$linux" == "true" ]] && alias resetHomeProfile='bash -c "~/dotfiles/scripts/display-settings.sh home; ~/dotfiles/scripts/pointer-settings.sh; ~/dotfiles/scripts/keyboard-settings.sh;"';
+[[ "$linux" == "true" ]] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh auto"';
+[[ "$linux" == "true" ]] && alias resetXEnvironment='bash -c "~/dotfiles/scripts/reset-x-environment.sh"';
 
 # Optional extra aliases
 ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
