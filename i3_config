@@ -108,8 +108,8 @@ bindsym $Cmd+$Opt+Shift+Right move container to output right; focus output right
 # Top-level i3 controls
 bindsym $Cmd+$Opt+Shift+r restart
 bindsym $Cmd+$Opt+Shift+c reload
-bindsym $Cmd+$Opt+Shift+l exec "i3lock -c 1e1d40"
-bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh; "
+bindsym $Cmd+$Opt+Shift+l exec "$HOME/dotfiles/scripts/rofi-shutdown.sh"
+bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
 
 # i3bar configuration
 bar {
