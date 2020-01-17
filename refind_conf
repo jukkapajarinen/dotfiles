@@ -1,0 +1,27 @@
+# Load the rEFInd-minimal-black theme by andersfischernielsen.
+include themes/rEFInd-minimal-black/theme.conf
+
+# Show no extra tools for rEFInd menu.
+showtools 
+
+# Disable timeout for the main menu screen. 
+timeout 0
+
+# CAUTION! Allow only external or manual entries
+scanfor external,biosexternal,manual
+
+# Manual Debian boot stanza.
+menuentry "Debian" {
+    icon /EFI/refind/themes/rEFInd-minimal-black/icons/os_debian.png
+    volume "Linux SSD"
+    loader /vmlinuz
+    initrd /initrd.img
+    options "ro root=UUID=1c6f76af-472a-44d0-9fae-9b216c2b0dc1"
+}
+
+# Manual MacOS boot stanza.
+menuentry "MacOS" {
+    icon /EFI/refind/themes/rEFInd-minimal-black/icons/os_mac.png
+    volume "Macintosh SSD"
+    loader /System/Library/CoreServices/boot.efi
+}

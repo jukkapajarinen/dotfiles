@@ -16,7 +16,7 @@ elif [[ $rofi_action == "Reboot" ]]; then
 
 # Handle Lock Screen action
 elif [[ $rofi_action == "Lock Screen" ]]; then
-  i3lock -c 1e1d40;
+  i3lock -c 000000;
 
 # Handle Logout action
 elif [[ $rofi_action == "Logout" ]]; then
