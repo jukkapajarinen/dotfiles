@@ -9,9 +9,9 @@ Clone this repo to your **home** directory and keep it there.
 cd ~; git clone https://github.com/jukkapajarinen/dotfiles.git
 ```
 
-Run the `install.sh` script in **bash** *(supported options are `-f` or `--force` to force installation and `--cli-only` to omit gui configurations).*
+Run the `installers/install_macos.sh` or `installers/install_linux.sh` script in **bash** *(supported options are `-f` or `--force` to force installation).*
 ```
-sudo ./dotfiles/install.sh --force
+sudo ./dotfiles/installers/install_macos.sh --force
 ```
 
 ## License

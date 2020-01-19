@@ -114,7 +114,7 @@ bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
 # i3bar configuration
 bar {
   i3bar_command i3bar
-  status_command $HOME/dotfiles/scripts/i3_statuscmd.sh
+  status_command $HOME/dotfiles/scripts/i3-statuscmd.sh
   output primary
   output eDP-1
   output HDMI-2
