@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Declare other variables
-scriptDir=$(cd "$(dirname $0)" && pwd);
-homeDir=${scriptDir///dotfiles/};
+scriptDir="/home/jukka/dotfiles";
+homeDir="/home/jukka";
 mkdir="mkdir -p";
 ln="ln -sv";
 os="Linux";
