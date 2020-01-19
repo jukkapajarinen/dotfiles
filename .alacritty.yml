@@ -10,7 +10,10 @@ shell:
 
 # Full window decorations
 window:
-  decorations: full
+  decorations: none
+  padding:
+    x: 8
+    y: 8
 
 # Use Fira Code font
 font:
@@ -23,7 +26,7 @@ font:
   italic:
     family: "Fira Code"
     style: Italic
-  size: 9.0
+  size: 12.0
 
 # Shades of Purple based colorscheme
 colors:
