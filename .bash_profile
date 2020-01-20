@@ -80,6 +80,10 @@ alias gs='git status -s -b';
 # Optional extra aliases
 ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
 
+# Bash-completions (Linux and MacOS)
+ls /usr/share/bash-completion/bash_completion &> /dev/null && source /usr/share/bash-completion/bash_completion;
+ls /usr/local/etc/profile.d/bash_completion.sh &> /dev/null && source /usr/local/etc/profile.d/bash_completion.sh;
+
 # Bash extensions
 which thefuck > /dev/null && eval $(thefuck --alias fuck);
 

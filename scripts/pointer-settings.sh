@@ -4,8 +4,7 @@
 allPossibleIds=$(xinput list --id-only);
 
 # Loop through possible ids and set settings (or fail silently)
-for deviceId in $allPossibleIds
-do
+for deviceId in $allPossibleIds; do
   # Try to set natural scrolling
   xinput set-prop $deviceId "libinput Natural Scrolling Enabled" 1 &>/dev/null;
 
