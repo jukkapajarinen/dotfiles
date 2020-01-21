@@ -1,117 +1,19 @@
-# General customizations
-for_window [class=".*"] border pixel 0
-gaps inner 16
-focus_follows_mouse no
-hide_edge_borders none
-
-# Goofy variables for easier keybindings
+# i3 variables
 set $Ctrl Mod4
 set $Cmd Control
 set $Opt Mod1
 set $Opt2 Mod5
-# set $t3 tslash
-# set $f3 dstroke
-# set $s3 ssharp
-# set $w3 lstroke
-# set $e3 EuroSign
-# set $one3 copyright
-# set $two3 at
-# set $three3 sterling
-# set $four3 dollar
-# set $five3 onehalf
-# set $six3 threequarters
-# set $seven3 bar
-# set $eight3 bracketleft
-# set $nine3 bracketright
-# set $zero3 braceright
-# set $r4 registered
-# set $c4 copyright
-# set $l4 Lstroke
 
-# Workspace variable names
-set $ws1 " 1 "
-set $ws2 " 2 "
-set $ws3 " 3 "
-set $ws4 " 4 "
-set $ws5 " 5 "
-set $ws6 " 6 "
-set $ws7 " 7 "
-set $ws8 " 8 "
-set $ws9 " 9 "
-set $ws10 " 10 "
-
-# Workspace settings
-bindsym $Cmd+$Opt+1 workspace $ws1
-bindsym $Cmd+$Opt+2 workspace $ws2
-bindsym $Cmd+$Opt+3 workspace $ws3
-bindsym $Cmd+$Opt+4 workspace $ws4
-bindsym $Cmd+$Opt+5 workspace $ws5
-bindsym $Cmd+$Opt+6 workspace $ws6
-bindsym $Cmd+$Opt+7 workspace $ws7
-bindsym $Cmd+$Opt+8 workspace $ws8
-bindsym $Cmd+$Opt+9 workspace $ws9
-bindsym $Cmd+$Opt+0 workspace $ws10
-bindsym $Cmd+$Opt+Shift+1 move container to workspace $ws1
-bindsym $Cmd+$Opt+Shift+2 move container to workspace $ws2
-bindsym $Cmd+$Opt+Shift+3 move container to workspace $ws3
-bindsym $Cmd+$Opt+Shift+4 move container to workspace $ws4
-bindsym $Cmd+$Opt+Shift+5 move container to workspace $ws5
-bindsym $Cmd+$Opt+Shift+6 move container to workspace $ws6
-bindsym $Cmd+$Opt+Shift+7 move container to workspace $ws7
-bindsym $Cmd+$Opt+Shift+8 move container to workspace $ws8
-bindsym $Cmd+$Opt+Shift+9 move container to workspace $ws9
-bindsym $Cmd+$Opt+Shift+0 move container to workspace $ws10
-
-# General controls
-bindsym $Cmd+q kill
-bindsym $Cmd+$Opt+$Ctrl+t exec "urxvt"
-bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
-bindsym $Cmd+space exec "rofi -modi run -show run"
-bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
-bindsym $Cmd+Shift+4 exec "scrot -e 'mv $f ~/Desktop/'"
-
-# Xf86 keybindings
-bindsym XF86MonBrightnessDown exec "$HOME/dotfiles/scripts/adjust-brightness.sh all down"
-bindsym XF86MonBrightnessUp exec "$HOME/dotfiles/scripts/adjust-brightness.sh all up"
-bindsym XF86LaunchA exec "$HOME/dotfiles/scripts/adjust-brightness.sh all reset"
-bindsym XF86LaunchB exec "rofi -modi run -show run"
-bindsym XF86KbdBrightnessDown exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessDown'"
-bindsym XF86KbdBrightnessUp exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessUp'"
-bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
-bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
-bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
-bindsym XF86AudioMute exec "pulsemixer --id 0 --toggle-mute"
-bindsym XF86AudioLowerVolume exec "pulsemixer --id 0 --change-volume -1"
-bindsym XF86AudioRaiseVolume exec "pulsemixer --id 0 --change-volume +1"
-bindsym XF86Eject exec "i3-nagbar -t 'warning' -m 'XF86Eject'"
-
-# Controls for focused window
-bindsym $Cmd+$Opt+Left move left
-bindsym $Cmd+$Opt+Down move down
-bindsym $Cmd+$Opt+Up move up
-bindsym $Cmd+$Opt+Right move right
-bindsym $Cmd+$Opt+Shift+f fullscreen toggle
-
-# Change container layout (stacked, tabbed, toggle split)
-bindsym $Cmd+$Opt+Shift+s layout stacking
-bindsym $Cmd+$Opt+Shift+w layout tabbed
-bindsym $Cmd+$Opt+Shift+e layout toggle split
-
-# Toggle floating mode
-bindsym $Cmd+$Opt+Shift+space floating toggle
-floating_modifier $Cmd+$Opt+Shift
-
-# Move focused container to left/right display
-bindsym $Cmd+$Opt+Shift+Left move container to output left; focus output left
-bindsym $Cmd+$Opt+Shift+Right move container to output right; focus output right
-
-# Top-level i3 controls
-bindsym $Cmd+$Opt+Shift+r restart
-bindsym $Cmd+$Opt+Shift+c reload
-bindsym $Cmd+$Opt+Shift+l exec "$HOME/dotfiles/scripts/rofi-shutdown.sh"
-bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
-
-# i3bar configuration
+# i3 settings
+default_orientation auto
+workspace_layout default
+floating_modifier $Cmd
+mouse_warping output
+focus_follows_mouse no
+for_window [class=".*"] border pixel 0
+default_border none
+hide_edge_borders none
+gaps inner 10
 bar {
   i3bar_command i3bar
   status_command $HOME/dotfiles/scripts/i3-statuscmd.sh
@@ -124,8 +26,8 @@ bar {
   tray_output primary
   tray_padding 8
   workspace_buttons yes
-  strip_workspace_numbers yes
-  strip_workspace_name no
+  strip_workspace_numbers no
+  strip_workspace_name yes
   font pango:Fira Code 10
   separator_symbol " "
   position top
@@ -141,3 +43,44 @@ bar {
     binding_mode #1e1d40 #1e1d40 #ffffff
   }
 }
+
+# i3 keybindings
+bindsym $Cmd+$Opt+Shift+Left move left
+bindsym $Cmd+$Opt+Shift+Down move down
+bindsym $Cmd+$Opt+Shift+Up move up
+bindsym $Cmd+$Opt+Shift+Right move right
+bindsym $Cmd+$Opt+Shift+f fullscreen toggle
+bindsym $Cmd+$Opt+Shift+space floating toggle
+bindsym $Cmd+$Opt+Shift+1 move container to workspace 1; workspace 1
+bindsym $Cmd+$Opt+Shift+2 move container to workspace 2; workspace 2
+bindsym $Cmd+$Opt+Shift+3 move container to workspace 3; workspace 3
+bindsym $Cmd+$Opt+Shift+4 move container to workspace 4; workspace 4
+bindsym $Cmd+$Opt+Shift+5 move container to workspace 5; workspace 5
+bindsym $Cmd+$Opt+Shift+6 move container to workspace 6; workspace 6
+bindsym $Cmd+$Opt+Shift+7 move container to workspace 7; workspace 7
+bindsym $Cmd+$Opt+Shift+8 move container to workspace 8; workspace 8
+bindsym $Cmd+$Opt+Shift+9 move container to workspace 9; workspace 9
+bindsym $Cmd+$Opt+Shift+0 move container to workspace 10; workspace 10
+bindsym $Cmd+$Opt+Shift+r restart
+bindsym $Cmd+$Opt+Shift+c reload
+bindsym $Cmd+$Opt+Shift+l exec "$HOME/dotfiles/scripts/rofi-shutdown.sh"
+bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
+bindsym $Cmd+$Opt+Shift+t exec "urxvt"
+bindsym $Cmd+q kill
+bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
+bindsym $Cmd+space exec "rofi -modi run -show run"
+bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
+bindsym $Cmd+Shift+4 exec "scrot -e 'mv $f ~/Desktop/'"
+bindsym XF86MonBrightnessDown exec "$HOME/dotfiles/scripts/adjust-brightness.sh all down"
+bindsym XF86MonBrightnessUp exec "$HOME/dotfiles/scripts/adjust-brightness.sh all up"
+bindsym XF86LaunchA exec "$HOME/dotfiles/scripts/adjust-brightness.sh all reset"
+bindsym XF86LaunchB exec "rofi -modi run -show run"
+bindsym XF86KbdBrightnessDown exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessDown'"
+bindsym XF86KbdBrightnessUp exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessUp'"
+bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+bindsym XF86AudioMute exec "pulsemixer --id 0 --toggle-mute"
+bindsym XF86AudioLowerVolume exec "pulsemixer --id 0 --change-volume -1"
+bindsym XF86AudioRaiseVolume exec "pulsemixer --id 0 --change-volume +1"
+bindsym XF86Eject exec "i3-nagbar -t 'warning' -m 'XF86Eject'"
