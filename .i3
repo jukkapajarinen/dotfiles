@@ -65,7 +65,8 @@ bindsym $Cmd+$Opt+Shift+r restart
 bindsym $Cmd+$Opt+Shift+c reload
 bindsym $Cmd+$Opt+Shift+l exec "$HOME/dotfiles/scripts/rofi-shutdown.sh"
 bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
-bindsym $Cmd+$Opt+Shift+t exec "urxvt"
+bindsym $Cmd+$Opt+Shift+Return exec "urxvt"
+bindsym $Cmd+$Opt+Shift+t split toggle
 bindsym $Cmd+q kill
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
