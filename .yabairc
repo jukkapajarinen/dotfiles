@@ -30,5 +30,3 @@ yabai -m config right_padding 10
 yabai -m config window_gap 10
 yabai -m config status_bar off
 yabai -m rule --add app="^System Preferences$" manage=off
-
-# Yabai keybindings in .skhdrc file
