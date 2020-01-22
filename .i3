@@ -51,6 +51,7 @@ bindsym $Cmd+$Opt+Shift+Up move up
 bindsym $Cmd+$Opt+Shift+Right move right
 bindsym $Cmd+$Opt+Shift+f fullscreen toggle
 bindsym $Cmd+$Opt+Shift+space floating toggle
+bindsym $Cmd+$Opt+Shift+t split toggle
 bindsym $Cmd+$Opt+Shift+1 move container to workspace 1; workspace 1
 bindsym $Cmd+$Opt+Shift+2 move container to workspace 2; workspace 2
 bindsym $Cmd+$Opt+Shift+3 move container to workspace 3; workspace 3
@@ -65,8 +66,10 @@ bindsym $Cmd+$Opt+Shift+r restart
 bindsym $Cmd+$Opt+Shift+c reload
 bindsym $Cmd+$Opt+Shift+l exec "$HOME/dotfiles/scripts/rofi-shutdown.sh"
 bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
+bindsym $Cmd+$Opt+Shift+m reload
 bindsym $Cmd+$Opt+Shift+Return exec "urxvt"
-bindsym $Cmd+$Opt+Shift+t split toggle
+
+# i3 MacOS style keybindings
 bindsym $Cmd+q kill
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
