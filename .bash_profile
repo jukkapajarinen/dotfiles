@@ -53,8 +53,8 @@ alias grep='grep --color=auto';
 alias diff='diff --color=auto';
 alias dmesg='dmesg --color=auto';
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
-alias vscodeExtExport='code --list-extensions > ~/dotfiles/vscode_extensions';
-alias vscodeExtImport='cat ~/dotfiles/vscode_extensions | xargs -L 1 code --install-extension';
+alias vscodeExtExport='code --list-extensions > ~/dotfiles/.vscode_extensions.lst';
+alias vscodeExtImport='cat ~/dotfiles/.vscode_extensions.lst | xargs -L 1 code --install-extension';
 alias gl='git log --name-only --graph --oneline';
 alias gs='git status -s -b';
 
