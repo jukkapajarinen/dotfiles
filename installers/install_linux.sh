@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Declare other variables
-scriptDir="/home/jukka/dotfiles";
-homeDir="/home/jukka";
+scriptDir="/home/$USER/dotfiles";
+homeDir="/home/$USER";
 mkdir="mkdir -p";
 ln="ln -sv";
 os="Linux";
@@ -35,10 +35,10 @@ $mkdir $homeDir/.config/Code/User/;
 $ln $scriptDir/.bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/.gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/.nanorc $homeDir/.nanorc;
-$ln /usr/share/nano /usr/local/share/nano;
-$ln $scriptDir/keyboard/keyboard_apple_fi /etc/default/keyboard;
-$ln $scriptDir/.apt_sources /etc/apt/sources.list;
-$ln $scriptDir/.apt_preferences /etc/apt/preferences;
+sudo $ln /usr/share/nano /usr/local/share/nano;
+sudo $ln $scriptDir/keyboard/keyboard_apple_fi /etc/default/keyboard;
+sudo $ln $scriptDir/.apt_sources /etc/apt/sources.list;
+sudo $ln $scriptDir/.apt_preferences /etc/apt/preferences;
 $ln $scriptDir/.i3 $homeDir/.config/i3/config;
 $ln $scriptDir/.conkyrc $homeDir/.conkyrc;
 $ln $scriptDir/.rofi $homeDir/.config/rofi/config;
@@ -53,9 +53,9 @@ $ln $scriptDir/.Xsession $homeDir/.Xsession;
 $ln $scriptDir/.vscode_settings.json $homeDir/.config/Code/User/settings.json;
 $ln $scriptDir/.vscode_keybindings.json $homeDir/.config/Code/User/keybindings.json;
 $ln $scriptDir/.alacritty.yml $homeDir/.alacritty.yml;
-$ln /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
-$ln /usr/bin/i3 /etc/alternatives/x-window-manager;
-$ln /usr/bin/urxvt /etc/alternatives/x-terminal-emulator;
+sudo $ln /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
+sudo $ln /usr/bin/i3 /etc/alternatives/x-window-manager;
+sudo $ln /usr/bin/urxvt /etc/alternatives/x-terminal-emulator;
 
 # Install additional things
 vscodeDataDir="$homeDir/.config/Code/";

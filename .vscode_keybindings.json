@@ -1,37 +1,30 @@
 [
-  // Toggle terminal with either ctrl or cmd
   { "key": "cmd+shift+[Equal]", "command": "workbench.action.terminal.toggleTerminal" },
   { "key": "ctrl+shift+[Equal]", "command": "workbench.action.terminal.toggleTerminal" },
   { "key": "cmd+shift+[Minus]", "command": "workbench.action.terminal.new" },
   { "key": "ctrl+shift+[Minus]", "command": "workbench.action.terminal.new" },
-
-  // Integrated terminal or editor splitting harmonization
   { "key": "ctrl+shift+alt+meta+[digit7]", "command": "workbench.action.terminal.split", "when": "terminalFocus" },
   { "key": "ctrl+shift+alt+cmd+[digit7]", "command": "workbench.action.terminal.split", "when": "terminalFocus" },
   { "key": "ctrl+shift+alt+meta+[digit7]", "command": "workbench.action.splitEditor", "when": "editorTextFocus" },
   { "key": "ctrl+shift+alt+cmd+[digit7]", "command": "workbench.action.splitEditor", "when": "editorTextFocus" },
-
-  // Remove editor groups crap
-  {"key": "cmd+[digit1]", "command": "-workbench.action.focusFirstEditorGroup" },
-  {"key": "cmd+[digit2]", "command": "-workbench.action.focusSecondEditorGroup" },
-  {"key": "cmd+[digit3]", "command": "-workbench.action.focusThirdEditorGroup" },
-  {"key": "cmd+[digit4]", "command": "-workbench.action.focusFourthEditorGroup" },
-  {"key": "cmd+[digit5]", "command": "-workbench.action.focusFifthEditorGroup" },
-  {"key": "cmd+[digit6]", "command": "-workbench.action.focusSixthEditorGroup" },
-  {"key": "cmd+[digit7]", "command": "-workbench.action.focusSeventhEditorGroup" },
-  {"key": "cmd+[digit8]", "command": "-workbench.action.focusEighthEditorGroup" },
-  {"key": "cmd+[digit9]", "command": "-workbench.action.focusLastEditorGroup" },
-  {"key": "ctrl+[digit1]", "command": "-workbench.action.focusFirstEditorGroup" },
-  {"key": "ctrl+[digit2]", "command": "-workbench.action.focusSecondEditorGroup" },
-  {"key": "ctrl+[digit3]", "command": "-workbench.action.focusThirdEditorGroup" },
-  {"key": "ctrl+[digit4]", "command": "-workbench.action.focusFourthEditorGroup" },
-  {"key": "ctrl+[digit5]", "command": "-workbench.action.focusFifthEditorGroup" },
-  {"key": "ctrl+[digit6]", "command": "-workbench.action.focusSixthEditorGroup" },
-  {"key": "ctrl+[digit7]", "command": "-workbench.action.focusSeventhEditorGroup" },
-  {"key": "ctrl+[digit8]", "command": "-workbench.action.focusEighthEditorGroup" },
-  {"key": "ctrl+[digit9]", "command": "-workbench.action.focusLastEditorGroup" },
-
-  // Switch editor tabs with either ctrl or cmd
+  { "key": "cmd+[digit1]", "command": "-workbench.action.focusFirstEditorGroup" },
+  { "key": "cmd+[digit2]", "command": "-workbench.action.focusSecondEditorGroup" },
+  { "key": "cmd+[digit3]", "command": "-workbench.action.focusThirdEditorGroup" },
+  { "key": "cmd+[digit4]", "command": "-workbench.action.focusFourthEditorGroup" },
+  { "key": "cmd+[digit5]", "command": "-workbench.action.focusFifthEditorGroup" },
+  { "key": "cmd+[digit6]", "command": "-workbench.action.focusSixthEditorGroup" },
+  { "key": "cmd+[digit7]", "command": "-workbench.action.focusSeventhEditorGroup" },
+  { "key": "cmd+[digit8]", "command": "-workbench.action.focusEighthEditorGroup" },
+  { "key": "cmd+[digit9]", "command": "-workbench.action.focusLastEditorGroup" },
+  { "key": "ctrl+[digit1]", "command": "-workbench.action.focusFirstEditorGroup" },
+  { "key": "ctrl+[digit2]", "command": "-workbench.action.focusSecondEditorGroup" },
+  { "key": "ctrl+[digit3]", "command": "-workbench.action.focusThirdEditorGroup" },
+  { "key": "ctrl+[digit4]", "command": "-workbench.action.focusFourthEditorGroup" },
+  { "key": "ctrl+[digit5]", "command": "-workbench.action.focusFifthEditorGroup" },
+  { "key": "ctrl+[digit6]", "command": "-workbench.action.focusSixthEditorGroup" },
+  { "key": "ctrl+[digit7]", "command": "-workbench.action.focusSeventhEditorGroup" },
+  { "key": "ctrl+[digit8]", "command": "-workbench.action.focusEighthEditorGroup" },
+  { "key": "ctrl+[digit9]", "command": "-workbench.action.focusLastEditorGroup" },
   { "key": "cmd+[digit1]", "command": "workbench.action.openEditorAtIndex1" },
   { "key": "cmd+[digit2]", "command": "workbench.action.openEditorAtIndex2" },
   { "key": "cmd+[digit3]", "command": "workbench.action.openEditorAtIndex3" },
@@ -50,27 +43,19 @@
   { "key": "ctrl+[digit7]", "command": "workbench.action.openEditorAtIndex7" },
   { "key": "ctrl+[digit8]", "command": "workbench.action.openEditorAtIndex8" },
   { "key": "ctrl+[digit9]", "command": "workbench.action.openEditorAtIndex9" },
-
-  // Close focused editor with either ctrl or cmd
   { "key": "ctrl+[keyW]", "command": "workbench.action.closeActiveEditor" },
   { "key": "ctrl+[keyW]", "command": "-workbench.action.switchWindow" },
   { "key": "cmd+[keyW]", "command": "workbench.action.closeActiveEditor" },
   { "key": "cmd+[keyW]", "command": "-workbench.action.closeWindow", "when": "!editorIsOpen && !multipleEditorGroups" },
   { "key": "cmd+[keyW]", "command": "-workbench.action.closeGroup", "when": "activeEditorGroupEmpty && multipleEditorGroups" },
-
-  // Add cursor to previous and next line with either ctrl or cmd
   { "key": "alt+ctrl+[ArrowUp]", "command": "editor.action.insertCursorAbove", "when": "editorTextFocus" },
   { "key": "alt+ctrl+[ArrowDown]", "command": "editor.action.insertCursorBelow", "when": "editorTextFocus" },
   { "key": "alt+cmd+[ArrowUp]", "command": "editor.action.insertCursorAbove", "when": "editorTextFocus" },
   { "key": "alt+cmd+[ArrowDown]", "command": "editor.action.insertCursorBelow", "when": "editorTextFocus" },
-
-  // Move and copy lines to up or down
   { "key": "alt+[ArrowUp]", "command": "editor.action.moveLinesUpAction", "when": "editorTextFocus && !editorReadonly" },
   { "key": "alt+[ArrowDown]", "command": "editor.action.moveLinesDownAction", "when": "editorTextFocus && !editorReadonly" },
   { "key": "shift+alt+[ArrowUp]", "command": "editor.action.copyLinesUpAction", "when": "editorTextFocus && !editorReadonly" },
   { "key": "shift+alt+[ArrowDown]", "command": "editor.action.copyLinesDownAction", "when": "editorTextFocus && !editorReadonly" },
-
-  // Cursor movement harmonization with either ctrl or cmd
   { "key": "ctrl+[ArrowRight]", "command": "cursorEnd", "when": "textInputFocus" },
   { "key": "ctrl+[ArrowLeft]", "command": "cursorHome", "when": "textInputFocus" },
   { "key": "ctrl+shift+[ArrowRight]", "command": "cursorEndSelect", "when": "textInputFocus" },
@@ -87,9 +72,6 @@
   { "key": "shift+cmd+[ArrowUp]", "command": "cursorTopSelect", "when": "textInputFocus" },
   { "key": "cmd+[ArrowDown]", "command": "cursorBottom", "when": "textInputFocus" },
   { "key": "shift+cmd+[ArrowDown]", "command": "cursorBottomSelect", "when": "textInputFocus" },
-  {},
-
-  // Cursor movement harmonization for alt+x
   { "key": "alt+[ArrowRight]", "command": "cursorWordEndRight", "when": "textInputFocus" },
   { "key": "alt+[ArrowLeft]", "command": "cursorWordStartLeft", "when": "textInputFocus" },
   { "key": "shift+alt+[ArrowRight]", "command": "cursorWordEndRightSelect", "when": "textInputFocus" },
