@@ -64,7 +64,5 @@
   "terminal.integrated.shell.linux": "/bin/bash",
   "terminal.integrated.shellArgs.linux": ["-l"],
   "terminal.integrated.shellArgs.osx": ["-l"],
-  "terminal.external.linuxExec": "urxvt",
-  "terminal.external.osxExec": "Terminal.app",
   "terminal.integrated.shell.osx": "/bin/bash"
 }

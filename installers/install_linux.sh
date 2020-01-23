@@ -29,6 +29,7 @@ $mkdir $homeDir/.config/i3;
 $mkdir $homeDir/.config/rofi;
 $mkdir $homeDir/.config/dunst;
 $mkdir $homeDir/.config/gtk-3.0;
+$mkdir $homeDir/.config/kitty;
 $mkdir $homeDir/.config/Code/User/;
 
 # Linux create symlinks
@@ -52,6 +53,7 @@ $ln $scriptDir/.Xresources $homeDir/.Xresources;
 $ln $scriptDir/.Xsession $homeDir/.Xsession;
 $ln $scriptDir/.vscode_settings.json $homeDir/.config/Code/User/settings.json;
 $ln $scriptDir/.vscode_keybindings.json $homeDir/.config/Code/User/keybindings.json;
+$ln $scriptDir/.kitty.conf $homeDir/.config/kitty/kitty.conf;
 $ln $scriptDir/.alacritty.yml $homeDir/.alacritty.yml;
 sudo $ln /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
 sudo $ln /usr/bin/i3 /etc/alternatives/x-window-manager;

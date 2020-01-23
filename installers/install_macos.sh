@@ -25,6 +25,7 @@ if [[ $1 == "--force" ]] || [[ $2 == "--force" ]] || [[ $1 == "-f" ]] || [[ $2 =
 fi
 
 # MacOS create directories
+$mkdir $homeDir/.config/kitty;
 $mkdir $homeDir/Library/Application\ Support/Code/User/;
 
 # MacOS create symlinks
@@ -36,6 +37,7 @@ $ln $scriptDir/.vscode_keybindings.json $homeDir/Library/Application\ Support/Co
 $ln $scriptDir/.yabairc $homeDir/.yabairc;
 $ln $scriptDir/.skhdrc $homeDir/.skhdrc;
 $ln $scriptDir/.alacritty.yml $homeDir/.alacritty.yml;
+$ln $scriptDir/.kitty.conf $homeDir/.config/kitty/kitty.conf;
 
 # Install additional things
 vscodeDataDir="$homeDir/Library/Application\ Support/Code/";
