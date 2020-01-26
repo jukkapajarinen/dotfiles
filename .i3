@@ -7,7 +7,7 @@ set $Opt2 Mod5
 # i3 settings
 default_orientation auto
 workspace_layout default
-floating_modifier $Cmd
+floating_modifier $Opt
 mouse_warping output
 focus_follows_mouse no
 for_window [class=".*"] border pixel 0
