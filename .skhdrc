@@ -20,5 +20,6 @@ cmd + alt + shift - r : yabai -m space --balance
 cmd + alt + shift - c : yabai -m space --balance
 cmd + alt + shift - l : pmset displaysleepnow
 cmd + alt + shift - x : yabai -m space --balance
+cmd + alt + shift - n : /System/Applications/Launchpad.app/Contents/MacOS/Launchpad
 cmd + alt + shift - m : /System/Applications/Mission\ Control.app/Contents/MacOS/Mission\ Control
 cmd + alt + shift - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
