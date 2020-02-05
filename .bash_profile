@@ -57,6 +57,9 @@ alias vscodeExtExport='code --list-extensions > ~/dotfiles/.vscode_extensions.ls
 alias vscodeExtImport='cat ~/dotfiles/.vscode_extensions.lst | xargs -L 1 code --install-extension';
 alias gl='git log --name-only --graph --oneline';
 alias gs='git status -s -b';
+alias gitIgnore='git update-index --assume-unchanged';
+alias gitUnignore='git update-index --no-assume-unchanged';
+alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 
 # MacOS aliases
 [[ "$macos" == "true" ]] && alias ls='ls -G'
