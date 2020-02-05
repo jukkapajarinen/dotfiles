@@ -59,6 +59,7 @@
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
+  "omnisharp.useGlobalMono": "always",
   "stylelint.enable": true,
   "stylelint.config": { "extends": "${env.HOME}/dotfiles/linters/.stylelintrc.json" },
   "terminal.integrated.shell.linux": "/bin/bash",
