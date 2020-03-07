@@ -40,6 +40,9 @@
   "files.trimFinalNewlines": true,
   "diffEditor.ignoreTrimWhitespace": true,
   "editor.tabSize": 2,
+  "[csharp]": {
+    "editor.tabSize": 4
+  },
   "editor.multiCursorModifier": "ctrlCmd",
   "emmet.triggerExpansionOnTab": true,
   "window.zoomLevel": 0,
