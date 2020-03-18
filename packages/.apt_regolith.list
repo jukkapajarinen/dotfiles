@@ -1,0 +1,2 @@
+# Official Regolith Linux PPA Repository
+deb [arch=amd64] http://ppa.launchpad.net/kgilmer/regolith-stable/ubuntu bionic main

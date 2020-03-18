@@ -67,7 +67,7 @@ bindsym $Cmd+$Opt+Shift+c reload
 bindsym $Cmd+$Opt+Shift+l exec "$HOME/dotfiles/scripts/rofi-shutdown.sh"
 bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
 bindsym $Cmd+$Opt+Shift+m reload
-bindsym $Cmd+$Opt+Shift+Return exec "urxvt"
+bindsym $Cmd+$Opt+Shift+Return exec "kitty"
 
 # i3 MacOS style keybindings
 bindsym $Cmd+q kill

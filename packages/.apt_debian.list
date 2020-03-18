@@ -1,0 +1,11 @@
+# Debian Main Repository
+deb http://ftp.fi.debian.org/debian/ buster main contrib non-free
+
+# Debian Updates Repository
+deb http://ftp.fi.debian.org/debian/ buster-updates main contrib non-free
+
+# Debian Backports Repository
+deb http://ftp.fi.debian.org/debian buster-backports main contrib non-free
+
+# Debian Security Updates Repository
+deb http://deb.debian.org/debian-security buster/updates main

@@ -39,9 +39,5 @@ $ln $scriptDir/.skhdrc $homeDir/.skhdrc;
 $ln $scriptDir/.alacritty.yml $homeDir/.alacritty.yml;
 $ln $scriptDir/.kitty.conf $homeDir/.config/kitty/kitty.conf;
 
-# Install additional things
-vscodeDataDir="$homeDir/Library/Application\ Support/Code/";
-cat $scriptDir/.vscode_extensions.lst | xargs -L 1 code --user-data-dir=$vscodeDataDir --install-extension;
-
 # Print info that execution finished
 echo "Installation finished."
