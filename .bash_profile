@@ -43,6 +43,7 @@ export LC_ALL="en_US.UTF-8";
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
 [[ "$macos" == "true" ]] && export ANDROID_HOME=/usr/local/Caskroom/android-sdk/4333796;
 [[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/platform-tools/";
+[[ "$macos" == "true" ]] && export GEM_HOME="$HOME/.gem";
 
 # Linux environment variables
 [[ "$linux" == "true" ]] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
