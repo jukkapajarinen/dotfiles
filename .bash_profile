@@ -79,6 +79,8 @@ alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 [[ "$linux" == "true" ]] && alias resetKeyboards='bash ~/dotfiles/scripts/keyboard-settings.sh';
 [[ "$linux" == "true" ]] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh auto"';
 [[ "$linux" == "true" ]] && alias resetXEnvironment='bash -c "~/dotfiles/scripts/reset-x-environment.sh"';
+[[ "$linux" == "true" ]] && alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
+# Tip: to restore run, sudo tar -xvpzf /backups/backup_<timestamp>.tar.gz -C /whatever --numeric-owner
 
 # Optional extra aliases
 ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
