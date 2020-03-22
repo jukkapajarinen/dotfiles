@@ -75,6 +75,9 @@ alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 # Linux aliases
 [[ "$linux" == "true" ]] && alias ls='ls --color=auto'
 [[ "$linux" == "true" ]] && alias open='xdg-open';
+[[ "$linux" == "true" ]] && alias apt-list-essential="dpkg-query -Wf '\${Package;-40}\${Essential}\n' | grep yes | awk '{print \$1}'";
+[[ "$linux" == "true" ]] && alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";
+[[ "$linux" == "true" ]] && alias apt-log-uninstalled="cat /var/log/apt/history.log | grep 'Commandline' | grep 'purge\|remove'";
 [[ "$linux" == "true" ]] && alias resetPointers='bash ~/dotfiles/scripts/pointer-settings.sh';
 [[ "$linux" == "true" ]] && alias resetKeyboards='bash ~/dotfiles/scripts/keyboard-settings.sh';
 [[ "$linux" == "true" ]] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh auto"';
