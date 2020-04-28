@@ -39,11 +39,13 @@ export LANGUAGE="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 
 # MacOS environment variables
-[[ "$macos" == "true" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
-[[ "$macos" == "true" ]] && export ANDROID_HOME=/usr/local/Caskroom/android-sdk/4333796;
-[[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/platform-tools/";
 [[ "$macos" == "true" ]] && export GEM_HOME="$HOME/.gem";
+[[ "$macos" == "true" ]] && export ANDROID_HOME=/usr/local/Caskroom/android-sdk/4333796;
+[[ "$macos" == "true" ]] && export ANDROID_SDK_ROOT=$ANDROID_HOME;
+[[ "$macos" == "true" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
+[[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/platform-tools/";
+[[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/emulator/";
 
 # Linux environment variables
 [[ "$linux" == "true" ]] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
@@ -53,7 +55,8 @@ export LC_ALL="en_US.UTF-8";
 alias grep='grep --color=auto';
 alias diff='diff --color=auto';
 alias dmesg='dmesg --color=auto';
-alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
+alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
+alias dockerpoop2='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
 alias vscodeExtExport='code --list-extensions > ~/dotfiles/.vscode_extensions.lst';
 alias vscodeExtImport='cat ~/dotfiles/.vscode_extensions.lst | xargs -L 1 code --install-extension';
 alias gl='git log --name-only --graph --oneline';
@@ -61,6 +64,7 @@ alias gs='git status -s -b';
 alias gitIgnore='git update-index --assume-unchanged';
 alias gitUnignore='git update-index --no-assume-unchanged';
 alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
+alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
 
 # MacOS aliases
 [[ "$macos" == "true" ]] && alias ls='ls -G'
@@ -71,7 +75,7 @@ alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 [[ "$macos" == "true" ]] && alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock';
 [[ "$macos" == "true" ]] && alias disableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores true';
 [[ "$macos" == "true" ]] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
-[[ "$macos" == "true" ]] && alias emu="$ANDROID_HOME/tools/emulator";
+[[ "$macos" == "true" ]] && alias emu="${ANDROID_HOME}/tools/emulator";
 
 # Linux aliases
 [[ "$linux" == "true" ]] && alias ls='ls --color=auto'
@@ -94,7 +98,7 @@ ls /usr/share/bash-completion/bash_completion &> /dev/null && source /usr/share/
 ls /usr/local/etc/profile.d/bash_completion.sh &> /dev/null && source /usr/local/etc/profile.d/bash_completion.sh;
 
 # Bash extensions
-which thefuck > /dev/null && eval $(thefuck --alias fuck);
+command -v thefuck > /dev/null && eval $(thefuck --alias fuck);
 
 # Start X for Linux systems
 [[ "$linux" == "true" ]] && [[ -z $DISPLAY ]] && which startx > /dev/null && startx && logout;
