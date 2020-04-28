@@ -34,6 +34,7 @@ $mkdir $homeDir/.config/Code/User/;
 
 # Linux create dotfile symlinks
 $ln $scriptDir/.bash_profile $homeDir/.bash_profile;
+$ln $scriptDir/.bash_aliases $homeDir/.bash_aliases;
 $ln $scriptDir/.gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/.nanorc $homeDir/.nanorc;
 $ln $scriptDir/.i3 $homeDir/.config/i3/config;

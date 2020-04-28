@@ -1,24 +1,16 @@
+#!/bin/bash
+
 # Check if we run MacOS
 [[ "$(uname -s)" == "Darwin" ]] && macos="true" || linux="true";
 
 # Custom colors
 RESET_COLOR="\033[0;0m";
-BG_YELLOW="\033[0;30;103m";
 FG_GRAY="\033[0;37m";
 FG_RED="\033[0;91m";
 FG_GREEN="\033[0;92m";
 FG_YELLOW="\033[0;93m";
 FG_BLUE="\033[0;94m";
 FG_MAGENTA="\033[0;95m";
-FG_CYAN="\033[0;96m";
-FG_WHITE="\033[0;97m";
-export LESS_TERMCAP_mb=$(printf '\e[01;34m');
-export LESS_TERMCAP_md=$(printf '\e[01;35m');
-export LESS_TERMCAP_me=$(printf '\e[0m');
-export LESS_TERMCAP_se=$(printf '\e[0m');
-export LESS_TERMCAP_so=$(printf '\e[01;34m');
-export LESS_TERMCAP_ue=$(printf '\e[0m');
-export LESS_TERMCAP_us=$(printf '\e[04;33m');
 
 # Custom functions
 git_branch() { git status &> /dev/null && (git branch 2> /dev/null | grep \* | awk '{print " ("$2")"}'); }
@@ -27,16 +19,22 @@ git_user() { git status &> /dev/null && git config --get user.email| awk '{print
 date_now() { date '+%a %d.%m.%Y %H:%M:%S'; }
 tty_name() { tty | sed -e "s:/dev/::"; }
 
-# Bash prompt
-[[ "$SSH_CONNECTION" == "" ]] && export PROMPT_COMMAND='PS1="\[${FG_RED}\]\u\[${FG_GRAY}\] @ \[${FG_YELLOW}\]\h\[${FG_GRAY}\] / \[${FG_BLUE}\]\W\[${FG_GRAY}\]\[${FG_GREEN}\]$(git_branch)\[${FG_GRAY}\]$(git_status)\[${FG_MAGENTA}\]$(git_user)\[${FG_GRAY}\] $ \[${RESET_COLOR}\]"';
-[[ "$SSH_CONNECTION" == "" ]] || export PROMPT_COMMAND='PS1="\[${FG_RED}\]\u\[${FG_GRAY}\] @ \[${BG_YELLOW}\]\h\[${FG_GRAY}\] / \[${FG_BLUE}\]\W\[${FG_GRAY}\]\[${FG_GREEN}\]$(git_branch)\[${FG_GRAY}\]$(git_status)\[${FG_MAGENTA}\]$(git_user)\[${FG_GRAY}\] $ \[${RESET_COLOR}\]"';
+# Message of the day
 clear; echo -e "${FG_RED}$(date_now)${FG_GRAY} | ${FG_YELLOW}$(tty_name)${FG_GRAY} | ${FG_BLUE}Be awesome today! 🚀${RESET_COLOR}";
 
 # Common environment variables
+export PROMPT_COMMAND='PS1="\[${FG_RED}\]\u\[${FG_GRAY}\] @ \[${FG_YELLOW}\]\h\[${FG_GRAY}\] / \[${FG_BLUE}\]\W\[${FG_GRAY}\]\[${FG_GREEN}\]$(git_branch)\[${FG_GRAY}\]$(git_status)\[${FG_MAGENTA}\]$(git_user)\[${FG_GRAY}\] $ \[${RESET_COLOR}\]"';
 export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin";
 export LANG="en_US.UTF-8";
 export LANGUAGE="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
+export LESS_TERMCAP_mb=$(printf "\e[01;34m");
+export LESS_TERMCAP_md=$(printf "\e[01;35m");
+export LESS_TERMCAP_me=$(printf "\e[0m");
+export LESS_TERMCAP_se=$(printf "\e[0m");
+export LESS_TERMCAP_so=$(printf "\e[01;34m");
+export LESS_TERMCAP_ue=$(printf "\e[0m");
+export LESS_TERMCAP_us=$(printf "\e[04;33m");
 
 # MacOS environment variables
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
@@ -51,54 +49,13 @@ export LC_ALL="en_US.UTF-8";
 [[ "$linux" == "true" ]] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
 [[ "$linux" == "true" ]] && export GTK_THEME="Adwaita:dark";
 
-# Common aliases
-alias grep='grep --color=auto';
-alias diff='diff --color=auto';
-alias dmesg='dmesg --color=auto';
-alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
-alias dockerpoop2='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
-alias vscodeExtExport='code --list-extensions > ~/dotfiles/.vscode_extensions.lst';
-alias vscodeExtImport='cat ~/dotfiles/.vscode_extensions.lst | xargs -L 1 code --install-extension';
-alias gl='git log --name-only --graph --oneline';
-alias gs='git status -s -b';
-alias gitIgnore='git update-index --assume-unchanged';
-alias gitUnignore='git update-index --no-assume-unchanged';
-alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
-alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
-
-# MacOS aliases
-[[ "$macos" == "true" ]] && alias ls='ls -G'
-[[ "$macos" == "true" ]] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';
-[[ "$macos" == "true" ]] && alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app';
-[[ "$macos" == "true" ]] && alias resetLaunchPad='defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock';
-[[ "$macos" == "true" ]] && alias disableDock='defaults write com.apple.dock tilesize -int 1; defaults write com.apple.dock autohide-time-modifier -float 9999999999; killall Dock';
-[[ "$macos" == "true" ]] && alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock';
-[[ "$macos" == "true" ]] && alias disableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores true';
-[[ "$macos" == "true" ]] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
-[[ "$macos" == "true" ]] && alias emu="${ANDROID_HOME}/tools/emulator";
-
-# Linux aliases
-[[ "$linux" == "true" ]] && alias ls='ls --color=auto'
-[[ "$linux" == "true" ]] && alias open='xdg-open';
-[[ "$linux" == "true" ]] && alias apt-list-essential="dpkg-query -Wf '\${Package;-40}\${Essential}\n' | grep yes | awk '{print \$1}'";
-[[ "$linux" == "true" ]] && alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";
-[[ "$linux" == "true" ]] && alias apt-log-uninstalled="cat /var/log/apt/history.log | grep 'Commandline' | grep 'purge\|remove'";
-[[ "$linux" == "true" ]] && alias resetPointers='bash ~/dotfiles/scripts/pointer-settings.sh';
-[[ "$linux" == "true" ]] && alias resetKeyboards='bash ~/dotfiles/scripts/keyboard-settings.sh';
-[[ "$linux" == "true" ]] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh auto"';
-[[ "$linux" == "true" ]] && alias resetXEnvironment='bash -c "~/dotfiles/scripts/reset-x-environment.sh"';
-[[ "$linux" == "true" ]] && alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
-# Tip: to restore run, sudo tar -xvpzf /backups/backup_<timestamp>.tar.gz -C /whatever --numeric-owner
-
-# Optional extra aliases
+# Source aliases
+ls ~/.bash_aliases &> /dev/null && source ~/.bash_aliases;
 ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
 
 # Bash-completions (Linux and MacOS)
 ls /usr/share/bash-completion/bash_completion &> /dev/null && source /usr/share/bash-completion/bash_completion;
 ls /usr/local/etc/profile.d/bash_completion.sh &> /dev/null && source /usr/local/etc/profile.d/bash_completion.sh;
-
-# Bash extensions
-command -v thefuck > /dev/null && eval $(thefuck --alias fuck);
 
 # Start X for Linux systems
 [[ "$linux" == "true" ]] && [[ -z $DISPLAY ]] && which startx > /dev/null && startx && logout;
