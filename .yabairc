@@ -45,3 +45,4 @@ yabai -m rule --add app="^Unity Hub$" manage=off
 yabai -m rule --add app="^MacPass$" title="^(General|Integration|Workflow|Updates|Plugins)$" manage=off
 yabai -m rule --add app="^Mail$" title="^(Signatures|Accounts|Junk Mail|Fonts & Colours|Viewing|Composing|Signatures|Rules)$" manage=off
 yabai -m rule --add app="^XD$" title="^(Adobe XD)$" manage=off
+yabai -m rule --add app="^Unity$" title="^()$" manage=off
