@@ -7,12 +7,14 @@
 alias grep='grep --color=auto';
 alias diff='diff --color=auto';
 alias dmesg='dmesg --color=auto';
+alias mv='mv -i';
+alias ll='ls -lah';
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
 alias dockerpoop2='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
 alias vscodeExtExport='code --list-extensions > ~/dotfiles/.vscode_extensions.lst';
 alias vscodeExtImport='cat ~/dotfiles/.vscode_extensions.lst | xargs -L 1 code --install-extension';
-alias gl='git log --name-only --graph --oneline';
-alias gs='git status -s -b';
+alias gl='git log --name-status --graph';
+alias gs='git status';
 alias gitIgnore='git update-index --assume-unchanged';
 alias gitUnignore='git update-index --no-assume-unchanged';
 alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
