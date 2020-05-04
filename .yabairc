@@ -40,3 +40,5 @@ yabai -m rule --add app="^MacPass$" title="^(General|Integration|Workflow|Update
 yabai -m rule --add app="^Mail$" title="^(Signatures|Accounts|Junk Mail|Fonts & Colours|Viewing|Composing|Signatures|Rules)$" manage=off
 yabai -m rule --add app="^XD$" title="^(Adobe XD)$" manage=off
 yabai -m rule --add app="^Unity$" title="^()$" manage=off
+yabai -m rule --add app="^(JetBrains.*)$" title="^(Welcome to.*)$" manage=off
+yabai -m rule --add app="^Android Studio$" title="^(Welcome to.*)$" manage=off
