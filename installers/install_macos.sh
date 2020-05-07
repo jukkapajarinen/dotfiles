@@ -32,6 +32,7 @@ $mkdir $homeDir/Library/Application\ Support/Code/User/;
 $ln $scriptDir/.bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/.bash_aliases $homeDir/.bash_aliases;
 $ln $scriptDir/.gitconfig $homeDir/.gitconfig;
+$ln $scriptDir/.gitignore_global $homeDir/.gitignore_global;
 $ln $scriptDir/.nanorc $homeDir/.nanorc;
 $ln $scriptDir/.vscode_settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
 $ln $scriptDir/.vscode_keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;

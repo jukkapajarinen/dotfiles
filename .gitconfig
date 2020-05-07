@@ -1,5 +1,6 @@
 [core]
   editor = nano
   commentChar = @
+  excludesfile = ~/.gitignore_global
 [include]
   path = ~/.gituser
