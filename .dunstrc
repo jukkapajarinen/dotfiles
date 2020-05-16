@@ -1,8 +1,12 @@
+# ##############################################################################
+# dunst setup configurations
+# ##############################################################################
+
 [global]
   geometry = "300x5-8+40"
   frame_width = 1
-  frame_color = "#6943ff"
-  separator_color = "#6943ff"
+  frame_color = "#dc322f"
+  separator_color = "#dc322f"
   padding = 8
   horizontal_padding = 8
   font = Fira Code 10
@@ -11,19 +15,16 @@
   word_wrap = true
   alignment = left
   browser = /usr/bin/firefox-dev -new-tab
-
 [urgency_low]
-  background = "#1e1d40"
-  foreground = "#ffffff"
+  background = "#002b36"
+  foreground = "#eee8d5"
   timeout = 10
-
 [urgency_normal]
-  background = "#1e1d40"
-  foreground = "#ffffff"
+  background = "#002b36"
+  foreground = "#eee8d5"
   timeout = 10
-
 [urgency_critical]
-  background = "#1e1d40"
-  foreground = "#ffffff"
-  frame_color = "#1e1d40"
+  background = "#002b36"
+  foreground = "#eee8d5"
+  frame_color = "#002b36"
   timeout = 10

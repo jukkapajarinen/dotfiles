@@ -1,4 +1,32 @@
-! URxvt settings
+! ##############################################################################
+! XResources color configurations
+! ##############################################################################
+
+*foreground: #657b83
+*background: #002b36
+*color0: #073642
+*color1: #dc322f
+*color2: #859900
+*color3: #b58900
+*color4: #268bd2
+*color5: #d33682
+*color6: #2aa198
+*color7: #eee8d5
+*color8: #002b36
+*color9: #cb4b16
+*color10: #586e75
+*color11: #657b83
+*color12: #839496
+*color13: #6c71c4
+*color14: #93a1a1
+*color15: #fdf6e3
+*pointerColor: #93a1a1
+*cursorColor: #dc322f
+
+! ##############################################################################
+! URxvt setup configurations
+! ##############################################################################
+
 URxvt.loginShell: true
 URxvt.saveLines: 4096
 URxvt.scrollBar: false
@@ -9,7 +37,10 @@ URxvt.internalBorder: 8
 URxvt.iso14755: false
 URxvt.perl-ext-common: selection-to-clipboard
 
-! XTerm settings
+! ##############################################################################
+! XTerm setup configurations
+! ##############################################################################
+
 xterm*loginShell: true
 xterm*termName: xterm-256color
 xterm*locale: true
@@ -29,27 +60,8 @@ xterm*translations: #override \n\
   Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
   Ctrl Shift <Key>C: copy-selection(CLIPBOARD)
 
-! Terminal ANSI colors
-*foreground: #fcfcfc
-*background: #1e1d40
-*color0: #000000
-*color1: #d90429
-*color2: #3ad900
-*color3: #fad000
-*color4: #6943ff
-*color5: #ff2c70
-*color6: #80fcff
-*color7: #c7c7c7
-*color8: #808080
-*color9: #ff0000
-*color10: #33ff00
-*color11: #ffff00
-*color12: #0066ff
-*color13: #cc00ff
-*color14: #00ffff
-*color15: #ffffff
-*pointerColor: #fcfcfc
-*cursorColor: #fad000
+! ##############################################################################
+! Miscellaneous setup configurations
+! ##############################################################################
 
-! Miscellaneous settings
 Xcursor.size: 16

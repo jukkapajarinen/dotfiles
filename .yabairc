@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 
-# Yabai settings
+# ##############################################################################
+# Yabai setup configurations
+# ##############################################################################
+
 yabai -m config window_placement second_child
 yabai -m config window_topmost on
 yabai -m config auto_balance off
@@ -23,7 +26,10 @@ yabai -m config right_padding 8
 yabai -m config window_gap 8
 yabai -m config status_bar off
 
-# Yabai excludes
+# ##############################################################################
+# Yabai window exclude rules
+# ##############################################################################
+
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Stickies$" manage=off

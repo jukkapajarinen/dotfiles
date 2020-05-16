@@ -1,4 +1,7 @@
-# Yabai keybindings
+# ##############################################################################
+# Yabai setup keybindings
+# ##############################################################################
+
 cmd + alt + shift - left : yabai -m window --swap west
 cmd + alt + shift - down : yabai -m window --swap south
 cmd + alt + shift - up : yabai -m window --swap north

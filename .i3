@@ -1,10 +1,19 @@
-# i3 variables
+# ##############################################################################
+# i3 variable configurations
+# ##############################################################################
+
+set $Color_Accent #dc322f
+set $Color_Foreground #eee8d5
+set $Color_Background #002b36
 set $Ctrl Mod4
 set $Cmd Control
 set $Opt Mod1
 set $Opt2 Mod5
 
-# i3 settings
+# ##############################################################################
+# i3 setup configurations
+# ##############################################################################
+
 default_orientation auto
 workspace_layout default
 floating_modifier $Opt
@@ -33,18 +42,21 @@ bar {
   position top
   height 32
   colors {
-    background #1e1d40
-    statusline #6943ff
-    separator #6943ff
-    focused_workspace #6943ff #6943ff #ffffff
-    active_workspace #6943ff #6943ff #ffffff
-    inactive_workspace #1e1d40 #1e1d40 #ffffff
-    urgent_workspace #1e1d40 #1e1d40 #ffffff
-    binding_mode #1e1d40 #1e1d40 #ffffff
+    background $Color_Background
+    statusline $Color_Accent
+    separator $Color_Accent
+    focused_workspace $Color_Accent $Color_Accent $Color_Foreground
+    active_workspace $Color_Accent $Color_Accent $Color_Foreground
+    inactive_workspace $Color_Background $Color_Background $Color_Foreground
+    urgent_workspace $Color_Background $Color_Background $Color_Foreground
+    binding_mode $Color_Background $Color_Background $Color_Foreground
   }
 }
 
+# ##############################################################################
 # i3 keybindings
+# ##############################################################################
+
 bindsym $Cmd+$Opt+Shift+Left move left
 bindsym $Cmd+$Opt+Shift+Down move down
 bindsym $Cmd+$Opt+Shift+Up move up
@@ -69,7 +81,10 @@ bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
 bindsym $Cmd+$Opt+Shift+m reload
 bindsym $Cmd+$Opt+Shift+Return exec "kitty"
 
+# ##############################################################################
 # i3 MacOS style keybindings
+# ##############################################################################
+
 bindsym $Cmd+q kill
 bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"

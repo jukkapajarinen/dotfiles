@@ -1,3 +1,7 @@
+-- #############################################################################
+-- conky setup configurations
+-- #############################################################################
+
 conky.config = {
   out_to_x = false,
   own_window = false,
@@ -12,12 +16,16 @@ conky.config = {
   cpu_avg_samples = 2,
 };
 
+-- #############################################################################
+-- conky update string configurations
+-- #############################################################################
+
 conky.text = [[
 [
-  { "full_text": "CPU: ${cpu cpu0}%", "color": "\#3ad900" },
-  { "full_text": "Mem: ${memperc}%", "color": "\#fad000" },
-  { "full_text": "SSD: ${fs_used_perc /}%", "color": "\#ff2c70" },
-  { "full_text": "Bat: ${battery_percent BAT0}%", "color": "\#80fcff" },
+  { "full_text": "CPU: ${cpu cpu0}%", "color": "\#859900" },
+  { "full_text": "Mem: ${memperc}%", "color": "\#b58900" },
+  { "full_text": "SSD: ${fs_used_perc /}%", "color": "\#dc322f" },
+  { "full_text": "Bat: ${battery_percent BAT0}%", "color": "\#2aa198" },
   { "full_text": "${time %a %d.%m.%Y} ${time %H:%M:%S} ", "color": "\#ffffff" }
 ],
 ]];

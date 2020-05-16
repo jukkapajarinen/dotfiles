@@ -70,15 +70,5 @@ sudo $ln /usr/bin/kitty /etc/alternatives/x-terminal-emulator;
 sudo $ln /usr/share/nano /usr/local/share/nano;
 sudo $cp $scriptDir/keyboard/keyboard_apple_fi /etc/default/keyboard;
 
-# Linux package repositories
-# sudo $ln $scriptDir/packages/.apt_debian.list /etc/apt/sources.list;
-# sudo $ln $scriptDir/packages/.apt_docker.list /etc/apt/sources.list.d/docker.list;
-# sudo $ln $scriptDir/packages/.apt_megasync.list /etc/apt/sources.list.d/megasync.list;
-# sudo $ln $scriptDir/packages/.apt_regolith.list /etc/apt/sources.list.d/regolith.list;
-# sudo $ln $scriptDir/packages/.apt_spotify.list /etc/apt/sources.list.d/spotify.list;
-# sudo $ln $scriptDir/packages/.apt_virtualbox.list /etc/apt/sources.list.d/virtualbox.list;
-# sudo $ln $scriptDir/packages/.apt_vscode.list /etc/apt/sources.list.d/vscode.list;
-# sudo $ln $scriptDir/packages/.apt_preferences /etc/apt/preferences;
-
 # Print info that execution finished
 echo "==> Installation finished."
