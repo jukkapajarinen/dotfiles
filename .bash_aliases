@@ -36,8 +36,4 @@ alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --
 [[ "$linux" == "true" ]] && alias apt-list-essential="dpkg-query -Wf '\${Package;-40}\${Essential}\n' | grep yes | awk '{print \$1}'";
 [[ "$linux" == "true" ]] && alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";
 [[ "$linux" == "true" ]] && alias apt-log-uninstalled="cat /var/log/apt/history.log | grep 'Commandline' | grep 'purge\|remove'";
-[[ "$linux" == "true" ]] && alias resetPointers='bash ~/dotfiles/scripts/pointer-settings.sh';
-[[ "$linux" == "true" ]] && alias resetKeyboards='bash ~/dotfiles/scripts/keyboard-settings.sh';
-[[ "$linux" == "true" ]] && alias resetDisplays='bash -c "~/dotfiles/scripts/display-settings.sh auto"';
-[[ "$linux" == "true" ]] && alias resetXEnvironment='bash -c "~/dotfiles/scripts/reset-x-environment.sh"';
 [[ "$linux" == "true" ]] && alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';

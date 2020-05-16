@@ -77,7 +77,7 @@ bindsym $Cmd+$Opt+Shift+0 move container to workspace 10; workspace 10
 bindsym $Cmd+$Opt+Shift+r restart
 bindsym $Cmd+$Opt+Shift+c reload
 bindsym $Cmd+$Opt+Shift+l exec "$HOME/dotfiles/scripts/rofi-shutdown.sh"
-bindsym $Cmd+$Opt+Shift+x exec "$HOME/dotfiles/scripts/reset-x-environment.sh"
+bindsym $Cmd+$Opt+Shift+x exec "bash $HOME/.Xsession --reset"
 bindsym $Cmd+$Opt+Shift+m reload
 bindsym $Cmd+$Opt+Shift+Return exec "kitty"
 
@@ -90,9 +90,9 @@ bindsym $Cmd+Tab exec "rofi -modi window -show-icons -show window"
 bindsym $Cmd+space exec "rofi -modi run -show run"
 bindsym $Cmd+Shift+3 exec "scrot -e 'mv $f ~/Desktop/'"
 bindsym $Cmd+Shift+4 exec "scrot -e 'mv $f ~/Desktop/'"
-bindsym XF86MonBrightnessDown exec "$HOME/dotfiles/scripts/adjust-brightness.sh all down"
-bindsym XF86MonBrightnessUp exec "$HOME/dotfiles/scripts/adjust-brightness.sh all up"
-bindsym XF86LaunchA exec "$HOME/dotfiles/scripts/adjust-brightness.sh all reset"
+bindsym XF86MonBrightnessDown exec "$HOME/dotfiles/scripts/x-adjust-brightness.sh all down"
+bindsym XF86MonBrightnessUp exec "$HOME/dotfiles/scripts/x-adjust-brightness.sh all up"
+bindsym XF86LaunchA exec "$HOME/dotfiles/scripts/x-adjust-brightness.sh all reset"
 bindsym XF86LaunchB exec "rofi -modi run -show run"
 bindsym XF86KbdBrightnessDown exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessDown'"
 bindsym XF86KbdBrightnessUp exec "i3-nagbar -t 'warning' -m 'XF86KbdBrightnessUp'"

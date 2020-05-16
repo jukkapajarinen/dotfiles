@@ -28,6 +28,7 @@ if [[ $1 == "--force" ]] || [[ $2 == "--force" ]] || [[ $1 == "-f" ]] || [[ $2 =
     cp="cp -vf --remove-destination";
   else
     echo "==> Installation not started."
+    exit;
   fi
 fi
 
