@@ -46,8 +46,9 @@ export LESS_TERMCAP_us=$(printf "\e[04;33m");
 [[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/emulator/";
 
 # Linux environment variables
-[[ "$linux" == "true" ]] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
-[[ "$linux" == "true" ]] && export GTK_THEME="Adwaita:dark";
+#[[ "$linux" == "true" ]] && export QT_STYLE_OVERRIDE="Adwaita-Dark";
+#[[ "$linux" == "true" ]] && export GTK_THEME="Adwaita:dark";
+[[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=gtk2
 
 # Source aliases
 ls ~/.bash_aliases &> /dev/null && source ~/.bash_aliases;

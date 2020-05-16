@@ -3,14 +3,16 @@
 # Declare other variables
 scriptDir="/home/$USER/dotfiles";
 homeDir="/home/$USER";
-mkdir="mkdir -p";
-ln="ln -sv";
+mkdir="mkdir -vp";
+ln="ln -isv";
+cp="cp -iv --remove-destination";
 os="Linux";
 
 # Print the directory paths
-echo "Host operating system is: $os";
-echo "Script executed in: $scriptDir";
-echo "Home directory detected as: $homeDir";
+echo "Welcome ${USER}, to Jukka's dotfiles installation script.";
+echo "- Operating system: $os";
+echo "- Source directory: $scriptDir";
+echo "- Target directory: $homeDir";
 
 # Exit if the dotfiles is not cloned into users home-directory
 if ! { [[ $scriptDir == *"home"* ]] || [[ $scriptDir == *"Users"* ]]; }; then
@@ -20,19 +22,25 @@ fi
 
 # Read possible --force or -f from the cli args
 if [[ $1 == "--force" ]] || [[ $2 == "--force" ]] || [[ $1 == "-f" ]] || [[ $2 == "-f" ]]; then
-  read -p "Are you sure to force installation? (files will be overwritten) [Y/n] " yn;
-  [[ $yn =~ [yY](es)* ]] && ln="ln -svf" || exit 0;
+  read -p "Are you sure to force installation? (files will be overwritten) [y/N] " yn;
+  if [[ $yn =~ [yY](es)* ]]; then
+    ln="ln -svf";
+    cp="cp -vf --remove-destination";
+  else
+    echo "==> Installation not started."
+  fi
 fi
 
 # Linux create directories
+echo "==> Create possibly missing directories.";
 $mkdir $homeDir/.config/i3;
 $mkdir $homeDir/.config/rofi;
 $mkdir $homeDir/.config/dunst;
-$mkdir $homeDir/.config/gtk-3.0;
 $mkdir $homeDir/.config/kitty;
 $mkdir $homeDir/.config/Code/User/;
 
 # Linux create dotfile symlinks
+echo "==> Install user configuration files.";
 $ln $scriptDir/.bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/.bash_aliases $homeDir/.bash_aliases;
 $ln $scriptDir/.gitconfig $homeDir/.gitconfig;
@@ -43,7 +51,6 @@ $ln $scriptDir/.conkyrc $homeDir/.conkyrc;
 $ln $scriptDir/.rofi $homeDir/.config/rofi/config;
 $ln $scriptDir/.dunstrc $homeDir/.config/dunst/dunstrc;
 $ln $scriptDir/.gtk_2 $homeDir/.gtkrc-2.0;
-$ln $scriptDir/.gtk_3 $homeDir/.config/gtk-3.0/settings.ini;
 $ln $scriptDir/.mimeapps $homeDir/.config/mimeapps.list;
 $ln $scriptDir/keyboard/keyboard_apple_fi.xkbmap $homeDir/.xkbmap;
 $ln $scriptDir/.xvkbd $homeDir/.xvkbd;
@@ -54,21 +61,24 @@ $ln $scriptDir/.vscode_keybindings.json $homeDir/.config/Code/User/keybindings.j
 $ln $scriptDir/.kitty.conf $homeDir/.config/kitty/kitty.conf;
 $ln $scriptDir/.alacritty.yml $homeDir/.alacritty.yml;
 
-# Linux create other symlinks
+# Linux create system symlinks
+echo "==> Install system configuration files.";
 sudo $ln /usr/share/zoneinfo/Europe/Helsinki /etc/localtime;
 sudo $ln /usr/bin/firefox-dev /etc/alternatives/x-www-browser;
 sudo $ln /usr/bin/i3 /etc/alternatives/x-window-manager;
 sudo $ln /usr/bin/kitty /etc/alternatives/x-terminal-emulator;
 sudo $ln /usr/share/nano /usr/local/share/nano;
-sudo $ln $scriptDir/keyboard/keyboard_apple_fi /etc/default/keyboard;
-sudo $ln $scriptDir/packages/.apt_debian.list /etc/apt/sources.list;
-sudo $ln $scriptDir/packages/.apt_docker.list /etc/apt/sources.list.d/docker.list;
-sudo $ln $scriptDir/packages/.apt_megasync.list /etc/apt/sources.list.d/megasync.list;
-sudo $ln $scriptDir/packages/.apt_regolith.list /etc/apt/sources.list.d/regolith.list;
-sudo $ln $scriptDir/packages/.apt_spotify.list /etc/apt/sources.list.d/spotify.list;
-sudo $ln $scriptDir/packages/.apt_virtualbox.list /etc/apt/sources.list.d/virtualbox.list;
-sudo $ln $scriptDir/packages/.apt_vscode.list /etc/apt/sources.list.d/vscode.list;
-sudo $ln $scriptDir/packages/.apt_preferences /etc/apt/preferences;
+sudo $cp $scriptDir/keyboard/keyboard_apple_fi /etc/default/keyboard;
+
+# Linux package repositories
+# sudo $ln $scriptDir/packages/.apt_debian.list /etc/apt/sources.list;
+# sudo $ln $scriptDir/packages/.apt_docker.list /etc/apt/sources.list.d/docker.list;
+# sudo $ln $scriptDir/packages/.apt_megasync.list /etc/apt/sources.list.d/megasync.list;
+# sudo $ln $scriptDir/packages/.apt_regolith.list /etc/apt/sources.list.d/regolith.list;
+# sudo $ln $scriptDir/packages/.apt_spotify.list /etc/apt/sources.list.d/spotify.list;
+# sudo $ln $scriptDir/packages/.apt_virtualbox.list /etc/apt/sources.list.d/virtualbox.list;
+# sudo $ln $scriptDir/packages/.apt_vscode.list /etc/apt/sources.list.d/vscode.list;
+# sudo $ln $scriptDir/packages/.apt_preferences /etc/apt/preferences;
 
 # Print info that execution finished
-echo "Installation finished."
+echo "==> Installation finished."
