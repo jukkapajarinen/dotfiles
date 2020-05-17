@@ -23,7 +23,9 @@ ctrl + mod1 + shift + Return
 # ##############################################################################
 
 ctrl + q
-  bspc node -k 
+  bspc node -k
+ctrl + w
+  bspc node -c
 ctrl + Tab
   rofi -modi window -show-icons -show window
 ctrl + space
