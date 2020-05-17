@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ##############################################################################
-# Bash profile configurations
+# Linux installation script for Jukka's dotfiles
 # ##############################################################################
 
 # Declare other variables
