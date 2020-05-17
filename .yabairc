@@ -8,6 +8,11 @@ yabai -m config window_placement second_child
 yabai -m config window_topmost on
 yabai -m config auto_balance off
 yabai -m config layout bsp
+yabai -m config top_padding 8
+yabai -m config bottom_padding 8
+yabai -m config left_padding 8
+yabai -m config right_padding 8
+yabai -m config window_gap 8
 yabai -m config mouse_modifier fn
 yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
@@ -19,15 +24,10 @@ yabai -m config normal_window_opacity 0.9
 yabai -m config window_opacity_duration 0.0
 yabai -m config window_shadow off
 yabai -m config window_border off
-yabai -m config top_padding 8
-yabai -m config bottom_padding 8
-yabai -m config left_padding 8
-yabai -m config right_padding 8
-yabai -m config window_gap 8
 yabai -m config status_bar off
 
 # ##############################################################################
-# Yabai window exclude rules
+# Yabai window rules
 # ##############################################################################
 
 yabai -m rule --add app="^System Preferences$" manage=off

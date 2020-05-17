@@ -16,11 +16,11 @@ elif [[ $rofi_action == "Reboot" ]]; then
 
 # Handle Lock Screen action
 elif [[ $rofi_action == "Lock Screen" ]]; then
-  i3lock -c 000000;
+  xscreensaver-command -lock;
 
 # Handle Logout action
 elif [[ $rofi_action == "Logout" ]]; then
-  i3-msg exit;
+  bspc quit; #i3-msg exit;
 
 # Handle Suspend action
 elif [[ $rofi_action == "Suspend" ]]; then
