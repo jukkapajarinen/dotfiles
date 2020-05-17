@@ -57,6 +57,7 @@ $ln $scriptDir/.nanorc $homeDir/.config/nano/nanorc;
 $ln $scriptDir/.bspwmrc $homeDir/.config/bspwm/bspwmrc;
 $ln $scriptDir/.sxhkdrc $homeDir/.config/sxhkd/sxhkdrc;
 $ln $scriptDir/.i3 $homeDir/.config/i3/config;
+$ln $scriptDir/.compton.conf $homeDir/.config/compton.conf;
 $ln $scriptDir/.conkyrc $homeDir/.config/conky/conky.conf;
 $ln $scriptDir/.rofi $homeDir/.config/rofi/config;
 $ln $scriptDir/.dunstrc $homeDir/.config/dunst/dunstrc;
