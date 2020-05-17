@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# ##############################################################################
+# Script for adjusting X11 display brightness
+# ##############################################################################
+
 # Declare variables
 availableDisplays=$(xrandr | grep -w connected  | awk '{print $1}');
 primaryBrightness=$(xrandr --verbose | grep "connected primary" -A5 | tail -n1 | awk '{print $2}');

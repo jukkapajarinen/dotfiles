@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# ##############################################################################
+# Bash profile configurations
+# ##############################################################################
+
 # Declare other variables
 scriptDir="/home/$USER/dotfiles";
 homeDir="/home/$USER";

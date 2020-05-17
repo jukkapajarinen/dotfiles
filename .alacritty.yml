@@ -1,34 +1,7 @@
-# Set the proper terminal colors
-env:
-  TERM: xterm-256color
+# ##############################################################################
+# Alacritty color configurations
+# ##############################################################################
 
-# Set to bash and login shell
-shell:
-  program: /bin/bash
-  args:
-    - --login
-
-# Full window decorations
-window:
-  decorations: none
-  padding:
-    x: 8
-    y: 8
-
-# Use Fira Code font
-font:
-  normal:
-    family: "Fira Code"
-    style: Regular
-  bold:
-    family: "Fira Code"
-    style: Bold
-  italic:
-    family: "Fira Code"
-    style: Italic
-  size: 12.0
-
-# Shades of Purple based colorscheme
 colors:
   primary:
     background: '0x002b36'
@@ -58,7 +31,32 @@ colors:
     white:   '0xfdf6e3'
   indexed_colors: []
 
-# Miscellaneous personal preferences
+# ##############################################################################
+# Alacritty setup configurations
+# ##############################################################################
+
+env:
+  TERM: xterm-256color
+shell:
+  program: /bin/bash
+  args:
+    - --login
+window:
+  decorations: none
+  padding:
+    x: 8
+    y: 8
+font:
+  normal:
+    family: "Fira Code"
+    style: Regular
+  bold:
+    family: "Fira Code"
+    style: Bold
+  italic:
+    family: "Fira Code"
+    style: Italic
+  size: 12.0
 scrolling:
   auto_scroll: true
 selection:
@@ -71,11 +69,12 @@ mouse:
       args: []
     modifiers: None
 
-# Mouse event bindings
+# ##############################################################################
+# Alacritty keybindings
+# ##############################################################################
+
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
-
-# Keyboard event bindings
 key_bindings:
   - { key: 0x40, mods: Super, chars: "\x00"} # @
   - { key: A, mods: Super, chars: "\x01"}

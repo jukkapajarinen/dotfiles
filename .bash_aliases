@@ -1,6 +1,10 @@
 #!/bin/bash
 
-# Check if we run MacOS
+# ##############################################################################
+# Aliases for MacOS and Linux
+# ##############################################################################
+
+# Check platform
 [[ "$(uname -s)" == "Darwin" ]] && macos="true" || linux="true";
 
 # Common aliases

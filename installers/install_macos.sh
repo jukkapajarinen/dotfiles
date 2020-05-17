@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# ##############################################################################
+# MacOS installation script for Jukka's dotfiles
+# ##############################################################################
+
 # Declare other variables
 scriptDir="/Users/$USER/dotfiles";
 homeDir="/Users/$USER";

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# ##############################################################################
+# Script for handling shutdown actions with Rofi
+# ##############################################################################
+
 # Specify dmenu options for rofi
 options="Shutdown\nReboot\nLock Screen\nLogout\nSuspend\nHibernate";
 

@@ -1,6 +1,8 @@
-[Default Applications]
+; ##############################################################################
+; Default application configurations
+; ##############################################################################
 
-  ; Firefox Dev Edition
+[Default Applications]
   x-scheme-handler/http=userapp-Firefox Developer Edition-9FNI4Z.desktop
   x-scheme-handler/https=userapp-Firefox Developer Edition-9FNI4Z.desktop
   x-scheme-handler/ftp=userapp-Firefox Developer Edition-9FNI4Z.desktop
@@ -12,8 +14,6 @@
   application/xhtml+xml=userapp-Firefox Developer Edition-9FNI4Z.desktop
   application/x-extension-xhtml=userapp-Firefox Developer Edition-9FNI4Z.desktop
   application/x-extension-xht=userapp-Firefox Developer Edition-9FNI4Z.desktop
-
-  ; Image files
   image/bmp=feh.desktop
   image/gif=feh.desktop
   image/jpeg=feh.desktop
@@ -21,12 +21,8 @@
   image/tiff=feh.desktop
   image/webp=feh.desktop
   image/svg+xml=feh.desktop
-
-  ; Miscellaneous files
   application/pdf=atril.desktop
   inode/directory=pcmanfm.desktop
-
-  ; Text files
   text/plain=code.desktop
   text/css=code.desktop
   text/rtf=code.desktop
@@ -35,8 +31,6 @@
   text/calendar=code.desktop
   application/json=code.desktop
   application/php=code.desktop
-
-  ; Audio/Video files
   audio/mpeg=vlc.desktop
   audio/aac=vlc.desktop
   audio/midi=vlc.desktop

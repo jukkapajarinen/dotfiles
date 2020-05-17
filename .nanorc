@@ -1,5 +1,5 @@
 # ##############################################################################
-# nano color configurations
+# GNU nano color configurations
 # ##############################################################################
 
 set titlecolor brightwhite,red
@@ -11,7 +11,7 @@ set keycolor yellow
 set functioncolor red
 
 # ##############################################################################
-# nano setup configurations
+# GNU nano setup configurations
 # ##############################################################################
 
 set autoindent
@@ -27,6 +27,6 @@ set tabstospaces
 set trimblanks
 
 # ##############################################################################
-# nano setup syntax coloring
+# GNU nano setup syntax coloring
 # ##############################################################################
 include "/usr/local/share/nano/*.nanorc"

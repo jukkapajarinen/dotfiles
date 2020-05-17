@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# ##############################################################################
+# Script for resetting X11 pointer settings
+# ##############################################################################
+
 # Read all possible available inputs
 allPossibleIds=$(xinput list --id-only);
 
