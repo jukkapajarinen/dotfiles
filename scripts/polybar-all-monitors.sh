@@ -11,12 +11,12 @@ killall -q polybar;
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Set the primary monitor and add it first
-primary="HDMI-2";
+primary=$(xrandr -q | grep 'primary' | awk '{ print$1 }');
 export MONITOR=$primary && polybar --reload topbar &
 
-# Launch polybar on all monitors
+# Launch polybar on all other monitors
 for monitor in $(polybar -m | cut -d":" -f1); do
-  [ $monitor != $primary ] && export MONITOR=$monitor && polybar --reload topbar &
+  [[ "$monitor" != "$primary" ]] && export MONITOR=$monitor && polybar --reload topbar &
 done
 
 # Inform user that the script ended

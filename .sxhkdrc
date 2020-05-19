@@ -5,8 +5,8 @@
 # For maximal goofiness: Cmd => ctrl, Ctrl => mod4, Opt_L => mod1, Opt_R => mod5
 ctrl + mod1 + shift + {Left,Down,Up,Right}
   bspc node -s {west,south,north,east}
-ctrl + mod1 + shift + {1-9}
-  id=$(bspc query -N -n); bspc node -d ^{1-9}; bspc node -f ${id}
+ctrl + mod1 + shift + {1-8}
+  id=$(bspc query -N -n); bspc node -d ^{1-8}; bspc node -f ${id}
 ctrl + mod1 + shift + f
   bspc node -t ~fullscreen
 ctrl + mod1 + shift + space
