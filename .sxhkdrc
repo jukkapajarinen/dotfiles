@@ -50,11 +50,11 @@ XF86AudioPlay
   dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 XF86AudioNext
   dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-XF86AudioMute
-  pulsemixer --id 0 --toggle-mute
+XF86AudioMutea
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
 XF86AudioLowerVolume
-  pulsemixer --id 0 --change-volume -1
+  pactl set-sink-volume @DEFAULT_SINK@ -1%
 XF86AudioRaiseVolume
-  pulsemixer --id 0 --change-volume +1
+  pactl set-sink-volume @DEFAULT_SINK@ +1%
 XF86Eject
-  notify-send "XF86Eject"
+  bash ~/dotfiles/scripts/rofi-shutdown.sh
