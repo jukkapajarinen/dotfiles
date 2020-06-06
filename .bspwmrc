@@ -13,11 +13,27 @@ else
 fi
 
 # ##############################################################################
+# bspwm auto-start applications
+# ##############################################################################
+
+bash ~/dotfiles/scripts/polybar-launcher.sh;
+pgrep -f sxhkd || sxhkd &
+pgrep -f compton || compton &
+pgrep -f xscreensaver || xscreensaver -no-splash &
+pgrep -f nitrogen || nitrogen --restore &
+pgrep -f nm-applet || nm-applet &
+pgrep -f pasystray || pasystray &
+pgrep -f megasync || megasync &
+pgrep -f blueman-applet || blueman-applet &
+pgrep -f caffeine-indicator || caffeine-indicator &
+pgrep -f clipit || clipit &
+
+# ##############################################################################
 # bspwm setup configurations
 # ##############################################################################
 
 bspc config initial_polarity second_child;
-bspc config top_padding 8;
+bspc config top_padding 36;
 bspc config right_padding 8;
 bspc config bottom_padding 8;
 bspc config left_padding 8;
@@ -28,7 +44,6 @@ bspc config pointer_action1 move;
 bspc config pointer_action2 resize_corner;
 bspc config focus_follows_pointer false;
 bspc config pointer_follows_focus false;
-bash ~/dotfiles/scripts/polybar-all-monitors.sh;
 
 # ##############################################################################
 # bspwm window rules

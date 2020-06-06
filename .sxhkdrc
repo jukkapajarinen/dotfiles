@@ -12,7 +12,7 @@ ctrl + mod1 + shift + f
 ctrl + mod1 + shift + space
   bspc node -t ~floating
 ctrl + mod1 + shift + r
-  bash ~/.Xsession --reset; pkill -USR1 -x sxhkd; bash ~/.config/bspwm/bspwmrc
+  bash ~/.Xsession; pkill -USR1 -x sxhkd; bash ~/.config/bspwm/bspwmrc
 ctrl + mod1 + shift + l
   bash ~/dotfiles/scripts/rofi-shutdown.sh
 ctrl + mod1 + shift + Return
