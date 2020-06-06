@@ -52,7 +52,6 @@ $ln $scriptDir/.yabairc $homeDir/.yabairc;
 $ln $scriptDir/.skhdrc $homeDir/.skhdrc;
 $ln $scriptDir/.vscode_settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
 $ln $scriptDir/.vscode_keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
-$ln $scriptDir/.alacritty.yml $homeDir/.alacritty.yml;
 $ln $scriptDir/.kitty.conf $homeDir/.config/kitty/kitty.conf;
 
 # Print info that execution finished

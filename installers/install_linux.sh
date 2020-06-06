@@ -40,13 +40,10 @@ fi
 echo "==> Create possibly missing directories.";
 $mkdir $homeDir/.config/bspwm/;
 $mkdir $homeDir/.config/sxhkd/;
-$mkdir $homeDir/.config/i3;
 $mkdir $homeDir/.config/polybar;
 $mkdir $homeDir/.config/rofi;
 $mkdir $homeDir/.config/dunst;
-$mkdir $homeDir/.config/conky;
 $mkdir $homeDir/.config/kitty;
-$mkdir $homeDir/.config/alacritty;
 $mkdir $homeDir/.config/nano;
 $mkdir $homeDir/.config/Code/User/;
 
@@ -61,17 +58,13 @@ $ln $scriptDir/.gitignore_global $homeDir/.gitignore_global;
 $ln $scriptDir/.nanorc $homeDir/.config/nano/nanorc;
 $ln $scriptDir/.bspwmrc $homeDir/.config/bspwm/bspwmrc;
 $ln $scriptDir/.sxhkdrc $homeDir/.config/sxhkd/sxhkdrc;
-$ln $scriptDir/.i3 $homeDir/.config/i3/config;
 $ln $scriptDir/.polybar.conf $homeDir/.config/polybar/config;
 $ln $scriptDir/.compton.conf $homeDir/.config/compton.conf;
-$ln $scriptDir/.conkyrc $homeDir/.config/conky/conky.conf;
 $ln $scriptDir/.rofi $homeDir/.config/rofi/config;
 $ln $scriptDir/.dunstrc $homeDir/.config/dunst/dunstrc;
-$ln $scriptDir/.mimeapps $homeDir/.config/mimeapps.list;
 $ln $scriptDir/.vscode_settings.json $homeDir/.config/Code/User/settings.json;
 $ln $scriptDir/.vscode_keybindings.json $homeDir/.config/Code/User/keybindings.json;
 $ln $scriptDir/.kitty.conf $homeDir/.config/kitty/kitty.conf;
-$ln $scriptDir/.alacritty.yml $homeDir/.config/alacritty/alacritty.yml;
 
 # Linux create system symlinks
 echo "==> Install system configuration files.";

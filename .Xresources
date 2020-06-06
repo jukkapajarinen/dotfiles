@@ -24,20 +24,6 @@
 *cursorColor: #dc322f
 
 ! ##############################################################################
-! URxvt setup configurations
-! ##############################################################################
-
-URxvt.loginShell: true
-URxvt.saveLines: 4096
-URxvt.scrollBar: false
-URxvt.scrollBar_right: false
-URxvt.cursorBlink: true
-URxvt.font: xft:Fira Code:size=10
-URxvt.internalBorder: 8
-URxvt.iso14755: false
-URxvt.perl-ext-common: selection-to-clipboard
-
-! ##############################################################################
 ! XTerm setup configurations
 ! ##############################################################################
 
