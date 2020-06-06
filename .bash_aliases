@@ -24,7 +24,7 @@ alias gitUnignore='git update-index --no-assume-unchanged';
 alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
 
-# MacOS aliases
+# OS specific aliases
 [[ "$macos" == "true" ]] && alias ls='ls -G'
 [[ "$macos" == "true" ]] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';
 [[ "$macos" == "true" ]] && alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app';
@@ -33,8 +33,6 @@ alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --
 [[ "$macos" == "true" ]] && alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock';
 [[ "$macos" == "true" ]] && alias disableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores true';
 [[ "$macos" == "true" ]] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
-
-# Linux aliases
 [[ "$linux" == "true" ]] && alias ls='ls --color=auto'
 [[ "$linux" == "true" ]] && alias open='xdg-open';
 [[ "$linux" == "true" ]] && alias apt-list-essential="dpkg-query -Wf '\${Package;-40}\${Essential}\n' | grep yes | awk '{print \$1}'";
