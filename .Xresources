@@ -2,7 +2,7 @@
 ! XResources color configurations
 ! ##############################################################################
 
-*foreground: #657b83
+*foreground: #eee8d5
 *background: #002b36
 *color0: #073642
 *color1: #dc322f

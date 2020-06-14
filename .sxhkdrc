@@ -27,7 +27,7 @@ ctrl + q
 ctrl + Tab
   rofi -modi window -show-icons -show window
 ctrl + space
-  rofi -modi run -show run
+  rofi -modi combi -show-icons -show combi -combi-modi drun,run
 ctrl + shift + 3
   scrot -e 'mv $f ~/Desktop/' && notify-send "Screenshot saved to: ~/Desktop/"
 ctrl + shift + 4
