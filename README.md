@@ -4,9 +4,9 @@ My dotfiles and other goodies for MacOS and Linux.
 
 ## Installation
 
-Clone this repo to your **home** directory and keep it there.
+Clone this repository to any directory in your computer.  E.g. **~/Projects**.
 ```
-cd ~ && git clone https://github.com/jukkapajarinen/dotfiles.git
+cd ~/Projects && git clone https://github.com/jukkapajarinen/dotfiles.git
 ```
 
 Run the `installers/install_macos.sh` or `installers/install_linux.sh` script in **bash** *(supported options are `-f` or `--force` to force installation).*

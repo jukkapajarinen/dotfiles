@@ -3,19 +3,19 @@
 # ##############################################################################
 
 # For maximal goofiness: Cmd => ctrl, Ctrl => mod4, Opt_L => mod1, Opt_R => mod5
-ctrl + mod1 + shift + {Left,Down,Up,Right}
+ctrl + mod5 + shift + {Left,Down,Up,Right}
   bspc node -s {west,south,north,east}
-ctrl + mod1 + shift + {1-8}
+ctrl + mod5 + shift + {1-8}
   id=$(bspc query -N -n); bspc node -d ^{1-8}; bspc node -f ${id}
-ctrl + mod1 + shift + f
+ctrl + mod5 + shift + f
   bspc node -t ~fullscreen
-ctrl + mod1 + shift + space
+ctrl + mod5 + shift + space
   bspc node -t ~floating
-ctrl + mod1 + shift + r
+ctrl + mod5 + shift + r
   pkill -USR1 -x sxhkd; bash ~/.config/bspwm/bspwmrc
-ctrl + mod1 + shift + l
-  bash ~/dotfiles/scripts/rofi-shutdown.sh
-ctrl + mod1 + shift + Return
+ctrl + mod5 + shift + l
+  bash ~/Scripts/rofi-shutdown.sh
+ctrl + mod5 + shift + Return
   kitty
 
 # ##############################################################################
@@ -57,4 +57,4 @@ XF86AudioLowerVolume
 XF86AudioRaiseVolume
   notify-send "***TODO*** XF86AudioRaiseVolume"
 XF86Eject
-  bash ~/dotfiles/scripts/rofi-shutdown.sh
+  bash ~/Scripts/rofi-shutdown.sh

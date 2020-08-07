@@ -15,8 +15,6 @@ alias mv='mv -i';
 alias ll='ls -lah';
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
 alias dockerpoop2='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
-alias vscodeExtExport='code --list-extensions > ~/dotfiles/.vscode_extensions.lst';
-alias vscodeExtImport='cat ~/dotfiles/.vscode_extensions.lst | xargs -L 1 code --install-extension';
 alias gl='git log --name-status --graph';
 alias gs='git status';
 alias gitIgnore='git update-index --assume-unchanged';
@@ -33,9 +31,13 @@ alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --
 [[ "$macos" == "true" ]] && alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock';
 [[ "$macos" == "true" ]] && alias disableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores true';
 [[ "$macos" == "true" ]] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
+[[ "$macos" == "true" ]] && alias vscodeExtExport='code --list-extensions > ~/Library/Application\ Support/Code/User/extensions.lst';
+[[ "$macos" == "true" ]] && alias vscodeExtImport='cat ~/Library/Application\ Support/Code/User/extensions.lst | xargs -L 1 code --install-extension';
 [[ "$linux" == "true" ]] && alias ls='ls --color=auto'
 [[ "$linux" == "true" ]] && alias open='xdg-open';
 [[ "$linux" == "true" ]] && alias apt-list-essential="dpkg-query -Wf '\${Package;-40}\${Essential}\n' | grep yes | awk '{print \$1}'";
 [[ "$linux" == "true" ]] && alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";
 [[ "$linux" == "true" ]] && alias apt-log-uninstalled="cat /var/log/apt/history.log | grep 'Commandline' | grep 'purge\|remove'";
 [[ "$linux" == "true" ]] && alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
+[[ "$linux" == "true" ]] && alias vscodeExtExport='code --list-extensions > ~/.config/Code/User/extensions.lst';
+[[ "$linux" == "true" ]] && alias vscodeExtImport='cat ~/.config/Code/User/extensions.lst | xargs -L 1 code --install-extension';
