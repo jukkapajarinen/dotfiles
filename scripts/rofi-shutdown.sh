@@ -20,11 +20,11 @@ elif [[ $rofi_action == "Reboot" ]]; then
 
 # Handle Lock Screen action
 elif [[ $rofi_action == "Lock Screen" ]]; then
-  xscreensaver-command -lock;
+  gnome-screensaver-command -l;
 
 # Handle Logout action
 elif [[ $rofi_action == "Logout" ]]; then
-  bspc quit; #i3-msg exit;
+  bspc quit;
 
 # Handle Suspend action
 elif [[ $rofi_action == "Suspend" ]]; then

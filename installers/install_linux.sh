@@ -40,8 +40,6 @@ fi
 echo "==> Create possibly missing directories.";
 $mkdir $homeDir/.config/bspwm/;
 $mkdir $homeDir/.config/sxhkd/;
-$mkdir $homeDir/.config/polybar;
-$mkdir $homeDir/.config/dunst;
 $mkdir $homeDir/.config/kitty;
 $mkdir $homeDir/.config/nano;
 $mkdir $homeDir/.config/Code/User/;
@@ -51,27 +49,21 @@ echo "==> Install user configuration files.";
 $ln $scriptDir/.bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/.bash_aliases $homeDir/.bash_aliases;
 $ln $scriptDir/.Xresources $homeDir/.Xresources;
-$ln $scriptDir/.Xsession $homeDir/.Xsession;
 $ln $scriptDir/.gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/.gitignore_global $homeDir/.gitignore_global;
 $ln $scriptDir/.nanorc $homeDir/.config/nano/nanorc;
 $ln $scriptDir/.bspwmrc $homeDir/.config/bspwm/bspwmrc;
 $ln $scriptDir/.sxhkdrc $homeDir/.config/sxhkd/sxhkdrc;
-$ln $scriptDir/.polybar.conf $homeDir/.config/polybar/config;
-$ln $scriptDir/.compton.conf $homeDir/.config/compton.conf;
-$ln $scriptDir/.dunstrc $homeDir/.config/dunst/dunstrc;
 $ln $scriptDir/.vscode_settings.json $homeDir/.config/Code/User/settings.json;
 $ln $scriptDir/.vscode_keybindings.json $homeDir/.config/Code/User/keybindings.json;
 $ln $scriptDir/.kitty.conf $homeDir/.config/kitty/kitty.conf;
 
 # Linux create system symlinks
 echo "==> Install system configuration files.";
-sudo $ln /usr/share/zoneinfo/Europe/Helsinki /etc/localtime;
-sudo $ln /usr/bin/firefox-esr /etc/alternatives/x-www-browser;
+sudo $ln /usr/bin/firefox /etc/alternatives/x-www-browser;
 sudo $ln /usr/bin/bspwm /etc/alternatives/x-window-manager;
 sudo $ln /usr/bin/kitty /etc/alternatives/x-terminal-emulator;
 sudo $ln /usr/share/nano /usr/local/share/nano;
-sudo $cp $scriptDir/keyboard/keyboard_apple_fi /etc/default/keyboard;
 
 # Print info that execution finished
 echo "==> Installation finished."

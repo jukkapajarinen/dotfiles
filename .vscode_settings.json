@@ -1,5 +1,4 @@
 {
-  "workbench.colorTheme": "Solarized Flat",
   "workbench.iconTheme": "vscode-great-icons",
   "workbench.list.horizontalScrolling": true,
   "workbench.editor.closeOnFileDelete": true,
@@ -65,5 +64,6 @@
   "terminal.integrated.shell.linux": "/bin/bash",
   "terminal.integrated.shellArgs.linux": ["-l"],
   "terminal.integrated.shellArgs.osx": ["-l"],
-  "terminal.integrated.shell.osx": "/bin/bash"
+  "terminal.integrated.shell.osx": "/bin/bash",
+  "workbench.colorTheme": "Shades of Purple"
 }

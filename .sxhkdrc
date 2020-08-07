@@ -12,7 +12,7 @@ ctrl + mod1 + shift + f
 ctrl + mod1 + shift + space
   bspc node -t ~floating
 ctrl + mod1 + shift + r
-  bash ~/.Xsession; pkill -USR1 -x sxhkd; bash ~/.config/bspwm/bspwmrc
+  pkill -USR1 -x sxhkd; bash ~/.config/bspwm/bspwmrc
 ctrl + mod1 + shift + l
   bash ~/dotfiles/scripts/rofi-shutdown.sh
 ctrl + mod1 + shift + Return
@@ -29,32 +29,32 @@ ctrl + Tab
 ctrl + space
   rofi -modi combi -show-icons -show combi -combi-modi drun,run
 ctrl + shift + 3
-  scrot -e 'mv $f ~/Desktop/' && notify-send "Screenshot saved to: ~/Desktop/"
+  gnome-screenshot
 ctrl + shift + 4
-  scrot -e 'mv $f ~/Desktop/' && notify-send "Screenshot saved to: ~/Desktop/"
+  gnome-screenshot -a
 XF86MonBrightnessDown
-  bash ~/dotfiles/scripts/x-adjust-brightness.sh all down
+  notify-send "***TODO*** XF86MonBrightnessDown"
 XF86MonBrightnessUp
-  bash ~/dotfiles/scripts/x-adjust-brightness.sh all up
+  notify-send "***TODO*** XF86MonBrightnessUp"
 XF86LaunchA
-  notify-send "XF86LaunchA"
+  notify-send "***TODO*** XF86LaunchA"
 XF86LaunchB
-  rofi -modi run -show run
+  rofi -modi combi -show-icons -show combi -combi-modi drun,run
 XF86KbdBrightnessDown
-  notify-send "XF86KbdBrightnessDown"
+  notify-send "***TODO*** XF86KbdBrightnessDown"
 XF86KbdBrightnessUp
-  notify-send "XF86KbdBrightnessUp"
+  notify-send "***TODO*** XF86KbdBrightnessUp"
 XF86AudioPrev
-  dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+  notify-send "***TODO*** XF86AudioPrev"
 XF86AudioPlay
-  dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+  notify-send "***TODO*** XF86AudioPlay"
 XF86AudioNext
-  dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-XF86AudioMutea
-  pactl set-sink-mute @DEFAULT_SINK@ toggle
+  notify-send "***TODO*** XF86AudioNext"
+XF86AudioMute
+  notify-send "***TODO*** XF86AudioMute"
 XF86AudioLowerVolume
-  pactl set-sink-volume @DEFAULT_SINK@ -1%
+  notify-send "***TODO*** XF86AudioLowerVolume"
 XF86AudioRaiseVolume
-  pactl set-sink-volume @DEFAULT_SINK@ +1%
+  notify-send "***TODO*** XF86AudioRaiseVolume"
 XF86Eject
   bash ~/dotfiles/scripts/rofi-shutdown.sh

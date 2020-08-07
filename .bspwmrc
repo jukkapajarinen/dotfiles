@@ -6,38 +6,47 @@
 
 hdmiConnected=$(xrandr -q | grep "HDMI-2 connected" &> /dev/null; echo $?);
 if [[ "$hdmiConnected" == "0" ]]; then
-  bspc monitor eDP-1 -d 1 2 3 4;
-  bspc monitor HDMI-2 -d 5 6 7 8;
+  bspc monitor eDP-1 -d 1 2 3 4 5;
+  bspc monitor HDMI-2 -d 6 7 8 9 0;
 else
-  bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8;
+  bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 0;
 fi
 
 # ##############################################################################
-# bspwm auto-start applications
+# bspwm setup environment and auto-start applications
 # ##############################################################################
 
-bash ~/dotfiles/scripts/polybar-launcher.sh;
 pgrep -f sxhkd || sxhkd &
-pgrep -f compton || compton &
-pgrep -f xscreensaver || xscreensaver -no-splash &
-pgrep -f nitrogen || nitrogen --restore &
-pgrep -f nm-applet || nm-applet &
-pgrep -f pasystray || pasystray &
-pgrep -f megasync || megasync &
-pgrep -f blueman-applet || blueman-applet &
-pgrep -f caffeine-indicator || caffeine-indicator &
-pgrep -f clipit || clipit &
+xrdb ~/.Xresources;
+xsetroot -cursor_name left_ptr;
+export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME"
+export XDG_SESSION_DESKTOP=x11;
+systemctl --user is-active gnome-session.service || systemctl --user start gnome-session.service;
+systemctl --user is-active gsd-xsettings.service || systemctl --user start gsd-xsettings.service;
+systemctl --user is-active gnome-session-x11-services.target || systemctl --user start gnome-session-x11-services.target;
+systemctl --user is-active gnome-flashback.target || systemctl --user start gnome-flashback.target;
+systemctl --user is-active indicators-pre.target || systemctl --user start indicators-pre.target;
+systemctl --user is-active indicator-application.service || systemctl --user start indicator-application.service;
+systemctl --user is-active indicator-bluetooth.service || systemctl --user start indicator-bluetooth.service;
+systemctl --user is-active indicator-datetime.service || systemctl --user start indicator-datetime.service;
+systemctl --user is-active indicator-keyboard.service || systemctl --user start indicator-keyboard.service;
+systemctl --user is-active indicator-messages.service || systemctl --user start indicator-messages.service;
+systemctl --user is-active indicator-power.service || systemctl --user start indicator-power.service;
+systemctl --user is-active indicator-printers.service || systemctl --user start indicator-printers.service;
+systemctl --user is-active indicator-session.service || systemctl --user start indicator-session.service;
+systemctl --user is-active indicator-sound.service || systemctl --user start indicator-sound.service;
+pgrep -f gnome-panel || gnome-panel &
 
 # ##############################################################################
 # bspwm setup configurations
 # ##############################################################################
 
 bspc config initial_polarity second_child;
-bspc config top_padding 36;
-bspc config right_padding 8;
-bspc config bottom_padding 8;
-bspc config left_padding 8;
-bspc config window_gap 8;
+bspc config top_padding 28;
+bspc config right_padding 0;
+bspc config bottom_padding 28;
+bspc config left_padding 0;
+bspc config window_gap 16;
 bspc config border_width 0;
 bspc config pointer_modifier mod1; # Opt_L => mod1
 bspc config pointer_action1 move;
