@@ -43,6 +43,7 @@ $mkdir $homeDir/.config/Code/User/;
 # Linux create custom script symlinks
 echo "==> Install user script files.";
 $ln $scriptDir/scripts/rofi-shutdown.sh $homeDir/Scripts/rofi-shutdown.sh;
+$ln $scriptDir/scripts/rofi-workspaces.sh $homeDir/Scripts/rofi-workspaces.sh;
 $ln $scriptDir/scripts/x-adjust-brightness.sh $homeDir/Scripts/x-adjust-brightness.sh;
 $ln $scriptDir/scripts/x-display-settings.sh $homeDir/Scripts/x-display-settings.sh;
 $ln $scriptDir/scripts/x-pointer-settings.sh $homeDir/Scripts/x-pointer-settings.sh;

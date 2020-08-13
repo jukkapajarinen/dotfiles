@@ -32,29 +32,7 @@ ctrl + shift + 3
   gnome-screenshot
 ctrl + shift + 4
   gnome-screenshot -a
-XF86MonBrightnessDown
-  notify-send "***TODO*** XF86MonBrightnessDown"
-XF86MonBrightnessUp
-  notify-send "***TODO*** XF86MonBrightnessUp"
 XF86LaunchA
-  notify-send "***TODO*** XF86LaunchA"
+  bash ~/Scripts/rofi-workspaces.sh
 XF86LaunchB
   rofi -modi combi -show-icons -show combi -combi-modi drun,run
-XF86KbdBrightnessDown
-  notify-send "***TODO*** XF86KbdBrightnessDown"
-XF86KbdBrightnessUp
-  notify-send "***TODO*** XF86KbdBrightnessUp"
-XF86AudioPrev
-  notify-send "***TODO*** XF86AudioPrev"
-XF86AudioPlay
-  notify-send "***TODO*** XF86AudioPlay"
-XF86AudioNext
-  notify-send "***TODO*** XF86AudioNext"
-XF86AudioMute
-  notify-send "***TODO*** XF86AudioMute"
-XF86AudioLowerVolume
-  notify-send "***TODO*** XF86AudioLowerVolume"
-XF86AudioRaiseVolume
-  notify-send "***TODO*** XF86AudioRaiseVolume"
-XF86Eject
-  bash ~/Scripts/rofi-shutdown.sh

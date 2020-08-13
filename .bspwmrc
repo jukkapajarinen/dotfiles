@@ -21,10 +21,24 @@ xrdb ~/.Xresources;
 xsetroot -cursor_name left_ptr;
 export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME"
 export XDG_SESSION_DESKTOP=x11;
-systemctl --user is-active gnome-session.service || systemctl --user start gnome-session.service;
-systemctl --user is-active gsd-xsettings.service || systemctl --user start gsd-xsettings.service;
-systemctl --user is-active gnome-session-x11-services.target || systemctl --user start gnome-session-x11-services.target;
 systemctl --user is-active gnome-flashback.target || systemctl --user start gnome-flashback.target;
+systemctl --user is-active gsd-a11y-settings.target || systemctl --user start gsd-a11y-settings.target
+systemctl --user is-active gsd-housekeeping.target || systemctl --user start gsd-housekeeping.target
+systemctl --user is-active gsd-power.target || systemctl --user start gsd-power.target
+systemctl --user is-active gsd-screensaver-proxy.target || systemctl --user start gsd-screensaver-proxy.target
+systemctl --user is-active gsd-sound.target || systemctl --user start gsd-sound.target
+systemctl --user is-active gsd-wwan.target || systemctl --user start gsd-wwan.target
+systemctl --user is-active gsd-color.target || systemctl --user start gsd-color.target
+systemctl --user is-active gsd-keyboard.target || systemctl --user start gsd-keyboard.target
+systemctl --user is-active gsd-print-notifications.target || systemctl --user start gsd-print-notifications.target
+systemctl --user is-active gsd-sharing.target || systemctl --user start gsd-sharing.target
+systemctl --user is-active gsd-usb-protection.target || systemctl --user start gsd-usb-protection.target
+systemctl --user is-active gsd-xsettings.target || systemctl --user start gsd-xsettings.target
+systemctl --user is-active gsd-datetime.target || systemctl --user start gsd-datetime.target
+systemctl --user is-active gsd-media-keys.target || systemctl --user start gsd-media-keys.target
+systemctl --user is-active gsd-rfkill.target || systemctl --user start gsd-rfkill.target
+systemctl --user is-active gsd-smartcard.target || systemctl --user start gsd-smartcard.target
+systemctl --user is-active gsd-wacom.target || systemctl --user start gsd-wacom.target
 systemctl --user is-active indicators-pre.target || systemctl --user start indicators-pre.target;
 systemctl --user is-active indicator-application.service || systemctl --user start indicator-application.service;
 systemctl --user is-active indicator-bluetooth.service || systemctl --user start indicator-bluetooth.service;
@@ -47,7 +61,7 @@ bspc config right_padding 0;
 bspc config bottom_padding 28;
 bspc config left_padding 0;
 bspc config window_gap 16;
-bspc config border_width 0;
+bspc config border_width 1;
 bspc config pointer_modifier mod5; # Opt_L => mod1
 bspc config pointer_action1 move;
 bspc config pointer_action2 resize_corner;
