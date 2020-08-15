@@ -50,6 +50,9 @@ systemctl --user is-active indicator-printers.service || systemctl --user start 
 systemctl --user is-active indicator-session.service || systemctl --user start indicator-session.service;
 systemctl --user is-active indicator-sound.service || systemctl --user start indicator-sound.service;
 pgrep -f gnome-panel || gnome-panel &
+pgrep -f nm-applet || nm-applet &
+pgrep -f caffeine-indicator || caffeine-indicator &
+pgrep -f clipit || clipit &
 
 # ##############################################################################
 # bspwm setup configurations
@@ -71,5 +74,6 @@ bspc config pointer_follows_focus false;
 # ##############################################################################
 # bspwm window rules
 # ##############################################################################
-bspc rule -a Gimp state=floating;
-bspc rule -a MEGAsync state=floating;
+bspc rule -a "Gimp*" state=floating;
+bspc rule -a "Onboard" state=floating;
+bspc rule -a "Gnome-calculator" state=floating;
