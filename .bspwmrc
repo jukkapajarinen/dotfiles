@@ -1,6 +1,19 @@
 #!/bin/bash
 
 # ##############################################################################
+# bspwm setup environment
+# ##############################################################################
+
+export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME"
+export XDG_SESSION_DESKTOP=x11;
+export XDG_SESSION_TYPE=x11;
+export XDG_MENU_PREFIX=gnome-flashback-;
+export XDG_RUNTIME_DIR="/run/user/$UID"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+xrdb ~/.Xresources;
+xsetroot -cursor_name left_ptr;
+
+# ##############################################################################
 # bspwm monitor workspace setup
 # ##############################################################################
 
@@ -13,15 +26,10 @@ else
 fi
 
 # ##############################################################################
-# bspwm setup environment and auto-start applications
+# bspwm auto-start applications
 # ##############################################################################
 
 pgrep -f sxhkd || sxhkd &
-xrdb ~/.Xresources;
-xsetroot -cursor_name left_ptr;
-export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME"
-export XDG_SESSION_DESKTOP=x11;
-systemctl --user is-active gnome-flashback.target || systemctl --user start gnome-flashback.target;
 systemctl --user is-active gsd-a11y-settings.target || systemctl --user start gsd-a11y-settings.target
 systemctl --user is-active gsd-housekeeping.target || systemctl --user start gsd-housekeeping.target
 systemctl --user is-active gsd-power.target || systemctl --user start gsd-power.target
@@ -50,21 +58,21 @@ systemctl --user is-active indicator-printers.service || systemctl --user start 
 systemctl --user is-active indicator-session.service || systemctl --user start indicator-session.service;
 systemctl --user is-active indicator-sound.service || systemctl --user start indicator-sound.service;
 pgrep -f gnome-panel || gnome-panel &
+pgrep -f gnome-flashback || gnome-flashback &
 pgrep -f nm-applet || nm-applet &
 pgrep -f caffeine-indicator || caffeine-indicator &
-pgrep -f clipit || clipit &
 
 # ##############################################################################
 # bspwm setup configurations
 # ##############################################################################
 
 bspc config initial_polarity second_child;
-bspc config top_padding 28;
+bspc config top_padding 24;
 bspc config right_padding 0;
-bspc config bottom_padding 28;
+bspc config bottom_padding 24;
 bspc config left_padding 0;
 bspc config window_gap 16;
-bspc config border_width 0
+bspc config border_width 1
 bspc config pointer_modifier mod5; # Opt_L => mod1
 bspc config pointer_action1 move;
 bspc config pointer_action2 resize_corner;
@@ -74,6 +82,7 @@ bspc config pointer_follows_focus false;
 # ##############################################################################
 # bspwm window rules
 # ##############################################################################
+
 bspc rule -a "Gimp*" state=floating;
 bspc rule -a "Onboard" state=floating;
 bspc rule -a "Gnome-calculator" state=floating;
