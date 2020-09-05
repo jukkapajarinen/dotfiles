@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# ##############################################################################
+# Environment variables for MacOS and Linux
+# ##############################################################################
+
+# Check platform
+[[ "$(uname -s)" == "Darwin" ]] && macos="true" || linux="true";
+
+# Common variables
+export LANG="en_US.UTF-8";
+export LANGUAGE="en_US.UTF-8";
+export LC_ALL="en_US.UTF-8";
+export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin";
+
+# OS specific variables
+[[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
+[[ "$macos" == "true" ]] && export GEM_HOME="$HOME/.gem";
+[[ "$macos" == "true" ]] && export ANDROID_HOME=/usr/local/Caskroom/android-sdk/4333796;
+[[ "$macos" == "true" ]] && export ANDROID_SDK_ROOT=$ANDROID_HOME;
+[[ "$macos" == "true" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
+[[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/platform-tools/";
+[[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/emulator/";
+[[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=gtk2

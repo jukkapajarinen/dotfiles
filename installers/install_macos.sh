@@ -43,7 +43,8 @@ $mkdir $homeDir/Library/Application\ Support/Code/User/;
 # MacOS create symlinks
 echo "==> Install user configuration files.";
 $ln $scriptDir/.bash_profile $homeDir/.bash_profile;
-$ln $scriptDir/.bash_aliases $homeDir/.bash_aliases;
+$ln $scriptDir/.shell_aliases $homeDir/.shell_aliases;
+$ln $scriptDir/.shell_env $homeDir/.shell_env;
 $ln $scriptDir/.gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/.gitignore_global $homeDir/.gitignore_global;
 $ln $scriptDir/.nanorc $homeDir/.nanorc;

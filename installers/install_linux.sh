@@ -51,7 +51,8 @@ $ln $scriptDir/scripts/x-pointer-settings.sh $homeDir/Scripts/x-pointer-settings
 # Linux create dotfile symlinks
 echo "==> Install user configuration files.";
 $ln $scriptDir/.bash_profile $homeDir/.bash_profile;
-$ln $scriptDir/.bash_aliases $homeDir/.bash_aliases;
+$ln $scriptDir/.shell_aliases $homeDir/.shell_aliases;
+$ln $scriptDir/.shell_env $homeDir/.shell_env;
 $ln $scriptDir/.Xresources $homeDir/.Xresources;
 $ln $scriptDir/.gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/.gitignore_global $homeDir/.gitignore_global;
