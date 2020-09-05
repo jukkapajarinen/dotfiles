@@ -65,5 +65,5 @@
   "terminal.integrated.shellArgs.linux": ["-l"],
   "terminal.integrated.shellArgs.osx": ["-l"],
   "terminal.integrated.shell.osx": "/bin/bash",
-  "workbench.colorTheme": "Shades of Purple"
+  "workbench.colorTheme": "Dracula"
 }
