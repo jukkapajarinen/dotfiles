@@ -2,13 +2,13 @@
 # GNU nano color configurations
 # ##############################################################################
 
-set titlecolor brightwhite,red
-set statuscolor brightwhite,red
-set errorcolor brightwhite,red
+set titlecolor brightwhite,blue
+set statuscolor brightwhite,blue
+set errorcolor brightwhite,blue
 set selectedcolor brightwhite,magenta
-set numbercolor red
+set numbercolor blue
 set keycolor yellow
-set functioncolor red
+set functioncolor blue
 
 # ##############################################################################
 # GNU nano setup configurations
