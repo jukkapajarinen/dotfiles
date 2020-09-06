@@ -61,9 +61,9 @@
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
-  "terminal.integrated.shell.linux": "/bin/bash",
-  "terminal.integrated.shellArgs.linux": ["-l"],
-  "terminal.integrated.shellArgs.osx": ["-l"],
-  "terminal.integrated.shell.osx": "/bin/bash",
+  "terminal.integrated.shell.linux": "bash",
+  "terminal.integrated.shell.osx": "bash",
+  "terminal.integrated.shellArgs.linux": ["--login"],
+  "terminal.integrated.shellArgs.osx": ["--login"],
   "workbench.colorTheme": "Dracula"
 }

@@ -37,7 +37,7 @@ xterm*scrollBar: false
 xterm*rightScrollBar: false
 xterm*cursorBlink: true
 xterm*faceName: Fira Code
-xterm*faceSize: 10
+xterm*faceSize: 12
 xterm*renderFont: true
 xterm*internalBorder: 8
 xterm*selectToClipboard: true

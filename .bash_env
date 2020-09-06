@@ -8,6 +8,7 @@
 [[ "$(uname -s)" == "Darwin" ]] && macos="true" || linux="true";
 
 # Common variables
+export DOTFILES="$HOME/Projects/dotfiles";
 export LANG="en_US.UTF-8";
 export LANGUAGE="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";

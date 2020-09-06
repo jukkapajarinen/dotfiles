@@ -31,14 +31,14 @@ export LESS_TERMCAP_so=$(printf "\e[01;34m");
 export LESS_TERMCAP_ue=$(printf "\e[0m");
 export LESS_TERMCAP_us=$(printf "\e[04;33m");
 
-# Source environment variables
-ls ~/.shell_env &> /dev/null && source ~/.shell_env;
-ls ~/.shell_env_extra &> /dev/null && source ~/.shell_env_extra;
-
-# Source shell aliases
-ls ~/.shell_aliases &> /dev/null && source ~/.shell_aliases;
-ls ~/.shell_aliases_extra &> /dev/null && source ~/.shell_aliases_extra;
-
 # Souce bash auto-completions
 ls /usr/share/bash-completion/bash_completion &> /dev/null && source /usr/share/bash-completion/bash_completion;
 ls /usr/local/etc/profile.d/bash_completion.sh &> /dev/null && source /usr/local/etc/profile.d/bash_completion.sh;
+
+# Source environment variables
+ls ~/.bash_env &> /dev/null && source ~/.bash_env;
+ls ~/.bash_env_extra &> /dev/null && source ~/.bash_env_extra;
+
+# Source shell aliases
+ls ~/.bash_aliases &> /dev/null && source ~/.bash_aliases;
+ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
