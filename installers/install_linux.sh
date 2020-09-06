@@ -53,6 +53,7 @@ echo "==> Install user configuration files.";
 $ln $scriptDir/.bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/.bash_aliases $homeDir/.bash_aliases;
 $ln $scriptDir/.bash_env $homeDir/.bash_env;
+$ln $scriptDir/.bash_theme $homeDir/.bash_theme;
 $ln $scriptDir/.Xresources $homeDir/.Xresources;
 $ln $scriptDir/.gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/.gitignore_global $homeDir/.gitignore_global;

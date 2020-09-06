@@ -65,5 +65,9 @@
   "terminal.integrated.shell.osx": "bash",
   "terminal.integrated.shellArgs.linux": ["--login"],
   "terminal.integrated.shellArgs.osx": ["--login"],
-  "workbench.colorTheme": "Dracula"
+  "workbench.colorTheme": "Dracula",
+  "workbench.colorCustomizations": {
+    "editorCursor.foreground": "#ff79c6",
+    "terminalCursor.foreground": "#ff79c6"
+  }
 }
