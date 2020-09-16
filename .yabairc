@@ -50,7 +50,7 @@ yabai -m rule --add app="^XD$" title="^(Adobe XD)$" manage=off;
 yabai -m rule --add app="^Unity Hub$" manage=off;
 yabai -m rule --add app="^Unity$" title="^()$" manage=off;
 yabai -m rule --add app="^(Rider|WebStorm|JetBrains.*|Android Studio)$" title="^(Welcome to.*|Preferences)$" manage=off;
-yabai -m rule --add app="^VLC$" manage=off;
+yabai -m rule --add app="^VLC$" manage=off border=off;
 yabai -m rule --add app="^QuickTime Player$" manage=off;
 yabai -m rule --add app="^Preview$" title!="^(.*.pdf.*)$" manage=off;
 yabai -m rule --add app="^(GIMP.*)$" title!="^(GNU Image Manipulation Program|.*– GIMP)$" manage=off;
