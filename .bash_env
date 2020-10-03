@@ -25,4 +25,4 @@ export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin"
 [[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/platform-tools/";
 [[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/tools/";
 [[ "$macos" == "true" ]] && export PATH="$PATH:$ANDROID_HOME/tools/bin";
-[[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=gtk2
+[[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=qt5ct
