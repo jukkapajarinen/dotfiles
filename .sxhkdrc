@@ -51,9 +51,9 @@ ctrl + mod5 + shift + l
 ctrl + q
   bspc node -c
 ctrl + Tab
-  rofi -modi window -show-icons -show window
+  rofi -show window -show-icons
 ctrl + space
-  rofi -modi combi -show-icons -show combi -combi-modi drun,run
+  rofi -show combi -combi-modi drun,run -show-icons
 ctrl + shift + 3
   gnome-screenshot
 ctrl + shift + 4
@@ -61,4 +61,4 @@ ctrl + shift + 4
 XF86LaunchA
   bash ~/Scripts/rofi-workspaces.sh
 XF86LaunchB
-  rofi -modi combi -show-icons -show combi -combi-modi drun,run
+  rofi -show combi -combi-modi drun,run -show-icons
