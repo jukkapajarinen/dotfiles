@@ -21,7 +21,7 @@ echo "- Target directory: $homeDir";
 
 # Read possible --force or -f from the cli args
 if [[ $1 == "--force" ]] || [[ $2 == "--force" ]] || [[ $1 == "-f" ]] || [[ $2 == "-f" ]]; then
-  read -p "Are you sure to force installation? (files will be overwritten) [Y/n] " yn;
+  read -p "==> Are you sure to force installation? (files will be overwritten) [Y/n] " yn;
   if [[ $yn =~ [yY](es)* ]]; then
     ln="ln -svf";
     cp="cp -vf --remove-destination";
@@ -42,19 +42,20 @@ $mkdir $homeDir/Library/Application\ Support/Code/User/;
 
 # MacOS create symlinks
 echo "==> Install user configuration files.";
-$ln $scriptDir/.bash_profile $homeDir/.bash_profile;
-$ln $scriptDir/.bash_aliases $homeDir/.bash_aliases;
-$ln $scriptDir/.bash_env $homeDir/.bash_env;
-$ln $scriptDir/.bash_theme $homeDir/.bash_theme;
-$ln $scriptDir/.gitconfig $homeDir/.gitconfig;
-$ln $scriptDir/.gitignore_global $homeDir/.gitignore_global;
-$ln $scriptDir/.nanorc $homeDir/.nanorc;
-$ln $scriptDir/.yabairc $homeDir/.yabairc;
-$ln $scriptDir/.skhdrc $homeDir/.skhdrc;
-$ln $scriptDir/.vscode_settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
-$ln $scriptDir/.vscode_keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
-$ln $scriptDir/.vscode_extensions.lst $homeDir/Library/Application\ Support/Code/User/extensions.lst;
-$ln $scriptDir/.kitty.conf $homeDir/.config/kitty/kitty.conf;
+$ln $scriptDir/bashrc $homeDir/.bashrc;
+$ln $scriptDir/bash_profile $homeDir/.bash_profile;
+$ln $scriptDir/bash_aliases $homeDir/.bash_aliases;
+$ln $scriptDir/bash_env $homeDir/.bash_env;
+$ln $scriptDir/bash_theme $homeDir/.bash_theme;
+$ln $scriptDir/gitconfig $homeDir/.gitconfig;
+$ln $scriptDir/gitexcludes $homeDir/.gitexcludes;
+$ln $scriptDir/nanorc $homeDir/.nanorc;
+$ln $scriptDir/yabairc $homeDir/.yabairc;
+$ln $scriptDir/skhdrc $homeDir/.skhdrc;
+$ln $scriptDir/vscode_settings.json $homeDir/Library/Application\ Support/Code/User/settings.json;
+$ln $scriptDir/vscode_keybindings.json $homeDir/Library/Application\ Support/Code/User/keybindings.json;
+$ln $scriptDir/vscode_extensions.lst $homeDir/Library/Application\ Support/Code/User/extensions.lst;
+$ln $scriptDir/kitty.conf $homeDir/.config/kitty/kitty.conf;
 
 # Print info that execution finished
 echo "==> Installation finished."

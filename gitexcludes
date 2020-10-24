@@ -1,0 +1,13 @@
+# OS files
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Editors
+.vscode/
+.vs/
+.idea/
+
+# Programming
+node_modules/
+*.class

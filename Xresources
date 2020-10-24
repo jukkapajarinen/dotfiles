@@ -27,7 +27,6 @@
 ! XTerm setup configurations
 ! ##############################################################################
 
-xterm*loginShell: true
 xterm*termName: xterm-256color
 xterm*locale: true
 xterm*utf8: always
