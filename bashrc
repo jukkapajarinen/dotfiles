@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ##############################################################################
-# Bash profile configurations
+# Bash shell configurations
 # ##############################################################################
 
 # Source bash auto-completions

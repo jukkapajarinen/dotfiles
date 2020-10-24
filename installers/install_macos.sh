@@ -34,6 +34,7 @@ fi
 # MacOS create directories
 echo "==> Create possibly missing directories.";
 $mkdir $homeDir/Scripts/;
+$mkdir $homeDir/.SpaceVim.d/;
 $mkdir $homeDir/.config/kitty/;
 $mkdir $homeDir/Library/Application\ Support/Code/User/;
 
@@ -49,6 +50,7 @@ $ln $scriptDir/bash_env $homeDir/.bash_env;
 $ln $scriptDir/bash_theme $homeDir/.bash_theme;
 $ln $scriptDir/gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/gitexcludes $homeDir/.gitexcludes;
+$ln $scriptDir/spacevim $homeDir/.SpaceVim.d/init.toml;
 $ln $scriptDir/nanorc $homeDir/.nanorc;
 $ln $scriptDir/yabairc $homeDir/.yabairc;
 $ln $scriptDir/skhdrc $homeDir/.skhdrc;

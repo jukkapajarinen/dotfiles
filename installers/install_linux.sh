@@ -34,6 +34,7 @@ fi
 # Linux create directories
 echo "==> Create possibly missing directories.";
 $mkdir $homeDir/Scripts/;
+$mkdir $homeDir/.SpaceVim.d/;
 $mkdir $homeDir/.config/bspwm/;
 $mkdir $homeDir/.config/sxhkd/;
 $mkdir $homeDir/.config/dunst/
@@ -59,6 +60,7 @@ $ln $scriptDir/bash_theme $homeDir/.bash_theme;
 $ln $scriptDir/Xresources $homeDir/.Xresources;
 $ln $scriptDir/gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/gitexcludes $homeDir/.gitexcludes;
+$ln $scriptDir/spacevim $homeDir/.SpaceVim.d/init.toml;
 $ln $scriptDir/nanorc $homeDir/.config/nano/nanorc;
 $ln $scriptDir/bspwmrc $homeDir/.config/bspwm/bspwmrc;
 $ln $scriptDir/sxhkdrc $homeDir/.config/sxhkd/sxhkdrc;

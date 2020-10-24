@@ -3,7 +3,7 @@
 ; ##############################################################################
 
 [core]
-  editor = nano
+  editor = nvim
   commentChar = @
   excludesfile = ~/.gitexcludes
 [include]
