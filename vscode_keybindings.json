@@ -1,6 +1,6 @@
 [
-  { "key": "cmd+shift+[Equal]", "command": "workbench.action.terminal.toggleTerminal" },
-  { "key": "ctrl+shift+[Equal]", "command": "workbench.action.terminal.toggleTerminal" },
+  { "key": "shift+alt+enter", "command": "workbench.action.terminal.toggleTerminal" },
+  { "key": "ctrl+shift+[Equal]", "command": "-workbench.action.terminal.toggleTerminal" },
   { "key": "cmd+shift+[Minus]", "command": "workbench.action.terminal.new" },
   { "key": "ctrl+shift+[Minus]", "command": "workbench.action.terminal.new" },
   { "key": "ctrl+shift+alt+meta+[digit7]", "command": "workbench.action.terminal.split", "when": "terminalFocus" },
@@ -75,5 +75,19 @@
   { "key": "alt+[ArrowRight]", "command": "cursorWordEndRight", "when": "textInputFocus" },
   { "key": "alt+[ArrowLeft]", "command": "cursorWordStartLeft", "when": "textInputFocus" },
   { "key": "shift+alt+[ArrowRight]", "command": "cursorWordEndRightSelect", "when": "textInputFocus" },
-  { "key": "shift+alt+[ArrowLeft]", "command": "cursorWordStartLeftSelect", "when": "textInputFocus" }
+  { "key": "shift+alt+[ArrowLeft]", "command": "cursorWordStartLeftSelect", "when": "textInputFocus" },
+  { "key": "ctrl+shift+g", "command": "editor.action.previousMatchFindAction", "when": "editorFocus" },
+  { "key": "shift+cmd+g", "command": "-editor.action.previousMatchFindAction", "when": "editorFocus" },
+  { "key": "ctrl+shift+g", "command": "workbench.action.terminal.findPrevious", "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+  { "key": "shift+cmd+g", "command": "-workbench.action.terminal.findPrevious", "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+  { "key": "shift+cmd+g", "command": "workbench.view.scm" },
+  { "key": "ctrl+shift+g", "command": "-workbench.view.scm" },
+  { "key": "shift+cmd+g", "command": "workbench.view.scm", "when": "gitlens:enabled && config.gitlens.keymap == 'chorded'" },
+  { "key": "ctrl+shift+g", "command": "-workbench.view.scm", "when": "gitlens:enabled && config.gitlens.keymap == 'chorded'" },
+  { "key": "cmd+g", "command": "workbench.action.gotoLine" },
+  { "key": "ctrl+g", "command": "-workbench.action.gotoLine" },
+  { "key": "ctrl+g", "command": "editor.action.nextMatchFindAction", "when": "editorFocus" },
+  { "key": "cmd+g", "command": "-editor.action.nextMatchFindAction", "when": "editorFocus" },
+  { "key": "ctrl+g", "command": "workbench.action.terminal.findNext", "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+  { "key": "cmd+g", "command": "-workbench.action.terminal.findNext", "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" }
 ]

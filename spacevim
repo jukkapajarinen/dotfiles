@@ -3,16 +3,16 @@
 # ##############################################################################
 
 [options]
-    colorscheme = "dracula"
-    colorscheme_bg = "dark"
-    enable_guicolors = true
-    statusline_separator = "arrow"
-    statusline_iseparator = "arrow"
-    buffer_index_type = 4
-    enable_statusline_mode = true
-    filemanager = "nerdtree"
-    filetree_direction = "left"
-    sidebar_width = 30
+  colorscheme = "dracula"
+  colorscheme_bg = "dark"
+  enable_guicolors = true
+  statusline_separator = "arrow"
+  statusline_iseparator = "arrow"
+  buffer_index_type = 4
+  enable_statusline_mode = true
+  filemanager = "nerdtree"
+  filetree_direction = "left"
+  sidebar_width = 30
 
 [[layers]]
   name = 'autocomplete'
