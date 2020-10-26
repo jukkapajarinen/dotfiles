@@ -13,6 +13,7 @@ export LANG="en_US.UTF-8";
 export LANGUAGE="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 export PATH="$PATH:/usr/sbin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/sbin";
+export NVM_DIR="$HOME/.nvm";
 
 # OS specific variables
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;

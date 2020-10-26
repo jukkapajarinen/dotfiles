@@ -11,3 +11,4 @@
 # Programming
 node_modules/
 *.class
+**/*.csproj
