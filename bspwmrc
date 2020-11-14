@@ -4,12 +4,7 @@
 # bspwm setup environment
 # ##############################################################################
 
-export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME"
-export XDG_SESSION_DESKTOP=x11;
-export XDG_SESSION_TYPE=x11;
-export XDG_MENU_PREFIX=gnome-flashback-;
-export XDG_RUNTIME_DIR="/run/user/$UID"
-export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME";
 xrdb ~/.Xresources;
 xsetroot -cursor_name left_ptr;
 
@@ -30,23 +25,29 @@ fi
 # ##############################################################################
 
 pgrep -f sxhkd || sxhkd &
-systemctl --user is-active gsd-a11y-settings.target || systemctl --user start gsd-a11y-settings.target
-systemctl --user is-active gsd-housekeeping.target || systemctl --user start gsd-housekeeping.target
-systemctl --user is-active gsd-power.target || systemctl --user start gsd-power.target
-systemctl --user is-active gsd-screensaver-proxy.target || systemctl --user start gsd-screensaver-proxy.target
-systemctl --user is-active gsd-sound.target || systemctl --user start gsd-sound.target
-systemctl --user is-active gsd-wwan.target || systemctl --user start gsd-wwan.target
-systemctl --user is-active gsd-color.target || systemctl --user start gsd-color.target
-systemctl --user is-active gsd-keyboard.target || systemctl --user start gsd-keyboard.target
-systemctl --user is-active gsd-print-notifications.target || systemctl --user start gsd-print-notifications.target
-systemctl --user is-active gsd-sharing.target || systemctl --user start gsd-sharing.target
-systemctl --user is-active gsd-usb-protection.target || systemctl --user start gsd-usb-protection.target
-systemctl --user is-active gsd-xsettings.target || systemctl --user start gsd-xsettings.target
-systemctl --user is-active gsd-datetime.target || systemctl --user start gsd-datetime.target
-systemctl --user is-active gsd-media-keys.target || systemctl --user start gsd-media-keys.target
-systemctl --user is-active gsd-rfkill.target || systemctl --user start gsd-rfkill.target
-systemctl --user is-active gsd-smartcard.target || systemctl --user start gsd-smartcard.target
-systemctl --user is-active gsd-wacom.target || systemctl --user start gsd-wacom.target
+pgrep -f gsd-a11y-settings || /usr/libexec/gsd-a11y-settings &
+pgrep -f gsd-backlight-helper || /usr/libexec/gsd-backlight-helper &
+pgrep -f gsd-color || /usr/libexec/gsd-color &
+pgrep -f gsd-datetime || /usr/libexec/gsd-datetime &
+pgrep -f gsd-disk-utility-notify || /usr/libexec/gsd-disk-utility-notify &
+pgrep -f gsd-housekeeping || /usr/libexec/gsd-housekeeping &
+pgrep -f gsd-keyboard || /usr/libexec/gsd-keyboard &
+pgrep -f gsd-media-keys || /usr/libexec/gsd-media-keys &
+pgrep -f gsd-power || /usr/libexec/gsd-power &
+pgrep -f gsd-printer || /usr/libexec/gsd-printer &
+pgrep -f gsd-print-notifications || /usr/libexec/gsd-print-notifications &
+pgrep -f gsd-rfkill || /usr/libexec/gsd-rfkill &
+pgrep -f gsd-screensaver-proxy || /usr/libexec/gsd-screensaver-proxy &
+pgrep -f gsd-sharing || /usr/libexec/gsd-sharing &
+pgrep -f gsd-smartcard || /usr/libexec/gsd-smartcard &
+pgrep -f gsd-sound || /usr/libexec/gsd-sound &
+pgrep -f gsd-usb-protection || /usr/libexec/gsd-usb-protection &
+pgrep -f gsd-wacom || /usr/libexec/gsd-wacom &
+pgrep -f gsd-wacom-oled-helper || /usr/libexec/gsd-wacom-oled-helper &
+pgrep -f gsd-wwan || /usr/libexec/gsd-wwan &
+pgrep -f gsd-xsettings || /usr/libexec/gsd-xsettings &
+pgrep -f gnome-flashback || gnome-flashback &
+
 systemctl --user is-active indicators-pre.target || systemctl --user start indicators-pre.target;
 systemctl --user is-active indicator-application.service || systemctl --user start indicator-application.service;
 systemctl --user is-active indicator-bluetooth.service || systemctl --user start indicator-bluetooth.service;
@@ -57,10 +58,9 @@ systemctl --user is-active indicator-power.service || systemctl --user start ind
 systemctl --user is-active indicator-printers.service || systemctl --user start indicator-printers.service;
 systemctl --user is-active indicator-session.service || systemctl --user start indicator-session.service;
 systemctl --user is-active indicator-sound.service || systemctl --user start indicator-sound.service;
-pgrep -f gnome-panel || gnome-panel &
-pgrep -f gnome-flashback || gnome-flashback &
 pgrep -f nm-applet || nm-applet &
 pgrep -f caffeine-indicator || caffeine-indicator &
+pgrep -f gnome-panel || gnome-panel &
 
 # ##############################################################################
 # bspwm setup configurations
