@@ -34,7 +34,7 @@
   "xml.format.preservedNewlines": 0,
   "search.showLineNumbers": true,
   "workbench.editor.enablePreview": false,
-  "workbench.activityBar.visible": false,
+  "workbench.activityBar.visible": true,
   "explorer.confirmDragAndDrop": false,
   "files.trimTrailingWhitespace": false,
   "files.trimFinalNewlines": true,

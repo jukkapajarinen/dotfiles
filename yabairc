@@ -57,3 +57,4 @@ yabai -m rule --add app="^QuickTime Player$" manage=off;
 yabai -m rule --add app="^Preview$" title!="^(.*.pdf.*)$" manage=off;
 yabai -m rule --add app="^(GIMP.*)$" title!="^(GNU Image Manipulation Program|.*– GIMP)$" manage=off;
 yabai -m rule --add app="^Transmission$" title!="^(Transmission)$" manage=off;
+yabai -m rule --add app="^balenaEtcher$" manage=off;
