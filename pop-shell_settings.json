@@ -1,0 +1,8 @@
+{
+  "float": [
+    { "class": "Gnome-calculator" }
+  ],
+  "log_on_focus": false,
+  "move_pointer_on_switch": false,
+  "default_pointer_position": "CENTER"
+}

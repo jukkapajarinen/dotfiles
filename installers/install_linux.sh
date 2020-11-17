@@ -35,12 +35,10 @@ fi
 echo "==> Create possibly missing directories.";
 $mkdir $homeDir/Scripts/;
 $mkdir $homeDir/.SpaceVim.d/;
-$mkdir $homeDir/.config/bspwm/;
-$mkdir $homeDir/.config/sxhkd/;
-$mkdir $homeDir/.config/dunst/
 $mkdir $homeDir/.config/kitty/;
 $mkdir $homeDir/.config/nano/;
 $mkdir $homeDir/.config/Code/User/;
+$mkdir $homeDir/.config/pop-shell/;
 
 # Linux create custom script symlinks
 echo "==> Install user script files.";
@@ -49,6 +47,7 @@ $ln $scriptDir/scripts/rofi-workspaces.sh $homeDir/Scripts/rofi-workspaces.sh;
 $ln $scriptDir/scripts/x-adjust-brightness.sh $homeDir/Scripts/x-adjust-brightness.sh;
 $ln $scriptDir/scripts/x-display-settings.sh $homeDir/Scripts/x-display-settings.sh;
 $ln $scriptDir/scripts/x-pointer-settings.sh $homeDir/Scripts/x-pointer-settings.sh;
+$ln $scriptDir/scripts/pop-shell-keybindings.sh $homeDir/Scripts/pop-shell-keybindings.sh;
 
 # Linux create dotfile symlinks
 echo "==> Install user configuration files.";
@@ -62,18 +61,15 @@ $ln $scriptDir/gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/gitexcludes $homeDir/.gitexcludes;
 $ln $scriptDir/spacevim $homeDir/.SpaceVim.d/init.toml;
 $ln $scriptDir/nanorc $homeDir/.config/nano/nanorc;
-$ln $scriptDir/bspwmrc $homeDir/.config/bspwm/bspwmrc;
-$ln $scriptDir/sxhkdrc $homeDir/.config/sxhkd/sxhkdrc;
-$ln $scriptDir/dunstrc $homeDir/.config/dunst/dunstrc;
 $ln $scriptDir/vscode_settings.json $homeDir/.config/Code/User/settings.json;
 $ln $scriptDir/vscode_keybindings.json $homeDir/.config/Code/User/keybindings.json;
 $ln $scriptDir/vscode_extensions.lst $homeDir/.config/Code/User/extensions.lst;
 $ln $scriptDir/kitty.conf $homeDir/.config/kitty/kitty.conf;
+$ln $scriptDir/pop-shell_settings.json $homeDir/.config/pop-shell/config.json;
 
 # Linux create system symlinks
 echo "==> Install system configuration files.";
 sudo $ln /usr/bin/firefox /etc/alternatives/x-www-browser;
-sudo $ln /usr/bin/bspwm /etc/alternatives/x-window-manager;
 sudo $ln /usr/bin/kitty /etc/alternatives/x-terminal-emulator;
 sudo $ln /usr/share/nano /usr/local/share/nano;
 
