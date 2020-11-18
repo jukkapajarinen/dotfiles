@@ -5,9 +5,19 @@
 # ##############################################################################
 
 dconf write /org/gnome/shell/extensions/pop-shell/activate-launcher "['<Ctrl>space']";
+dconf write /org/gnome/shell/extensions/pop-shell/toggle-floating "['<Ctrl><Shift><Alt>Space']";
 gsettings set org.gnome.desktop.wm.keybindings close "['<Ctrl>q']";
+gsettings set org.gnome.desktop.wm.keybindings minimize "['<Ctrl>h']";
+gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "['<Ctrl><Shift><Alt>f']";
 gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Ctrl>Tab']";
 gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<Shift><Ctrl>Tab']";
+gsettings set org.gnome.settings-daemon.plugins.media-keys www "['<Ctrl><Shift><Alt>b']";
+gsettings set org.gnome.settings-daemon.plugins.media-keys email "['<Ctrl><Shift><Alt>e']";
+gsettings set org.gnome.settings-daemon.plugins.media-keys home "['<Ctrl><Shift><Alt>f']";
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Ctrl><Shift><Alt>Return']";
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Ctrl><Shift><Alt>l']";
+gsettings set org.gnome.shell.keybindings toggle-application-view "['XF86LaunchB', '<Ctrl><Shift><Alt>n']";
+gsettings set org.gnome.shell.keybindings toggle-overview "['XF86LaunchA', '<Ctrl><Shift><Alt>m']";
 
 # bspc config initial_polarity second_child;
 # bspc config top_padding 32;
@@ -24,9 +34,6 @@ gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<
 # bspc config pointer_action2 resize_corner;
 # bspc config focus_follows_pointer false;
 # bspc config pointer_follows_focus false;
-
-# ctrl + mod5 + shift + Return
-#   kitty
 
 # ctrl + mod5 + shift + Left
 #   bspc node -s west
@@ -58,29 +65,13 @@ gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<
 # ctrl + mod5 + shift + 0
 #   id=$(bspc query -N -n); bspc node -d 0; bspc node -f ${id}
 
-# ctrl + mod5 + shift + f
-#   bspc node -t ~fullscreen
-# ctrl + mod5 + shift + space
-#   bspc node -t ~floating
 # ctrl + mod5 + shift + r
 #   pkill -USR1 -x sxhkd; bash ~/.config/bspwm/bspwmrc
-# ctrl + mod5 + shift + l
-#   bash ~/Scripts/rofi-shutdown.sh
   
-# ctrl + q
-#   bspc node -c
-# ctrl + Tab
-#   rofi -show window -show-icons
-# ctrl + space
-#   rofi -show combi -combi-modi drun,run -show-icons
 # ctrl + shift + 3
 #   gnome-screenshot
 # ctrl + shift + 4
 #   gnome-screenshot -a
-# XF86LaunchA
-#   bash ~/Scripts/rofi-workspaces.sh
-# XF86LaunchB
-#   rofi -show combi -combi-modi drun,run -show-icons
 
 # Print info that execution finished
 echo "==> Pop!_Shell and Gnome keybindings finished."
