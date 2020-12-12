@@ -55,3 +55,4 @@ yabai -m rule --add app="^(GIMP.*)$" title!="^(GNU Image Manipulation Program|.*
 yabai -m rule --add app="^Transmission$" title!="^(Transmission)$" manage=off;
 yabai -m rule --add app="^balenaEtcher$" manage=off;
 yabai -m rule --add app="^Docker$" title="^Software Update$" manage=off;
+yabai -m rule --add app="^(PrinterProxy|Samsung C43x Series.*)$" manage=off;
