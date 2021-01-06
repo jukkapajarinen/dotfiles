@@ -63,7 +63,7 @@
   "scss.validate": false,
   "terminal.integrated.shell.linux": "bash",
   "terminal.integrated.shell.osx": "bash",
-  "workbench.colorTheme": "Dracula At Night",
+  "workbench.colorTheme": "GitHub Dark",
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#ff79c6",
     "terminalCursor.foreground": "#ff79c6"
