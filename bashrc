@@ -22,3 +22,6 @@ ls /usr/local/etc/profile.d/bash_completion.sh &> /dev/null && source /usr/local
 # Source nvm related scripts
 ls "$NVM_DIR/nvm.sh" &> /dev/null && source "$NVM_DIR/nvm.sh";
 ls "$NVM_DIR/bash_completion" &> /dev/null && source "$NVM_DIR/bash_completion";
+
+# Terraform auto-complete
+complete -C /usr/local/bin/terraform terraform
