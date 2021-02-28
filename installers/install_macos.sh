@@ -47,7 +47,7 @@ $ln $scriptDir/bashrc $homeDir/.bashrc;
 $ln $scriptDir/bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/bash_aliases $homeDir/.bash_aliases;
 $ln $scriptDir/bash_env $homeDir/.bash_env;
-$ln $scriptDir/bash_theme $homeDir/.bash_theme;
+$ln $scriptDir/starship.toml $homeDir/.config/starship.toml;
 $ln $scriptDir/gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/gitexcludes $homeDir/.gitexcludes;
 $ln $scriptDir/spacevim $homeDir/.SpaceVim.d/init.toml;

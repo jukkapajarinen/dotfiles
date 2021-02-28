@@ -1,0 +1,46 @@
+# ##############################################################################
+# Starship configurations
+# ##############################################################################
+
+format = """
+$username$directory$git_branch$git_status$git_state$package$cmd_duration
+[❯](blue bold) """
+scan_timeout = 10
+add_newline = false
+
+[username]
+style_user = "purple bold"
+style_root = "bg:purple fg:black bold"
+format = "[$user]($style) in "
+show_always = true
+
+[directory]
+style_user = "blue bold"
+read_only_style = "blue bold"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncate_to_repo = true
+
+[git_branch]
+style = "154 bold"
+format = "on [$symbol$branch]($style) "
+symbol = " "
+
+[git_status]
+style = "red bold"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+
+[git_state]
+style = "203 bold"
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+
+[package]
+style = "208 bold"
+format = "is [$symbol$version]($style) "
+symbol = "📦 "
+display_private = true
+
+[cmd_duration]
+style = "yellow bold"
+format = "took [$duration]($style) "
+show_milliseconds = true
+min_time = 1
