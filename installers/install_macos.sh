@@ -51,6 +51,7 @@ $ln $scriptDir/starship.toml $homeDir/.config/starship.toml;
 $ln $scriptDir/gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/gitexcludes $homeDir/.gitexcludes;
 $ln $scriptDir/spacevim $homeDir/.SpaceVim.d/init.toml;
+$ln $scriptDir/mostrc $homeDir/.mostrc;
 $ln $scriptDir/nanorc $homeDir/.nanorc;
 $ln $scriptDir/yabairc $homeDir/.yabairc;
 $ln $scriptDir/skhdrc $homeDir/.skhdrc;
