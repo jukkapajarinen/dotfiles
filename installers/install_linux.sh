@@ -59,7 +59,7 @@ $ln $scriptDir/bash_theme $homeDir/.bash_theme;
 $ln $scriptDir/Xresources $homeDir/.Xresources;
 $ln $scriptDir/gitconfig $homeDir/.gitconfig;
 $ln $scriptDir/gitexcludes $homeDir/.gitexcludes;
-$ln $scriptDir/spacevim $homeDir/.SpaceVim.d/init.toml;
+$ln $scriptDir/spacevim.toml $homeDir/.SpaceVim.d/init.toml;
 $ln $scriptDir/nanorc $homeDir/.config/nano/nanorc;
 $ln $scriptDir/vscode_settings.json $homeDir/.config/Code/User/settings.json;
 $ln $scriptDir/vscode_keybindings.json $homeDir/.config/Code/User/keybindings.json;
