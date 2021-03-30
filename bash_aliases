@@ -18,6 +18,7 @@ alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); 
 alias dockerpoop2='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
 alias gl='git log --name-status --graph';
 alias gs='git status';
+alias ga='git add . && git status';
 alias gitIgnore='git update-index --assume-unchanged';
 alias gitUnignore='git update-index --no-assume-unchanged';
 alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
