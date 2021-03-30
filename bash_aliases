@@ -22,6 +22,7 @@ alias gitIgnore='git update-index --assume-unchanged';
 alias gitUnignore='git update-index --no-assume-unchanged';
 alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
+alias k='kubectl'
 
 # OS specific aliases
 [[ "$macos" == "true" ]] && alias ls='ls -G'
