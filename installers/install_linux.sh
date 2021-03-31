@@ -66,6 +66,7 @@ $ln $scriptDir/vscode_keybindings.json $homeDir/.config/Code/User/keybindings.js
 $ln $scriptDir/vscode_extensions.lst $homeDir/.config/Code/User/extensions.lst;
 $ln $scriptDir/kitty.conf $homeDir/.config/kitty/kitty.conf;
 $ln $scriptDir/pop-shell_settings.json $homeDir/.config/pop-shell/config.json;
+$ln $scriptDir/qmk_keymap.json $homeDir/.qmk_keymap.json;
 
 # Linux create system symlinks
 echo "==> Install system configuration files.";
