@@ -1,0 +1,64 @@
+# ##############################################################################
+# Sxhkd setup keybindings
+# ##############################################################################
+
+ctrl + mod5 + shift + Return
+  kitty
+
+ctrl + mod5 + shift + Left
+  bspc node -s west
+ctrl + mod5 + shift + Down
+  bspc node -s south
+ctrl + mod5 + shift + Up
+  bspc node -s north
+ctrl + mod5 + shift + Right
+  bspc node -s east
+
+ctrl + mod5 + shift + 1
+  id=$(bspc query -N -n); bspc node -d 1; bspc node -f ${id}
+ctrl + mod5 + shift + 2
+  id=$(bspc query -N -n); bspc node -d 2; bspc node -f ${id}
+ctrl + mod5 + shift + 3
+  id=$(bspc query -N -n); bspc node -d 3; bspc node -f ${id}
+ctrl + mod5 + shift + 4
+  id=$(bspc query -N -n); bspc node -d 4; bspc node -f ${id}
+ctrl + mod5 + shift + 5
+  id=$(bspc query -N -n); bspc node -d 5; bspc node -f ${id}
+ctrl + mod5 + shift + 6
+  id=$(bspc query -N -n); bspc node -d 6; bspc node -f ${id}
+ctrl + mod5 + shift + 7
+  id=$(bspc query -N -n); bspc node -d 7; bspc node -f ${id}
+ctrl + mod5 + shift + 8
+  id=$(bspc query -N -n); bspc node -d 8; bspc node -f ${id}
+ctrl + mod5 + shift + 9
+  id=$(bspc query -N -n); bspc node -d 9; bspc node -f ${id}
+ctrl + mod5 + shift + 0
+  id=$(bspc query -N -n); bspc node -d 0; bspc node -f ${id}
+
+ctrl + mod5 + shift + f
+  bspc node -t ~fullscreen
+ctrl + mod5 + shift + space
+  bspc node -t ~floating
+ctrl + mod5 + shift + r
+  pkill -USR1 -x sxhkd; bash ~/.config/bspwm/bspwmrc
+ctrl + mod5 + shift + l
+  bash ~/Scripts/rofi-shutdown.sh
+
+# ##############################################################################
+# Sxhkd setup MacOS style keybindings
+# ##############################################################################
+
+ctrl + q
+  bspc node -c
+ctrl + Tab
+  rofi -show window -show-icons
+ctrl + space
+  rofi -show combi -combi-modi drun,run -show-icons
+ctrl + shift + 3
+  gnome-screenshot
+ctrl + shift + 4
+  gnome-screenshot -a
+XF86LaunchA
+  bash ~/Scripts/rofi-workspaces.sh
+XF86LaunchB
+  rofi -show combi -combi-modi drun,run -show-icons
