@@ -1,13 +1,18 @@
 # Arch Linux Base Installation :mage:
  
-My usual setup for Arch Linux. Assuming EFI system and timezone in Finland. 
-Locale en_IE is for Ireland, great for Non-UK Europeans using English.
+My usual setup for Arch Linux. Assuming EFI system, `/dev/sda` and timezone in Finland. 
+Locale en_IE is for Ireland, great for Non-UK Europeans using English. 
 Credits to Arch Linux Wiki and Distrotube!
  
 ## Setup for live env
 ```
 loadkeys fi;
 timedatectl set-ntp true;
+iwctl; #this is a pre-installed wifi-tool. (skip to next section, if ethernet)
+#[iwd] device list; 
+#[iwd] station <wlan0> scan; 
+#[iwd] station <wlan0> get-networks;
+#[iwd] station <wlan0> connect <SSID>;
 ```
  
 ## Partition and format disk(s)
@@ -30,7 +35,7 @@ arch-chroot /mnt;
 ```
 ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime;
 hwclock --systohc;
-pacman -S nvim;
+pacman -S neovim;
 nvim /etc/locale.gen; #(en_IE.UTF-8 & fi_FI.UTF-8)
 locale-gen;
 nvim /etc/locale.conf; #(LANG=en_IE.UTF-8)
@@ -46,22 +51,22 @@ useradd -m jukkapajarinen;
 passwd jukkapajarinen;
 usermod -aG wheel,audio,video,optical,storage jukkapajarinen;
 pacman -S sudo;
-EDITOR=nvim visudo (%wheel ALL=(ALL) ALL);
+EDITOR=nvim visudo; #(%wheel ALL=(ALL) ALL)
 ```
  
 ## Install EFI bootloader
 ```
-pacman -S grub efibootmgr dosfstools op-prober mtools;
-mkdir /boot/EFI;
-mount /dev/sda1 /boot/EFI;
-grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck;
+pacman -S grub efibootmgr dosfstools os-prober mtools;
+mount /dev/sda1 /mnt;
+grub-install --target=x86_64-efi --bootloader-id=grub_uefi --efi-directory=/mnt; #--recheck #--removable
 grub-mkconfig -o /boot/grub/grub.cfg;
 ```
  
 ## Ensure networking
 ```
 pacman -S networkmanager;
-systemctl enable networkmanager;
+systemctl enable NetworkManager;
 ```
  
-That's it. Now you should have a working Arch system and you can turn it into something shiny! :sparkles:
+Reboot, and that's it. If you had wifi, use `nmcli` to connect to your wifi.  
+Now you'll be ready to turn it into something shiny! :sparkles:
