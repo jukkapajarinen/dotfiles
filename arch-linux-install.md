@@ -58,7 +58,7 @@ EDITOR=nvim visudo; #(%wheel ALL=(ALL) ALL)
 ```
 pacman -S grub efibootmgr dosfstools os-prober mtools;
 mount /dev/sda1 /mnt;
-grub-install --target=x86_64-efi --bootloader-id=grub_uefi --efi-directory=/mnt; #--recheck #--removable
+grub-install --target=x86_64-efi --bootloader-id=grub_uefi --efi-directory=/mnt --recheck --removable;
 grub-mkconfig -o /boot/grub/grub.cfg;
 ```
  
