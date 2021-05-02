@@ -15,7 +15,7 @@ format = "[$user]($style) in "
 show_always = true
 
 [directory]
-style_user = "blue bold"
+style = "blue bold"
 read_only_style = "blue bold"
 format = "[$path]($style)[$read_only]($read_only_style) "
 truncate_to_repo = true

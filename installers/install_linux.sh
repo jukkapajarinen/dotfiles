@@ -58,6 +58,7 @@ $ln $scriptDir/bashrc $homeDir/.bashrc;
 $ln $scriptDir/bash_profile $homeDir/.bash_profile;
 $ln $scriptDir/bash_aliases $homeDir/.bash_aliases;
 $ln $scriptDir/bash_env $homeDir/.bash_env;
+$ln $scriptDir/starship.toml $homeDir/.config/starship.toml;
 $ln $scriptDir/bash_theme $homeDir/.bash_theme;
 $ln $scriptDir/Xresources $homeDir/.Xresources;
 $ln $scriptDir/gitconfig $homeDir/.gitconfig;
@@ -75,11 +76,11 @@ $ln $scriptDir/pop-shell_settings.json $homeDir/.config/pop-shell/config.json;
 $ln $scriptDir/qmk_keymap.json $homeDir/.qmk_keymap.json;
 
 # Linux create system symlinks
-echo "==> Install system configuration files.";
-sudo $ln /usr/bin/firefox /etc/alternatives/x-www-browser;
-sudo $ln /usr/bin/bspwm /etc/alternatives/x-window-manager;
-sudo $ln /usr/bin/kitty /etc/alternatives/x-terminal-emulator;
-sudo $ln /usr/share/nano /usr/local/share/nano;
+# echo "==> Install system configuration files.";
+# sudo $ln /usr/bin/firefox /etc/alternatives/x-www-browser;
+# sudo $ln /usr/bin/bspwm /etc/alternatives/x-window-manager;
+# sudo $ln /usr/bin/kitty /etc/alternatives/x-terminal-emulator;
+# sudo $ln /usr/share/nano /usr/local/share/nano;
 
 # Print info that execution finished
 echo "==> Installation finished."
