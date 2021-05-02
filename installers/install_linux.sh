@@ -72,15 +72,7 @@ $ln $scriptDir/vscode_settings.json $homeDir/.config/Code/User/settings.json;
 $ln $scriptDir/vscode_keybindings.json $homeDir/.config/Code/User/keybindings.json;
 $ln $scriptDir/vscode_extensions.lst $homeDir/.config/Code/User/extensions.lst;
 $ln $scriptDir/kitty.conf $homeDir/.config/kitty/kitty.conf;
-$ln $scriptDir/pop-shell_settings.json $homeDir/.config/pop-shell/config.json;
 $ln $scriptDir/qmk_keymap.json $homeDir/.qmk_keymap.json;
-
-# Linux create system symlinks
-# echo "==> Install system configuration files.";
-# sudo $ln /usr/bin/firefox /etc/alternatives/x-www-browser;
-# sudo $ln /usr/bin/bspwm /etc/alternatives/x-window-manager;
-# sudo $ln /usr/bin/kitty /etc/alternatives/x-terminal-emulator;
-# sudo $ln /usr/share/nano /usr/local/share/nano;
 
 # Print info that execution finished
 echo "==> Installation finished."
