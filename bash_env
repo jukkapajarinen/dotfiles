@@ -23,4 +23,5 @@ export MANPAGER="most";
 [[ "$macos" == "true" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
 
 # Linux specific variables
+[[ "$linux" == "true" ]] && export GTK_THEME=Adwaita:dark
 [[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=qt5ct

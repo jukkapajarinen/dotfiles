@@ -39,6 +39,7 @@ $mkdir "$homeDir/.config/dunst"/
 $mkdir "$homeDir/.config/kitty/";
 $mkdir "$homeDir/.config/nano/";
 $mkdir "$homeDir/.config/Code/User/";
+$mkdir "$homeDir/.config/gtk-3.0/";
 
 # Linux create custom script symlinks
 echo "==> Install user script files.";
@@ -47,7 +48,6 @@ $ln "$scriptDir/scripts/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh
 $ln "$scriptDir/scripts/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
 $ln "$scriptDir/scripts/x-display-settings.sh" "$homeDir/Scripts/x-display-settings.sh";
 $ln "$scriptDir/scripts/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
-$ln "$scriptDir/scripts/pop-shell-keybindings.sh" "$homeDir/Scripts/pop-shell-keybindings.sh";
 
 # Linux create dotfile symlinks
 echo "==> Install user configuration files.";
@@ -70,6 +70,7 @@ $ln "$scriptDir/vscode_keybindings.json" "$homeDir/.config/Code/User/keybindings
 $ln "$scriptDir/vscode_extensions.lst" "$homeDir/.config/Code/User/extensions.lst";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
+$ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
 
 # Print info that execution finished
 echo "==> Installation finished."
