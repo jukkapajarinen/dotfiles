@@ -17,8 +17,10 @@ export NVM_DIR="$HOME/.nvm";
 export PAGER="most";
 export MANPAGER="most";
 
-# OS specific variables
+# MacOS specific variables
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
 [[ "$macos" == "true" ]] && export GEM_HOME="$HOME/.gem";
 [[ "$macos" == "true" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
+
+# Linux specific variables
 [[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=qt5ct

@@ -17,7 +17,7 @@ options=(
   "Workspace 9"
   "Workspace 0"
 );
-dmenuOptions="${options[@]/#/\\n}";
+dmenuOptions="${options[*]/#/\\n}";
 dmenuOptions="${dmenuOptions/\\n/}";
 dmenuOptions="${dmenuOptions// \\n/\\n}";
 
@@ -25,7 +25,7 @@ dmenuOptions="${dmenuOptions// \\n/\\n}";
 rofi_action=$(echo -e "${dmenuOptions[@]}" | rofi -i -dmenu -selected-row 0);
 
 # Handle all actions at once
-workspaces=($(bspc query --desktops));
+workspaces=("$(bspc query --desktops)");
 for idx in "${!options[@]}"; do
   if [[ "${rofi_action}" == "${options[${idx}]}" ]]; then
     bspc desktop -f "${workspaces[${idx}]}";

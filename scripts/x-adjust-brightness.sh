@@ -31,7 +31,7 @@ if [[ $display == "all" ]]; then
   [[ $nextBrightness == "1.6" ]] && nextBrightness="1.5";
   [[ $nextBrightness == "0.0" ]] && nextBrightness="0.1";
   for display in $availableDisplays
-  do xrandr --output $display --brightness $nextBrightness; done
+  do xrandr --output "$display" --brightness $nextBrightness; done
 
 # Increase or decrease brightness for requested display
 else
@@ -40,7 +40,7 @@ else
   [[ $direction == "reset" ]] && nextBrightness="1.0";
   [[ $nextBrightness == "1.6" ]] && nextBrightness="1.5";
   [[ $nextBrightness == "0.0" ]] && nextBrightness="0.1";
-  xrandr --output $display --brightness $nextBrightness;
+  xrandr --output "$display" --brightness $nextBrightness;
 fi
 
 # Inform user that the script ended

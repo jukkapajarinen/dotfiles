@@ -14,7 +14,7 @@ alias diff='diff --color=auto';
 alias dmesg='dmesg --color=auto';
 alias mv='mv -i';
 alias ls='exa';
-alias ll='exa -lah';
+alias ll='exa -la';
 alias dockerpoop='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
 alias dockerpoop2='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi -f $(docker images -q); docker network rm $(docker network ls -q); docker volume rm $(docker volume ls -q);';
 alias gl='git log --name-status --graph';
@@ -26,7 +26,7 @@ alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
 alias k='kubectl'
 
-# OS specific aliases
+# MacOS specific aliases
 [[ "$macos" == "true" ]] && alias ls='ls -G'
 [[ "$macos" == "true" ]] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';
 [[ "$macos" == "true" ]] && alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app';
@@ -37,6 +37,8 @@ alias k='kubectl'
 [[ "$macos" == "true" ]] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
 [[ "$macos" == "true" ]] && alias vscodeExtExport='code --list-extensions > ~/Library/Application\ Support/Code/User/extensions.lst';
 [[ "$macos" == "true" ]] && alias vscodeExtImport='cat ~/Library/Application\ Support/Code/User/extensions.lst | xargs -L 1 code --install-extension';
+
+# Linux specific aliases
 [[ "$linux" == "true" ]] && alias ls='ls --color=auto'
 [[ "$linux" == "true" ]] && alias open='xdg-open';
 [[ "$linux" == "true" ]] && alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";
