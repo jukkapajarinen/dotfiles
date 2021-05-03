@@ -4,7 +4,8 @@
 # Linux installation script for Jukka's dotfiles
 # ##############################################################################
 
-# Declare other variables
+# Declare common variables
+arrow="\033[32m==>\033[0m";
 bashDir="$(dirname "${BASH_SOURCE[0]}")";
 scriptDir="$(cd "${bashDir//installers/}" >/dev/null 2>&1 && pwd)";
 homeDir="/home/$USER";
@@ -13,24 +14,24 @@ ln="ln -isv"; #cp="cp -iv --remove-destination";
 os="Linux";
 
 # Print the directory paths
-echo "Welcome ${USER}, to Jukka's dotfiles installation script.";
-echo "- Operating system: $os";
-echo "- Source directory: $scriptDir";
-echo "- Target directory: $homeDir";
+echo -e "\033[1mWelcome ${USER}, to Jukka's dotfiles installation script.\033[0m";
+echo -e "- Operating system: $os";
+echo -e "- Source directory: $scriptDir";
+echo -e "- Target directory: $homeDir";
 
 # Read possible --force or -f from the cli args
 if [[ $1 == "--force" ]] || [[ $2 == "--force" ]] || [[ $1 == "-f" ]] || [[ $2 == "-f" ]]; then
-  read -rp "==> Are you sure to force installation? (files will be overwritten) [y/N] " yn;
+  read -rp "$(echo -e "$arrow" Are you sure to force installation? \(files will be overwritten\) [y/N]) " yn;
   if [[ $yn =~ [yY](es)* ]]; then
     ln="ln -svf"; # cp="cp -vf --remove-destination";
   else
-    echo "==> Installation was not started."
+    echo -e "$arrow Installation was not started."
     exit;
   fi
 fi
 
 # Linux create directories
-echo "==> Create possibly missing directories.";
+echo -e "$arrow Create possibly missing directories.";
 $mkdir "$homeDir/Scripts/";
 $mkdir "$homeDir/.SpaceVim.d/";
 $mkdir "$homeDir/.config/bspwm/";
@@ -42,7 +43,7 @@ $mkdir "$homeDir/.config/Code/User/";
 $mkdir "$homeDir/.config/gtk-3.0/";
 
 # Linux create custom script symlinks
-echo "==> Install user script files.";
+echo -e "$arrow Install user script files.";
 $ln "$scriptDir/scripts/rofi-shutdown.sh" "$homeDir/Scripts/rofi-shutdown.sh";
 $ln "$scriptDir/scripts/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh";
 $ln "$scriptDir/scripts/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
@@ -50,7 +51,7 @@ $ln "$scriptDir/scripts/x-display-settings.sh" "$homeDir/Scripts/x-display-setti
 $ln "$scriptDir/scripts/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
 
 # Linux create dotfile symlinks
-echo "==> Install user configuration files.";
+echo -e "$arrow Install user configuration files.";
 $ln "$scriptDir/bashrc" "$homeDir/.bashrc";
 $ln "$scriptDir/bash_profile" "$homeDir/.bash_profile";
 $ln "$scriptDir/bash_aliases" "$homeDir/.bash_aliases";
@@ -73,4 +74,4 @@ $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
 
 # Print info that execution finished
-echo "==> Installation finished."
+echo -e "$arrow Installation finished."
