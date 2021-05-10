@@ -67,5 +67,6 @@
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#ff79c6",
     "terminalCursor.foreground": "#ff79c6"
-  }
+  },
+  "extensions.ignoreRecommendations": true
 }
