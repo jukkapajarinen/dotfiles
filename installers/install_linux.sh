@@ -23,7 +23,7 @@ echo -e "- Target directory: $homeDir";
 if [[ $1 == "--force" ]] || [[ $2 == "--force" ]] || [[ $1 == "-f" ]] || [[ $2 == "-f" ]]; then
   read -rp "$(echo -e "$arrow" Are you sure to force installation? \(files will be overwritten\) [y/N]) " yn;
   if [[ $yn =~ [yY](es)* ]]; then
-    ln="ln -svf"; # cp="cp -vf --remove-destination";
+    ln="ln -svf"; #cp="cp -vf --remove-destination";
   else
     echo -e "$arrow Installation was not started."
     exit;
@@ -49,6 +49,8 @@ $ln "$scriptDir/scripts/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh
 $ln "$scriptDir/scripts/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
 $ln "$scriptDir/scripts/x-display-settings.sh" "$homeDir/Scripts/x-display-settings.sh";
 $ln "$scriptDir/scripts/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
+$ln "$scriptDir/scripts/gnome-setup.sh" "$homeDir/Scripts/gnome-setup.sh";
+$ln "$scriptDir/scripts/gnome-startup.sh" "$homeDir/Scripts/gnome-startup.sh";
 
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";

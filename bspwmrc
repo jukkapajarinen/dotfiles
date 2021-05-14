@@ -4,14 +4,7 @@
 # bspwm setup environment
 # ##############################################################################
 
-export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME";
 xrdb ~/.Xresources;
-xsetroot -cursor_name left_ptr;
-
-# ##############################################################################
-# bspwm monitor workspace setup
-# ##############################################################################
-
 hdmiConnected=$(xrandr -q | grep "HDMI-2 connected" &> /dev/null; echo $?);
 if [[ "$hdmiConnected" == "0" ]]; then
   bspc monitor eDP-1 -d 1 2 3 4 5;
@@ -25,41 +18,8 @@ fi
 # ##############################################################################
 
 pgrep -f sxhkd || sxhkd &
-pgrep -f gsd-a11y-settings || /usr/libexec/gsd-a11y-settings &
-pgrep -f gsd-backlight-helper || /usr/libexec/gsd-backlight-helper &
-pgrep -f gsd-color || /usr/libexec/gsd-color &
-pgrep -f gsd-datetime || /usr/libexec/gsd-datetime &
-pgrep -f gsd-disk-utility-notify || /usr/libexec/gsd-disk-utility-notify &
-pgrep -f gsd-housekeeping || /usr/libexec/gsd-housekeeping &
-pgrep -f gsd-keyboard || /usr/libexec/gsd-keyboard &
-pgrep -f gsd-media-keys || /usr/libexec/gsd-media-keys &
-pgrep -f gsd-power || /usr/libexec/gsd-power &
-pgrep -f gsd-printer || /usr/libexec/gsd-printer &
-pgrep -f gsd-print-notifications || /usr/libexec/gsd-print-notifications &
-pgrep -f gsd-rfkill || /usr/libexec/gsd-rfkill &
-pgrep -f gsd-screensaver-proxy || /usr/libexec/gsd-screensaver-proxy &
-pgrep -f gsd-sharing || /usr/libexec/gsd-sharing &
-pgrep -f gsd-smartcard || /usr/libexec/gsd-smartcard &
-pgrep -f gsd-sound || /usr/libexec/gsd-sound &
-pgrep -f gsd-usb-protection || /usr/libexec/gsd-usb-protection &
-pgrep -f gsd-wacom || /usr/libexec/gsd-wacom &
-pgrep -f gsd-wacom-oled-helper || /usr/libexec/gsd-wacom-oled-helper &
-pgrep -f gsd-wwan || /usr/libexec/gsd-wwan &
-pgrep -f gsd-xsettings || /usr/libexec/gsd-xsettings &
-pgrep -f gnome-flashback || gnome-flashback &
-
-systemctl --user is-active indicators-pre.target || systemctl --user start indicators-pre.target;
-systemctl --user is-active indicator-application.service || systemctl --user start indicator-application.service;
-systemctl --user is-active indicator-bluetooth.service || systemctl --user start indicator-bluetooth.service;
-systemctl --user is-active indicator-datetime.service || systemctl --user start indicator-datetime.service;
-systemctl --user is-active indicator-keyboard.service || systemctl --user start indicator-keyboard.service;
-systemctl --user is-active indicator-messages.service || systemctl --user start indicator-messages.service;
-systemctl --user is-active indicator-power.service || systemctl --user start indicator-power.service;
-systemctl --user is-active indicator-printers.service || systemctl --user start indicator-printers.service;
-systemctl --user is-active indicator-session.service || systemctl --user start indicator-session.service;
-systemctl --user is-active indicator-sound.service || systemctl --user start indicator-sound.service;
-pgrep -f nm-applet || nm-applet &
-pgrep -f gnome-panel || gnome-panel &
+source ~/Scripts/gnome-startup.sh;
+source ~/Scripts/gnome-setup.sh;
 
 # ##############################################################################
 # bspwm setup configurations
