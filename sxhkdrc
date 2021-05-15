@@ -40,7 +40,7 @@ super + ctrl + alt + f
 super + ctrl + alt + space
   bspc node -t ~floating
 super + ctrl + alt + r
-  killall sxhkd; bash $HOME/.config/bspwm/bspwmrc
+  killall sxhkd; killall polybar; bash $HOME/.config/bspwm/bspwmrc
 super + ctrl + alt + l
   bash $HOME/Scripts/rofi-shutdown.sh
 

@@ -21,9 +21,9 @@ fi
 
 bspc config initial_polarity second_child;
 bspc config split_ratio 0.50
-bspc config top_padding 32;
-bspc config bottom_padding 8;
-bspc config window_gap 16;
+bspc config top_padding 28;
+bspc config bottom_padding 0;
+bspc config window_gap 20;
 bspc config right_padding 0;
 bspc config left_padding 0;
 bspc config border_width 2;
@@ -48,4 +48,5 @@ bspc rule -a "Gnome-calculator" state=floating;
 # ##############################################################################
 
 pgrep -f sxhkd || sxhkd &
+pgrep -f polybar || polybar mainbar &
 bash "$HOME/Scripts/gnome-startup.sh" &
