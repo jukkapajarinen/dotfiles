@@ -1,0 +1,19 @@
+/* ########################################################################### */
+/* Rofi setup configurations */
+/* ########################################################################### */
+
+configuration {
+	font: "Fira Code 10";
+	bw: 6;
+	padding: 12;
+	line-margin: 6;
+	hide-scrollbar: true;
+	color-normal: "#1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2";
+	color-urgent: "#1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2";
+	color-active: "#1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2";
+	color-window: "#1e1f29, #69558c, #1e1f29";
+	kb-mode-next: "Shift+Right";
+	kb-mode-previous: "Shift+Left";
+	kb-row-up: "Up,Control+Shift+Tab";
+	kb-row-down: "Down,Control+Tab";
+}

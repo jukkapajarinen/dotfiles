@@ -46,19 +46,7 @@ xterm*translations: #override \n\
   Ctrl Shift <Key>C: copy-selection(CLIPBOARD)
 
 ! ##############################################################################
-! Rofi setup configurations
+! Miscellaneous configurations
 ! ##############################################################################
 
-rofi.hide-scrollbar: true
-rofi.font: Fira Code 10
-rofi.color-normal: #1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2
-rofi.color-urgent: #1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2
-rofi.color-active: #1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2
-rofi.color-window: #1e1f29, #69558c, #1e1f29
-rofi.bw: 6
-rofi.line-margin: 6
-rofi.padding: 12
-rofi.kb-mode-next: Shift+Right
-rofi.kb-mode-previous: Shift+Left
-rofi.kb-row-down: Down,Control+Tab
-rofi.kb-row-up: Up,Control+Shift+Tab
+Xcursor.size: 16

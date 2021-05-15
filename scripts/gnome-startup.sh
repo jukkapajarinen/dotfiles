@@ -8,7 +8,7 @@ for ((i = 0; i < 10; i++)) do
   pgrep -f gnome-flashback || /usr/bin/gnome-flashback & #OK
   (("$(pgrep -fc gsd-a11y-settings)" > 1)) || /usr/lib/gsd-a11y-settings &
   (("$(pgrep -fc backlight-helper)" > 1)) || /usr/lib/gsd-backlight-helper &
-  (("$(pgrep -fc gsd-color)" > 1)) || /usr/lib/gsd-color &
+  (("$(pgrep -fc gsd-color)" > 1)) || /usr/lib/gsd-color & #OK
   (("$(pgrep -fc gsd-datetime)" > 1)) || /usr/lib/gsd-datetime &
   pgrep -f gsd-disk-utility-notify || /usr/lib/gsd-disk-utility-notify & #OK
   (("$(pgrep -fc gsd-housekeeping)" > 1)) || /usr/lib/gsd-housekeeping &
@@ -17,7 +17,7 @@ for ((i = 0; i < 10; i++)) do
   (("$(pgrep -fc gsd-power)" > 1)) || /usr/lib/gsd-power &
   (("$(pgrep -fc gsd-printer)" > 1)) || /usr/lib/gsd-printer &
   (("$(pgrep -fc gsd-print-notifications)" > 1)) || /usr/lib/gsd-print-notifications &
-  (("$(pgrep -fc gsd-rfkill)" > 1)) || /usr/lib/gsd-rfkill &
+  (("$(pgrep -fc gsd-rfkill)" > 1)) || /usr/lib/gsd-rfkill & #OK
   (("$(pgrep -fc gsd-screensaver-proxy)" > 1)) || /usr/lib/gsd-screensaver-proxy &
   (("$(pgrep -fc gsd-sharing)" > 1)) || /usr/lib/gsd-sharing &
   (("$(pgrep -fc gsd-smartcard)" > 1)) || /usr/lib/gsd-smartcard &

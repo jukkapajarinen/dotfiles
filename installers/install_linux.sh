@@ -41,6 +41,7 @@ $mkdir "$homeDir/.config/kitty/";
 $mkdir "$homeDir/.config/nano/";
 $mkdir "$homeDir/.config/Code/User/";
 $mkdir "$homeDir/.config/gtk-3.0/";
+$mkdir "$homeDir/.config/rofi/";
 
 # Linux create custom script symlinks
 echo -e "$arrow Install user script files.";
@@ -74,6 +75,7 @@ $ln "$scriptDir/vscode_extensions.lst" "$homeDir/.config/Code/User/extensions.ls
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
+$ln "$scriptDir/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."
