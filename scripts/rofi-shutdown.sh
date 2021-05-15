@@ -20,7 +20,7 @@ elif [[ $rofi_action == "Reboot" ]]; then
 
 # Handle Lock Screen action
 elif [[ $rofi_action == "Lock Screen" ]]; then
-  gnome-screensaver-command -l;
+  xdg-screensaver lock;
 
 # Handle Logout action
 elif [[ $rofi_action == "Logout" ]]; then
