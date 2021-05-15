@@ -4,7 +4,8 @@
 # bspwm setup environment
 # ##############################################################################
 
-xrdb ~/.Xresources;
+xrdb "$HOME/.Xresources";
+bash "$HOME/Scripts/gnome-setup.sh";
 hdmiConnected=$(xrandr -q | grep "HDMI-2 connected" &> /dev/null; echo $?);
 if [[ "$hdmiConnected" == "0" ]]; then
   bspc monitor eDP-1 -d 1 2 3 4 5;
@@ -12,14 +13,6 @@ if [[ "$hdmiConnected" == "0" ]]; then
 else
   bspc monitor -d 1 2 3 4 5 6 7 8 9 0;
 fi
-
-# ##############################################################################
-# bspwm auto-start applications
-# ##############################################################################
-
-pgrep -f sxhkd || sxhkd &
-source ~/Scripts/gnome-startup.sh;
-source ~/Scripts/gnome-setup.sh;
 
 # ##############################################################################
 # bspwm setup configurations
@@ -48,3 +41,10 @@ bspc config pointer_follows_focus false;
 bspc rule -a "Gimp*" state=floating;
 bspc rule -a "Onboard" state=floating;
 bspc rule -a "Gnome-calculator" state=floating;
+
+# ##############################################################################
+# bspwm auto-start applications
+# ##############################################################################
+
+pgrep -f sxhkd || sxhkd &
+bash "$HOME/Scripts/gnome-startup.sh" &
