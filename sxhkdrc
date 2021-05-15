@@ -40,9 +40,9 @@ super + ctrl + alt + f
 super + ctrl + alt + space
   bspc node -t ~floating
 super + ctrl + alt + r
-  pkill -USR1 -x sxhkd; bash ~/.config/bspwm/bspwmrc
+  killall sxhkd; bash $HOME/.config/bspwm/bspwmrc
 super + ctrl + alt + l
-  bash ~/Scripts/rofi-shutdown.sh
+  bash $HOME/Scripts/rofi-shutdown.sh
 
 # ##############################################################################
 # Sxhkd setup MacOS style keybindings
@@ -59,6 +59,6 @@ super + shift + 3
 super + shift + 4
   gnome-screenshot -a
 XF86LaunchA
-  bash ~/Scripts/rofi-workspaces.sh
+  bash $HOME/Scripts/rofi-workspaces.sh
 XF86LaunchB
   rofi -show combi -combi-modi drun,run -show-icons

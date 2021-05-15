@@ -27,5 +27,5 @@ for ((i = 0; i < 10; i++)) do
   (("$(pgrep -fc gsd-wacom-oled-helper)" > 1)) || /usr/lib/gsd-wacom-oled-helper &
   pgrep -f gsd-wwan || /usr/lib/gsd-wwan & #OK
   pgrep -f gsd-xsettings || /usr/lib/gsd-xsettings & #OK
-  sleep .1
+  sleep .1;
 done

@@ -36,7 +36,6 @@ $mkdir "$homeDir/Scripts/";
 $mkdir "$homeDir/.SpaceVim.d/";
 $mkdir "$homeDir/.config/bspwm/";
 $mkdir "$homeDir/.config/sxhkd/";
-$mkdir "$homeDir/.config/dunst"/
 $mkdir "$homeDir/.config/kitty/";
 $mkdir "$homeDir/.config/nano/";
 $mkdir "$homeDir/.config/Code/User/";
@@ -68,7 +67,6 @@ $ln "$scriptDir/spacevim.toml" "$homeDir/.SpaceVim.d/init.toml";
 $ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
 $ln "$scriptDir/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
 $ln "$scriptDir/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
-$ln "$scriptDir/dunstrc" "$homeDir/.config/dunst/dunstrc";
 $ln "$scriptDir/vscode_settings.json" "$homeDir/.config/Code/User/settings.json";
 $ln "$scriptDir/vscode_keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
 $ln "$scriptDir/vscode_extensions.lst" "$homeDir/.config/Code/User/extensions.lst";
