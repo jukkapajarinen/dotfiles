@@ -14,6 +14,6 @@ configuration {
 	color-window: "#1e1f29, #ffffff, #1e1f29";
 	kb-mode-next: "Shift+Right";
 	kb-mode-previous: "Shift+Left";
-	kb-row-up: "Up,Control+Shift+Tab";
-	kb-row-down: "Down,Control+Tab";
+	kb-row-up: "Up,Control+Shift+Tab,Alt+Shift+Tab";
+	kb-row-down: "Down,Control+Tab,Alt+Tab";
 }
