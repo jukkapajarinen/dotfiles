@@ -65,6 +65,7 @@ $ln "$scriptDir/Xresources" "$homeDir/.Xresources";
 $ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
 $ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
 $ln "$scriptDir/spacevim.toml" "$homeDir/.SpaceVim.d/init.toml";
+$ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
 $ln "$scriptDir/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
 $ln "$scriptDir/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
@@ -75,7 +76,7 @@ $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
 $ln "$scriptDir/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
-$ln "$scriptDir/polybar" "$homeDir/.config/polybar/config";
+$ln "$scriptDir/polybar.ini" "$homeDir/.config/polybar/config";
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."

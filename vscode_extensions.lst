@@ -14,9 +14,12 @@ kleber-swf.unity-code-snippets
 ms-azuretools.vscode-docker
 ms-dotnettools.csharp
 ms-python.python
+ms-python.vscode-pylance
+ms-toolsai.jupyter
 naumovs.color-highlight
 nemesarial.dust
 oderwat.indent-rainbow
+redhat.vscode-commons
 redhat.vscode-xml
 rmnl.theme-solarized-flat-dark
 stylelint.vscode-stylelint
