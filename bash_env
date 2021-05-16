@@ -14,7 +14,7 @@ export LANGUAGE="en_IE.UTF-8";
 export LC_ALL="en_IE.UTF-8";
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH";
 export NVM_DIR="$HOME/.nvm";
-export PAGER="most";
+export PAGER="less";
 export MANPAGER="most";
 
 # MacOS specific variables

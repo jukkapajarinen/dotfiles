@@ -9,6 +9,7 @@
 
 # Common aliases
 alias dotfiles='cd "${DOTFILES}"';
+alias less='less -R';
 alias grep='grep --color=auto';
 alias diff='diff --color=auto';
 alias dmesg='dmesg --color=auto';
