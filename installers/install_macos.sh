@@ -9,21 +9,29 @@ arrow="\033[32m==>\033[0m";
 bashDir="$(dirname "${BASH_SOURCE[0]}")";
 scriptDir="$(cd "${bashDir//installers/}" >/dev/null 2>&1 && pwd)";
 homeDir="/Users/$USER";
-mkdir="mkdir -vp";
-ln="ln -isv"; #cp="cp -iv --remove-destination";
 os="MacOS";
 
 # Print the directory paths
 echo -e "\033[1mWelcome ${USER}, to Jukka's dotfiles installation script.\033[0m";
-echo -e "- Operating system: $os";
-echo -e "- Source directory: $scriptDir";
-echo -e "- Target directory: $homeDir";
+echo -e "- Operating system: \033[32m$os\033[0m";
+echo -e "- Source directory: \033[34m$scriptDir\033[0m";
+echo -e "- Target directory: \033[31m$homeDir\033[0m";
 
 # Read possible --force or -f from the cli args
 if [[ $1 == "--force" ]] || [[ $2 == "--force" ]] || [[ $1 == "-f" ]] || [[ $2 == "-f" ]]; then
   read -rp "$(echo -e "$arrow" Are you sure to force installation? \(files will be overwritten\) [y/N]) " yn;
   if [[ $yn =~ [yY](es)* ]]; then
+    mkdir="mkdir -vp";
     ln="ln -svf"; #cp="cp -vf --remove-destination";
+  else
+    echo -e "$arrow Installation was not started."
+    exit;
+  fi
+else
+  read -rp "$(echo -e "$arrow" Are you sure to start installation? [y/N]) " yn;
+  if [[ $yn =~ [yY](es)* ]]; then
+    mkdir="mkdir -vp";
+    ln="ln -isv"; #cp="cp -iv --remove-destination";
   else
     echo -e "$arrow Installation was not started."
     exit;
