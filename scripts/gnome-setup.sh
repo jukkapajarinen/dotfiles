@@ -6,6 +6,7 @@
 
 gsettings set org.gnome.gnome-flashback desktop false; #default: true
 gsettings set org.gnome.gnome-flashback root-background true; #default: false
+gsettings set org.gnome.desktop.wm.preferences button-layout "close:appmenu"; #default: appmenu:close
 
 # ##############################################################################
 # Unset default gnome keybindings
