@@ -60,6 +60,7 @@ $ln "$scriptDir/scripts/x-display-settings.sh" "$homeDir/Scripts/x-display-setti
 $ln "$scriptDir/scripts/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
 $ln "$scriptDir/scripts/gnome-setup.sh" "$homeDir/Scripts/gnome-setup.sh";
 $ln "$scriptDir/scripts/gnome-startup.sh" "$homeDir/Scripts/gnome-startup.sh";
+$ln "$scriptDir/scripts/gnome-unset-keybindings.sh" "$homeDir/Scripts/gnome-unset-keybindings.sh";
 
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
