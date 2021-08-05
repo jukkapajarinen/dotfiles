@@ -58,9 +58,9 @@ $ln "$scriptDir/scripts/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh
 $ln "$scriptDir/scripts/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
 $ln "$scriptDir/scripts/x-display-settings.sh" "$homeDir/Scripts/x-display-settings.sh";
 $ln "$scriptDir/scripts/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
-$ln "$scriptDir/scripts/gnome-setup.sh" "$homeDir/Scripts/gnome-setup.sh";
-$ln "$scriptDir/scripts/gnome-startup.sh" "$homeDir/Scripts/gnome-startup.sh";
-$ln "$scriptDir/scripts/gnome-unset-keybindings.sh" "$homeDir/Scripts/gnome-unset-keybindings.sh";
+$ln "$scriptDir/scripts/gnome-settings-setup.sh" "$homeDir/Scripts/gnome-settings-setup.sh";
+$ln "$scriptDir/scripts/gnome-gsd-manual-startup.sh" "$homeDir/Scripts/gnome-gsd-manual-startup.sh";
+$ln "$scriptDir/scripts/gnome-unset-all-keybindings.sh" "$homeDir/Scripts/gnome-unset-all-keybindings.sh";
 
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
@@ -76,16 +76,16 @@ $ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
 $ln "$scriptDir/spacevim.toml" "$homeDir/.SpaceVim.d/init.toml";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
-$ln "$scriptDir/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
-$ln "$scriptDir/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
+$ln "$scriptDir/bspwm/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
+$ln "$scriptDir/bspwm/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
 $ln "$scriptDir/vscode_settings.json" "$homeDir/.config/Code/User/settings.json";
 $ln "$scriptDir/vscode_keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
 $ln "$scriptDir/vscode_extensions.lst" "$homeDir/.config/Code/User/extensions.lst";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
-$ln "$scriptDir/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
-$ln "$scriptDir/polybar.ini" "$homeDir/.config/polybar/config";
+$ln "$scriptDir/bspwm/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
+$ln "$scriptDir/bspwm/polybar.ini" "$homeDir/.config/polybar/config";
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."

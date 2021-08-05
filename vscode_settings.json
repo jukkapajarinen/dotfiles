@@ -43,7 +43,7 @@
   "[csharp]": { "editor.tabSize": 4 },
   "editor.multiCursorModifier": "ctrlCmd",
   "emmet.triggerExpansionOnTab": true,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "editor.minimap.enabled": true,
   "telemetry.enableTelemetry": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
