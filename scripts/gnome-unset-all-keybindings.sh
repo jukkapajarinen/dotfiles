@@ -142,3 +142,6 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys next-static [] #defau
 gsettings set org.gnome.settings-daemon.plugins.media-keys previous-static [] #default ['XF86AudioPrev', '<Ctrl>XF86AudioPrev']
 gsettings set org.gnome.settings-daemon.plugins.media-keys keyboard-brightness-down-static [] #default ['XF86KbdBrightnessDown']
 gsettings set org.gnome.settings-daemon.plugins.media-keys volume-down-precise-static [] #default ['<Shift>XF86AudioLowerVolume', '<Ctrl><Shift>XF86AudioLowerVolume']
+
+# Print info that execution finished
+echo "==> Unsetting Gnome keybindings finished." 

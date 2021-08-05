@@ -50,6 +50,7 @@ $mkdir "$homeDir/.config/Code/User/";
 $mkdir "$homeDir/.config/gtk-3.0/";
 $mkdir "$homeDir/.config/rofi/";
 $mkdir "$homeDir/.config/polybar/";
+$mkdir "$homeDir/.config/pop-shell/";
 
 # Linux create custom script symlinks
 echo -e "$arrow Install user script files.";
@@ -86,6 +87,7 @@ $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
 $ln "$scriptDir/bspwm/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
 $ln "$scriptDir/bspwm/polybar.ini" "$homeDir/.config/polybar/config";
+$ln "$scriptDir/pop-shell_settings.json ""$homeDir/.config/pop-shell/config.json";
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."
