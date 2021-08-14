@@ -12,10 +12,11 @@ export DOTFILES="$HOME/Projects/dotfiles";
 export LANG="en_IE.UTF-8";
 export LANGUAGE="en_IE.UTF-8";
 export LC_ALL="en_IE.UTF-8";
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH";
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin";
 export NVM_DIR="$HOME/.nvm";
 export PAGER="less";
 export MANPAGER="most";
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin";
 
 # MacOS specific variables
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
