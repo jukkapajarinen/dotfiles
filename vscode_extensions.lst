@@ -1,5 +1,6 @@
 2gua.rainbow-brackets
 ahmadawais.shades-of-purple
+ChakrounAnas.turbo-console-log
 cipchk.cssrem
 CoenraadS.bracket-pair-colorizer
 dbaeumer.vscode-eslint
@@ -9,6 +10,7 @@ efoerster.texlab
 emmanuelbeziat.vscode-great-icons
 esbenp.prettier-vscode
 flowtype.flow-for-vscode
+ginfuru.ginfuru-vscode-jekyll-syntax
 huangbaoshan.comment-aligner
 kleber-swf.unity-code-snippets
 ms-azuretools.vscode-docker
@@ -18,11 +20,12 @@ ms-python.vscode-pylance
 ms-toolsai.jupyter
 naumovs.color-highlight
 nemesarial.dust
-oderwat.indent-rainbow
 redhat.vscode-commons
 redhat.vscode-xml
+richie5um2.vscode-sort-json
 rmnl.theme-solarized-flat-dark
 stylelint.vscode-stylelint
+teabyii.ayu
 timonwong.shellcheck
 TomiTurtiainen.js-complexity-analysis
 TomiTurtiainen.rf-intellisense
@@ -30,4 +33,6 @@ tomoki1207.pdf
 torn4dom4n.latex-support
 Tyriar.lorem-ipsum
 Unity.unity-debug
+wayou.vscode-todo-highlight
+whatwedo.twig
 xabikos.JavaScriptSnippets
