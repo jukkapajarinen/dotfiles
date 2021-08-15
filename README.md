@@ -22,10 +22,11 @@ cd ~/Projects/dotfiles && ./installers/install_linux.sh; #Linux normal installat
 cd ~/Projects/dotfiles && ./installers/install_linux.sh -f; #Linux forced installation
 ```
 
+## Author
 
+- [Jukka Pajarinen](https://www.jukkapajarinen.com)
 
-
-## License
+## [License](LICENSE.md)
 
 Copyright (c) 2021 Jukka Pajarinen
 
