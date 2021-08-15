@@ -68,5 +68,9 @@ $ln "$scriptDir/vscode_extensions.lst" "$homeDir/Library/Application\ Support/Co
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 
+# MacOS create helper symlink to dotfiles
+echo -e "$arrow Create helper symlink to /dotfiles?";
+sudo $ln "$scriptDir" "/dotfiles";
+
 # Print info that execution finished
 echo -e "$arrow Installation finished."

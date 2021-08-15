@@ -89,5 +89,9 @@ $ln "$scriptDir/bspwm/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
 $ln "$scriptDir/bspwm/polybar.ini" "$homeDir/.config/polybar/config";
 $ln "$scriptDir/pop-shell_settings.json ""$homeDir/.config/pop-shell/config.json";
 
+# Linux create helper symlink to dotfiles
+echo -e "$arrow Create helper symlink to /dotfiles?";
+sudo $ln "$scriptDir" "/dotfiles";
+
 # Print info that execution finished
 echo -e "$arrow Installation finished."

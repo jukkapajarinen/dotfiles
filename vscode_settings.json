@@ -26,10 +26,11 @@
   "eslint.enable": true,
   "eslint.nodePath": "/usr/local/bin/node",
   "eslint.options": {
-    "configFile": "/Users/jukka/Projects/dotfiles/linters/eslintrc.json"
+    "configFile": "/dotfiles/linters/eslintrc.json"
   },
   "eslint.validate": [
-    "javascript"
+    "javascript",
+    "typescript"
   ],
   "explorer.confirmDragAndDrop": false,
   "extensions.ignoreRecommendations": true,
@@ -43,7 +44,7 @@
   "scss.validate": false,
   "search.showLineNumbers": true,
   "stylelint.config": {
-    "extends": "/Users/jukka/Projects/dotfiles/linters/stylelintrc.json"
+    "extends": "/dotfiles/linters/stylelintrc.json"
   },
   "stylelint.enable": true,
   "telemetry.enableTelemetry": false,
