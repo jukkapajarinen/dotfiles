@@ -6,13 +6,14 @@
   "editor.cursorBlinking": "blink",
   "editor.cursorStyle": "block",
   "editor.cursorWidth": 5,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": false,
   "editor.fontFamily": "'Fira Code', 'Monaco', 'Menlo', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 12,
   "editor.fontWeight": "600",
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.glyphMargin": true,
   "editor.insertSpaces": true,
   "editor.letterSpacing": 0.5,
@@ -23,15 +24,11 @@
   "editor.snippetSuggestions": "top",
   "editor.tabSize": 2,
   "emmet.triggerExpansionOnTab": true,
-  "eslint.enable": true,
   "eslint.nodePath": "/usr/local/bin/node",
   "eslint.options": {
     "configFile": "/dotfiles/linters/eslintrc.json"
   },
-  "eslint.validate": [
-    "javascript",
-    "typescript"
-  ],
+  "eslint.validate": ["javascript", "typescript"],
   "explorer.confirmDragAndDrop": false,
   "extensions.ignoreRecommendations": true,
   "files.trimFinalNewlines": true,
