@@ -1,5 +1,4 @@
 {
-  "breadcrumbs.enabled": false,
   "css.validate": false,
   "cssrem.rootFontSize": 12,
   "diffEditor.ignoreTrimWhitespace": false,
@@ -69,5 +68,6 @@
   "xml.format.preservedNewlines": 0,
   "xml.format.preserveEmptyContent": true,
   "xml.format.spaceBeforeEmptyCloseTag": true,
-  "xml.format.splitAttributes": false
+  "xml.format.splitAttributes": false,
+  "liquid.format": false
 }

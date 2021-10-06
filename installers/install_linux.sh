@@ -48,6 +48,7 @@ $mkdir "$homeDir/.config/kitty/";
 $mkdir "$homeDir/.config/nano/";
 $mkdir "$homeDir/.config/Code/User/";
 $mkdir "$homeDir/.config/gtk-3.0/";
+$mkdir "$homeDir/.config/gtk-4.0/";
 $mkdir "$homeDir/.config/rofi/";
 $mkdir "$homeDir/.config/polybar/";
 $mkdir "$homeDir/.config/pop-shell/";
@@ -85,6 +86,7 @@ $ln "$scriptDir/vscode_extensions.lst" "$homeDir/.config/Code/User/extensions.ls
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
+$ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-4.0/settings.ini";
 $ln "$scriptDir/bspwm/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
 $ln "$scriptDir/bspwm/polybar.ini" "$homeDir/.config/polybar/config";
 $ln "$scriptDir/pop-shell_settings.json ""$homeDir/.config/pop-shell/config.json";
