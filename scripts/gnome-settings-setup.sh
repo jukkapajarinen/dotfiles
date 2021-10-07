@@ -20,6 +20,21 @@ gsettings set org.gnome.shell.extensions.pop-shell gap-inner 4
 gsettings set org.gnome.shell.extensions.pop-shell gap-outer 4
 gsettings set org.gnome.shell.extensions.pop-shell active-hint false
 gsettings set org.gnome.shell.extensions.pop-shell hint-color-rgba 'rgba(255, 255, 255, 1)'
+gsettings set org.gnome.shell.extensions.vitals update-time 1
+gsettings set org.gnome.shell.extensions.vitals position-in-panel 1 #1=center
+gsettings set org.gnome.shell.extensions.vitals use-higher-precision true
+gsettings set org.gnome.shell.extensions.vitals show-temperature true
+gsettings set org.gnome.shell.extensions.vitals show-processor true
+gsettings set org.gnome.shell.extensions.vitals show-memory true
+gsettings set org.gnome.shell.extensions.vitals show-storage true
+gsettings set org.gnome.shell.extensions.vitals show-battery false
+gsettings set org.gnome.shell.extensions.vitals show-network false
+gsettings set org.gnome.shell.extensions.vitals show-system false
+gsettings set org.gnome.shell.extensions.vitals show-fan false
+gsettings set org.gnome.shell.extensions.vitals show-voltage false
+gsettings set org.gnome.shell.extensions.arch-update check-interval 30
+gsettings set org.gnome.shell.extensions.arch-update position-number 0
+gsettings set org.gnome.shell.extensions.arch-update update-cmd "kitty sh -c  'sudo pacman -Syu ; echo Done - Press enter to exit; read _'"
 
 # ##############################################################################
 # Keybindings (Gnome and extensions)
