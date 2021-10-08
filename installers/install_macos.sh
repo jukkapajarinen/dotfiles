@@ -62,9 +62,9 @@ $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/nanorc" "$homeDir/.nanorc";
 $ln "$scriptDir/yabairc" "$homeDir/.yabairc";
 $ln "$scriptDir/skhdrc" "$homeDir/.skhdrc";
-$ln "$scriptDir/vscode_settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
-$ln "$scriptDir/vscode_keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
-$ln "$scriptDir/vscode_extensions.lst" "$homeDir/Library/Application\ Support/Code/User/extensions.lst";
+$ln "$scriptDir/vscode/vscode_settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
+$ln "$scriptDir/vscode/vscode_keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
+$ln "$scriptDir/vscode/vscode_extensions.lst" "$homeDir/Library/Application\ Support/Code/User/extensions.lst";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 

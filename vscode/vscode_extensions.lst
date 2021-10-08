@@ -1,5 +1,6 @@
 2gua.rainbow-brackets
 ahmadawais.shades-of-purple
+bungcip.better-toml
 ChakrounAnas.turbo-console-log
 cipchk.cssrem
 CoenraadS.bracket-pair-colorizer
@@ -13,6 +14,7 @@ flowtype.flow-for-vscode
 ginfuru.ginfuru-vscode-jekyll-syntax
 huangbaoshan.comment-aligner
 kleber-swf.unity-code-snippets
+medzhidov.hex-rgba-converter
 ms-azuretools.vscode-docker
 ms-dotnettools.csharp
 ms-python.python
@@ -26,6 +28,7 @@ richie5um2.vscode-sort-json
 rmnl.theme-solarized-flat-dark
 sissel.shopify-liquid
 stylelint.vscode-stylelint
+syler.sass-indented
 teabyii.ayu
 timonwong.shellcheck
 TomiTurtiainen.js-complexity-analysis
