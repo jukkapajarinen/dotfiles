@@ -12,10 +12,17 @@ export DOTFILES="$HOME/Projects/dotfiles";
 export LANG="en_IE.UTF-8";
 export LANGUAGE="en_IE.UTF-8";
 export LC_ALL="en_IE.UTF-8";
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin";
-export NVM_DIR="$HOME/.nvm";
 export PAGER="less";
 export MANPAGER="most";
+export NVM_DIR="$HOME/.nvm";
+
+# Append program paths
+export PATH="$PATH:/usr/local/sbin";
+export PATH="$PATH:/usr/local/bin";
+export PATH="$PATH:/usr/bin";
+export PATH="$PATH:/usr/sbin";
+export PATH="$PATH:/bin";
+export PATH="$PATH:/sbin";
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin";
 
 # MacOS specific variables
