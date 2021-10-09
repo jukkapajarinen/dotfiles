@@ -1,5 +1,5 @@
 ! ##############################################################################
-! XResources color configurations
+! XResources configuration
 ! ##############################################################################
 
 *.foreground: #f8f8f2
@@ -23,10 +23,6 @@
 *pointerColor: #f8f8f2
 *cursorColor: #ff79c6
 
-! ##############################################################################
-! XTerm setup configurations
-! ##############################################################################
-
 xterm*termName: xterm-256color
 xterm*locale: true
 xterm*utf8: always
@@ -44,9 +40,5 @@ xterm*translations: #override \n\
   Ctrl <Key>V: insert-selection(CLIPBOARD) \n\
   Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
   Ctrl Shift <Key>C: copy-selection(CLIPBOARD)
-
-! ##############################################################################
-! Miscellaneous configurations
-! ##############################################################################
 
 Xcursor.size: 16

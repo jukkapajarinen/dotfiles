@@ -1,13 +1,11 @@
 #!/bin/bash
 
 # ##############################################################################
-# Aliases for MacOS and Linux
+# Bash aliases for MacOS and Linux
 # ##############################################################################
 
-# Check platform
 [[ "$(uname -s)" == "Darwin" ]] && macos="true" || linux="true";
 
-# Common aliases
 alias dotfiles='cd "${DOTFILES}"';
 alias less='less -R';
 alias grep='grep --color=auto';
@@ -29,7 +27,6 @@ alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
 alias k='kubectl'
 
-# MacOS specific aliases
 [[ "$macos" == "true" ]] && alias ls='ls -G'
 [[ "$macos" == "true" ]] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';
 [[ "$macos" == "true" ]] && alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app';
@@ -40,8 +37,6 @@ alias k='kubectl'
 [[ "$macos" == "true" ]] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
 [[ "$macos" == "true" ]] && alias vscodeExport='code --list-extensions > ~/Library/Application\ Support/Code/User/extensions.txt';
 [[ "$macos" == "true" ]] && alias vscodeImport='cat ~/Library/Application\ Support/Code/User/extensions.txt | xargs -L 1 code --install-extension';
-
-# Linux specific aliases
 [[ "$linux" == "true" ]] && alias ls='ls --color=auto'
 [[ "$linux" == "true" ]] && alias open='xdg-open';
 [[ "$linux" == "true" ]] && alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";

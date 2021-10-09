@@ -1,15 +1,11 @@
 % ##############################################################################
-% Most configurations
+% Most configuration
 % ##############################################################################
 
 color normal white default
 color status yellow default
 color underline yellow default
 color overstrike blue default
-
-% ##############################################################################
-% Most less-like key-bindings
-% ##############################################################################
 
 unsetkey "^K"
 setkey up "^K"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ##############################################################################
-# bspwm setup environment
+# bspwm configuration
 # ##############################################################################
 
 xrdb "$HOME/.Xresources";
@@ -14,10 +14,6 @@ if [[ "$hdmiConnected" == "0" ]]; then
 else
   bspc monitor -d 1 2 3 4 5 6 7 8 9 0;
 fi
-
-# ##############################################################################
-# bspwm setup configurations
-# ##############################################################################
 
 bspc config initial_polarity second_child;
 bspc config split_ratio 0.50
@@ -36,16 +32,8 @@ bspc config pointer_action2 resize_corner;
 bspc config focus_follows_pointer false;
 bspc config pointer_follows_focus false;
 
-# ##############################################################################
-# bspwm window rules
-# ##############################################################################
-
 bspc rule -a "Onboard" state=floating;
 bspc rule -a "Gnome-calculator" state=floating;
-
-# ##############################################################################
-# bspwm auto-start applications
-# ##############################################################################
 
 pgrep -f sxhkd || sxhkd &
 pgrep -f polybar || polybar mainbar &

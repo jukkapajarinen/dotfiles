@@ -1,5 +1,5 @@
 # ##############################################################################
-# Sxhkd general keybindings
+# Sxhkd configuration
 # ##############################################################################
 
 super + ctrl + alt + Return
@@ -15,10 +15,6 @@ super + ctrl + alt + l
 alt + Tab
   rofi -show window -show-icons
 
-# ##############################################################################
-# Sxhkd window movement keybindings
-# ##############################################################################
-
 super + ctrl + alt + Left
   bspc node -s west
 super + ctrl + alt + Down
@@ -28,10 +24,6 @@ super + ctrl + alt + Up
 super + ctrl + alt + Right
   bspc node -s east
 
-# ##############################################################################
-# Sxhkd window resize keybindings
-# ##############################################################################
-
 super + ctrl + alt + shift + Left
   bspc node -z left -20 0 || bspc node -z right -20 0
 super + ctrl + alt + shift + Down
@@ -40,10 +32,6 @@ super + ctrl + alt + shift + Up
   bspc node -z top 0 -20 || bspc node -z bottom 0 -20
 super + ctrl + alt + shift + Right
   bspc node -z right 20 0 || bspc node -z left 20 0
-
-# ##############################################################################
-# Sxhkd go to workspaces keybindings
-# ##############################################################################
 
 super + ctrl + alt + 1
   bspc desktop -f 1
@@ -66,10 +54,6 @@ super + ctrl + alt + 9
 super + ctrl + alt + 0
   bspc desktop -f 0
 
-# ##############################################################################
-# Sxhkd move to workspaces keybindings
-# ##############################################################################
-
 super + ctrl + alt + shift + 1
   id=$(bspc query -N -n); bspc node -d 1; bspc node -f ${id}
 super + ctrl + alt + shift + 2
@@ -90,10 +74,6 @@ super + ctrl + alt + shift + 9
   id=$(bspc query -N -n); bspc node -d 9; bspc node -f ${id}
 super + ctrl + alt + shift + 0
   id=$(bspc query -N -n); bspc node -d 0; bspc node -f ${id}
-
-# ##############################################################################
-# Sxhkd setup MacOS style keybindings
-# ##############################################################################
 
 super + q
   bspc node -c

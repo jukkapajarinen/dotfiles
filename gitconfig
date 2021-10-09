@@ -1,17 +1,20 @@
 ; ##############################################################################
-; Git setup configurations
+; Git configuration
 ; ##############################################################################
 
 [core]
-  editor = nvim
-  commentChar = @
-  excludesfile = ~/.gitexcludes
+editor = nvim
+commentChar = @
+excludesfile = ~/.gitexcludes
+
 [filter "lfs"]
-  process = git-lfs filter-process
-  required = true
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+
 [pull]
-  rebase = true
+rebase = true
+
 [include]
-  path = ~/.gituser
+path = ~/.gituser

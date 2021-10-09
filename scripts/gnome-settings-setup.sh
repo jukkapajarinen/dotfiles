@@ -12,10 +12,6 @@ gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.default-applications.terminal exec "kitty"
 
-# ##############################################################################
-# Gnome extension preferences
-# ##############################################################################
-
 gsettings set org.gnome.shell.extensions.pop-shell gap-inner 4
 gsettings set org.gnome.shell.extensions.pop-shell gap-outer 4
 gsettings set org.gnome.shell.extensions.pop-shell active-hint false
@@ -35,10 +31,6 @@ gsettings set org.gnome.shell.extensions.vitals show-voltage false
 gsettings set org.gnome.shell.extensions.arch-update check-interval 30
 gsettings set org.gnome.shell.extensions.arch-update position-number 0
 gsettings set org.gnome.shell.extensions.arch-update update-cmd "kitty sh -c  'sudo pacman -Syu ; echo Done - Press enter to exit; read _'"
-
-# ##############################################################################
-# Keybindings (Gnome and extensions)
-# ##############################################################################
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ name "Open kitty"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ command "kitty"
@@ -83,6 +75,3 @@ gsettings set org.gnome.shell.extensions.pop-shell toggle-floating "['<Shift><Su
 gsettings set org.gnome.shell.extensions.pop-shell toggle-stacking-global "['<Shift><Super><Alt>s']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-tiling "['<Shift><Super><Alt>t']";
 gsettings set org.gnome.shell.extensions.pop-shell tile-orientation "['<Shift><Super><Alt>o']";
- 
-# Print info that execution finished
-echo "==> Gnome and Pop!_Shell setup and keybindings finished." 

@@ -1,5 +1,5 @@
 # ##############################################################################
-# GNU nano color configurations
+# GNU nano configuration
 # ##############################################################################
 
 set titlecolor brightwhite,blue
@@ -9,10 +9,6 @@ set selectedcolor brightwhite,magenta
 set numbercolor blue
 set keycolor yellow
 set functioncolor blue
-
-# ##############################################################################
-# GNU nano setup configurations
-# ##############################################################################
 
 set autoindent
 set historylog
@@ -25,9 +21,4 @@ set suspend
 set tabsize 2
 set tabstospaces
 set trimblanks
-
-# ##############################################################################
-# GNU nano setup syntax coloring
-# ##############################################################################
-
 include "/usr/local/share/nano/*.nanorc"

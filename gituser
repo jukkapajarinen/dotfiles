@@ -1,7 +1,7 @@
 ; ##############################################################################
-; Git user configurations
+; Git User configuration
 ; ##############################################################################
 
 [user]
-  name = Jukka Pajarinen
-  email = jukka.pajarinen@lumitum.com
+name = Jukka Pajarinen
+email = jukka.pajarinen@lumitum.com
