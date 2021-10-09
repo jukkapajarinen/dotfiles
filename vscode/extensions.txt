@@ -40,3 +40,4 @@ Unity.unity-debug
 wayou.vscode-todo-highlight
 whatwedo.twig
 xabikos.JavaScriptSnippets
+XadillaX.viml

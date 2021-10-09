@@ -41,7 +41,7 @@ fi
 # MacOS create directories
 echo -e "$arrow Create possibly missing directories.";
 $mkdir "$homeDir/Scripts/";
-$mkdir "$homeDir/.SpaceVim.d/";
+$mkdir "$homeDir/.config/nvim";
 $mkdir "$homeDir/.config/kitty/";
 $mkdir "$homeDir/Library/Application\ Support/Code/User/";
 
@@ -57,14 +57,14 @@ $ln "$scriptDir/bash_env" "$homeDir/.bash_env";
 $ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
 $ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
 $ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
-$ln "$scriptDir/spacevim.toml" "$homeDir/.SpaceVim.d/init.toml";
+$ln "$scriptDir/init.vim" "$homeDir/.config/nvim/init.vim";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/nanorc" "$homeDir/.nanorc";
 $ln "$scriptDir/yabairc" "$homeDir/.yabairc";
 $ln "$scriptDir/skhdrc" "$homeDir/.skhdrc";
-$ln "$scriptDir/vscode/vscode_settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
-$ln "$scriptDir/vscode/vscode_keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
-$ln "$scriptDir/vscode/vscode_extensions.lst" "$homeDir/Library/Application\ Support/Code/User/extensions.lst";
+$ln "$scriptDir/vscode/settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
+$ln "$scriptDir/vscode/keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
+$ln "$scriptDir/vscode/extensions.txt" "$homeDir/Library/Application\ Support/Code/User/extensions.txt";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 

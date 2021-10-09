@@ -19,7 +19,7 @@ gsettings set org.gnome.desktop.default-applications.terminal exec "kitty"
 gsettings set org.gnome.shell.extensions.pop-shell gap-inner 4
 gsettings set org.gnome.shell.extensions.pop-shell gap-outer 4
 gsettings set org.gnome.shell.extensions.pop-shell active-hint false
-gsettings set org.gnome.shell.extensions.pop-shell hint-color-rgba 'rgba(255, 255, 255, 1)'
+gsettings set org.gnome.shell.extensions.pop-shell hint-color-rgba 'rgba(255, 121, 198, 1)'
 gsettings set org.gnome.shell.extensions.vitals update-time 1
 gsettings set org.gnome.shell.extensions.vitals position-in-panel 1 #1=center
 gsettings set org.gnome.shell.extensions.vitals use-higher-precision true

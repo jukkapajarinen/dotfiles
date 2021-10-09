@@ -41,7 +41,7 @@ fi
 # Linux create directories
 echo -e "$arrow Create possibly missing directories.";
 $mkdir "$homeDir/Scripts/";
-$mkdir "$homeDir/.SpaceVim.d/";
+$mkdir "$homeDir/.config/nvim";
 $mkdir "$homeDir/.config/bspwm/";
 $mkdir "$homeDir/.config/sxhkd/";
 $mkdir "$homeDir/.config/kitty/";
@@ -74,14 +74,14 @@ $ln "$scriptDir/bash_theme" "$homeDir/.bash_theme";
 $ln "$scriptDir/Xresources" "$homeDir/.Xresources";
 $ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
 $ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
-$ln "$scriptDir/spacevim.toml" "$homeDir/.SpaceVim.d/init.toml";
+$ln "$scriptDir/init.vim" "$homeDir/.config/nvim/init.vim";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
 $ln "$scriptDir/bspwm/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
 $ln "$scriptDir/bspwm/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
-$ln "$scriptDir/vscode/vscode_settings.json" "$homeDir/.config/Code/User/settings.json";
-$ln "$scriptDir/vscode/vscode_keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
-$ln "$scriptDir/vscode/vscode_extensions.lst" "$homeDir/.config/Code/User/extensions.lst";
+$ln "$scriptDir/vscode/settings.json" "$homeDir/.config/Code/User/settings.json";
+$ln "$scriptDir/vscode/keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
+$ln "$scriptDir/vscode/extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
