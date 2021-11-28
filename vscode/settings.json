@@ -1,10 +1,17 @@
 {
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "persoderlind.vscode-phpcbf"
+  },
   "css.validate": false,
   "cssrem.rootFontSize": 12,
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.cursorBlinking": "blink",
   "editor.cursorStyle": "block",
   "editor.cursorWidth": 5,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": false,
   "editor.fontFamily": "'Fira Code', 'Monaco', 'Menlo', monospace",
   "editor.fontLigatures": true,
@@ -26,15 +33,39 @@
   "eslint.options": {
     "configFile": "/dotfiles/linters/eslintrc.json"
   },
-  "eslint.validate": ["javascript", "typescript"],
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
   "explorer.confirmDragAndDrop": false,
   "extensions.ignoreRecommendations": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": false,
+  "intelephense.environment.includePaths": [
+    "web/core/includes"
+  ],
+  "intelephense.files.associations": [
+    "*.inc",
+    "*.theme",
+    "*.install",
+    "*.module",
+    "*.profile",
+    "*.php",
+    "*.phtml"
+  ],
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.validate.enable": false,
   "less.validate": false,
   "omnisharp.useGlobalMono": "never",
+  "php-docblocker.gap": true,
+  "php-docblocker.useShortNames": true,
+  "phpcbf.documentFormattingProvider": true,
+  "phpcbf.enable": true,
+  "phpcbf.executablePath": "/home/jukkapajarinen/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcbf",
+  "phpcbf.standard": "/home/jukkapajarinen/.config/composer/vendor/drupal/coder/coder_sniffer/Drupal",
+  "phpcs.enable": true,
+  "phpcs.executablePath": "/home/jukkapajarinen/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcs",
+  "phpcs.standard": "/home/jukkapajarinen/.config/composer/vendor/drupal/coder/coder_sniffer/Drupal",
   "scss.validate": false,
   "search.showLineNumbers": true,
   "stylelint.config": {
@@ -44,10 +75,10 @@
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "block",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.osx": "bash",
   "terminal.integrated.fontFamily": "'Fira Code', 'Monaco', 'Menlo', monospace",
   "terminal.integrated.fontSize": 12,
-  "terminal.integrated.defaultProfile.linux":"bash",
-  "terminal.integrated.defaultProfile.osx": "bash",
   "window.zoomLevel": 1,
   "workbench.activityBar.visible": true,
   "workbench.colorCustomizations": {
@@ -60,8 +91,5 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.iconTheme": "vscode-great-icons",
   "workbench.list.horizontalScrolling": true,
-  "workbench.startupEditor": "newUntitledFile",
-  "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
-  },
+  "workbench.startupEditor": "newUntitledFile"
 }
