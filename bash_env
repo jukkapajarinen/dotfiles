@@ -21,6 +21,7 @@ export PATH="$PATH:/usr/sbin";
 export PATH="$PATH:/bin";
 export PATH="$PATH:/sbin";
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin";
+export PATH="$PATH:$HOME/.config/composer/vendor/bin";
 
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
 [[ "$macos" == "true" ]] && export GEM_HOME="$HOME/.gem";
