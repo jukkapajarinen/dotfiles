@@ -22,7 +22,7 @@ if [[ $1 == "--force" ]] || [[ $2 == "--force" ]] || [[ $1 == "-f" ]] || [[ $2 =
   read -rp "$(echo -e "$arrow" Are you sure to force installation? \(files will be overwritten\) [y/N]) " yn;
   if [[ $yn =~ [yY](es)* ]]; then
     mkdir="mkdir -vp";
-    ln="ln -svf"; #cp="cp -vf --remove-destination";
+    ln="ln -svfT"; #cp="cp -vf --remove-destination";
   else
     echo -e "$arrow Installation was not started."
     exit;
@@ -31,7 +31,7 @@ else
   read -rp "$(echo -e "$arrow" Are you sure to start installation? [y/N]) " yn;
   if [[ $yn =~ [yY](es)* ]]; then
     mkdir="mkdir -vp";
-    ln="ln -isv"; #cp="cp -iv --remove-destination";
+    ln="ln -isvT"; #cp="cp -iv --remove-destination";
   else
     echo -e "$arrow Installation was not started."
     exit;
@@ -41,6 +41,7 @@ fi
 # Linux create directories
 echo -e "$arrow Create possibly missing directories.";
 $mkdir "$homeDir/Scripts/";
+$mkdir "$homeDir/.config/autostart/";
 $mkdir "$homeDir/.config/nvim";
 $mkdir "$homeDir/.config/bspwm/";
 $mkdir "$homeDir/.config/sxhkd/";
@@ -65,6 +66,7 @@ $ln "$scriptDir/scripts/gnome-unset-all-keybindings.sh" "$homeDir/Scripts/gnome-
 
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
+$ln "$scriptDir/gsettings.desktop" "$homeDir/.config/autostart/gsettings.desktop";
 $ln "$scriptDir/bashrc" "$homeDir/.bashrc";
 $ln "$scriptDir/bashrc" "$homeDir/.bash_profile";
 $ln "$scriptDir/bash_aliases" "$homeDir/.bash_aliases";

@@ -12,6 +12,8 @@ export LANGUAGE="en_IE.UTF-8";
 export LC_ALL="en_IE.UTF-8";
 export PAGER="less";
 export MANPAGER="most";
+export GREP_COLOR=always;
+export CLICOLOR_FORCE=true;
 export NVM_DIR="$HOME/.nvm";
 export GEM_HOME="$HOME/.gem";
 

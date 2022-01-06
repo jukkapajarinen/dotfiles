@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Exec=/dotfiles/scripts/gnome-settings-setup.sh
+Name=gnome-settings-setup
+Comment=Apply gsettings on startup
+Terminal=false
+OnlyShowIn=GNOME
+Type=Application
+StartupNotify=false
+X-GNOME-Autostart-enabled=true
