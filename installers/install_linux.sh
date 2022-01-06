@@ -66,7 +66,7 @@ $ln "$scriptDir/scripts/gnome-unset-all-keybindings.sh" "$homeDir/Scripts/gnome-
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
 $ln "$scriptDir/bashrc" "$homeDir/.bashrc";
-$ln "$scriptDir/bash_profile" "$homeDir/.bash_profile";
+$ln "$scriptDir/bashrc" "$homeDir/.bash_profile";
 $ln "$scriptDir/bash_aliases" "$homeDir/.bash_aliases";
 $ln "$scriptDir/bash_env" "$homeDir/.bash_env";
 $ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
@@ -74,7 +74,8 @@ $ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
 $ln "$scriptDir/Xresources" "$homeDir/.Xresources";
-$ln "$scriptDir/init.vim" "$homeDir/.config/nvim/init.vim";
+$ln "$scriptDir/vimrc" "$homeDir/.vimrc";
+$ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
 $ln "$scriptDir/bspwm/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";

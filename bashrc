@@ -4,18 +4,24 @@
 # Bash configuration
 # ##############################################################################
 
-ls ~/.bash_env &> /dev/null && source ~/.bash_env;
-ls ~/.bash_env_extra &> /dev/null && source ~/.bash_env_extra;
-ls ~/.bash_aliases &> /dev/null && source ~/.bash_aliases;
-ls ~/.bash_aliases_extra &> /dev/null && source ~/.bash_aliases_extra;
+source ~/.bash_env &> /dev/null;
+source ~/.bash_env_extra &> /dev/null;
+source ~/.bash_aliases &> /dev/null;
+source ~/.bash_aliases_extra &> /dev/null;
 
-ls /usr/share/bash-completion/bash_completion &> /dev/null && source /usr/share/bash-completion/bash_completion;
-ls /usr/local/etc/profile.d/bash_completion.sh &> /dev/null && source /usr/local/etc/profile.d/bash_completion.sh;
+source /usr/share/bash-completion/bash_completion &> /dev/null;
+source /usr/local/etc/profile.d/bash_completion.sh &> /dev/null;
+source "$NVM_DIR/nvm.sh" &> /dev/null;
+source "$NVM_DIR/bash_completion" &> /dev/null;
+source "/usr/share/nvm/init-nvm.sh" &> /dev/null;
+source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash" &> /dev/null;
 
-ls "$NVM_DIR/nvm.sh" &> /dev/null && source "$NVM_DIR/nvm.sh";
-ls "$NVM_DIR/bash_completion" &> /dev/null && source "$NVM_DIR/bash_completion";
-ls "/usr/share/nvm/init-nvm.sh" &> /dev/null && source "/usr/share/nvm/init-nvm.sh";
 complete -C /usr/local/bin/terraform terraform;
 eval "$(starship init bash)";
 
 which neofetch &> /dev/null && which lolcat &> /dev/null && neofetch | lolcat;
+
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+# END_KITTY_SHELL_INTEGRATION
