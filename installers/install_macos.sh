@@ -54,9 +54,10 @@ $ln "$scriptDir/bashrc" "$homeDir/.bashrc";
 $ln "$scriptDir/bash_profile" "$homeDir/.bash_profile";
 $ln "$scriptDir/bash_aliases" "$homeDir/.bash_aliases";
 $ln "$scriptDir/bash_env" "$homeDir/.bash_env";
-$ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
 $ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
 $ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
+$ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
+$ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
 $ln "$scriptDir/init.vim" "$homeDir/.config/nvim/init.vim";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/nanorc" "$homeDir/.nanorc";
@@ -65,8 +66,7 @@ $ln "$scriptDir/yabai/skhdrc" "$homeDir/.skhdrc";
 $ln "$scriptDir/vscode/settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
 $ln "$scriptDir/vscode/keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
 $ln "$scriptDir/vscode/extensions.txt" "$homeDir/Library/Application\ Support/Code/User/extensions.txt";
-$ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
-$ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
+$ln "$scriptDir/keyboard/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
 
 # MacOS create helper symlink to dotfiles
 echo -e "$arrow Create helper symlink to /dotfiles?";

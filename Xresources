@@ -40,5 +40,3 @@ xterm*translations: #override \n\
   Ctrl <Key>V: insert-selection(CLIPBOARD) \n\
   Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
   Ctrl Shift <Key>C: copy-selection(CLIPBOARD)
-
-Xcursor.size: 16
