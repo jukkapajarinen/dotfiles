@@ -16,5 +16,6 @@ ls "$NVM_DIR/nvm.sh" &> /dev/null && source "$NVM_DIR/nvm.sh";
 ls "$NVM_DIR/bash_completion" &> /dev/null && source "$NVM_DIR/bash_completion";
 ls "/usr/share/nvm/init-nvm.sh" &> /dev/null && source "/usr/share/nvm/init-nvm.sh";
 complete -C /usr/local/bin/terraform terraform;
-
 eval "$(starship init bash)";
+
+which neofetch &> /dev/null && which lolcat &> /dev/null && neofetch | lolcat;
