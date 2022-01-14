@@ -5,6 +5,8 @@
 # ##############################################################################
 
 gnome-extensions disable ubuntu-dock@ubuntu.com;
+gnome-extensions enable pop-shell@system76.com;
+
 gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:appmenu";
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
 gsettings set org.gnome.mutter dynamic-workspaces false
@@ -54,7 +56,8 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip 
 gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot "[]";
 gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-clip "[]";
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Shift><Super><Alt>l']";
-gsettings set org.gnome.shell.extensions.pop-shell activate-launcher "['<Super>space']";
+gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['<Super>space']";
+gsettings set org.gnome.shell.extensions.pop-shell activate-launcher "[]";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-floating "['<Shift><Super><Alt>space']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-stacking-global "['<Shift><Super><Alt>s']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-tiling "['<Shift><Super><Alt>t']";
