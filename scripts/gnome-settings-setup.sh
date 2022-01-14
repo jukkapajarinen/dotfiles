@@ -4,6 +4,7 @@
 # Script for setting up Gnome preferences
 # ##############################################################################
 
+gnome-extensions disable ubuntu-dock@ubuntu.com;
 gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:appmenu";
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
 gsettings set org.gnome.mutter dynamic-workspaces false
