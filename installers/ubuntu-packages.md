@@ -1,7 +1,7 @@
 # Ubuntu software packages
 ## install software from packages
 ```
-apt install curl exa bat docker.io docker-compose most vim neovim neofetch lolcat fonts-firacode gnome-tweaks geary steam;
+apt install git curl exa bat docker.io docker-compose most vim neovim neofetch lolcat fonts-firacode gnome-tweaks geary steam kitty;
 ```
 
 ## install software via scripts
