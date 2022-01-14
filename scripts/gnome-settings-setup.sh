@@ -7,8 +7,6 @@
 gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:appmenu";
 gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
 gsettings set org.gnome.mutter dynamic-workspaces false
-gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
 gsettings set org.gnome.desktop.interface clock-show-seconds true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.default-applications.terminal exec "kitty"

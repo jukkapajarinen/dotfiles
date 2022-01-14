@@ -28,5 +28,5 @@ export PATH="$PATH:$HOME/.config/composer/vendor/bin";
 
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
 [[ "$macos" == "true" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
-[[ "$linux" == "true" ]] && export GTK_THEME=Adwaita:dark
+[[ "$linux" == "true" ]] && export GTK_THEME=Yaru:dark
 [[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=qt5ct
