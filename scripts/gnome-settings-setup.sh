@@ -16,7 +16,7 @@ gsettings set org.gnome.desktop.default-applications.terminal exec "kitty"
 gsettings set org.gnome.shell.extensions.pop-shell gap-inner 4
 gsettings set org.gnome.shell.extensions.pop-shell gap-outer 4
 gsettings set org.gnome.shell.extensions.pop-shell active-hint false
-gsettings set org.gnome.shell.extensions.pop-shell hint-color-rgba 'rgba(255, 121, 198, 1)'
+gsettings set org.gnome.shell.extensions.pop-shell hint-color-rgba 'rgba(215, 81, 34, 1)'
 
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ name "Open kitty"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ command "kitty"
