@@ -79,7 +79,6 @@
   "terminal.integrated.defaultProfile.osx": "bash",
   "terminal.integrated.fontFamily": "'Fira Code', 'Monaco', 'Menlo', monospace",
   "terminal.integrated.fontSize": 12,
-  "window.zoomLevel": 1,
   "workbench.activityBar.visible": true,
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#ff79c6",
