@@ -1,8 +1,11 @@
 2gua.rainbow-brackets
+alfnielsen.vsc-rename-files
+atomiks.moonlight
 bmewburn.vscode-intelephense-client
 bungcip.better-toml
 cipchk.cssrem
 CoenraadS.bracket-pair-colorizer
+cssho.vscode-svgviewer
 dbaeumer.vscode-eslint
 DmitryDorofeev.empty-indent
 dssiqueira.drupal-8-snippets

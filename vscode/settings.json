@@ -84,12 +84,13 @@
     "editorCursor.foreground": "#ff79c6",
     "terminalCursor.foreground": "#ff79c6"
   },
-  "workbench.colorTheme": "Ayu Mirage Bordered",
+  "workbench.colorTheme": "Moonlight",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.iconTheme": "vscode-great-icons",
   "workbench.list.horizontalScrolling": true,
   "workbench.startupEditor": "newUntitledFile",
-  "bracketPairColorizer.depreciation-notice": false
+  "bracketPairColorizer.depreciation-notice": false,
+  "window.menuBarVisibility": "toggle"
 }
