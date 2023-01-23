@@ -66,19 +66,17 @@ $ln "$scriptDir/gnome/gnome-unset-all-keybindings.sh" "$homeDir/Scripts/gnome-un
 
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
-$ln "$scriptDir/bashrc" "$homeDir/.bashrc";
-$ln "$scriptDir/bashrc" "$homeDir/.bash_profile";
-$ln "$scriptDir/bash_aliases" "$homeDir/.bash_aliases";
-$ln "$scriptDir/bash_env" "$homeDir/.bash_env";
-$ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
-$ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
-$ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
-$ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
-$ln "$scriptDir/Xresources" "$homeDir/.Xresources";
-$ln "$scriptDir/vimrc" "$homeDir/.vimrc";
-$ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
-$ln "$scriptDir/mostrc" "$homeDir/.mostrc";
-$ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
+$ln "$scriptDir/terminal/bashrc" "$homeDir/.bashrc";
+$ln "$scriptDir/terminal/bashrc" "$homeDir/.bash_profile";
+$ln "$scriptDir/terminal/gitconfig" "$homeDir/.gitconfig";
+$ln "$scriptDir/terminal/gitexcludes" "$homeDir/.gitexcludes";
+$ln "$scriptDir/terminal/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
+$ln "$scriptDir/terminal/starship.toml" "$homeDir/.config/starship.toml";
+$ln "$scriptDir/terminal/Xresources" "$homeDir/.Xresources";
+$ln "$scriptDir/terminal/vimrc" "$homeDir/.vimrc";
+$ln "$scriptDir/terminal/vimrc" "$homeDir/.config/nvim/init.vim";
+$ln "$scriptDir/terminal/mostrc" "$homeDir/.mostrc";
+$ln "$scriptDir/terminal/nanorc" "$homeDir/.config/nano/nanorc";
 $ln "$scriptDir/gnome/gsettings.desktop" "$homeDir/.config/autostart/gsettings.desktop";
 $ln "$scriptDir/gnome/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
 $ln "$scriptDir/gnome/gtk-settings.ini" "$homeDir/.config/gtk-4.0/settings.ini";

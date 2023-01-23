@@ -1,10 +1,40 @@
 #!/bin/bash
 
+[[ "$(uname -s)" == "Darwin" ]] && macos="true" || linux="true";
+
+# ##############################################################################
+# Bash environment variables for MacOS and Linux
+# ##############################################################################
+
+export DOTFILES="$HOME/Projects/dotfiles";
+export LANG="en_IE.UTF-8";
+export LANGUAGE="en_IE.UTF-8";
+export LC_ALL="en_IE.UTF-8";
+export PAGER="less";
+export MANPAGER="most";
+export GREP_COLOR=always;
+export CLICOLOR_FORCE=true;
+export NVM_DIR="$HOME/.nvm";
+export GEM_HOME="$HOME/.gem";
+
+export PATH="$PATH:/usr/local/sbin";
+export PATH="$PATH:/usr/local/bin";
+export PATH="$PATH:/usr/bin";
+export PATH="$PATH:/usr/sbin";
+export PATH="$PATH:/bin";
+export PATH="$PATH:/sbin";
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin";
+export PATH="$PATH:$HOME/.config/composer/vendor/bin";
+export PATH="$PATH:$HOME/.local/bin";
+
+[[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
+[[ "$macos" == "true" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
+[[ "$linux" == "true" ]] && export GTK_THEME=Yaru:dark
+[[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=qt5ct
+
 # ##############################################################################
 # Bash aliases for MacOS and Linux
 # ##############################################################################
-
-[[ "$(uname -s)" == "Darwin" ]] && macos="true" || linux="true";
 
 alias dotfiles='cd "${DOTFILES}"';
 alias less='less -R';
@@ -45,3 +75,19 @@ alias k='kubectl'
 [[ "$linux" == "true" ]] && alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
 [[ "$linux" == "true" ]] && alias vscodeExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
 [[ "$linux" == "true" ]] && alias vscodeImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 code --install-extension';
+
+# ##############################################################################
+# Bash sources and launches
+# ##############################################################################
+
+source /usr/share/bash-completion/bash_completion &> /dev/null;
+source /usr/local/etc/profile.d/bash_completion.sh &> /dev/null;
+source "$NVM_DIR/nvm.sh" &> /dev/null;
+source "$NVM_DIR/bash_completion" &> /dev/null;
+source "/usr/share/nvm/init-nvm.sh" &> /dev/null;
+source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash" &> /dev/null;
+
+complete -C /usr/local/bin/terraform terraform;
+eval "$(starship init bash)";
+
+which neofetch &> /dev/null && which lolcat &> /dev/null && neofetch | lolcat;
