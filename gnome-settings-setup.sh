@@ -1,26 +1,18 @@
 #!/bin/bash
 
 # ##############################################################################
-# Script for setting up Gnome preferences
+# Gnome settings configurations
 # ##############################################################################
 
-gnome-extensions disable ubuntu-dock@ubuntu.com;
-gnome-extensions enable pop-shell@system76.com;
-
 gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:appmenu";
-gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
-gsettings set org.gnome.mutter dynamic-workspaces false
-gsettings set org.gnome.desktop.interface clock-show-seconds true
-gsettings set org.gnome.desktop.interface clock-show-weekday true
-gsettings set org.gnome.desktop.default-applications.terminal exec "kitty"
-gsettings set org.gnome.shell.extensions.pop-shell gap-inner 4
-gsettings set org.gnome.shell.extensions.pop-shell gap-outer 4
-gsettings set org.gnome.shell.extensions.pop-shell active-hint false
-gsettings set org.gnome.shell.extensions.pop-shell hint-color-rgba 'rgba(215, 81, 34, 1)'
-
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ name "Open kitty"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ command "kitty"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ binding "<Shift><Super><Alt>Return"
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 10;
+gsettings set org.gnome.mutter dynamic-workspaces false;
+gsettings set org.gnome.desktop.interface clock-show-seconds true;
+gsettings set org.gnome.desktop.interface clock-show-weekday true;
+gsettings set org.gnome.desktop.default-applications.terminal exec "kitty";
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ name "Open kitty";
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ command "kitty";
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ binding "<Shift><Super><Alt>Return";
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/']";
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']";
 gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>Tab']";
@@ -57,8 +49,18 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot "[]
 gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-clip "[]";
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Shift><Super><Alt>l']";
 gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['<Super>space']";
+
+# ##############################################################################
+# Gnome extensions configurations
+# ##############################################################################
+
+gnome-extensions enable pop-shell@system76.com;
 gsettings set org.gnome.shell.extensions.pop-shell activate-launcher "[]";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-floating "['<Shift><Super><Alt>space']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-stacking-global "['<Shift><Super><Alt>s']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-tiling "['<Shift><Super><Alt>t']";
 gsettings set org.gnome.shell.extensions.pop-shell tile-orientation "['<Shift><Super><Alt>o']";
+gsettings set org.gnome.shell.extensions.pop-shell gap-inner 8;
+gsettings set org.gnome.shell.extensions.pop-shell gap-outer 8;
+gsettings set org.gnome.shell.extensions.pop-shell show-title true;
+gsettings set org.gnome.shell.extensions.pop-shell active-hint false;
