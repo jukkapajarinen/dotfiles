@@ -79,6 +79,7 @@ $ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
 $ln "$scriptDir/gsettings.desktop" "$homeDir/.config/autostart/gsettings.desktop";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
 $ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-4.0/settings.ini";
+$ln "$scriptDir/pop-shell.json" "$homeDir/.config/pop-shell/config.json";
 $ln "$scriptDir/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
 $ln "$scriptDir/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
 $ln "$scriptDir/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
@@ -86,7 +87,7 @@ $ln "$scriptDir/polybar.ini" "$homeDir/.config/polybar/config";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/.config/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
-$ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
+$ln "$scriptDir/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
 $ln "$scriptDir/Xmodmap" "$homeDir/.Xmodmap";
 
 # Linux create helper symlink to dotfiles

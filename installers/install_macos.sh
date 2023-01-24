@@ -65,7 +65,7 @@ $ln "$scriptDir/skhdrc" "$homeDir/.skhdrc";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application\ Support/Code/User/extensions.txt";
-$ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
+$ln "$scriptDir/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
 
 # MacOS create helper symlink to dotfiles
 echo -e "$arrow Create helper symlink to /dotfiles?";
