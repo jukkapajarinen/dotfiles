@@ -4,16 +4,31 @@
 # Gnome settings configurations
 # ##############################################################################
 
-gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:appmenu";
-gsettings set org.gnome.desktop.wm.preferences num-workspaces 10;
-gsettings set org.gnome.mutter dynamic-workspaces false;
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark';
+gsettings set org.gnome.desktop.interface icon-theme 'Adwaita';
+gsettings set org.gnome.desktop.interface cursor-theme 'DMZ-Black';
+gsettings set org.gnome.desktop.interface font-name 'Cantarell 11';
+gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 11';
 gsettings set org.gnome.desktop.interface clock-show-seconds true;
 gsettings set org.gnome.desktop.interface clock-show-weekday true;
+gsettings set org.gnome.desktop.interface clock-show-weekday true;
+gsettings set org.gnome.desktop.calendar show-weekdate true;
 gsettings set org.gnome.desktop.default-applications.terminal exec "kitty";
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ name "Open kitty";
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ command "kitty";
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/ binding "<Shift><Super><Alt>Return";
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/open-kitty/']";
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot "['<Shift><Super>3']";
+gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot "['<Shift><Super>4']";
+gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot-clip "[]";
+gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip "[]";
+gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot "[]";
+gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-clip "[]";
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Shift><Super><Alt>l']";
+gsettings set org.gnome.mutter dynamic-workspaces false;
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 10;
+gsettings set org.gnome.desktop.wm.preferences button-layout "close,minimize,maximize:appmenu";
 gsettings set org.gnome.desktop.wm.keybindings close "['<Super>q']";
 gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>Tab']";
 gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<Shift><Super>Tab']";
@@ -41,13 +56,6 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-7 "['<Super><
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-8 "['<Super><Ctrl><Alt>8']";
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-9 "['<Super><Ctrl><Alt>9']";
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super><Ctrl><Alt>0']";
-gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot "['<Shift><Super>3']";
-gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot "['<Shift><Super>4']";
-gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot-clip "[]";
-gsettings set org.gnome.settings-daemon.plugins.media-keys area-screenshot-clip "[]";
-gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot "[]";
-gsettings set org.gnome.settings-daemon.plugins.media-keys window-screenshot-clip "[]";
-gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Shift><Super><Alt>l']";
 gsettings set org.gnome.desktop.wm.keybindings panel-main-menu "['<Super>space']";
 
 # ##############################################################################
