@@ -77,6 +77,8 @@ $ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
 $ln "$scriptDir/gsettings.desktop" "$homeDir/.config/autostart/gsettings.desktop";
+$ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
+$ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-4.0/settings.ini";
 $ln "$scriptDir/pop-shell.json" "$homeDir/.config/pop-shell/config.json";
 $ln "$scriptDir/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
 $ln "$scriptDir/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
