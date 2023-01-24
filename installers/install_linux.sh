@@ -55,44 +55,63 @@ $mkdir "$homeDir/.config/polybar/";
 
 # Linux create custom script symlinks
 echo -e "$arrow Install user script files.";
-$ln "$scriptDir/wm/rofi-shutdown.sh" "$homeDir/Scripts/rofi-shutdown.sh";
-$ln "$scriptDir/wm/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh";
-$ln "$scriptDir/wm/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
-$ln "$scriptDir/wm/x-display-settings.sh" "$homeDir/Scripts/x-display-settings.sh";
-$ln "$scriptDir/wm/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
-$ln "$scriptDir/gnome/gnome-settings-setup.sh" "$homeDir/Scripts/gnome-settings-setup.sh";
-$ln "$scriptDir/gnome/gnome-gsd-manual-startup.sh" "$homeDir/Scripts/gnome-gsd-manual-startup.sh";
-$ln "$scriptDir/gnome/gnome-unset-all-keybindings.sh" "$homeDir/Scripts/gnome-unset-all-keybindings.sh";
+$ln "$scriptDir/rofi-shutdown.sh" "$homeDir/Scripts/rofi-shutdown.sh";
+$ln "$scriptDir/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh";
+$ln "$scriptDir/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
+$ln "$scriptDir/x-display-settings.sh" "$homeDir/Scripts/x-display-settings.sh";
+$ln "$scriptDir/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
+$ln "$scriptDir/gnome-settings-setup.sh" "$homeDir/Scripts/gnome-settings-setup.sh";
+$ln "$scriptDir/gnome-unset-all-keybindings.sh" "$homeDir/Scripts/gnome-unset-all-keybindings.sh";
 
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
-$ln "$scriptDir/terminal/bashrc" "$homeDir/.bashrc";
-$ln "$scriptDir/terminal/bashrc" "$homeDir/.bash_profile";
-$ln "$scriptDir/terminal/gitconfig" "$homeDir/.gitconfig";
-$ln "$scriptDir/terminal/gitexcludes" "$homeDir/.gitexcludes";
-$ln "$scriptDir/terminal/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
-$ln "$scriptDir/terminal/starship.toml" "$homeDir/.config/starship.toml";
-$ln "$scriptDir/terminal/Xresources" "$homeDir/.Xresources";
-$ln "$scriptDir/terminal/vimrc" "$homeDir/.vimrc";
-$ln "$scriptDir/terminal/vimrc" "$homeDir/.config/nvim/init.vim";
-$ln "$scriptDir/terminal/mostrc" "$homeDir/.mostrc";
-$ln "$scriptDir/terminal/nanorc" "$homeDir/.config/nano/nanorc";
-$ln "$scriptDir/gnome/gsettings.desktop" "$homeDir/.config/autostart/gsettings.desktop";
-$ln "$scriptDir/gnome/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
-$ln "$scriptDir/gnome/gtk-settings.ini" "$homeDir/.config/gtk-4.0/settings.ini";
-$ln "$scriptDir/wm/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
-$ln "$scriptDir/wm/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
-$ln "$scriptDir/wm/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
-$ln "$scriptDir/wm/polybar.ini" "$homeDir/.config/polybar/config";
-$ln "$scriptDir/vscode/settings.json" "$homeDir/.config/Code/User/settings.json";
-$ln "$scriptDir/vscode/keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
-$ln "$scriptDir/vscode/extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
-$ln "$scriptDir/keyboard/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
-$ln "$scriptDir/keyboard/Xmodmap" "$homeDir/.Xmodmap";
+$ln "$scriptDir/bashrc" "$homeDir/.bashrc";
+$ln "$scriptDir/bashrc" "$homeDir/.bash_profile";
+$ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
+$ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
+$ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
+$ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
+$ln "$scriptDir/Xresources" "$homeDir/.Xresources";
+$ln "$scriptDir/vimrc" "$homeDir/.vimrc";
+$ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
+$ln "$scriptDir/mostrc" "$homeDir/.mostrc";
+$ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
+$ln "$scriptDir/gsettings.desktop" "$homeDir/.config/autostart/gsettings.desktop";
+$ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-3.0/settings.ini";
+$ln "$scriptDir/gtk-settings.ini" "$homeDir/.config/gtk-4.0/settings.ini";
+$ln "$scriptDir/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
+$ln "$scriptDir/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
+$ln "$scriptDir/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
+$ln "$scriptDir/polybar.ini" "$homeDir/.config/polybar/config";
+$ln "$scriptDir/vscode-settings.json" "$homeDir/.config/Code/User/settings.json";
+$ln "$scriptDir/vscode-keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
+$ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
+$ln "$scriptDir/qmk_keymap.json" "$homeDir/.qmk_keymap.json";
+$ln "$scriptDir/Xmodmap" "$homeDir/.Xmodmap";
 
 # Linux create helper symlink to dotfiles
 echo -e "$arrow Create helper symlink to /dotfiles?";
 sudo $ln "$scriptDir" "/dotfiles";
+
+# ```
+# apt install git curl exa bat docker.io docker-compose most vim neovim neofetch lolcat fonts-firacode gnome-tweaks geary steam kitty keepassxc vlc;
+# ```
+
+# ```
+# cd $HOME/Downloads && git clone https://github.com/pop-os/shell.git && cd shell && make local-install;
+# sudo cp org.gnome.shell.extensions.pop-shell.gschema.xml /usr/share/glib-2.0/schemas/;
+# sudo glib-compile-schemas /usr/share/glib-2.0/schemas/;
+# ```
+# ```
+# curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim;
+# sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim';
+# ```
+# ```
+# sh -c "$(curl -fsSL https://starship.rs/install.sh)";
+# ```
+# ```
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash;
+# ```
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."

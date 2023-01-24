@@ -16,5 +16,6 @@ smudge = git-lfs smudge -- %f
 [pull]
 rebase = true
 
-[include]
-path = ~/.gituser
+[user]
+name = Jukka Pajarinen
+email = jukka.pajarinen@lumitum.com

@@ -31,7 +31,7 @@
   "emmet.triggerExpansionOnTab": true,
   "eslint.nodePath": "/usr/local/bin/node",
   "eslint.options": {
-    "configFile": "/dotfiles/vscode/eslintrc.json"
+    "configFile": "/dotfiles/eslintrc.json"
   },
   "eslint.validate": [
     "javascript",
@@ -69,7 +69,7 @@
   "scss.validate": false,
   "search.showLineNumbers": true,
   "stylelint.config": {
-    "extends": "/dotfiles/vscode/stylelintrc.json"
+    "extends": "/dotfiles/stylelintrc.json"
   },
   "stylelint.enable": true,
   "telemetry.telemetryLevel": "off",

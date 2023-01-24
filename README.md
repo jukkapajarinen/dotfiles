@@ -1,25 +1,21 @@
 # Jukka's dotfiles 💎
 
-My dotfiles and other goodies for MacOS and Linux.
+My dotfiles and scripts for MacOS and Linux. Dotfiles are symlinked to appropriate directories by handy installation scripts.
 
 ## Installation
 
-Clone this repository to any location in your filesystem.  E.g. **~/Projects**.
+- ⚠️ Please read installation scripts before usage. You may accidentally override things you don't want to! ⚠️
+- Clone this repository to any location in your filesystem.  (E.g. **~/Projects**)
+- Change directory to the previously **cloned** `dotfiles` directory
+- Launch the `./installers/install_macos.sh` or `./installers/install_linux.sh` script in **bash**!
+  - *Supported options are `-f` or `--force` to force installation.*
+  - *Don't use **sudo!** (installer will ask for sudo password, if needed.)*
+  - *Installer will ask your permission `[y/N]` to start the installation.*
+
+## TL;DR;
 
 ```
-cd ~/Projects && git clone git@github.com:jukkapajarinen/dotfiles.git;
-```
-
-Change to the **project directory** and launch the `installers/install_macos.sh` or `installers/install_linux.sh` script in **bash**!
-- *Supported options are `-f` or `--force` to force installation.*
-- *Don't use **sudo!** (installer will ask for sudo password, if needed.)*
-- *Installer will ask your permission `[y/N]` to start the installation.*
-
-```
-cd ~/Projects/dotfiles && ./installers/install_macos.sh; #MacOS normal installation
-cd ~/Projects/dotfiles && ./installers/install_macos.sh -f; #MacOS forced installation
-cd ~/Projects/dotfiles && ./installers/install_linux.sh; #Linux normal installation
-cd ~/Projects/dotfiles && ./installers/install_linux.sh -f; #Linux forced installation
+git clone git@github.com:jukkapajarinen/dotfiles.git && cd dotfiles && bash ./installers/install_linux.sh;
 ```
 
 ## Author
