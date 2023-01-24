@@ -45,7 +45,7 @@ alias ip='ip --color=auto';
 alias mv='mv -i';
 alias ls='exa'; #alias ls='ls --color=auto';
 alias ll='exa -la';
-which batcat && alias bat='batcat';
+which batcat &> /dev/null  && alias bat='batcat';
 alias cat='bat -p';
 alias dockerpoop='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker network rm $(docker network ls -q) && docker volume rm $(docker volume ls -q);';
 alias dockerpoopSudo='sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q) && sudo docker rmi -f $(sudo docker images -q) && sudo docker network rm $(sudo docker network ls -q) && sudo docker volume rm $(sudo docker volume ls -q);';
