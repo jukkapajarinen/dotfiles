@@ -6,7 +6,6 @@
 # Bash environment variables for MacOS and Linux
 # ##############################################################################
 
-export DOTFILES="$HOME/Projects/dotfiles";
 export LANG="en_IE.UTF-8";
 export LANGUAGE="en_IE.UTF-8";
 export LC_ALL="en_IE.UTF-8";
@@ -14,9 +13,10 @@ export PAGER="less";
 export MANPAGER="most";
 export GREP_COLOR=always;
 export CLICOLOR_FORCE=true;
+
+export DOTFILES="$HOME/Projects/dotfiles";
 export NVM_DIR="$HOME/.nvm";
 export GEM_HOME="$HOME/.gem";
-
 export PATH="$PATH:/usr/local/sbin";
 export PATH="$PATH:/usr/local/bin";
 export PATH="$PATH:/usr/bin";
@@ -29,8 +29,6 @@ export PATH="$PATH:$HOME/.local/bin";
 
 [[ "$macos" == "true" ]] && export BASH_SILENCE_DEPRECATION_WARNING=1;
 [[ "$macos" == "true" ]] && export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin";
-[[ "$linux" == "true" ]] && export GTK_THEME=Yaru:dark
-[[ "$linux" == "true" ]] && export QT_QPA_PLATFORMTHEME=qt5ct
 
 # ##############################################################################
 # Bash aliases for MacOS and Linux
@@ -66,15 +64,15 @@ alias k='kubectl'
 [[ "$macos" == "true" ]] && alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock';
 [[ "$macos" == "true" ]] && alias disableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores true';
 [[ "$macos" == "true" ]] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
-[[ "$macos" == "true" ]] && alias vscodeExport='code --list-extensions > ~/Library/Application\ Support/Code/User/vscode-extensions.txt';
-[[ "$macos" == "true" ]] && alias vscodeImport='cat ~/Library/Application\ Support/Code/User/vscode-extensions.txt | xargs -L 1 code --install-extension';
+[[ "$macos" == "true" ]] && alias vscodeExport='code --list-extensions > ~/Library/Application\ Support/Code/User/extensions.txt';
+[[ "$macos" == "true" ]] && alias vscodeImport='cat ~/Library/Application\ Support/Code/User/extensions.txt | xargs -L 1 code --install-extension';
 [[ "$linux" == "true" ]] && alias ls='ls --color=auto'
 [[ "$linux" == "true" ]] && alias open='xdg-open';
 [[ "$linux" == "true" ]] && alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";
 [[ "$linux" == "true" ]] && alias apt-log-uninstalled="cat /var/log/apt/history.log | grep 'Commandline' | grep 'purge\|remove'";
 [[ "$linux" == "true" ]] && alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
-[[ "$linux" == "true" ]] && alias vscodeExport='code --list-extensions > ~/.config/Code/User/vscode-extensions.txt';
-[[ "$linux" == "true" ]] && alias vscodeImport='cat ~/.config/Code/User/vscode-extensions.txt | xargs -L 1 code --install-extension';
+[[ "$linux" == "true" ]] && alias vscodeExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
+[[ "$linux" == "true" ]] && alias vscodeImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 code --install-extension';
 
 # ##############################################################################
 # Bash sources and launches
@@ -83,11 +81,7 @@ alias k='kubectl'
 source /usr/share/bash-completion/bash_completion &> /dev/null;
 source /usr/local/etc/profile.d/bash_completion.sh &> /dev/null;
 source "$NVM_DIR/nvm.sh" &> /dev/null;
-source "$NVM_DIR/bash_completion" &> /dev/null;
-source "/usr/share/nvm/init-nvm.sh" &> /dev/null;
-source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash" &> /dev/null;
 
-complete -C /usr/local/bin/terraform terraform;
 eval "$(starship init bash)";
 
-which neofetch &> /dev/null && which lolcat &> /dev/null && neofetch | lolcat;
+which neofetch &> /dev/null && neofetch;

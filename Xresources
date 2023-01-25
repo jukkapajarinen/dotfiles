@@ -2,26 +2,26 @@
 ! XResources configuration
 ! ##############################################################################
 
-*.foreground: #f8f8f2
-*.background: #282a36
-*.color0:     #000000
-*.color8:     #4d4d4d
-*.color1:     #ff5555
-*.color9:     #ff6e67
-*.color2:     #50fa7b
-*.color10:    #5af78e
-*.color3:     #f1fa8c
-*.color11:    #f4f99d
-*.color4:     #bd93f9
-*.color12:    #caa9fa
-*.color5:     #ff79c6
-*.color13:    #ff92d0
-*.color6:     #8be9fd
-*.color14:    #9aedfe
-*.color7:     #bfbfbf
-*.color15:    #e6e6e6
-*pointerColor: #f8f8f2
-*cursorColor: #ff79c6
+*.foreground: #d4be98
+*.background: #1d2021
+*.color0:     #32302f
+*.color8:     #32302f
+*.color1:     #ea6962
+*.color9:     #ea6962
+*.color2:     #a9b665
+*.color10:    #a9b665
+*.color3:     #e78a4e
+*.color11:    #e78a4e
+*.color4:     #7daea3
+*.color12:    #7daea3
+*.color5:     #d3869b
+*.color13:    #d3869b
+*.color6:     #89b482
+*.color14:    #89b482
+*.color7:     #d4be98
+*.color15:    #d4be98
+*pointerColor: #d4be98
+*cursorColor: #d3869b
 
 xterm*termName: xterm-256color
 xterm*locale: true

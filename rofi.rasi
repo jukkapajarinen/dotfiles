@@ -8,10 +8,10 @@ configuration {
   padding: 12;
   line-margin: 6;
   hide-scrollbar: true;
-  color-normal: "#1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2";
-  color-urgent: "#1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2";
-  color-active: "#1e1f29, #f8f8f2, #1e1f29, #69558c, #f8f8f2";
-  color-window: "#1e1f29, #ffffff, #1e1f29";
+  color-normal: "#1d2021, #d4be98, #1d2021, #d3869b, #d4be98";
+  color-urgent: "#1d2021, #d4be98, #1d2021, #d3869b, #d4be98";
+  color-active: "#1d2021, #d4be98, #1d2021, #d3869b, #d4be98";
+  color-window: "#1d2021, #d4be98, #1d2021";
   kb-mode-next: "Shift+Right";
   kb-mode-previous: "Shift+Left";
   kb-row-up: "Up,Control+Shift+Tab,Alt+Shift+Tab";

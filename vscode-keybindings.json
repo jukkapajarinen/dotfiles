@@ -1,6 +1,6 @@
 [
-  { "key": "cmd+alt+enter", "command": "workbench.action.terminal.toggleTerminal" },
-  { "key": "ctrl+alt+enter", "command": "workbench.action.terminal.toggleTerminal" },
+  { "key": "cmd+alt+enter", "command": "workbench.action.terminal.openNativeConsole", "when": "editorIsOpen" },
+  { "key": "ctrl+alt+enter", "command": "workbench.action.terminal.openNativeConsole", "when": "editorIsOpen" },
   { "key": "ctrl+shift+[Equal]", "command": "-workbench.action.terminal.toggleTerminal" },
   { "key": "cmd+shift+[Minus]", "command": "workbench.action.terminal.new" },
   { "key": "ctrl+shift+[Minus]", "command": "workbench.action.terminal.new" },

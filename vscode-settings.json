@@ -56,7 +56,6 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.validate.enable": false,
   "less.validate": false,
-  "omnisharp.useGlobalMono": "never",
   "php-docblocker.gap": true,
   "php-docblocker.useShortNames": true,
   "phpcbf.documentFormattingProvider": true,
@@ -79,12 +78,11 @@
   "terminal.integrated.defaultProfile.osx": "bash",
   "terminal.integrated.fontFamily": "'Fira Code', 'Monaco', 'Menlo', monospace",
   "terminal.integrated.fontSize": 12,
-  "workbench.activityBar.visible": true,
   "workbench.colorCustomizations": {
-    "editorCursor.foreground": "#ff79c6",
-    "terminalCursor.foreground": "#ff79c6"
+    "editorCursor.foreground": "#d3869b",
+    "terminalCursor.foreground": "#d3869b"
   },
-  "workbench.colorTheme": "Moonlight",
+  "workbench.colorTheme": "Gruvbox Material Dark",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,
@@ -92,5 +90,8 @@
   "workbench.list.horizontalScrolling": true,
   "workbench.startupEditor": "newUntitledFile",
   "bracketPairColorizer.depreciation-notice": false,
-  "window.menuBarVisibility": "toggle"
+  "window.menuBarVisibility": "toggle",
+  "terminal.explorerKind": "external",
+  "terminal.external.linuxExec": "kitty",
+  "terminal.external.osxExec": "Kitty.app"
 }
