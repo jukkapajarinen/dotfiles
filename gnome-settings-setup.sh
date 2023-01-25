@@ -5,11 +5,6 @@
 # ##############################################################################
 
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
-gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark';
-gsettings set org.gnome.desktop.interface icon-theme 'Adwaita';
-gsettings set org.gnome.desktop.interface cursor-theme 'DMZ-Black';
-gsettings set org.gnome.desktop.interface font-name 'Cantarell 11';
-gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 11';
 gsettings set org.gnome.desktop.interface clock-show-seconds true;
 gsettings set org.gnome.desktop.interface clock-show-weekday true;
 gsettings set org.gnome.desktop.interface clock-show-weekday true;

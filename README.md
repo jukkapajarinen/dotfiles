@@ -5,7 +5,7 @@ My dotfiles and scripts for MacOS and Linux. Dotfiles are symlinked to appropria
 ## Installation
 
 - ⚠️ Please read installation scripts before usage. You may accidentally override things you don't want to! ⚠️
-- Clone this repository to any location in your filesystem.  (E.g. **~/Projects**)
+- Clone this repository to any location in your filesystem.  (E.g. **~/**)
 - Change directory to the previously **cloned** `dotfiles` directory
 - Launch the `./installers/install_macos.sh` or `./installers/install_linux.sh` script in **bash**!
   - *Supported options are `-f` or `--force` to force installation.*
