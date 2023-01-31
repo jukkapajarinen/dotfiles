@@ -14,7 +14,7 @@ export MANPAGER="most";
 export GREP_COLOR=always;
 export CLICOLOR_FORCE=true;
 
-export DOTFILES="$HOME/Projects/dotfiles";
+export DOTFILES="$HOME/dotfiles";
 export NVM_DIR="$HOME/.nvm";
 export GEM_HOME="$HOME/.gem";
 export PATH="$PATH:/usr/local/sbin";
@@ -54,7 +54,7 @@ alias gitIgnore='git update-index --assume-unchanged';
 alias gitUnignore='git update-index --no-assume-unchanged';
 alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
-alias k='kubectl'
+alias k='kubectl';
 
 [[ "$macos" == "true" ]] && alias ls='ls -G'
 [[ "$macos" == "true" ]] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';
