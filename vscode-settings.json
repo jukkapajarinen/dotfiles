@@ -54,7 +54,7 @@
     "*.phtml"
   ],
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "javascript.validate.enable": false,
+  "javascript.suggestionActions.enabled": true,
   "less.validate": false,
   "php-docblocker.gap": true,
   "php-docblocker.useShortNames": true,
@@ -93,5 +93,7 @@
   "window.menuBarVisibility": "toggle",
   "terminal.explorerKind": "external",
   "terminal.external.linuxExec": "kitty",
-  "terminal.external.osxExec": "Kitty.app"
+  "terminal.external.osxExec": "Kitty.app",
+  "explorer.openEditors.sortOrder": "alphabetical",
+  "search.sortOrder": "fileNames"
 }

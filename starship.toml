@@ -4,7 +4,7 @@
 
 format = """
 $username$directory$git_branch$git_status$git_state$package$cmd_duration
-[\\$](blue bold) """
+[🦄](blue bold) """
 scan_timeout = 10
 add_newline = false
 
