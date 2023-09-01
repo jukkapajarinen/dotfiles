@@ -3,7 +3,7 @@
 " ##############################################################################
 
 call plug#begin('~/.vim/plugged')
-Plug 'ayu-theme/ayu-vim'
+Plug 'Rigellute/shades-of-purple.vim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 call plug#end()
@@ -26,5 +26,5 @@ set smarttab
 set autoindent
 
 set termguicolors
-let ayucolor="mirage"
-colorscheme ayu
+syntax enable
+colorscheme shades_of_purple
