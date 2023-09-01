@@ -1,4 +1,5 @@
 2gua.rainbow-brackets
+ahmadawais.shades-of-purple
 alfnielsen.vsc-rename-files
 bmewburn.vscode-intelephense-client
 bungcip.better-toml
