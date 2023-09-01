@@ -63,7 +63,7 @@ gsettings set org.gnome.shell.extensions.pop-shell toggle-floating "['<Shift><Su
 gsettings set org.gnome.shell.extensions.pop-shell toggle-stacking-global "['<Shift><Super><Alt>s']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-tiling "['<Shift><Super><Alt>t']";
 gsettings set org.gnome.shell.extensions.pop-shell tile-orientation "['<Shift><Super><Alt>o']";
-gsettings set org.gnome.shell.extensions.pop-shell gap-inner 2;
-gsettings set org.gnome.shell.extensions.pop-shell gap-outer 2;
+gsettings set org.gnome.shell.extensions.pop-shell gap-inner 1;
+gsettings set org.gnome.shell.extensions.pop-shell gap-outer 1;
 gsettings set org.gnome.shell.extensions.pop-shell show-title true;
 gsettings set org.gnome.shell.extensions.pop-shell active-hint false;

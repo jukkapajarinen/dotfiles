@@ -2,6 +2,7 @@
 alfnielsen.vsc-rename-files
 bmewburn.vscode-intelephense-client
 bungcip.better-toml
+chuaple.vscode-lebab
 cipchk.cssrem
 CoenraadS.bracket-pair-colorizer
 cssho.vscode-svgviewer
@@ -14,6 +15,7 @@ esbenp.prettier-vscode
 ginfuru.ginfuru-vscode-jekyll-syntax
 huangbaoshan.comment-aligner
 ikappas.phpcs
+jdinhlife.gruvbox
 marcostazi.VS-code-drupal
 mblode.twig-language-2
 medzhidov.hex-rgba-converter
@@ -22,6 +24,7 @@ neilbrayfield.php-docblocker
 nemesarial.dust
 nonylene.dark-molokai-theme
 persoderlind.vscode-phpcbf
+Ransh.ransh
 redhat.vscode-commons
 redhat.vscode-xml
 richie5um2.vscode-sort-json
@@ -30,6 +33,7 @@ sainnhe.gruvbox-material
 sissel.shopify-liquid
 stylelint.vscode-stylelint
 syler.sass-indented
+teabyii.ayu
 timonwong.shellcheck
 TomiTurtiainen.rf-intellisense
 tomoki1207.pdf

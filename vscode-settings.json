@@ -79,10 +79,10 @@
   "terminal.integrated.fontFamily": "'Fira Code', 'Monaco', 'Menlo', monospace",
   "terminal.integrated.fontSize": 12,
   "workbench.colorCustomizations": {
-    "editorCursor.foreground": "#d3869b",
-    "terminalCursor.foreground": "#d3869b"
+    "editorCursor.foreground": "#FFFC00",
+    "terminalCursor.foreground": "#FFFC00"
   },
-  "workbench.colorTheme": "Gruvbox Material Dark",
+  "workbench.colorTheme": "Ayu Mirage Bordered",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,

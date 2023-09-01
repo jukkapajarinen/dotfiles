@@ -83,5 +83,3 @@ source /usr/local/etc/profile.d/bash_completion.sh &> /dev/null;
 source "$NVM_DIR/nvm.sh" &> /dev/null;
 
 eval "$(starship init bash)";
-
-which neofetch &> /dev/null && neofetch;

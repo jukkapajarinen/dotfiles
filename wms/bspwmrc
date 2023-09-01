@@ -4,7 +4,6 @@
 # bspwm configuration
 # ##############################################################################
 
-xrdb "$HOME/.Xresources";
 xsetroot -cursor_name left_ptr;
 hdmiConnected=$(xrandr -q | grep "HDMI-2 connected" &> /dev/null; echo $?);
 if [[ "$hdmiConnected" == "0" ]]; then
