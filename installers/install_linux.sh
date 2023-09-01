@@ -55,11 +55,11 @@ $mkdir "$homeDir/.config/polybar/";
 
 # Linux create custom script symlinks
 echo -e "$arrow Install user script files.";
-$ln "$scriptDir/rofi-shutdown.sh" "$homeDir/Scripts/rofi-shutdown.sh";
-$ln "$scriptDir/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh";
-$ln "$scriptDir/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
-$ln "$scriptDir/x-display-settings.sh" "$homeDir/Scripts/x-display-settings.sh";
-$ln "$scriptDir/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
+$ln "$scriptDir/wms/rofi-shutdown.sh" "$homeDir/Scripts/rofi-shutdown.sh";
+$ln "$scriptDir/wms/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh";
+$ln "$scriptDir/wms/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
+$ln "$scriptDir/wms/x-display-settings.sh" "$homeDir/Scripts/x-display-settings.sh";
+$ln "$scriptDir/wms/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
 $ln "$scriptDir/gnome-settings-setup.sh" "$homeDir/Scripts/gnome-settings-setup.sh";
 $ln "$scriptDir/gnome-unset-all-keybindings.sh" "$homeDir/Scripts/gnome-unset-all-keybindings.sh";
 
@@ -75,18 +75,17 @@ $ln "$scriptDir/Xresources" "$homeDir/.Xresources";
 $ln "$scriptDir/vimrc" "$homeDir/.vimrc";
 $ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
-$ln "$scriptDir/nanorc" "$homeDir/.config/nano/nanorc";
 $ln "$scriptDir/gsettings.desktop" "$homeDir/.config/autostart/gsettings.desktop";
 $ln "$scriptDir/pop-shell.json" "$homeDir/.config/pop-shell/config.json";
-$ln "$scriptDir/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
-$ln "$scriptDir/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
-$ln "$scriptDir/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
-$ln "$scriptDir/polybar.ini" "$homeDir/.config/polybar/config";
+$ln "$scriptDir/wms/bspwmrc" "$homeDir/.config/bspwm/bspwmrc";
+$ln "$scriptDir/wms/sxhkdrc" "$homeDir/.config/sxhkd/sxhkdrc";
+$ln "$scriptDir/wms/rofi.rasi" "$homeDir/.config/rofi/config.rasi";
+$ln "$scriptDir/wms/polybar.ini" "$homeDir/.config/polybar/config";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/.config/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
-$ln "$scriptDir/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
-$ln "$scriptDir/Xmodmap" "$homeDir/.Xmodmap";
+$ln "$scriptDir/kbd/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
+$ln "$scriptDir/kbd/Xmodmap" "$homeDir/.Xmodmap";
 
 # Linux create helper symlink to dotfiles
 echo -e "$arrow Create helper symlink to /dotfiles?";

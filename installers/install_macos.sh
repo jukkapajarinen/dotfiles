@@ -59,13 +59,12 @@ $ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
 $ln "$scriptDir/vimrc" "$homeDir/.vimrc";
 $ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
-$ln "$scriptDir/nanorc" "$homeDir/.nanorc";
-$ln "$scriptDir/yabairc" "$homeDir/.yabairc";
-$ln "$scriptDir/skhdrc" "$homeDir/.skhdrc";
+$ln "$scriptDir/wms/yabairc" "$homeDir/.yabairc";
+$ln "$scriptDir/wms/skhdrc" "$homeDir/.skhdrc";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application\ Support/Code/User/extensions.txt";
-$ln "$scriptDir/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
+$ln "$scriptDir/kbd/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
 
 # MacOS create helper symlink to dotfiles
 echo -e "$arrow Create helper symlink to /dotfiles?";
