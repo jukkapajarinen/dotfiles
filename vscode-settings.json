@@ -13,7 +13,7 @@
   "editor.cursorWidth": 5,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": false,
-  "editor.fontFamily": "'JetBrains Mono', 'Fira Code', 'Monaco', 'Menlo', monospace",
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Fira Code', 'Monaco', 'Menlo', monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 12,
   "editor.fontWeight": "400",
@@ -76,17 +76,15 @@
   "terminal.integrated.cursorStyle": "block",
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.defaultProfile.osx": "bash",
-  "terminal.integrated.fontFamily": "'JetBrains Mono', 'Fira Code', 'Monaco', 'Menlo', monospace",
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'Fira Code', 'Monaco', 'Menlo', monospace",
   "terminal.integrated.fontSize": 12,
   "workbench.colorCustomizations": {
     "editorCursor.foreground": "#fad000",
     "terminalCursor.foreground": "#fad000"
   },
-  "workbench.colorTheme": "Shades of Purple",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,
-  "workbench.iconTheme": "vscode-great-icons",
   "workbench.list.horizontalScrolling": true,
   "workbench.startupEditor": "newUntitledFile",
   "bracketPairColorizer.depreciation-notice": false,
@@ -95,5 +93,7 @@
   "terminal.external.linuxExec": "kitty",
   "terminal.external.osxExec": "Kitty.app",
   "explorer.openEditors.sortOrder": "alphabetical",
-  "search.sortOrder": "fileNames"
+  "search.sortOrder": "fileNames",
+  "workbench.colorTheme": "Shades of Purple",
+  "workbench.iconTheme": "vscode-great-icons"
 }

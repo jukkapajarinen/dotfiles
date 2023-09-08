@@ -2,6 +2,12 @@
   "float": [
     {
       "class": "Gnome-calculator"
+    },
+    {
+      "class": "gnome-control-center"
+    },
+    {
+      "class": "steam"
     }
   ],
   "skiptaskbarhidden": [],

@@ -90,5 +90,29 @@
   { "key": "ctrl+g", "command": "editor.action.nextMatchFindAction", "when": "editorFocus" },
   { "key": "cmd+g", "command": "-editor.action.nextMatchFindAction", "when": "editorFocus" },
   { "key": "ctrl+g", "command": "workbench.action.terminal.findNext", "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
-  { "key": "cmd+g", "command": "-workbench.action.terminal.findNext", "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" }
+  {
+    "key": "cmd+g",
+    "command": "-workbench.action.terminal.findNext",
+    "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+shift+meta+d",
+    "command": "workbench.view.debug",
+    "when": "viewContainer.workbench.view.debug.enabled"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "-workbench.view.debug",
+    "when": "viewContainer.workbench.view.debug.enabled"
+  },
+  {
+    "key": "ctrl+shift+meta+l",
+    "command": "liquid.formatDocument",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-liquid.formatDocument",
+    "when": "editorTextFocus"
+  }
 ]

@@ -73,6 +73,7 @@ alias k='kubectl';
 [[ "$linux" == "true" ]] && alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
 [[ "$linux" == "true" ]] && alias vscodeExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
 [[ "$linux" == "true" ]] && alias vscodeImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 code --install-extension';
+[[ "$linux" == "true" ]] && alias nvim='~/Applications/nvim.appimage';
 
 # ##############################################################################
 # Bash sources and launches
