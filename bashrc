@@ -16,13 +16,14 @@ export CLICOLOR_FORCE=true;
 
 export DOTFILES="$HOME/dotfiles";
 export NVM_DIR="$HOME/.nvm";
-export GEM_HOME="$HOME/.gem";
+export GEM_HOME="$HOME/.gem/";
 export PATH="$PATH:/usr/local/sbin";
 export PATH="$PATH:/usr/local/bin";
 export PATH="$PATH:/usr/bin";
 export PATH="$PATH:/usr/sbin";
 export PATH="$PATH:/bin";
 export PATH="$PATH:/sbin";
+export PATH="$PATH:$GEM_HOME/bin";
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin";
 export PATH="$PATH:$HOME/.config/composer/vendor/bin";
 export PATH="$PATH:$HOME/.local/bin";
