@@ -114,5 +114,9 @@
     "key": "ctrl+shift+l",
     "command": "-liquid.formatDocument",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "workbench.action.files.saveFiles"
   }
 ]

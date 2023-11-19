@@ -61,10 +61,10 @@
   "phpcbf.documentFormattingProvider": true,
   "phpcbf.enable": true,
   "phpcbf.executablePath": "/home/jukkapajarinen/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcbf",
-  "phpcbf.standard": "/home/jukkapajarinen/.config/composer/vendor/drupal/coder/coder_sniffer/Drupal",
+  "phpcbf.standard": "/home/jukkapajarinen/.config/composer/vendor/wp-coding-standards/wpcs/WordPress",
   "phpcs.enable": true,
   "phpcs.executablePath": "/home/jukkapajarinen/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcs",
-  "phpcs.standard": "/home/jukkapajarinen/.config/composer/vendor/drupal/coder/coder_sniffer/Drupal",
+  "phpcs.standard": "/home/jukkapajarinen/.config/composer/vendor/wp-coding-standards/wpcs/WordPress",
   "scss.validate": false,
   "search.showLineNumbers": true,
   "stylelint.config": {
@@ -87,7 +87,6 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.list.horizontalScrolling": true,
   "workbench.startupEditor": "newUntitledFile",
-  "bracketPairColorizer.depreciation-notice": false,
   "window.menuBarVisibility": "toggle",
   "terminal.explorerKind": "external",
   "terminal.external.linuxExec": "kitty",
@@ -95,5 +94,10 @@
   "explorer.openEditors.sortOrder": "alphabetical",
   "search.sortOrder": "fileNames",
   "workbench.colorTheme": "Shades of Purple",
-  "workbench.iconTheme": "vscode-great-icons"
+  "workbench.iconTheme": "vscode-great-icons",
+  "[twig]": {
+    "editor.defaultFormatter": "mblode.twig-language-2",
+  },
+  "twig-language-2.indentStyle": "space",
+  "twig-language-2.tabSize": 2
 }

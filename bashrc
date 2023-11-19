@@ -56,6 +56,8 @@ alias gitUnignore='git update-index --no-assume-unchanged';
 alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
 alias k='kubectl';
+alias python=python2;
+alias deit='docker exec -it';
 
 [[ "$macos" == "true" ]] && alias ls='ls -G'
 [[ "$macos" == "true" ]] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';

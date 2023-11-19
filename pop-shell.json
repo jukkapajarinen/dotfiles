@@ -8,6 +8,12 @@
     },
     {
       "class": "steam"
+    },
+    {
+      "class": "com.github.vikdevelop.timer"
+    },
+    {
+      "class": "AppRun.wrapped"
     }
   ],
   "skiptaskbarhidden": [],
