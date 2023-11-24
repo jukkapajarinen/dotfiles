@@ -2,7 +2,6 @@
 ahmadawais.shades-of-purple
 bungcip.better-toml
 dbaeumer.vscode-eslint
-eamodio.gitlens
 esbenp.prettier-vscode
 ginfuru.ginfuru-vscode-jekyll-syntax
 marcostazi.VS-code-drupal
@@ -13,7 +12,6 @@ nemesarial.dust
 persoderlind.vscode-phpcbf
 redhat.vscode-xml
 richie5um2.vscode-sort-json
-sissel.shopify-liquid
 stylelint.vscode-stylelint
 syler.sass-indented
 timonwong.shellcheck
