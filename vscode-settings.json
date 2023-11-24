@@ -5,12 +5,13 @@
   "[php]": {
     "editor.defaultFormatter": "persoderlind.vscode-phpcbf"
   },
+  "[twig]": {
+    "editor.defaultFormatter": "mblode.twig-language-2"
+  },
   "css.validate": false,
-  "cssrem.rootFontSize": 12,
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.cursorBlinking": "blink",
-  "editor.cursorStyle": "block",
-  "editor.cursorWidth": 5,
+  "editor.cursorStyle": "block-outline",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": false,
   "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Fira Code', 'Monaco', 'Menlo', monospace",
@@ -38,66 +39,45 @@
     "typescript"
   ],
   "explorer.confirmDragAndDrop": false,
+  "explorer.openEditors.sortOrder": "alphabetical",
   "extensions.ignoreRecommendations": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": false,
-  "intelephense.environment.includePaths": [
-    "web/core/includes"
-  ],
-  "intelephense.files.associations": [
-    "*.inc",
-    "*.theme",
-    "*.install",
-    "*.module",
-    "*.profile",
-    "*.php",
-    "*.phtml"
-  ],
-  "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.suggestionActions.enabled": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "less.validate": false,
-  "php-docblocker.gap": true,
-  "php-docblocker.useShortNames": true,
   "phpcbf.documentFormattingProvider": true,
   "phpcbf.enable": true,
   "phpcbf.executablePath": "/home/jukkapajarinen/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcbf",
   "phpcbf.standard": "/home/jukkapajarinen/.config/composer/vendor/wp-coding-standards/wpcs/WordPress",
-  "phpcs.enable": true,
-  "phpcs.executablePath": "/home/jukkapajarinen/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcs",
-  "phpcs.standard": "/home/jukkapajarinen/.config/composer/vendor/wp-coding-standards/wpcs/WordPress",
   "scss.validate": false,
   "search.showLineNumbers": true,
+  "search.sortOrder": "fileNames",
   "stylelint.config": {
     "extends": "/dotfiles/stylelintrc.json"
   },
   "stylelint.enable": true,
   "telemetry.telemetryLevel": "off",
+  "terminal.explorerKind": "external",
+  "terminal.external.linuxExec": "kitty",
+  "terminal.external.osxExec": "Kitty.app",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "block",
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.defaultProfile.osx": "bash",
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'Fira Code', 'Monaco', 'Menlo', monospace",
   "terminal.integrated.fontSize": 12,
+  "twig-language-2.indentStyle": "space",
+  "twig-language-2.tabSize": 2,
+  "window.menuBarVisibility": "toggle",
   "workbench.colorCustomizations": {
-    "editorCursor.foreground": "#fad000",
-    "terminalCursor.foreground": "#fad000"
+    "editorCursor.foreground": "#00ffff",
+    "terminalCursor.foreground": "#00ffff"
   },
+  "workbench.colorTheme": "Shades of Purple",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.list.horizontalScrolling": true,
-  "workbench.startupEditor": "newUntitledFile",
-  "window.menuBarVisibility": "toggle",
-  "terminal.explorerKind": "external",
-  "terminal.external.linuxExec": "kitty",
-  "terminal.external.osxExec": "Kitty.app",
-  "explorer.openEditors.sortOrder": "alphabetical",
-  "search.sortOrder": "fileNames",
-  "workbench.colorTheme": "Shades of Purple",
-  "workbench.iconTheme": "vscode-great-icons",
-  "[twig]": {
-    "editor.defaultFormatter": "mblode.twig-language-2",
-  },
-  "twig-language-2.indentStyle": "space",
-  "twig-language-2.tabSize": 2
+  "workbench.startupEditor": "newUntitledFile"
 }
