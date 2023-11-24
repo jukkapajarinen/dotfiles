@@ -297,7 +297,7 @@
     "terminal.ansiBlack": "#F6FAFB",
     "terminal.ansiBlue": "#8E47FF",
     "terminal.ansiBrightBlack": "#443A73",
-    "terminal.ansiBrightBlue": "#8133FF",
+    "terminal.ansiBrightBlue": "#b362ff",
     "terminal.ansiBrightCyan": "#70E2FF",
     "terminal.ansiBrightGreen": "#11CC00",
     "terminal.ansiBrightMagenta": "#FF85ED",
@@ -335,5 +335,6 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.list.horizontalScrolling": true,
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.colorTheme": "Shades of Purple"
+  "workbench.colorTheme": "Shades of Purple",
+  "terminal.integrated.fontWeight": "normal"
 }
