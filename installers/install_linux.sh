@@ -85,6 +85,7 @@ $ln "$scriptDir/vscode-keybindings.json" "$homeDir/.config/Code/User/keybindings
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
 $ln "$scriptDir/kbd/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
 $ln "$scriptDir/kbd/Xmodmap" "$homeDir/.Xmodmap";
+sudo $ln "$scriptDir/kbd/fi_mac_with_euro" "/usr/share/X11/xkb/symbols/fi";
 
 # Linux create helper symlink to dotfiles
 echo -e "$arrow Create helper symlink to /dotfiles?";
