@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ##############################################################################
-# Reset Gnome settings and compile extension schemas
+# Reset Gnome settings and do initial stuff
 # ##############################################################################
 gsettings list-schemas | xargs -n 1 gsettings reset-recursively;
 mkdir -p ~/.local/share/glib-2.0/schemas;
@@ -9,6 +9,7 @@ cp ~/.local/share/gnome-shell/extensions/space-bar@luchrioh/schemas/*.gschema.xm
 cp ~/.local/share/gnome-shell/extensions/AlphabeticalAppGrid@stuarthayhurst/schemas/*.gschema.xml ~/.local/share/glib-2.0/schemas;
 cp ~/.local/share/gnome-shell/extensions/pop-shell@system76.com/schemas/*.gschema.xml ~/.local/share/glib-2.0/schemas;
 glib-compile-schemas ~/.local/share/glib-2.0/schemas;
+xmodmap -e "keycode  26 = e E e E EuroSign EuroSign";
 
 # ##############################################################################
 # Gnome settings configurations
