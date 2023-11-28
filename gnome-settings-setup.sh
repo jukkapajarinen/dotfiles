@@ -1,9 +1,27 @@
 #!/bin/bash
 
 # ##############################################################################
+# Reset Gnome settings and compile extension schemas
+# ##############################################################################
+gsettings list-schemas | xargs -n 1 gsettings reset-recursively;
+mkdir -p ~/.local/share/glib-2.0/schemas;
+cp ~/.local/share/gnome-shell/extensions/space-bar@luchrioh/schemas/*.gschema.xml ~/.local/share/glib-2.0/schemas;
+cp ~/.local/share/gnome-shell/extensions/AlphabeticalAppGrid@stuarthayhurst/schemas/*.gschema.xml ~/.local/share/glib-2.0/schemas;
+cp ~/.local/share/gnome-shell/extensions/pop-shell@system76.com/schemas/*.gschema.xml ~/.local/share/glib-2.0/schemas;
+glib-compile-schemas ~/.local/share/glib-2.0/schemas;
+
+# ##############################################################################
 # Gnome settings configurations
 # ##############################################################################
-
+gsettings set org.gnome.ControlCenter last-panel 'keyboard';
+gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fi+mac')]";
+gsettings set org.gnome.shell disabled-extensions "['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com']";
+gsettings set org.gnome.shell enabled-extensions "['pop-shell@system76.com', 'space-bar@luchrioh', 'AlphabeticalAppGrid@stuarthayhurst']";
+gsettings set org.gnome.ControlCenter last-panel 'mouse';
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark';
+gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-purple-dark';
+gsettings set org.gnome.desktop.peripherals.mouse natural-scroll true;
+gsettings set org.gnome.gedit.preferences.editor scheme 'Yaru-dark';
 gsettings set org.gnome.desktop.calendar show-weekdate true;
 gsettings set org.gnome.desktop.default-applications.terminal exec "kitty";
 gsettings set org.gnome.desktop.interface clock-show-seconds true;
@@ -50,48 +68,16 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 # ##############################################################################
 # Gnome extensions configurations
 # ##############################################################################
-
-gnome-extensions enable pop-shell@system76.com;
-gsettings set org.gnome.shell.extensions.pop-shell activate-launcher "[]";
-gsettings set org.gnome.shell.extensions.pop-shell active-hint false;
-gsettings set org.gnome.shell.extensions.pop-shell column-size 64;
-gsettings set org.gnome.shell.extensions.pop-shell focus-down "['<Super>Down', '<Super>KP_Down', '<Super>j']";
-gsettings set org.gnome.shell.extensions.pop-shell focus-left "['<Super>Left', '<Super>KP_Left', '<Super>h']";
-gsettings set org.gnome.shell.extensions.pop-shell focus-right "['<Super>Right', '<Super>KP_Right', '<Super>l']";
-gsettings set org.gnome.shell.extensions.pop-shell focus-up "['<Super>Up', '<Super>KP_Up', '<Super>k']";
-gsettings set org.gnome.shell.extensions.pop-shell gap-inner 2;
-gsettings set org.gnome.shell.extensions.pop-shell gap-outer 2;
-gsettings set org.gnome.shell.extensions.pop-shell hint-color-rgba 'rgba(189,255,0, 1)';
-gsettings set org.gnome.shell.extensions.pop-shell log-level 0;
-gsettings set org.gnome.shell.extensions.pop-shell management-orientation "['o']";
-gsettings set org.gnome.shell.extensions.pop-shell pop-monitor-down "['<Super><Shift><Primary>Down', '<Super><Shift><Primary>KP_Down', '<Super><Shift><Primary>j']";
-gsettings set org.gnome.shell.extensions.pop-shell pop-monitor-left "['<Super><Shift>Left', '<Super><Shift>KP_Left', '<Super><Shift>h']";
-gsettings set org.gnome.shell.extensions.pop-shell pop-monitor-right "['<Super><Shift>Right', '<Super><Shift>KP_Right', '<Super><Shift>l']";
-gsettings set org.gnome.shell.extensions.pop-shell pop-monitor-up "['<Super><Shift><Primary>Up', '<Super><Shift><Primary>KP_Up', '<Super><Shift><Primary>k']";
-gsettings set org.gnome.shell.extensions.pop-shell pop-workspace-down "['<Super><Shift>Down', '<Super><Shift>KP_Down', '<Super><Shift>j']";
-gsettings set org.gnome.shell.extensions.pop-shell pop-workspace-up "['<Super><Shift>Up', '<Super><Shift>KP_Up', '<Super><Shift>k']";
-gsettings set org.gnome.shell.extensions.pop-shell row-size 64;
-gsettings set org.gnome.shell.extensions.pop-shell show-skip-taskbar true;
-gsettings set org.gnome.shell.extensions.pop-shell show-title true;
-gsettings set org.gnome.shell.extensions.pop-shell smart-gaps false;
+gsettings set org.gnome.shell.extensions.space-bar.appearance active-workspace-background-color 'rgb(179,98,255)';
+gsettings set org.gnome.shell.extensions.space-bar.appearance active-workspace-text-color 'rgb(22,14,63)';
+gsettings set org.gnome.shell.extensions.space-bar.appearance inactive-workspace-text-color 'rgb(179,98,255)';
+gsettings set org.gnome.shell.extensions.pop-shell activate-launcher @as [];
+gsettings set org.gnome.shell.extensions.pop-shell hint-color-rgba 'rgb(179,98,255)';
 gsettings set org.gnome.shell.extensions.pop-shell snap-to-grid true;
 gsettings set org.gnome.shell.extensions.pop-shell tile-accept "['Return', 'KP_Enter']";
 gsettings set org.gnome.shell.extensions.pop-shell tile-by-default true;
 gsettings set org.gnome.shell.extensions.pop-shell tile-enter "['<Super>Space']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-move-down "['Down', 'KP_Down', 'j']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-move-left "['Left', 'KP_Left', 'h']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-move-right "['Right', 'KP_Right', 'l']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-move-up "['Up', 'KP_Up', 'k']";
 gsettings set org.gnome.shell.extensions.pop-shell tile-orientation "['<Shift><Super><Alt>o']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-reject "['Escape']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-resize-down "['<Shift>Down', '<Shift>KP_Down', '<Shift>j']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-resize-left "['<Shift>Left', '<Shift>KP_Left', '<Shift>h']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-resize-right "['<Shift>Right', '<Shift>KP_Right', '<Shift>l']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-resize-up "['<Shift>Up', '<Shift>KP_Up', '<Shift>k']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-swap-down "['<Primary>Down', '<Primary>KP_Down', '<Primary>j']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-swap-left "['<Primary>Left', '<Primary>KP_Left', '<Primary>h']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-swap-right "['<Primary>Right', '<Primary>KP_Right', '<Primary>l']";
-gsettings set org.gnome.shell.extensions.pop-shell tile-swap-up "['<Primary>Up', '<Primary>KP_Up', '<Primary>k']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-floating "['<Shift><Super><Alt>space']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-stacking "['s']";
 gsettings set org.gnome.shell.extensions.pop-shell toggle-stacking-global "['<Shift><Super><Alt>s']";

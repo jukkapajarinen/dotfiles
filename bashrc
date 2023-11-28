@@ -85,5 +85,6 @@ alias deit='docker exec -it';
 source /usr/share/bash-completion/bash_completion &> /dev/null;
 source /usr/local/etc/profile.d/bash_completion.sh &> /dev/null;
 source "$NVM_DIR/nvm.sh" &> /dev/null;
+source <(ng completion script);
 
 eval "$(starship init bash)";

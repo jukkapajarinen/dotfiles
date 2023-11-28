@@ -10,17 +10,14 @@
       "class": "steam"
     },
     {
-      "class": "com.github.vikdevelop.timer"
+      "class": "com.mattjakeman.ExtensionManager"
     },
     {
-      "class": "AppRun.wrapped"
+      "class": "com.vixalien.sticky"
     },
     {
       "class": "com.vixalien.sticky",
       "title": "Sticky Notes"
-    },
-    {
-      "class": "com.vixalien.sticky"
     }
   ],
   "skiptaskbarhidden": [],
