@@ -18,6 +18,9 @@
     {
       "class": "com.vixalien.sticky",
       "title": "Sticky Notes"
+    },
+    {
+      "class": "org.gnome.clocks"
     }
   ],
   "skiptaskbarhidden": [],
