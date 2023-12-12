@@ -58,8 +58,10 @@ alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --
 alias k='kubectl';
 alias python=python3;
 alias deit='docker exec -it';
-function _findFiles() { folder="${2:-.}"; sudo find "$folder" -type f -name "*$1*" -print0 | xargs -0 -I{} echo -e "\033[36m{}\033[0m"; }; 
+function _findFiles() { folder="${2:-.}"; sudo find "$folder" -type f -iname "*$1*" -print0 | xargs -0 -I{} echo -e "\033[36m{}\033[0m"; }; 
 alias findfiles='_findFiles';
+function _findFolders() { folder="${2:-.}"; sudo find "$folder" -type d -iname "*$1*" -print0 | xargs -0 -I{} echo -e "\033[36m{}\033[0m"; }; 
+alias findfolders='_findFolders';
 function _grepFiles() { folder="${2:-.}"; sudo sh -c "grep --color=auto -rl '$1' '$folder'";  };
 alias grepfiles='_grepFiles';
 
