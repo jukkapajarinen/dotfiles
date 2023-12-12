@@ -42,10 +42,10 @@ alias diff='diff --color=auto';
 alias dmesg='dmesg --color=auto';
 alias ip='ip --color=auto';
 alias mv='mv -i';
-alias ls='exa'; #alias ls='ls --color=auto';
-alias ll='exa -la';
-which batcat &> /dev/null  && alias bat='batcat';
-alias cat='bat -p';
+which exa &> /dev/null && alias ls='exa';
+which exa &> /dev/null && alias ll='exa -la';
+which batcat &> /dev/null && alias bat='batcat';
+which batcat &> /dev/null && alias cat='bat -p';
 alias dockerpoop='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker network rm $(docker network ls -q) && docker volume rm $(docker volume ls -q);';
 alias dockerpoopSudo='sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q) && sudo docker rmi -f $(sudo docker images -q) && sudo docker network rm $(sudo docker network ls -q) && sudo docker volume rm $(sudo docker volume ls -q);';
 alias gl='git log --name-status --graph';
@@ -56,8 +56,12 @@ alias gitUnignore='git update-index --no-assume-unchanged';
 alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
 alias k='kubectl';
-alias python=python2;
+alias python=python3;
 alias deit='docker exec -it';
+function _findFiles() { folder="${2:-.}"; find "$folder" -type f -name "*$1*" -print0 | xargs -0 -I{} echo -e "\033[36m{}\033[0m"; }; 
+alias findfiles='_findFiles';
+function _grepFiles() { folder="${2:-.}"; grep -rl "$1" "$folder";  };
+alias grepfiles='_grepFiles';
 
 [[ "$macos" == "true" ]] && alias ls='ls -G'
 [[ "$macos" == "true" ]] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';

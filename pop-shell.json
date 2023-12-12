@@ -21,6 +21,9 @@
     },
     {
       "class": "org.gnome.clocks"
+    },
+    {
+      "class": "xdg-desktop-portal-gnome"
     }
   ],
   "skiptaskbarhidden": [],
