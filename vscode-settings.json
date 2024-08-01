@@ -21,7 +21,7 @@
   "editor.fontSize": 12,
   "editor.fontWeight": "400",
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.glyphMargin": true,
   "editor.insertSpaces": true,
   "editor.letterSpacing": 0.5,
@@ -48,7 +48,7 @@
   "phpcbf.documentFormattingProvider": true,
   "phpcbf.enable": true,
   "phpcbf.executablePath": "/home/jukkapajarinen/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcbf",
-  "phpcbf.standard": "/home/jukkapajarinen/.config/composer/vendor/wp-coding-standards/wpcs/WordPress",
+  "phpcbf.standard": "/home/jukkapajarinen/.config/composer/vendor/drupal/coder/coder_sniffer/Drupal",
   "scss.validate": false,
   "search.showLineNumbers": true,
   "search.sortOrder": "fileNames",
@@ -337,5 +337,6 @@
   "workbench.list.horizontalScrolling": true,
   "workbench.startupEditor": "newUntitledFile",
   "workbench.colorTheme": "Shades of Purple",
-  "terminal.integrated.fontWeight": "normal"
+  "terminal.integrated.fontWeight": "normal",
+  "window.zoomLevel": -1
 }

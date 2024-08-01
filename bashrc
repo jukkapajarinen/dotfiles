@@ -64,6 +64,7 @@ function _findFolders() { folder="${2:-.}"; sudo find "$folder" -type d -iname "
 alias findfolders='_findFolders';
 function _grepFiles() { folder="${2:-.}"; sudo sh -c "grep --color=auto -rl '$1' '$folder'";  };
 alias grepfiles='_grepFiles';
+alias findRepos='find / -type d -name ".git" -exec dirname {} \; 2>/dev/null';
 
 [[ "$macos" == "true" ]] && alias ls='ls -G'
 [[ "$macos" == "true" ]] && alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app';
