@@ -2,22 +2,20 @@
 # Starship configuration
 # ##############################################################################
 
-format = """
-$username$directory$git_branch$git_status$git_state$package$cmd_duration
-[🦄](blue bold) """
+format = "$username$sudo$directory$git_branch$git_status$git_state$package$cmd_duration[\\$](green bold) "
 scan_timeout = 10
 add_newline = false
 
 [username]
 style_user = "purple bold"
 style_root = "bg:purple fg:black bold"
-format = "[$user]($style) in "
+format = "[$user]($style) "
 show_always = true
 
 [directory]
 style = "cyan bold"
 read_only_style = "cyan bold"
-format = "[$path]($style)[$read_only]($read_only_style) "
+format = "in [$path]($style)[$read_only]($read_only_style) "
 truncate_to_repo = true
 
 [git_branch]
@@ -44,3 +42,9 @@ style = "yellow bold"
 format = "took [$duration]($style) "
 show_milliseconds = true
 min_time = 1
+
+[sudo]
+style = 'green bold'
+symbol = '🧙 '
+format = '[as $symbol]($style)'
+disabled = false
