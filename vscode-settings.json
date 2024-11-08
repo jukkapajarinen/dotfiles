@@ -336,7 +336,7 @@
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.list.horizontalScrolling": true,
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.colorTheme": "Shades of Purple",
+  "workbench.colorTheme": "Monokai Vibrant",
   "terminal.integrated.fontWeight": "normal",
   "window.zoomLevel": -1
 }

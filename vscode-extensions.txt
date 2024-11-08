@@ -1,7 +1,11 @@
 2gua.rainbow-brackets
 ahmadawais.shades-of-purple
+amiralizadeh9480.laravel-extra-intellisense
 bungcip.better-toml
+cipchk.cssrem
+cjhowe7.laravel-blade
 dbaeumer.vscode-eslint
+eamodio.gitlens
 esbenp.prettier-vscode
 ginfuru.ginfuru-vscode-jekyll-syntax
 marcostazi.VS-code-drupal
@@ -12,6 +16,8 @@ nemesarial.dust
 persoderlind.vscode-phpcbf
 redhat.vscode-xml
 richie5um2.vscode-sort-json
+s3gf4ult.monokai-vibrant
+shufo.vscode-blade-formatter
 stylelint.vscode-stylelint
 syler.sass-indented
 timonwong.shellcheck
