@@ -48,8 +48,6 @@ $mkdir "$homeDir/.config/sxhkd/";
 $mkdir "$homeDir/.config/kitty/";
 $mkdir "$homeDir/.config/nano/";
 $mkdir "$homeDir/.config/Code/User/";
-$mkdir "$homeDir/.config/gtk-3.0/";
-$mkdir "$homeDir/.config/gtk-4.0/";
 $mkdir "$homeDir/.config/rofi/";
 $mkdir "$homeDir/.config/polybar/";
 
