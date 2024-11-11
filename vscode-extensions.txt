@@ -1,14 +1,12 @@
-2gua.rainbow-brackets
 ahmadawais.shades-of-purple
 amiralizadeh9480.laravel-extra-intellisense
-bungcip.better-toml
 cipchk.cssrem
 cjhowe7.laravel-blade
 dbaeumer.vscode-eslint
 eamodio.gitlens
 esbenp.prettier-vscode
 ginfuru.ginfuru-vscode-jekyll-syntax
-marcostazi.VS-code-drupal
+marcostazi.vs-code-drupal
 mblode.twig-language-2
 medzhidov.hex-rgba-converter
 naumovs.color-highlight
@@ -21,8 +19,7 @@ shufo.vscode-blade-formatter
 stylelint.vscode-stylelint
 syler.sass-indented
 timonwong.shellcheck
-TomiTurtiainen.rf-intellisense
 tomoki1207.pdf
 torn4dom4n.latex-support
 whatwedo.twig
-XadillaX.viml
+xadillax.viml
