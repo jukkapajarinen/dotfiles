@@ -1,5 +1,4 @@
 {
-  "cssrem.rootFontSize": 16,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -10,6 +9,7 @@
     "editor.defaultFormatter": "mblode.twig-language-2"
   },
   "css.validate": false,
+  "cssrem.rootFontSize": 16,
   "debug.internalConsoleOptions": "neverOpen",
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.cursorBlinking": "blink",
@@ -36,7 +36,10 @@
   "eslint.options": {
     "configFile": "/dotfiles/eslintrc.json"
   },
-  "eslint.validate": ["javascript", "typescript"],
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ],
   "explorer.confirmDragAndDrop": false,
   "explorer.openEditors.sortOrder": "alphabetical",
   "extensions.ignoreRecommendations": true,
@@ -66,6 +69,7 @@
   "terminal.integrated.defaultProfile.osx": "bash",
   "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'Fira Code', 'Monaco', 'Menlo', monospace",
   "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontWeight": "normal",
   "twig-language-2.indentStyle": "space",
   "twig-language-2.tabSize": 2,
   "window.menuBarVisibility": "toggle",
@@ -151,8 +155,8 @@
     "editorGutter.modifiedBackground": "#C05CFF46",
     "editorHoverWidget.background": "#10092F",
     "editorHoverWidget.border": "#10092F",
-    "editorIndentGuide.activeBackground": "#A478FC42",
-    "editorIndentGuide.background": "#A478FC0F",
+    "editorIndentGuide.activeBackground1": "#A478FC42",
+    "editorIndentGuide.background1": "#A478FC0F",
     "editorLineNumber.foreground": "#A478FC",
     "editorLink.activeForeground": "#A478FC",
     "editorMarkerNavigation.background": "#1F3F6F33",
@@ -219,10 +223,10 @@
     "notificationCenterHeader.background": "#8133FF",
     "notificationCenterHeader.foreground": "#E8D9D4",
     "notificationLink.foreground": "#E8D9D4",
+    "notificationToast.border": "#160E3F",
     "notifications.background": "#160E3F",
     "notifications.border": "#25155B",
     "notifications.foreground": "#D3B8FF",
-    "notificationToast.border": "#160E3F",
     "panel.background": "#160E3F",
     "panel.border": "#E7EB00",
     "panelTitle.activeBorder": "#E7EB00",
@@ -331,11 +335,10 @@
     "welcomePage.buttonHoverBackground": "#1E1155",
     "widget.shadow": "#F6FAFB26"
   },
+  "workbench.colorTheme": "Monokai Vibrant",
   "workbench.editor.closeOnFileDelete": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.list.horizontalScrolling": true,
-  "workbench.startupEditor": "newUntitledFile",
-  "workbench.colorTheme": "Monokai Vibrant",
-  "terminal.integrated.fontWeight": "normal"
+  "workbench.startupEditor": "newUntitledFile"
 }

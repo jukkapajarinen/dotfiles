@@ -1,9 +1,8 @@
-ahmadawais.shades-of-purple
 amiralizadeh9480.laravel-extra-intellisense
+bmewburn.vscode-intelephense-client
 cipchk.cssrem
 cjhowe7.laravel-blade
 dbaeumer.vscode-eslint
-eamodio.gitlens
 esbenp.prettier-vscode
 ginfuru.ginfuru-vscode-jekyll-syntax
 marcostazi.vs-code-drupal
@@ -21,5 +20,4 @@ syler.sass-indented
 timonwong.shellcheck
 tomoki1207.pdf
 torn4dom4n.latex-support
-whatwedo.twig
 xadillax.viml
