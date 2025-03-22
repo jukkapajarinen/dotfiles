@@ -3,6 +3,7 @@ bmewburn.vscode-intelephense-client
 cipchk.cssrem
 cjhowe7.laravel-blade
 dbaeumer.vscode-eslint
+eamodio.gitlens
 esbenp.prettier-vscode
 ginfuru.ginfuru-vscode-jekyll-syntax
 marcostazi.vs-code-drupal

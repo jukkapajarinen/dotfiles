@@ -1,4 +1,7 @@
 {
+  "[blade]": {
+    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -223,10 +226,10 @@
     "notificationCenterHeader.background": "#8133FF",
     "notificationCenterHeader.foreground": "#E8D9D4",
     "notificationLink.foreground": "#E8D9D4",
-    "notificationToast.border": "#160E3F",
     "notifications.background": "#160E3F",
     "notifications.border": "#25155B",
     "notifications.foreground": "#D3B8FF",
+    "notificationToast.border": "#160E3F",
     "panel.background": "#160E3F",
     "panel.border": "#E7EB00",
     "panelTitle.activeBorder": "#E7EB00",
@@ -340,8 +343,5 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.list.horizontalScrolling": true,
-  "workbench.startupEditor": "newUntitledFile",
-  "[blade]": {
-    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
-  }
+  "workbench.startupEditor": "newUntitledFile"
 }
