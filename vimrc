@@ -3,8 +3,8 @@
 " ##############################################################################
 
 call plug#begin('~/.vim/plugged')
-Plug 'Rigellute/shades-of-purple.vim'
 Plug 'mattn/emmet-vim'
+Plug 'crusoexia/vim-monokai'
 Plug 'tpope/vim-surround'
 call plug#end()
 
@@ -27,4 +27,6 @@ set autoindent
 
 set termguicolors
 syntax enable
-colorscheme shades_of_purple
+colorscheme monokai
+highlight Normal guibg=#051b29
+highlight LineNr guibg=#051b29
