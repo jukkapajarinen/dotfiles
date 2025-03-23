@@ -19,7 +19,7 @@ format = "in [$path]($style)[$read_only]($read_only_style) "
 truncate_to_repo = true
 
 [git_branch]
-style = "154 bold"
+style = "green bold"
 format = "on [$symbol$branch]($style) "
 symbol = " "
 
@@ -28,11 +28,11 @@ style = "red bold"
 format = '([\[$all_status$ahead_behind\]]($style) )'
 
 [git_state]
-style = "203 bold"
+style = "red bold"
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 
 [package]
-style = "208 bold"
+style = "yellow bold"
 format = "is [$symbol$version]($style) "
 symbol = "📦 "
 display_private = true
