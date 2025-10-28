@@ -51,16 +51,6 @@ $mkdir "$homeDir/.config/Code/User/";
 $mkdir "$homeDir/.config/rofi/";
 $mkdir "$homeDir/.config/polybar/";
 
-# Linux create custom script symlinks
-echo -e "$arrow Install user script files.";
-$ln "$scriptDir/wms/rofi-shutdown.sh" "$homeDir/Scripts/rofi-shutdown.sh";
-$ln "$scriptDir/wms/rofi-workspaces.sh" "$homeDir/Scripts/rofi-workspaces.sh";
-$ln "$scriptDir/wms/x-adjust-brightness.sh" "$homeDir/Scripts/x-adjust-brightness.sh";
-$ln "$scriptDir/wms/x-display-settings.sh" "$homeDir/Scripts/x-display-settings.sh";
-$ln "$scriptDir/wms/x-pointer-settings.sh" "$homeDir/Scripts/x-pointer-settings.sh";
-$ln "$scriptDir/gnome-settings-setup.sh" "$homeDir/Scripts/gnome-settings-setup.sh";
-$ln "$scriptDir/gnome-unset-all-keybindings.sh" "$homeDir/Scripts/gnome-unset-all-keybindings.sh";
-
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
 $ln "$scriptDir/bashrc" "$homeDir/.bashrc";
@@ -81,13 +71,12 @@ $ln "$scriptDir/wms/polybar.ini" "$homeDir/.config/polybar/config";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/.config/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
+$ln "$scriptDir/vscode-settings.json" "$homeDir/.config/VSCodium/User/settings.json";
+$ln "$scriptDir/vscode-keybindings.json" "$homeDir/.config/VSCodium/User/keybindings.json";
+$ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/VSCodium/User/extensions.txt";
 $ln "$scriptDir/kbd/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
 $ln "$scriptDir/kbd/Xmodmap" "$homeDir/.Xmodmap";
 sudo $ln "$scriptDir/kbd/fi_mac_with_euro" "/usr/share/X11/xkb/symbols/fi";
-
-# Linux create helper symlink to dotfiles
-echo -e "$arrow Create helper symlink to $homeDir/.dotfiles?";
-sudo $ln "$scriptDir" "$homeDir/.dotfiles";
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."

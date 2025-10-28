@@ -43,10 +43,8 @@ echo -e "$arrow Create possibly missing directories.";
 $mkdir "$homeDir/Scripts/";
 $mkdir "$homeDir/.config/nvim";
 $mkdir "$homeDir/.config/kitty/";
-$mkdir "$homeDir/Library/Application\ Support/Code/User/";
-
-# MacOS create custom script symlinks
-#echo -e "$arrow Install user script files.";
+$mkdir "$homeDir/Library/Application Support/Code/User/";
+$mkdir "$homeDir/Library/Application Support/VSCodium/User/";
 
 # MacOS create symlinks
 echo -e "$arrow Install user configuration files.";
@@ -61,14 +59,13 @@ $ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
 $ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/wms/yabairc" "$homeDir/.yabairc";
 $ln "$scriptDir/wms/skhdrc" "$homeDir/.skhdrc";
-$ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
-$ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
-$ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application\ Support/Code/User/extensions.txt";
+$ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application Support/Code/User/settings.json";
+$ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application Support/Code/User/keybindings.json";
+$ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application Support/Code/User/extensions.txt";
+$ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application Support/VSCodium/User/settings.json";
+$ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application Support/VSCodium/User/keybindings.json";
+$ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application Support/VSCodium/User/extensions.txt";
 $ln "$scriptDir/kbd/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
-
-# MacOS create helper symlink to dotfiles
-echo -e "$arrow Create helper symlink to $homeDir/.dotfiles?";
-sudo $ln "$scriptDir" "$homeDir/.dotfiles";
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."

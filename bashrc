@@ -74,8 +74,10 @@ alias findRepos='find / -type d -name ".git" -exec dirname {} \; 2>/dev/null';
 [[ "$macos" == "true" ]] && alias enableDock='defaults delete com.apple.dock tilesize; defaults delete com.apple.dock autohide-time-modifier; killall Dock';
 [[ "$macos" == "true" ]] && alias disableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores true';
 [[ "$macos" == "true" ]] && alias enableDSStore='defaults write com.apple.desktopservices DSDontWriteNetworkStores false';
-[[ "$macos" == "true" ]] && alias vscodeExport='code --list-extensions > ~/Library/Application\ Support/Code/User/extensions.txt';
-[[ "$macos" == "true" ]] && alias vscodeImport='cat ~/Library/Application\ Support/Code/User/extensions.txt | xargs -L 1 code --install-extension';
+[[ "$macos" == "true" ]] && alias vscodeExport='code --list-extensions > ~/Library/Application Support/Code/User/extensions.txt';
+[[ "$macos" == "true" ]] && alias vscodeImport='cat ~/Library/Application Support/Code/User/extensions.txt | xargs -L 1 code --install-extension';
+[[ "$macos" == "true" ]] && alias vscodiumExport='code --list-extensions > ~/Library/Application\ Support/VSCodium/User/extensions.txt';
+[[ "$macos" == "true" ]] && alias vscodiumImport='cat ~/Library/Application\ Support/VSCodium/User/extensions.txt | xargs -L 1 codium --install-extension';
 [[ "$linux" == "true" ]] && alias ls='ls --color=auto'
 [[ "$linux" == "true" ]] && alias open='xdg-open';
 [[ "$linux" == "true" ]] && alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";
@@ -83,6 +85,8 @@ alias findRepos='find / -type d -name ".git" -exec dirname {} \; 2>/dev/null';
 [[ "$linux" == "true" ]] && alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
 [[ "$linux" == "true" ]] && alias vscodeExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
 [[ "$linux" == "true" ]] && alias vscodeImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 code --install-extension';
+[[ "$linux" == "true" ]] && alias vscodiumExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
+[[ "$linux" == "true" ]] && alias vscodiumImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 codium --install-extension';
 [[ "$linux" == "true" ]] && alias nvim='~/Applications/nvim.appimage';
 
 # ##############################################################################
@@ -92,6 +96,5 @@ alias findRepos='find / -type d -name ".git" -exec dirname {} \; 2>/dev/null';
 source /usr/share/bash-completion/bash_completion &> /dev/null;
 source /usr/local/etc/profile.d/bash_completion.sh &> /dev/null;
 source "$NVM_DIR/nvm.sh" &> /dev/null;
-source <(ng completion script);
 
 eval "$(starship init bash)";
