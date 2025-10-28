@@ -86,8 +86,8 @@ $ln "$scriptDir/kbd/Xmodmap" "$homeDir/.Xmodmap";
 sudo $ln "$scriptDir/kbd/fi_mac_with_euro" "/usr/share/X11/xkb/symbols/fi";
 
 # Linux create helper symlink to dotfiles
-echo -e "$arrow Create helper symlink to /dotfiles?";
-sudo $ln "$scriptDir" "/dotfiles";
+echo -e "$arrow Create helper symlink to $homeDir/.dotfiles?";
+sudo $ln "$scriptDir" "$homeDir/.dotfiles";
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."
