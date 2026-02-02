@@ -118,5 +118,9 @@
   {
     "key": "ctrl+alt+s",
     "command": "workbench.action.files.saveFiles"
+  },
+  {
+    "key": "ctrl+shift+[Equal]",
+    "command": "editor.action.indentationToSpaces"
   }
 ]

@@ -43,8 +43,7 @@ echo -e "$arrow Create possibly missing directories.";
 $mkdir "$homeDir/Scripts/";
 $mkdir "$homeDir/.config/nvim";
 $mkdir "$homeDir/.config/kitty/";
-$mkdir "$homeDir/Library/Application Support/Code/User/";
-$mkdir "$homeDir/Library/Application Support/VSCodium/User/";
+$mkdir "$homeDir/Library/Application\ Support/Code/User/";
 
 # MacOS create symlinks
 echo -e "$arrow Install user configuration files.";
@@ -62,9 +61,9 @@ $ln "$scriptDir/wms/skhdrc" "$homeDir/.skhdrc";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application Support/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application Support/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application Support/Code/User/extensions.txt";
-$ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application Support/VSCodium/User/settings.json";
-$ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application Support/VSCodium/User/keybindings.json";
-$ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application Support/VSCodium/User/extensions.txt";
+$ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
+$ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
+$ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application\ Support/Code/User/extensions.txt";
 $ln "$scriptDir/kbd/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
 
 # Print info that execution finished

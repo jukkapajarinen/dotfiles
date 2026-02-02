@@ -25,7 +25,6 @@
   "editor.fontSize": 12,
   "editor.fontWeight": "600",
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": false,
   "editor.glyphMargin": true,
   "editor.insertSpaces": true,
   "editor.letterSpacing": 0.5,
@@ -40,10 +39,7 @@
   "eslint.options": {
     "configFile": "/dotfiles/eslintrc.json"
   },
-  "eslint.validate": [
-    "javascript",
-    "typescript"
-  ],
+  "eslint.validate": ["javascript", "typescript"],
   "explorer.confirmDragAndDrop": false,
   "explorer.openEditors.sortOrder": "alphabetical",
   "extensions.ignoreRecommendations": true,
