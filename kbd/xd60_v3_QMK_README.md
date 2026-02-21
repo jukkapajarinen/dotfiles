@@ -47,31 +47,53 @@ To blash firmware file to keyboarD:
 qmk flash -kb <my_keyboard> -km <my_keymap>
 ```
 
-## QMK Docker usage
+## Compile HEX with QMK Docker
 
 ```
 cd kbd;
 docker pull qmkfm/qmk_cli;
 docker run --rm -it -v qmk_firmware:/qmk_firmware qmkfm/qmk_cli qmk setup;
-```
-
-```
-docker run --rm -it -v qmk_firmware:/qmk_firmware qmkfm/qmk_cli bash 
-```
-
-```
-lsusb
-Bus 001 Device 016: ID 7844:6363 XIUDI XD60rev3
-```
-
-
-```
 docker run --rm -it \
   -v qmk_firmware:/qmk_firmware \
   -v $(pwd):/host_keymaps \
   qmkfm/qmk_cli \
-  qmk compile /host_keymaps/xd60_v3_kb2_nordic_iso_small_shifts_normal_arrow_keys_linux_win.json
+  /bin/bash -c "qmk compile /host_keymaps/xd60_v3_kb2.json && cp /qmk_firmware/.build/xiudi_xd60_rev3_xd60_v3_kb2.hex /host_keymaps/xd60_v3_kb2.hex"
 ```
+
+## Flash HEX with dfu-programmer
+
+Keyboard must be put to bootloader mode by pressing reset button on the back of the PCB.
+
+Verify with lsbusb that you see Atmel DFU bootloader listed.
+Notice Bus number and Device number, if needed by dfu-programmer.
+```
+lsusb
+...
+Bus 001 Device 031: ID 03eb:2ff4 Atmel Corp. atmega32u4 DFU bootloader
+...
+```
+Not 
+```
+lsusb
+...
+Bus 001 Device 029: ID 7844:6363 XIUDI XD60rev3
+...
+```
+
+Install dfu-programmer.
+```
+sudo apt install dfu-programmer;
+```
+
+```
+sudo dfu-programmer atmega32u4 get
+Bootloader Version: 0x00 (0)
+
+sudo dfu-programmer atmega32u4:001:031 erase
+sudo dfu-programmer atmega32u4 flash xd60_v3_kb2.hex 
+sudo dfu-programmer atmega32u4 reset
+```
+
 
 
 
