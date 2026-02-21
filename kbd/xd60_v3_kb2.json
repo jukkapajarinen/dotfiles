@@ -3,7 +3,7 @@
   "notes": "",
   "version": 1,
   "keyboard": "xiudi/xd60/rev3",
-  "keymap": "xd60_v3_kb2_nordic_iso_small_shifts_normal_arrow_keys_linux_win.json",
+  "keymap": "xd60_v3_kb2",
   "layout": "LAYOUT_all",
   "layers": [
     [
