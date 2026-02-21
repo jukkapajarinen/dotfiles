@@ -50,14 +50,29 @@ qmk flash -kb <my_keyboard> -km <my_keymap>
 ## QMK Docker usage
 
 ```
-git clone --recurse-submodules https://github.com/qmk/qmk_firmware.git
-cd qmk_firmware
+cd kbd;
+docker pull qmkfm/qmk_cli;
+docker run --rm -it -v qmk_firmware:/qmk_firmware qmkfm/qmk_cli qmk setup;
 ```
 
-Now start use the docker script to build and flash like this:
 ```
-util/docker_build.sh keyboard:keymap:target
+docker run --rm -it -v qmk_firmware:/qmk_firmware qmkfm/qmk_cli bash 
 ```
+
+```
+lsusb
+Bus 001 Device 016: ID 7844:6363 XIUDI XD60rev3
+```
+
+
+```
+docker run --rm -it \
+  -v qmk_firmware:/qmk_firmware \
+  -v $(pwd):/host_keymaps \
+  qmkfm/qmk_cli \
+  qmk compile /host_keymaps/xd60_v3_kb2_nordic_iso_small_shifts_normal_arrow_keys_linux_win.json
+```
+
 
 
 ## Flashing QMK Keyboard 1 (Nordic ISO, normal shifts, arrow keys on same row, MacOS)
