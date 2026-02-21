@@ -4,6 +4,8 @@ My dotfiles and scripts for MacOS and Linux. Dotfiles are symlinked to appropria
 
 Please check the installation scripts before usage. You may accidentally override things you don't want to!
 
+Custom keyboard configurations readme is [here](./kbd/xd60_v3_QMK_README.md).
+
 ## Installation
 
 - Clone this repository to any location in your filesystem.  (E.g. **~/**)
