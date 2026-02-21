@@ -47,6 +47,18 @@ To blash firmware file to keyboarD:
 qmk flash -kb <my_keyboard> -km <my_keymap>
 ```
 
+## QMK Docker usage
+
+```
+git clone --recurse-submodules https://github.com/qmk/qmk_firmware.git
+cd qmk_firmware
+```
+
+Now start use the docker script to build and flash like this:
+```
+util/docker_build.sh keyboard:keymap:target
+```
+
 
 ## Flashing QMK Keyboard 1 (Nordic ISO, normal shifts, arrow keys on same row, MacOS)
 
