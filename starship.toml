@@ -5,6 +5,7 @@
 format = "$username$sudo$directory$git_branch$git_status$git_state$package$cmd_duration[\\$](green bold) "
 scan_timeout = 10
 add_newline = false
+command_timeout = 5000 
 
 [username]
 style_user = "purple bold"
