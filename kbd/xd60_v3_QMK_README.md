@@ -2,8 +2,6 @@
 
 XD64 XD60 3.0 Mechanical Keyboard Customization 60% PCB Support RGB Bottom Light ALPS MX Axis TypeC Keyboard Accessories
 
-![xd60_v3_layouts.jpg](./xd60_v3_layouts.jpg)
-
 V3.0 Kit1: XD60 PCB board X1, GH60 satellite axis set
 V3.0Kit3: XD60 PCB board X1, GH60 satellite axis set, G-axis 5-pin axis set (70 pieces, can be specified arbitrarily)
 G-axis combination), telephone line Type-c
@@ -25,33 +23,19 @@ Product Features:
 14. Switching between eight onboard lighting effects and jumper wires for external lighting boards
 15. In the future, multiple expansion versions can be added to the expansion area to achieve various interesting functions
 
-## [QMK Firmware](https://qmk.fm/)
+## General details
 
-Open-source keyboard firmware for Atmel AVR and Arm USB families
-
-Install QMK build and flash tools:
-
-```
-curl -fsSL https://install.qmk.fm | sh
-```
-
-See QMK docs for help: [QMK Docs](https://docs.qmk.fm/)
-
-To build firmware from keymap:
-```
-qmk compile -kb <keyboard> -km <keymap>
-```
-
-To blash firmware file to keyboarD:
-```
-qmk flash -kb <my_keyboard> -km <my_keymap>
-```
+- XD stands for XiuDi, the manufacturer.  
+- KPRebuplic is one distributor from China.
+- There are at least 3 revisions.  
+- It is often referred XD64, but it is 60% width => XD60.  
+- QMK supports xiudi/xd60/rev3 and rev2.  
+- Atmel Corp. atmega32u4 processor.
 
 ## Compile HEX with QMK Docker
 
 ```
 cd kbd;
-docker pull qmkfm/qmk_cli;
 docker run --rm -it -v qmk_firmware:/qmk_firmware qmkfm/qmk_cli qmk setup;
 docker run --rm -it \
   -v qmk_firmware:/qmk_firmware \
@@ -62,55 +46,25 @@ docker run --rm -it \
 
 ## Flash HEX with dfu-programmer
 
-Keyboard must be put to bootloader mode by pressing reset button on the back of the PCB.
+Before flashing, keyboard must be put to bootloader mode by pressing reset button on the back of the PCB!
 
-Verify with lsbusb that you see Atmel DFU bootloader listed.
-Notice Bus number and Device number, if needed by dfu-programmer.
+CORRECT - bootloader mode
 ```
-lsusb
-...
+$ lsusb
 Bus 001 Device 031: ID 03eb:2ff4 Atmel Corp. atmega32u4 DFU bootloader
-...
 ```
-Not 
+WRONG - keyboard mode
 ```
-lsusb
-...
+$ lsusb
 Bus 001 Device 029: ID 7844:6363 XIUDI XD60rev3
-...
 ```
 
-Install dfu-programmer.
-```
-sudo apt install dfu-programmer;
-```
-
+Flashing commands:
 ```
 sudo dfu-programmer atmega32u4 get
 Bootloader Version: 0x00 (0)
 
-sudo dfu-programmer atmega32u4:001:031 erase
+sudo dfu-programmer atmega32u4 erase
 sudo dfu-programmer atmega32u4 flash xd60_v3_kb2.hex 
 sudo dfu-programmer atmega32u4 reset
-```
-
-
-
-
-## Flashing QMK Keyboard 1 (Nordic ISO, normal shifts, arrow keys on same row, MacOS)
-
-Keymap file: [xd60_v3_kb1_nordic_iso_normal_shifts_arrow_keys_on_same_row_macos.json](xd60_v3_kb1_nordic_iso_normal_shifts_arrow_keys_on_same_Wrow_macos.json)
-
-```
-qmk compile -kb <keyboard> -km <keymap>;
-qmk flash -kb <my_keyboard> -km <my_keymap>;
-```
-
-## Flashing QMK Keyboard 2 (Nordic ISO, small shifts, normal arrow keys, Linux/Win)
-
-Keymap file: [xd60_v3_kb2_nordic_iso_small_shifts_normal_arrow_keys_linux_win.json](xd60_v3_kb2_nordic_iso_small_shifts_normal_arrow_keys_linux_win.json)
-
-```
-qmk compile -kb <keyboard> -km <keymap>;
-qmk flash -kb <my_keyboard> -km <my_keymap>;
 ```
