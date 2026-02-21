@@ -49,20 +49,18 @@ $mkdir "$homeDir/.config/Code/User/";
 
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
-$ln "$scriptDir/bashrc" "$homeDir/.bashrc";
-$ln "$scriptDir/bashrc" "$homeDir/.bash_profile";
-$ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
-$ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
+$ln "$scriptDir/bashrc-linux" "$homeDir/.bashrc";
+$ln "$scriptDir/bashrc-linux" "$homeDir/.bash_profile";
+$ln "$scriptDir/git-config" "$homeDir/.gitconfig";
+$ln "$scriptDir/git-excludes" "$homeDir/.gitexcludes";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
 $ln "$scriptDir/vimrc" "$homeDir/.vimrc";
 $ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
-$ln "$scriptDir/mostrc" "$homeDir/.mostrc";
 $ln "$scriptDir/gsettings.desktop" "$homeDir/.config/autostart/gsettings.desktop";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/.config/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
-$ln "$scriptDir/kbd/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
 $ln "$scriptDir/kbd/Xmodmap" "$homeDir/.Xmodmap";
 sudo $ln "$scriptDir/kbd/fi_mac_with_euro" "/usr/share/X11/xkb/symbols/fi";
 

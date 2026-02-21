@@ -13,3 +13,4 @@ node_modules/
 *.class
 **/*.csproj
 .env
+vendor/

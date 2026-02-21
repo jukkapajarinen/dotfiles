@@ -2,9 +2,10 @@
 
 My dotfiles and scripts for MacOS and Linux. Dotfiles are symlinked to appropriate directories by handy installation scripts.
 
+Please check the installation scripts before usage. You may accidentally override things you don't want to!
+
 ## Installation
 
-- ⚠️ Please read installation scripts before usage. You may accidentally override things you don't want to! ⚠️
 - Clone this repository to any location in your filesystem.  (E.g. **~/**)
 - Change directory to the previously **cloned** `dotfiles` directory
 - Launch the `./installers/install_macos.sh` or `./installers/install_linux.sh` script in **bash**!
@@ -15,7 +16,9 @@ My dotfiles and scripts for MacOS and Linux. Dotfiles are symlinked to appropria
 ## TL;DR;
 
 ```
-git clone git@github.com:jukkapajarinen/dotfiles.git && cd dotfiles && bash ./installers/install_linux.sh;
+git clone git@github.com:jukkapajarinen/dotfiles.git && 
+cd dotfiles && 
+bash ./installers/install_linux.sh;
 ```
 
 ## Author
@@ -24,7 +27,7 @@ git clone git@github.com:jukkapajarinen/dotfiles.git && cd dotfiles && bash ./in
 
 ## [License](LICENSE.md)
 
-Copyright (c) 2023 Jukka Pajarinen
+Copyright (c) 2026 Jukka Pajarinen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

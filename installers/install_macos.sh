@@ -47,24 +47,20 @@ $mkdir "$homeDir/Library/Application\ Support/Code/User/";
 
 # MacOS create symlinks
 echo -e "$arrow Install user configuration files.";
-$ln "$scriptDir/bashrc" "$homeDir/.bashrc";
-$ln "$scriptDir/bashrc" "$homeDir/.bash_profile";
-$ln "$scriptDir/gitconfig" "$homeDir/.gitconfig";
-$ln "$scriptDir/gitexcludes" "$homeDir/.gitexcludes";
+$ln "$scriptDir/bashrc-macos" "$homeDir/.bashrc";
+$ln "$scriptDir/bashrc-macos" "$homeDir/.bash_profile";
+$ln "$scriptDir/git-config" "$homeDir/.gitconfig";
+$ln "$scriptDir/git-excludes" "$homeDir/.gitexcludes";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
 $ln "$scriptDir/vimrc" "$homeDir/.vimrc";
 $ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
-$ln "$scriptDir/mostrc" "$homeDir/.mostrc";
-$ln "$scriptDir/wms/yabairc" "$homeDir/.yabairc";
-$ln "$scriptDir/wms/skhdrc" "$homeDir/.skhdrc";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application Support/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application Support/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application Support/Code/User/extensions.txt";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/Library/Application\ Support/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/Library/Application\ Support/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/Library/Application\ Support/Code/User/extensions.txt";
-$ln "$scriptDir/kbd/qmk-keymap.json" "$homeDir/.qmk-keymap.json";
 
 # Print info that execution finished
 echo -e "$arrow Installation finished."
