@@ -31,7 +31,10 @@ gsettings set org/gnome/calculator target-currency \'\'
 gsettings set org/gnome/calculator target-units \'radian\'
 gsettings set org/gnome/calculator window-maximized false
 gsettings set org/gnome/calculator word-size 64
-gsettings set org/gnome/control-center last-panel \'search\'
+gsettings set org/gnome/clocks/state/window maximized false
+gsettings set org/gnome/clocks/state/window panel-id \'stopwatch\'
+gsettings set org/gnome/clocks/state/window size \(870\,\ 690\)
+gsettings set org/gnome/control-center last-panel \'background\'
 gsettings set org/gnome/control-center window-state \(980\,\ 874\,\ false\)
 gsettings set org/gnome/desktop/app-folders folder-children \[\'Utilities\'\,\ \'YaST\'\,\ \'Pardus\'\]
 gsettings set org/gnome/desktop/app-folders/folders/Pardus categories \[\'X-Pardus-Apps\'\]
@@ -56,9 +59,13 @@ gsettings set org/gnome/desktop/interface clock-show-weekday true
 gsettings set org/gnome/desktop/interface color-scheme \'prefer-dark\'
 gsettings set org/gnome/desktop/interface gtk-theme \'Yaru-blue-dark\'
 gsettings set org/gnome/desktop/interface icon-theme \'Yaru-blue\'
-gsettings set org/gnome/desktop/notifications application-children \[\'org-gnome-software\'\]
+gsettings set org/gnome/desktop/notifications application-children \[\'org-gnome-software\'\,\ \'gimp\'\,\ \'google-chrome\'\,\ \'transmission-gtk\'\]
 gsettings set org/gnome/desktop/notifications show-in-lock-screen false
+gsettings set org/gnome/desktop/notifications/application/gimp application-id \'gimp.desktop\'
+gsettings set org/gnome/desktop/notifications/application/google-chrome application-id \'google-chrome.desktop\'
 gsettings set org/gnome/desktop/notifications/application/org-gnome-software application-id \'org.gnome.Software.desktop\'
+gsettings set org/gnome/desktop/notifications/application/transmission-gtk application-id \'transmission-gtk.desktop\'
+gsettings set org/gnome/desktop/peripherals/keyboard numlock-state true
 gsettings set org/gnome/desktop/peripherals/mouse natural-scroll true
 gsettings set org/gnome/desktop/peripherals/touchpad two-finger-scrolling-enabled true
 gsettings set org/gnome/desktop/privacy old-files-age uint32\ 30
@@ -69,6 +76,7 @@ gsettings set org/gnome/desktop/screensaver secondary-color \'#2c001e\'
 gsettings set org/gnome/desktop/search-providers disable-external true
 gsettings set org/gnome/desktop/search-providers sort-order \[\'org.gnome.Contacts.desktop\'\,\ \'org.gnome.Documents.desktop\'\,\ \'org.gnome.Nautilus.desktop\'\]
 gsettings set org/gnome/desktop/session idle-delay uint32\ 0
+gsettings set org/gnome/desktop/thumbnailers disable-all true
 gsettings set org/gnome/desktop/wm/keybindings maximize @as\ \[\]
 gsettings set org/gnome/desktop/wm/keybindings move-to-workspace-1 \[\'\<Shift\>\<Super\>1\'\]
 gsettings set org/gnome/desktop/wm/keybindings move-to-workspace-2 \[\'\<Shift\>\<Super\>2\'\]
@@ -80,6 +88,7 @@ gsettings set org/gnome/desktop/wm/keybindings switch-to-workspace-3 \[\'\<Super
 gsettings set org/gnome/desktop/wm/keybindings switch-to-workspace-4 \[\'\<Super\>4\'\]
 gsettings set org/gnome/desktop/wm/keybindings unmaximize @as\ \[\]
 gsettings set org/gnome/desktop/wm/preferences num-workspaces 4
+gsettings set org/gnome/desktop/wm/preferences workspace-names @as\ \[\]
 gsettings set org/gnome/evolution-data-server migrated true
 gsettings set org/gnome/mutter dynamic-workspaces false
 gsettings set org/gnome/mutter edge-tiling false
@@ -103,12 +112,13 @@ gsettings set org/gnome/settings-daemon/plugins/power sleep-inactive-ac-type \'n
 gsettings set org/gnome/shell app-picker-layout \[\{\'software-properties-drivers.desktop\':\ \<\{\'position\':\ \<0\>\}\>\,\ \'brasero.desktop\':\ \<\{\'position\':\ \<1\>\}\>\,\ \'org.gnome.Calculator.desktop\':\ \<\{\'position\':\ \<2\>\}\>\,\ \'org.gnome.Calendar.desktop\':\ \<\{\'position\':\ \<3\>\}\>\,\ \'Counter-Strike\ 2.desktop\':\ \<\{\'position\':\ \<4\>\}\>\,\ \'simple-scan.desktop\':\ \<\{\'position\':\ \<5\>\}\>\,\ \'com.mattjakeman.ExtensionManager.desktop\':\ \<\{\'position\':\ \<6\>\}\>\,\ \'filezilla.desktop\':\ \<\{\'position\':\ \<7\>\}\>\,\ \'gimp.desktop\':\ \<\{\'position\':\ \<8\>\}\>\,\ \'gparted.desktop\':\ \<\{\'position\':\ \<9\>\}\>\,\ \'yelp.desktop\':\ \<\{\'position\':\ \<10\>\}\>\,\ \'org.gnome.eog.desktop\':\ \<\{\'position\':\ \<11\>\}\>\,\ \'gnome-language-selector.desktop\':\ \<\{\'position\':\ \<12\>\}\>\,\ \'libreoffice-startcenter.desktop\':\ \<\{\'position\':\ \<13\>\}\>\,\ \'libreoffice-base.desktop\':\ \<\{\'position\':\ \<14\>\}\>\,\ \'libreoffice-calc.desktop\':\ \<\{\'position\':\ \<15\>\}\>\,\ \'libreoffice-draw.desktop\':\ \<\{\'position\':\ \<16\>\}\>\,\ \'libreoffice-impress.desktop\':\ \<\{\'position\':\ \<17\>\}\>\,\ \'libreoffice-math.desktop\':\ \<\{\'position\':\ \<18\>\}\>\,\ \'libreoffice-writer.desktop\':\ \<\{\'position\':\ \<19\>\}\>\,\ \'mpollux-digisign-client.desktop\':\ \<\{\'position\':\ \<20\>\}\>\,\ \'nvidia-settings.desktop\':\ \<\{\'position\':\ \<21\>\}\>\,\ \'com.obsproject.Studio.desktop\':\ \<\{\'position\':\ \<22\>\}\>\,\ \'system-config-printer.desktop\':\ \<\{\'position\':\ \<23\>\}\>\}\,\ \{\'org.remmina.Remmina.desktop\':\ \<\{\'position\':\ \<0\>\}\>\,\ \'org.gnome.Software.desktop\':\ \<\{\'position\':\ \<1\>\}\>\,\ \'software-properties-gtk.desktop\':\ \<\{\'position\':\ \<2\>\}\>\,\ \'update-manager.desktop\':\ \<\{\'position\':\ \<3\>\}\>\,\ \'org.gnome.SoundRecorder.desktop\':\ \<\{\'position\':\ \<4\>\}\>\,\ \'spotify.desktop\':\ \<\{\'position\':\ \<5\>\}\>\,\ \'gnome-session-properties.desktop\':\ \<\{\'position\':\ \<6\>\}\>\,\ \'steam.desktop\':\ \<\{\'position\':\ \<7\>\}\>\,\ \'org.gnome.SystemMonitor.desktop\':\ \<\{\'position\':\ \<8\>\}\>\,\ \'org.gnome.TextEditor.desktop\':\ \<\{\'position\':\ \<9\>\}\>\,\ \'transmission-gtk.desktop\':\ \<\{\'position\':\ \<10\>\}\>\,\ \'Utilities\':\ \<\{\'position\':\ \<11\>\}\>\,\ \'vim.desktop\':\ \<\{\'position\':\ \<12\>\}\>\,\ \'vmware-netcfg.desktop\':\ \<\{\'position\':\ \<13\>\}\>\,\ \'vlc.desktop\':\ \<\{\'position\':\ \<14\>\}\>\,\ \'vmware-player.desktop\':\ \<\{\'position\':\ \<15\>\}\>\,\ \'vmware-workstation.desktop\':\ \<\{\'position\':\ \<16\>\}\>\,\ \'org.wireshark.Wireshark.desktop\':\ \<\{\'position\':\ \<17\>\}\>\}\]
 gsettings set org/gnome/shell disabled-extensions \[\'ubuntu-dock@ubuntu.com\'\]
 gsettings set org/gnome/shell enabled-extensions \[\'ding@rastersoft.com\'\,\ \'tiling-assistant@ubuntu.com\'\,\ \'space-bar@luchrioh\'\,\ \'AlphabeticalAppGrid@stuarthayhurst\'\]
-gsettings set org/gnome/shell favorite-apps \[\'google-chrome.desktop\'\,\ \'org.gnome.Nautilus.desktop\'\,\ \'kitty.desktop\'\,\ \'code.desktop\'\,\ \'org.keepassxc.KeePassXC.desktop\'\,\ \'org.gnome.clocks.desktop\'\,\ \'org.gnome.Settings.desktop\'\]
+gsettings set org/gnome/shell favorite-apps \[\'google-chrome.desktop\'\,\ \'org.gnome.Nautilus.desktop\'\,\ \'kitty.desktop\'\,\ \'code.desktop\'\,\ \'org.keepassxc.KeePassXC.desktop\'\,\ \'org.gnome.clocks.desktop\'\,\ \'spotify.desktop\'\,\ \'org.gnome.Settings.desktop\'\]
 gsettings set org/gnome/shell last-selected-power-profile \'performance\'
 gsettings set org/gnome/shell welcome-dialog-last-shown-version \'46.0\'
 gsettings set org/gnome/shell/extensions/dash-to-dock extend-height true
 gsettings set org/gnome/shell/extensions/ding start-corner \'top-left\'
 gsettings set org/gnome/shell/extensions/space-bar/appearance application-styles \'.space-bar\ \{\\n\ \ -natural-hpadding:\ 12px\;\\n\}\\n\\n.space-bar-workspace-label.active\ \{\\n\ \ margin:\ 0\ 4px\;\\n\ \ background-color:\ rgba\(255\,255\,255\,0.3\)\;\\n\ \ color:\ rgba\(255\,255\,255\,1\)\;\\n\ \ border-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ font-weight:\ 700\;\\n\ \ border-radius:\ 4px\;\\n\ \ border-width:\ 0px\;\\n\ \ padding:\ 3px\ 8px\;\\n\}\\n\\n.space-bar-workspace-label.inactive\ \{\\n\ \ margin:\ 0\ 4px\;\\n\ \ background-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ color:\ rgba\(255\,255\,255\,1\)\;\\n\ \ border-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ font-weight:\ 700\;\\n\ \ border-radius:\ 4px\;\\n\ \ border-width:\ 0px\;\\n\ \ padding:\ 3px\ 8px\;\\n\}\\n\\n.space-bar-workspace-label.inactive.empty\ \{\\n\ \ margin:\ 0\ 4px\;\\n\ \ background-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ color:\ rgba\(255\,255\,255\,0.5\)\;\\n\ \ border-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ font-weight:\ 700\;\\n\ \ border-radius:\ 4px\;\\n\ \ border-width:\ 0px\;\\n\ \ padding:\ 3px\ 8px\;\\n\}\'
+gsettings set org/gnome/shell/extensions/space-bar/behavior smart-workspace-names false
 gsettings set org/gnome/shell/extensions/space-bar/state version 34
 gsettings set org/gnome/shell/extensions/tiling-assistant active-window-hint-color \'rgb\(211\,70\,21\)\'
 gsettings set org/gnome/shell/extensions/tiling-assistant enable-tiling-popup false
@@ -120,7 +130,27 @@ gsettings set org/gnome/shell/keybindings switch-to-application-2 @as\ \[\]
 gsettings set org/gnome/shell/keybindings switch-to-application-3 @as\ \[\]
 gsettings set org/gnome/shell/keybindings switch-to-application-4 @as\ \[\]
 gsettings set org/gnome/shell/world-clocks locations @av\ \[\]
-gsettings set org/gnome/software check-timestamp int64\ 1772044746
+gsettings set org/gnome/software check-timestamp int64\ 1772092868
+gsettings set org/gnome/software flatpak-purge-timestamp int64\ 1772100047
 gsettings set org/gnome/software install-timestamp int64\ 1727971198
 gsettings set org/gnome/software packagekit-historical-updates-timestamp uint64\ 1727971198
 gsettings set org/gnome/software update-notification-timestamp int64\ 1772044736
+gsettings set org/gtk/gtk4/settings/file-chooser date-format \'regular\'
+gsettings set org/gtk/gtk4/settings/file-chooser location-mode \'path-bar\'
+gsettings set org/gtk/gtk4/settings/file-chooser show-hidden false
+gsettings set org/gtk/gtk4/settings/file-chooser sidebar-width 140
+gsettings set org/gtk/gtk4/settings/file-chooser sort-column \'name\'
+gsettings set org/gtk/gtk4/settings/file-chooser sort-directories-first true
+gsettings set org/gtk/gtk4/settings/file-chooser sort-order \'ascending\'
+gsettings set org/gtk/gtk4/settings/file-chooser type-format \'category\'
+gsettings set org/gtk/gtk4/settings/file-chooser view-type \'list\'
+gsettings set org/gtk/settings/file-chooser date-format \'regular\'
+gsettings set org/gtk/settings/file-chooser location-mode \'path-bar\'
+gsettings set org/gtk/settings/file-chooser show-hidden false
+gsettings set org/gtk/settings/file-chooser show-size-column true
+gsettings set org/gtk/settings/file-chooser show-type-column true
+gsettings set org/gtk/settings/file-chooser sidebar-width 160
+gsettings set org/gtk/settings/file-chooser sort-column \'name\'
+gsettings set org/gtk/settings/file-chooser sort-directories-first true
+gsettings set org/gtk/settings/file-chooser sort-order \'ascending\'
+gsettings set org/gtk/settings/file-chooser type-format \'category\'
