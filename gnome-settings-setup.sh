@@ -7,7 +7,9 @@ gsettings set apps/update-manager launch-time int64\ 1777063038
 gsettings set apps/update-manager show-details true
 gsettings set apps/update-manager window-height 400
 gsettings set apps/update-manager window-width 645
+gsettings set com/mattjakeman/ExtensionManager height 600
 gsettings set com/mattjakeman/ExtensionManager last-used-version \'0.5.0\'
+gsettings set com/mattjakeman/ExtensionManager width 800
 gsettings set com/ubuntu/update-notifier regular-auto-launch-interval 0
 gsettings set com/ubuntu/update-notifier release-check-time uint32\ 1776059962
 gsettings set com/ubuntu/update-notifier show-livepatch-status-icon true
@@ -40,7 +42,7 @@ gsettings set org/gnome/calculator word-size 64
 gsettings set org/gnome/clocks/state/window maximized false
 gsettings set org/gnome/clocks/state/window panel-id \'stopwatch\'
 gsettings set org/gnome/clocks/state/window size \(870\,\ 690\)
-gsettings set org/gnome/control-center last-panel \'network\'
+gsettings set org/gnome/control-center last-panel \'wifi\'
 gsettings set org/gnome/control-center window-state \(1164\,\ 899\,\ false\)
 gsettings set org/gnome/desktop/a11y/magnifier cross-hairs-length 58
 gsettings set org/gnome/desktop/app-folders folder-children \[\'Utilities\'\,\ \'YaST\'\,\ \'Pardus\'\]
@@ -73,8 +75,9 @@ gsettings set org/gnome/desktop/interface font-name \'Ubuntu\ Sans\ 11\'
 gsettings set org/gnome/desktop/interface gtk-enable-primary-paste true
 gsettings set org/gnome/desktop/interface gtk-theme \'Yaru-blue-dark\'
 gsettings set org/gnome/desktop/interface icon-theme \'Yaru-blue-dark\'
-gsettings set org/gnome/desktop/notifications application-children \[\'org-gnome-software\'\,\ \'gimp\'\,\ \'google-chrome\'\,\ \'transmission-gtk\'\,\ \'org-gnome-nautilus\'\,\ \'gnome-printers-panel\'\,\ \'org-gnome-eog\'\,\ \'org-gnome-fileroller\'\,\ \'com-mattjakeman-extensionmanager\'\,\ \'gnome-power-panel\'\,\ \'org-gnome-settings\'\,\ \'steam\'\,\ \'filezilla\'\,\ \'spotify\'\]
+gsettings set org/gnome/desktop/notifications application-children \[\'org-gnome-software\'\,\ \'gimp\'\,\ \'google-chrome\'\,\ \'transmission-gtk\'\,\ \'org-gnome-nautilus\'\,\ \'gnome-printers-panel\'\,\ \'org-gnome-eog\'\,\ \'org-gnome-fileroller\'\,\ \'com-mattjakeman-extensionmanager\'\,\ \'gnome-power-panel\'\,\ \'org-gnome-settings\'\,\ \'steam\'\,\ \'filezilla\'\,\ \'spotify\'\,\ \'code\'\]
 gsettings set org/gnome/desktop/notifications show-in-lock-screen false
+gsettings set org/gnome/desktop/notifications/application/code application-id \'code.desktop\'
 gsettings set org/gnome/desktop/notifications/application/com-mattjakeman-extensionmanager application-id \'com.mattjakeman.ExtensionManager.desktop\'
 gsettings set org/gnome/desktop/notifications/application/filezilla application-id \'filezilla.desktop\'
 gsettings set org/gnome/desktop/notifications/application/gimp application-id \'gimp.desktop\'
@@ -189,6 +192,9 @@ gsettings set org/gnome/papers/default pen-stroke 1.0
 gsettings set org/gnome/papers/default show-sidebar true
 gsettings set org/gnome/papers/default sizing-mode \'automatic\'
 gsettings set org/gnome/papers/default text-color \'blue\'
+gsettings set org/gnome/portal/filechooser/com.google.Chrome last-folder-path \'/home/jukkapajarinen/Desktop\'
+gsettings set org/gnome/portal/filechooser/gnome-network-panel last-folder-path \'/home/jukkapajarinen/Projects_Jilab/0_files/SDS1-openvpn\'
+gsettings set org/gnome/portal/filechooser/org.gnome.Papers last-folder-path \'/home/jukkapajarinen/Documents\'
 gsettings set org/gnome/settings-daemon/plugins/color night-light-schedule-automatic false
 gsettings set org/gnome/settings-daemon/plugins/media-keys custom-keybindings \[\'/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/\'\]
 gsettings set org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0 binding \'\<Super\>Return\'
@@ -198,7 +204,7 @@ gsettings set org/gnome/settings-daemon/plugins/power sleep-inactive-ac-timeout 
 gsettings set org/gnome/settings-daemon/plugins/power sleep-inactive-ac-type \'nothing\'
 gsettings set org/gnome/shell app-picker-layout \[\{\'software-properties-drivers.desktop\':\ \<\{\'position\':\ \<0\>\}\>\,\ \'brasero.desktop\':\ \<\{\'position\':\ \<1\>\}\>\,\ \'org.gnome.Calculator.desktop\':\ \<\{\'position\':\ \<2\>\}\>\,\ \'org.gnome.Calendar.desktop\':\ \<\{\'position\':\ \<3\>\}\>\,\ \'Counter-Strike\ 2.desktop\':\ \<\{\'position\':\ \<4\>\}\>\,\ \'simple-scan.desktop\':\ \<\{\'position\':\ \<5\>\}\>\,\ \'org.gnome.Papers.desktop\':\ \<\{\'position\':\ \<6\>\}\>\,\ \'com.mattjakeman.ExtensionManager.desktop\':\ \<\{\'position\':\ \<7\>\}\>\,\ \'org.gnome.eog.desktop\':\ \<\{\'position\':\ \<8\>\}\>\,\ \'org.gnome.font-viewer.desktop\':\ \<\{\'position\':\ \<9\>\}\>\,\ \'gimp.desktop\':\ \<\{\'position\':\ \<10\>\}\>\,\ \'gparted.desktop\':\ \<\{\'position\':\ \<11\>\}\>\,\ \'org.gnome.Yelp.desktop\':\ \<\{\'position\':\ \<12\>\}\>\,\ \'gnome-language-selector.desktop\':\ \<\{\'position\':\ \<13\>\}\>\,\ \'libreoffice-startcenter.desktop\':\ \<\{\'position\':\ \<14\>\}\>\,\ \'libreoffice-base.desktop\':\ \<\{\'position\':\ \<15\>\}\>\,\ \'libreoffice-calc.desktop\':\ \<\{\'position\':\ \<16\>\}\>\,\ \'libreoffice-draw.desktop\':\ \<\{\'position\':\ \<17\>\}\>\,\ \'libreoffice-impress.desktop\':\ \<\{\'position\':\ \<18\>\}\>\,\ \'libreoffice-math.desktop\':\ \<\{\'position\':\ \<19\>\}\>\,\ \'libreoffice-writer.desktop\':\ \<\{\'position\':\ \<20\>\}\>\,\ \'org.gnome.Logs.desktop\':\ \<\{\'position\':\ \<21\>\}\>\,\ \'Mass\ Effect\ Legendary\ Edition.desktop\':\ \<\{\'position\':\ \<22\>\}\>\,\ \'mpollux-digisign-client.desktop\':\ \<\{\'position\':\ \<23\>\}\>\,\ \'nvidia-settings.desktop\':\ \<\{\'position\':\ \<24\>\}\>\,\ \'com.obsproject.Studio.desktop\':\ \<\{\'position\':\ \<25\>\}\>\,\ \'system-config-printer.desktop\':\ \<\{\'position\':\ \<26\>\}\>\,\ \'org.remmina.Remmina.desktop\':\ \<\{\'position\':\ \<27\>\}\>\,\ \'org.gnome.Software.desktop\':\ \<\{\'position\':\ \<28\>\}\>\,\ \'software-properties-gtk.desktop\':\ \<\{\'position\':\ \<29\>\}\>\,\ \'update-manager.desktop\':\ \<\{\'position\':\ \<30\>\}\>\,\ \'org.gnome.SoundRecorder.desktop\':\ \<\{\'position\':\ \<31\>\}\>\,\ \'steam.desktop\':\ \<\{\'position\':\ \<32\>\}\>\,\ \'org.gnome.SystemMonitor.desktop\':\ \<\{\'position\':\ \<33\>\}\>\,\ \'org.gnome.TextEditor.desktop\':\ \<\{\'position\':\ \<34\>\}\>\,\ \'transmission-gtk.desktop\':\ \<\{\'position\':\ \<35\>\}\>\,\ \'Utilities\':\ \<\{\'position\':\ \<36\>\}\>\,\ \'vim.desktop\':\ \<\{\'position\':\ \<37\>\}\>\,\ \'vmware-netcfg.desktop\':\ \<\{\'position\':\ \<38\>\}\>\,\ \'vlc.desktop\':\ \<\{\'position\':\ \<39\>\}\>\,\ \'vmware-player.desktop\':\ \<\{\'position\':\ \<40\>\}\>\,\ \'vmware-workstation.desktop\':\ \<\{\'position\':\ \<41\>\}\>\}\]
 gsettings set org/gnome/shell disabled-extensions \[\'ubuntu-dock@ubuntu.com\'\]
-gsettings set org/gnome/shell enabled-extensions \[\'ding@rastersoft.com\'\,\ \'tiling-assistant@ubuntu.com\'\,\ \'space-bar@luchrioh\'\,\ \'AlphabeticalAppGrid@stuarthayhurst\'\,\ \'snapd-search-provider@canonical.com\'\,\ \'web-search-provider@ubuntu.com\'\]
+gsettings set org/gnome/shell enabled-extensions \[\'ding@rastersoft.com\'\,\ \'tiling-assistant@ubuntu.com\'\,\ \'space-bar@luchrioh\'\,\ \'AlphabeticalAppGrid@stuarthayhurst\'\,\ \'snapd-search-provider@canonical.com\'\,\ \'web-search-provider@ubuntu.com\'\,\ \'tiling-assistant@leleat-on-github\'\]
 gsettings set org/gnome/shell favorite-apps \[\'google-chrome.desktop\'\,\ \'org.gnome.Nautilus.desktop\'\,\ \'kitty.desktop\'\,\ \'code.desktop\'\,\ \'org.keepassxc.KeePassXC.desktop\'\,\ \'org.gnome.clocks.desktop\'\,\ \'spotify.desktop\'\,\ \'org.gnome.Settings.desktop\'\,\ \'filezilla.desktop\'\]
 gsettings set org/gnome/shell last-selected-power-profile \'performance\'
 gsettings set org/gnome/shell welcome-dialog-last-shown-version \'46.0\'
@@ -207,11 +213,49 @@ gsettings set org/gnome/shell/extensions/ding start-corner \'top-left\'
 gsettings set org/gnome/shell/extensions/space-bar/appearance application-styles \'.space-bar\ \{\\n\ \ -natural-hpadding:\ 12px\;\\n\}\\n\\n.space-bar-workspace-label.active\ \{\\n\ \ margin:\ 0\ 4px\;\\n\ \ background-color:\ rgba\(255\,255\,255\,0.3\)\;\\n\ \ color:\ rgba\(255\,255\,255\,1\)\;\\n\ \ border-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ font-weight:\ 700\;\\n\ \ border-radius:\ 4px\;\\n\ \ border-width:\ 0px\;\\n\ \ padding:\ 3px\ 8px\;\\n\}\\n\\n.space-bar-workspace-label.inactive\ \{\\n\ \ margin:\ 0\ 4px\;\\n\ \ background-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ color:\ rgba\(255\,255\,255\,1\)\;\\n\ \ border-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ font-weight:\ 700\;\\n\ \ border-radius:\ 4px\;\\n\ \ border-width:\ 0px\;\\n\ \ padding:\ 3px\ 8px\;\\n\}\\n\\n.space-bar-workspace-label.inactive.empty\ \{\\n\ \ margin:\ 0\ 4px\;\\n\ \ background-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ color:\ rgba\(255\,255\,255\,0.5\)\;\\n\ \ border-color:\ rgba\(0\,0\,0\,0\)\;\\n\ \ font-weight:\ 700\;\\n\ \ border-radius:\ 4px\;\\n\ \ border-width:\ 0px\;\\n\ \ padding:\ 3px\ 8px\;\\n\}\'
 gsettings set org/gnome/shell/extensions/space-bar/behavior smart-workspace-names false
 gsettings set org/gnome/shell/extensions/space-bar/state version 34
+gsettings set org/gnome/shell/extensions/tiling-assistant activate-layout0 @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant activate-layout1 @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant activate-layout2 @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant activate-layout3 @as\ \[\]
 gsettings set org/gnome/shell/extensions/tiling-assistant active-window-hint-color \'rgb\(211\,70\,21\)\'
+gsettings set org/gnome/shell/extensions/tiling-assistant auto-tile @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant center-window @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant debugging-free-rects @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant debugging-show-tiled-rects @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant default-move-mode 0
+gsettings set org/gnome/shell/extensions/tiling-assistant dynamic-keybinding-behavior 0
 gsettings set org/gnome/shell/extensions/tiling-assistant enable-tiling-popup false
-gsettings set org/gnome/shell/extensions/tiling-assistant last-version-installed 46
+gsettings set org/gnome/shell/extensions/tiling-assistant focus-hint 0
+gsettings set org/gnome/shell/extensions/tiling-assistant focus-hint-color \'rgb\(0\,115\,229\)\'
+gsettings set org/gnome/shell/extensions/tiling-assistant last-version-installed 54
 gsettings set org/gnome/shell/extensions/tiling-assistant overridden-settings \{\'org.gnome.mutter.edge-tiling\':\ \<@mb\ nothing\>\,\ \'org.gnome.desktop.wm.keybindings.maximize\':\ \<@mb\ nothing\>\,\ \'org.gnome.desktop.wm.keybindings.unmaximize\':\ \<@mb\ nothing\>\,\ \'org.gnome.mutter.keybindings.toggle-tiled-left\':\ \<@mb\ nothing\>\,\ \'org.gnome.mutter.keybindings.toggle-tiled-right\':\ \<@mb\ nothing\>\}
+gsettings set org/gnome/shell/extensions/tiling-assistant restore-window \[\'\<Super\>Down\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant search-popup-layout @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant single-screen-gap 0
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-bottom-half \[\'\<Super\>KP_2\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-bottom-half-ignore-ta @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-bottomleft-quarter \[\'\<Super\>KP_1\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-bottomleft-quarter-ignore-ta @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-bottomright-quarter \[\'\<Super\>KP_3\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-bottomright-quarter-ignore-ta @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-edit-mode @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-left-half \[\'\<Super\>Left\'\,\ \'\<Super\>KP_4\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-left-half-ignore-ta @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-maximize \[\'\<Super\>Up\'\,\ \'\<Super\>KP_5\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-maximize-horizontally @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-maximize-vertically @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-right-half \[\'\<Super\>Right\'\,\ \'\<Super\>KP_6\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-right-half-ignore-ta @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-top-half \[\'\<Super\>KP_8\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-top-half-ignore-ta @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-topleft-quarter \[\'\<Super\>KP_7\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-topleft-quarter-ignore-ta @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-topright-quarter \[\'\<Super\>KP_9\'\]
+gsettings set org/gnome/shell/extensions/tiling-assistant tile-topright-quarter-ignore-ta @as\ \[\]
 gsettings set org/gnome/shell/extensions/tiling-assistant tiling-popup-all-workspace true
+gsettings set org/gnome/shell/extensions/tiling-assistant toggle-always-on-top @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant toggle-tiling-popup @as\ \[\]
+gsettings set org/gnome/shell/extensions/tiling-assistant window-gap 0
 gsettings set org/gnome/shell/keybindings switch-to-application-1 @as\ \[\]
 gsettings set org/gnome/shell/keybindings switch-to-application-2 @as\ \[\]
 gsettings set org/gnome/shell/keybindings switch-to-application-3 @as\ \[\]
@@ -225,7 +269,7 @@ gsettings set org/gnome/software update-notification-timestamp int64\ 1772044736
 gsettings set org/gnome/system/location enabled false
 gsettings set org/gtk/gtk4/settings/file-chooser date-format \'regular\'
 gsettings set org/gtk/gtk4/settings/file-chooser location-mode \'path-bar\'
-gsettings set org/gtk/gtk4/settings/file-chooser show-hidden false
+gsettings set org/gtk/gtk4/settings/file-chooser show-hidden true
 gsettings set org/gtk/gtk4/settings/file-chooser sidebar-width 140
 gsettings set org/gtk/gtk4/settings/file-chooser sort-column \'name\'
 gsettings set org/gtk/gtk4/settings/file-chooser sort-directories-first true
