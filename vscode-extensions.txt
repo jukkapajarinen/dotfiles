@@ -1,12 +1,9 @@
-alefragnani.project-manager
 amiralizadeh9480.laravel-extra-intellisense
 andersliu.insert-line-number
 bmewburn.vscode-intelephense-client
 cipchk.cssrem
 cjhowe7.laravel-blade
-codezombiech.gitignore
 dbaeumer.vscode-eslint
-donjayamanne.githistory
 eamodio.gitlens
 esbenp.prettier-vscode
 ginfuru.ginfuru-vscode-jekyll-syntax
@@ -21,7 +18,6 @@ ms-python.vscode-python-envs
 ms-vscode.test-adapter-converter
 naumovs.color-highlight
 nemesarial.dust
-persoderlind.vscode-phpcbf
 redhat.vscode-xml
 richie5um2.vscode-sort-json
 s3gf4ult.monokai-vibrant
@@ -32,4 +28,3 @@ timonwong.shellcheck
 tomoki1207.pdf
 torn4dom4n.latex-support
 xadillax.viml
-ziyasal.vscode-open-in-github

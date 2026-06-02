@@ -6,7 +6,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[php]": {
-    "editor.defaultFormatter": "persoderlind.vscode-phpcbf"
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },
   "[twig]": {
     "editor.defaultFormatter": "mblode.twig-language-2"
@@ -45,13 +45,11 @@
   "extensions.ignoreRecommendations": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": false,
-  "javascript.suggestionActions.enabled": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
   "less.validate": false,
   "phpcbf.documentFormattingProvider": true,
   "phpcbf.enable": true,
-  "phpcbf.executablePath": "/home/jukkapajarinen/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcbf",
-  "phpcbf.standard": "/home/jukkapajarinen/.config/composer/vendor/drupal/coder/coder_sniffer/Drupal",
+  "phpcbf.executablePath": "/home/jukka/.config/composer/vendor/bin/phpcbf",
+  "phpcbf.standard": "/home/jukka/.config/composer/vendor/drupal/coder/coder_sniffer/Drupal",
   "scss.validate": false,
   "search.showLineNumbers": true,
   "search.sortOrder": "fileNames",
