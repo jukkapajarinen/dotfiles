@@ -10,7 +10,7 @@ Custom keyboard configurations readme is [here](./kbd/xd60_v3_QMK_README.md).
 
 - Clone this repository to any location in your filesystem.  (E.g. **~/**)
 - Change directory to the previously **cloned** `dotfiles` directory
-- Launch the `./installers/install_macos.sh` or `./installers/install_linux.sh` script in **bash**!
+- Launch the `./install_linux.sh` script in **bash**!
   - *Supported options are `-f` or `--force` to force installation.*
   - *Don't use **sudo!** (installer will ask for sudo password, if needed.)*
   - *Installer will ask your permission `[y/N]` to start the installation.*
