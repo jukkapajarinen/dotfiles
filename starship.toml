@@ -22,7 +22,7 @@ truncate_to_repo = true
 [git_branch]
 style = "green bold"
 format = "on [$symbol$branch]($style) "
-symbol = " "
+symbol = ""
 
 [git_status]
 style = "red bold"
@@ -35,7 +35,7 @@ format = '\([$state( $progress_current/$progress_total)]($style)\) '
 [package]
 style = "yellow bold"
 format = "is [$symbol$version]($style) "
-symbol = "📦 "
+symbol = ""
 display_private = true
 
 [cmd_duration]
@@ -46,6 +46,5 @@ min_time = 1
 
 [sudo]
 style = 'green bold'
-symbol = '🧙 '
-format = '[as $symbol]($style)'
+format = '[as sudo]($style) '
 disabled = false

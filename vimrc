@@ -28,5 +28,5 @@ set autoindent
 set termguicolors
 syntax enable
 colorscheme monokai
-highlight Normal guibg=#051b29
-highlight LineNr guibg=#051b29
+highlight Normal guibg=#151330
+highlight LineNr guibg=#151330
