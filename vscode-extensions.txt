@@ -1,5 +1,6 @@
 amiralizadeh9480.laravel-extra-intellisense
 andersliu.insert-line-number
+anthropic.claude-code
 bmewburn.vscode-intelephense-client
 cipchk.cssrem
 cjhowe7.laravel-blade

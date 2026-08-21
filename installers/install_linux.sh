@@ -43,7 +43,6 @@ echo -e "$arrow Create possibly missing directories.";
 $mkdir "$homeDir/Scripts/";
 $mkdir "$homeDir/.config/autostart/";
 $mkdir "$homeDir/.config/nvim";
-$mkdir "$homeDir/.config/sxhkd/";
 $mkdir "$homeDir/.config/kitty/";
 $mkdir "$homeDir/.config/Code/User/";
 
