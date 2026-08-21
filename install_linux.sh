@@ -40,7 +40,6 @@ fi
 
 # Linux create directories
 echo -e "$arrow Create possibly missing directories.";
-$mkdir "$homeDir/Scripts/";
 $mkdir "$homeDir/.config/autostart/";
 $mkdir "$homeDir/.config/nvim";
 $mkdir "$homeDir/.config/kitty/";
@@ -48,8 +47,8 @@ $mkdir "$homeDir/.config/Code/User/";
 
 # Linux create dotfile symlinks
 echo -e "$arrow Install user configuration files.";
-$ln "$scriptDir/bashrc-linux" "$homeDir/.bashrc";
-$ln "$scriptDir/bashrc-linux" "$homeDir/.bash_profile";
+$ln "$scriptDir/bashrc" "$homeDir/.bashrc";
+$ln "$scriptDir/bashrc" "$homeDir/.bash_profile";
 $ln "$scriptDir/git-config" "$homeDir/.gitconfig";
 $ln "$scriptDir/git-excludes" "$homeDir/.gitexcludes";
 $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";

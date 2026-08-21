@@ -10,7 +10,6 @@ export PAGER="less";
 export MANPAGER="less";
 export GREP_COLOR=always;
 export CLICOLOR_FORCE=true;
-export DOTFILES="$HOME/dotfiles";
 export NVM_DIR="$HOME/.nvm";
 export GEM_HOME="$HOME/.gem/";
 export PATH="$PATH:/usr/local/sbin";
@@ -19,15 +18,12 @@ export PATH="$PATH:/usr/bin";
 export PATH="$PATH:/usr/sbin";
 export PATH="$PATH:/bin";
 export PATH="$PATH:/sbin";
-export PATH="$PATH:$GEM_HOME/bin";
-export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin";
 export PATH="$PATH:$HOME/.config/composer/vendor/bin";
 export PATH="$PATH:$HOME/.local/bin";
 
 # ##############################################################################
 # Bash aliases for Linux
 # ##############################################################################
-alias dotfiles='cd "${DOTFILES}"';
 alias less='less -R';
 alias grep='grep --color=auto';
 alias diff='diff --color=auto';
@@ -38,8 +34,6 @@ which exa &> /dev/null && alias ls='exa';
 which exa &> /dev/null && alias ll='exa -la';
 which batcat &> /dev/null && alias bat='batcat';
 which batcat &> /dev/null && alias cat='bat -p';
-alias dockerprune='docker system prune -a --volumes';
-alias dockerpruneSudo='sudo docker system prune -a --volumes';
 alias gl='git log --name-status --graph';
 alias gitIgnore='git update-index --assume-unchanged';
 alias gitUnignore='git update-index --no-assume-unchanged';
@@ -47,23 +41,11 @@ alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
 alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
 alias k='kubectl';
 alias python=python3;
-alias deit='docker exec -it';
-function _findFiles() { folder="${2:-.}"; sudo find "$folder" -type f -iname "*$1*" -print0 | xargs -0 -I{} echo -e "\033[36m{}\033[0m"; }; 
-alias findfiles='_findFiles';
-function _findFolders() { folder="${2:-.}"; sudo find "$folder" -type d -iname "*$1*" -print0 | xargs -0 -I{} echo -e "\033[36m{}\033[0m"; }; 
-alias findfolders='_findFolders';
-function _grepFiles() { folder="${2:-.}"; sudo sh -c "grep --color=auto -rl '$1' '$folder'";  };
-alias grepfiles='_grepFiles';
-alias findRepos='find / -type d -name ".git" -exec dirname {} \; 2>/dev/null';
-alias ls='ls --color=auto'
+alias ls='ls --color=auto';
 alias open='xdg-open';
-alias apt-log-installed="cat /var/log/apt/history.log | grep 'Commandline' | grep 'install'";
-alias apt-log-uninstalled="cat /var/log/apt/history.log | grep 'Commandline' | grep 'purge\|remove'";
-alias backupSystem='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
+alias backup='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
 alias vscodeExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
 alias vscodeImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 code --install-extension';
-alias vscodiumExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
-alias vscodiumImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 codium --install-extension';
 alias nvim='~/Applications/nvim.appimage';
 
 # ##############################################################################
