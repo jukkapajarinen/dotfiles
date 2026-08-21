@@ -14,3 +14,4 @@ node_modules/
 **/*.csproj
 .env
 vendor/
+**/.claude/settings.local.json

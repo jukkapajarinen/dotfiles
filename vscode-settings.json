@@ -6,7 +6,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
   },
   "[twig]": {
     "editor.defaultFormatter": "mblode.twig-language-2"
@@ -353,5 +355,6 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.list.horizontalScrolling": true,
-  "workbench.startupEditor": "newUntitledFile"
+  "workbench.startupEditor": "newUntitledFile",
+  "claudeCode.preferredLocation": "panel"
 }
