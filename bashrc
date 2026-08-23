@@ -20,7 +20,7 @@ export PATH="$PATH:/bin";
 export PATH="$PATH:/sbin";
 export PATH="$PATH:$HOME/.config/composer/vendor/bin";
 export PATH="$PATH:$HOME/.local/bin";
-export DOTENV_CONFIG_QUIET=true; # silence dotenv's ad banner (e.g. from `tldr`)
+export DOTENV_CONFIG_QUIET=true;
 
 # ##############################################################################
 # Bash aliases for Linux
@@ -30,20 +30,21 @@ alias grep='grep --color=auto';
 alias diff='diff --color=auto';
 alias dmesg='dmesg --color=auto';
 alias ip='ip --color=auto';
+alias ls='ls --color=auto';
 alias mv='mv -i';
+alias open='xdg-open';
+
 which exa &> /dev/null && alias ls='exa';
 which exa &> /dev/null && alias ll='exa -la';
 which batcat &> /dev/null && alias bat='batcat';
 which batcat &> /dev/null && alias cat='bat -p';
-alias gl='git log --name-status --graph';
-alias gitIgnore='git update-index --assume-unchanged';
-alias gitUnignore='git update-index --no-assume-unchanged';
-alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
-alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
-alias k='kubectl';
-alias python=python3;
-alias ls='ls --color=auto';
-alias open='xdg-open';
+which git &> /dev/null && alias gl='git log --name-status --graph';
+which git &> /dev/null && alias gitIgnore='git update-index --assume-unchanged';
+which git &> /dev/null && alias gitUnignore='git update-index --no-assume-unchanged';
+which git &> /dev/null && alias gitIgnored='git ls-files -v | grep "^[[:lower:]]"';
+which git &> /dev/null && alias gitYesterday='git log --since=yesterday.midnight --pretty=format:"- %s" --reverse';
+which kubectl &> /dev/null &&alias k='kubectl';
+
 alias backup='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
 alias vscodeExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
 alias vscodeImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 code --install-extension';
