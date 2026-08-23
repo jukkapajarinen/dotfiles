@@ -2,5 +2,11 @@
   {
     "key": "ctrl+meta+enter",
     "command": "workbench.action.terminal.new"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "§" },
+    "when": "terminalFocus"
   }
 ]

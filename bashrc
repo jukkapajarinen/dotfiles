@@ -20,6 +20,7 @@ export PATH="$PATH:/bin";
 export PATH="$PATH:/sbin";
 export PATH="$PATH:$HOME/.config/composer/vendor/bin";
 export PATH="$PATH:$HOME/.local/bin";
+export DOTENV_CONFIG_QUIET=true; # silence dotenv's ad banner (e.g. from `tldr`)
 
 # ##############################################################################
 # Bash aliases for Linux
@@ -46,7 +47,33 @@ alias open='xdg-open';
 alias backup='sudo bash -c "cd / && mkdir -p backups && tar -cvpzf backups/backup_$(date +"%Y-%m-%d_%H-%M").tar.gz --exclude=/backups/*.tar.gz --one-file-system /"';
 alias vscodeExport='code --list-extensions > ~/.config/Code/User/extensions.txt';
 alias vscodeImport='cat ~/.config/Code/User/extensions.txt | xargs -L 1 code --install-extension';
-alias nvim='~/Applications/nvim.appimage';
+
+# ##############################################################################
+# Command guidance (tldr cheatsheets)
+# ##############################################################################
+_tldr_widget() {
+    local cmd point saved_stty output tmpfile;
+    command -v tldr &>/dev/null || return;
+    cmd="${READLINE_LINE%% *}";
+    if [[ -n "$cmd" ]]; then
+        printf '\r\e[K\e[1;33mTLDR\e[0m  \e[2m%s\e[0m' "$cmd";
+        tmpfile=$(mktemp);
+        timeout 3 env FORCE_COLOR=1 tldr "$cmd" >"$tmpfile" 2>/dev/null;
+        output=$(<"$tmpfile");
+        rm -f "$tmpfile";
+        printf '\r\e[K';
+        if [[ -n "$output" ]]; then
+            point=$READLINE_POINT;
+            saved_stty=$(stty -g);
+            { printf '\e[1;33mTLDR\e[0m  \e[2m%s\e[0m\n\n' "$READLINE_LINE"; printf '%s\n' "$output"; } | less -R --quit-on-intr;
+            stty "$saved_stty";
+            READLINE_POINT=$point;
+        fi
+    fi
+}
+bind -x '"§": _tldr_widget';   # VS Code integrated terminal forwards Ctrl+Space as this
+bind -x '"\C-@": _tldr_widget';   # native terminals (kitty, etc.) send raw NUL for Ctrl+Space
+
 
 # ##############################################################################
 # Bash sources and launches
