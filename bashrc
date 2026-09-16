@@ -72,8 +72,10 @@ _tldr_widget() {
         fi
     fi
 }
-bind -x '"§": _tldr_widget';   # VS Code integrated terminal forwards Ctrl+Space as this
-bind -x '"\C-@": _tldr_widget';   # native terminals (kitty, etc.) send raw NUL for Ctrl+Space
+if [[ $- == *i* ]]; then
+    bind -x '"§": _tldr_widget';   # VS Code integrated terminal forwards Ctrl+Space as this
+    bind -x '"\C-@": _tldr_widget';   # native terminals (kitty, etc.) send raw NUL for Ctrl+Space
+fi
 
 
 # ##############################################################################
