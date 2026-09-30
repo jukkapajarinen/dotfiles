@@ -70,13 +70,18 @@
 }
 
 /* Blurred popups: dark grey, see-through so the blur shows. Top bar menus
-   are a little darker than notification popups, app folders and the log out /
-   restart / shut down dialog. */
+   are a little darker than notification popups, volume and brightness popups,
+   switchers, dialogs, app folders and the log out / restart / shut down
+   dialog. */
 .popup-menu-content.dotfiles-blurred {
     background-color: rgba(30, 30, 34, 0.88);
 }
 
 .notification-banner.dotfiles-blurred,
+.osd-window.dotfiles-blurred,
+.switcher-list.dotfiles-blurred,
+.workspace-switcher.dotfiles-blurred,
+.modal-dialog.dotfiles-blurred,
 .dotfiles-blurred .app-folder-dialog,
 .dotfiles-blurred .modal-dialog {
     background-color: rgba(40, 40, 44, 0.8);
@@ -196,4 +201,17 @@
 .grid-search-result:insensitive,
 .app-folder:insensitive {
     background-color: transparent;
+}
+
+/* Workspaces in tiling mode show as squares, not dots, in the popup shown
+   when switching workspaces with the keyboard. */
+.ws-switcher-indicator.dotfiles-tiling {
+    border-radius: 2px;
+}
+
+/* The tile a dragged window would swap into, in the accent blue. */
+.dotfiles-tile-drop {
+    background-color: st-transparentize(-st-accent-color, 0.7);
+    border: 2px solid -st-accent-color;
+    border-radius: 12px;
 }
