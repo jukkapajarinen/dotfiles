@@ -1,5 +1,6 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
 
 // Inside GNOME Shell this is an extension. Outside it (`gjs -m extension.js`,
 // used by INSTALL.sh) the Shell modules are missing and the settings are applied
@@ -65,16 +66,16 @@ const SETTINGS = [
     [`${CUSTOM_KEYBINDING_SCHEMA}:${CUSTOM_KEYBINDINGS_PATH}/custom0/`, 'binding', "'<Super>Return'"],
     [`${CUSTOM_KEYBINDING_SCHEMA}:${CUSTOM_KEYBINDINGS_PATH}/custom0/`, 'command', "'/usr/bin/kitty'"],
     [`${CUSTOM_KEYBINDING_SCHEMA}:${CUSTOM_KEYBINDINGS_PATH}/custom0/`, 'name', "'Kitty terminal'"],
-    ['org.gnome.desktop.wm.keybindings', 'move-to-workspace-1', "['<Shift><Super>1']"],
-    ['org.gnome.desktop.wm.keybindings', 'move-to-workspace-2', "['<Shift><Super>2']"],
-    ['org.gnome.desktop.wm.keybindings', 'move-to-workspace-3', "['<Shift><Super>3']"],
-    ['org.gnome.desktop.wm.keybindings', 'move-to-workspace-4', "['<Shift><Super>4']"],
+    ['org.gnome.desktop.wm.keybindings', 'move-to-workspace-1', "['<Shift><Control><Super>1']"],
+    ['org.gnome.desktop.wm.keybindings', 'move-to-workspace-2', "['<Shift><Control><Super>2']"],
+    ['org.gnome.desktop.wm.keybindings', 'move-to-workspace-3', "['<Shift><Control><Super>3']"],
+    ['org.gnome.desktop.wm.keybindings', 'move-to-workspace-4', "['<Shift><Control><Super>4']"],
     ['org.gnome.desktop.wm.keybindings', 'switch-applications', "['<Super>Tab']"],
     ['org.gnome.desktop.wm.keybindings', 'switch-applications-backward', "['<Shift><Super>Tab']"],
-    ['org.gnome.desktop.wm.keybindings', 'switch-to-workspace-1', "['<Super>1']"],
-    ['org.gnome.desktop.wm.keybindings', 'switch-to-workspace-2', "['<Super>2']"],
-    ['org.gnome.desktop.wm.keybindings', 'switch-to-workspace-3', "['<Super>3']"],
-    ['org.gnome.desktop.wm.keybindings', 'switch-to-workspace-4', "['<Super>4']"],
+    ['org.gnome.desktop.wm.keybindings', 'switch-to-workspace-1', "['<Control><Super>1']"],
+    ['org.gnome.desktop.wm.keybindings', 'switch-to-workspace-2', "['<Control><Super>2']"],
+    ['org.gnome.desktop.wm.keybindings', 'switch-to-workspace-3', "['<Control><Super>3']"],
+    ['org.gnome.desktop.wm.keybindings', 'switch-to-workspace-4', "['<Control><Super>4']"],
 ];
 
 function applySettings(dir) {
@@ -246,6 +247,11 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         // from still reserving space for it.
         Main.overview.dash.hide();
         Main.overview.dash.height = 0;
+
+        // Super opens the app grid instead of the overview: pause the shell's
+        // own Super handler and add ours.
+        GObject.signal_handlers_block_matched(global.display, {signalId: 'overlay-key'});
+        this._overlayKeyId = global.display.connect('overlay-key', toggleAppGrid);
     }
 
     disable() {
@@ -262,5 +268,9 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         Main.panel.statusArea.activities.container.show();
         Main.overview.dash.height = -1;
         Main.overview.dash.show();
+
+        global.display.disconnect(this._overlayKeyId);
+        this._overlayKeyId = null;
+        GObject.signal_handlers_unblock_matched(global.display, {signalId: 'overlay-key'});
     }
 }
