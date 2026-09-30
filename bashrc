@@ -85,3 +85,4 @@ source "/usr/share/bash-completion/bash_completion" &> /dev/null;
 source "/usr/local/etc/profile.d/bash_completion.sh" &> /dev/null;
 source "$NVM_DIR/nvm.sh" &> /dev/null;
 eval "$(starship init bash)";
+. "/home/jukka/.deno/env"

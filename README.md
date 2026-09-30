@@ -10,17 +10,17 @@ Custom keyboard configurations readme is [here](./kbd/xd60_v3_QMK_README.md).
 
 - Clone this repository to any location in your filesystem.  (E.g. **~/**)
 - Change directory to the previously **cloned** `dotfiles` directory
-- Launch the `./install_linux.sh` script in **bash**!
-  - *Supported options are `-f` or `--force` to force installation.*
+- Launch the `./INSTALL.sh` script in **bash**!
+  - *Supported option is `--yes` to answer `Y` to all questions and overwrite existing files.*
   - *Don't use **sudo!** (installer will ask for sudo password, if needed.)*
-  - *Installer will ask your permission `[y/N]` to start the installation.*
+  - *Installer will ask your permission `[Y/n]` to start the installation.*
 
 ## TL;DR;
 
 ```
 git clone git@github.com:jukkapajarinen/dotfiles.git && 
 cd dotfiles && 
-bash ./installers/install_linux.sh;
+bash ./INSTALL.sh;
 ```
 
 ## Author
