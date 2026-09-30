@@ -14,7 +14,8 @@ const UUID = 'dotfiles@jukkapajarinen.com';
 const TIMEZONE = 'Europe/Helsinki';
 const WEEKDAYS = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
 
-// Launchers shown right of the workspace buttons, as desktop file IDs.
+// Launchers shown right of the workspace buttons, as desktop file IDs, in the
+// order they appear in the top bar.
 const APPS = [
     'google-chrome.desktop',
     'org.gnome.Nautilus.desktop',
@@ -34,6 +35,8 @@ const CUSTOM_KEYBINDINGS_PATH = '/org/gnome/settings-daemon/plugins/media-keys/c
 const SETTINGS = [
     ['org.gnome.desktop.input-sources', 'sources', "[('xkb', 'fi+mac')]"],
     ['org.gnome.shell', 'disabled-extensions', "['ubuntu-dock@ubuntu.com']"],
+    // No saved custom order, so the app grid is always sorted alphabetically.
+    ['org.gnome.shell', 'app-picker-layout', '[]'],
     ['org.gnome.desktop.interface', 'color-scheme', "'prefer-dark'"],
     ['org.gnome.desktop.interface', 'gtk-theme', "'Yaru-blue-dark'"],
     ['org.gnome.desktop.interface', 'icon-theme', "'Yaru-blue-dark'"],
@@ -156,19 +159,28 @@ function createWorkspaceButtons() {
     return box;
 }
 
-// App launchers next to the workspace buttons. Clicking always opens a new
-// window, even when the app is already running.
+// An app grid button and app launchers next to the workspace buttons.
+// Clicking a launcher always opens a new window, even when the app is running.
 function createAppButtons() {
     const appSystem = Shell.AppSystem.get_default();
     const box = new St.BoxLayout({style_class: 'dotfiles-apps'});
 
-    for (const id of APPS) {
+    const apps = APPS.map(id => {
         const app = appSystem.lookup_app(id);
-        if (!app) {
+        if (!app)
             console.warn(`${UUID}: skipping missing app ${id}`);
-            continue;
-        }
+        return app;
+    }).filter(app => app);
 
+    const allApps = new St.Button({
+        style_class: 'dotfiles-app',
+        child: new St.Icon({icon_name: 'view-app-grid-symbolic', style_class: 'dotfiles-app-icon'}),
+        accessible_name: 'Show Apps',
+    });
+    allApps.connect('clicked', toggleAppGrid);
+    box.add_child(allApps);
+
+    for (const app of apps) {
         const button = new St.Button({
             style_class: 'dotfiles-app',
             child: new St.Icon({gicon: app.get_icon(), style_class: 'dotfiles-app-icon'}),
@@ -177,7 +189,20 @@ function createAppButtons() {
         button.connect('clicked', () => app.open_new_window(-1));
         box.add_child(button);
     }
+
     return box;
+}
+
+// Open the app grid, or close it if it is already showing. The overview
+// ignores showApps() while it is open, so flip the (hidden) dash button then.
+function toggleAppGrid() {
+    const showAppsButton = Main.overview.dash.showAppsButton;
+    if (!Main.overview.visible)
+        Main.overview.showApps();
+    else if (showAppsButton.checked)
+        Main.overview.hide();
+    else
+        showAppsButton.checked = true;
 }
 
 function wallpaperSettings(dir) {
@@ -216,6 +241,11 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         Main.panel._leftBox.insert_child_at_index(this._workspaces, 0);
         this._apps = createAppButtons();
         Main.panel._leftBox.insert_child_at_index(this._apps, 1);
+
+        // Hide the favourites dash in the overview. Height 0 stops the overview
+        // from still reserving space for it.
+        Main.overview.dash.hide();
+        Main.overview.dash.height = 0;
     }
 
     disable() {
@@ -230,5 +260,7 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         this._apps.destroy();
         this._apps = null;
         Main.panel.statusArea.activities.container.show();
+        Main.overview.dash.height = -1;
+        Main.overview.dash.show();
     }
 }

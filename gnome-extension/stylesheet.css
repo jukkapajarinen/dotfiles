@@ -29,7 +29,8 @@
     background-color: -st-accent-color;
 }
 
-/* App launchers right of the workspaces, same boxes without the accent. */
+/* App grid button and launchers right of the workspaces, same boxes without
+   the accent and 20% bigger than the workspace boxes. */
 .dotfiles-apps {
     spacing: 2px;
     padding: 0 4px 0 8px;
@@ -37,9 +38,9 @@
 
 .dotfiles-app {
     transition-duration: 150ms;
-    padding: 0 5px;
-    margin: 4px 0;
-    border-radius: 4px;
+    padding: 0 6px;
+    margin: 5px 0;
+    border-radius: 5px;
     background-color: transparent;
 }
 
@@ -52,5 +53,10 @@
 }
 
 .dotfiles-app-icon {
-    icon-size: 16px;
+    icon-size: 19px;
+}
+
+/* Top bar 20% taller than Yaru's 2.2em. */
+#panel {
+    height: 2.64em;
 }
