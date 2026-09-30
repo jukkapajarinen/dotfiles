@@ -6,8 +6,24 @@ import GLib from 'gi://GLib';
 // straight away to the current session.
 const {Extension} = await import('resource:///org/gnome/shell/extensions/extension.js')
     .catch(() => ({Extension: null}));
+const Main = Extension ? await import('resource:///org/gnome/shell/ui/main.js') : null;
+const St = Extension ? (await import('gi://St')).default : null;
+const Shell = Extension ? (await import('gi://Shell')).default : null;
 
 const UUID = 'dotfiles@jukkapajarinen.com';
+const TIMEZONE = 'Europe/Helsinki';
+const WEEKDAYS = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
+
+// Launchers shown right of the workspace buttons, as desktop file IDs.
+const APPS = [
+    'google-chrome.desktop',
+    'org.gnome.Nautilus.desktop',
+    'org.gnome.Calculator.desktop',
+    'org.gnome.clocks.desktop',
+    'kitty.desktop',
+    'com.microsoft.VSCode.desktop',
+    'org.keepassxc.KeePassXC.desktop',
+];
 
 const CUSTOM_KEYBINDING_SCHEMA = 'org.gnome.settings-daemon.plugins.media-keys.custom-keybinding';
 const CUSTOM_KEYBINDINGS_PATH = '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings';
@@ -27,9 +43,16 @@ const SETTINGS = [
     ['org.gnome.desktop.default-applications.terminal', 'exec', "'kitty'"],
     ['org.gnome.desktop.interface', 'clock-show-seconds', 'true'],
     ['org.gnome.desktop.interface', 'clock-show-weekday', 'true'],
+    ['org.gnome.desktop.interface', 'clock-format', "'24h'"],
+    ['org.gnome.desktop.datetime', 'automatic-timezone', 'false'],
     ['org.gnome.desktop.wm.preferences', 'num-workspaces', '4'],
     ['org.gnome.mutter', 'dynamic-workspaces', 'false'],
     ['org.gnome.mutter', 'workspaces-only-on-primary', 'false'],
+    ['org.gnome.shell.extensions.ding', 'start-corner', "'top-left'"],
+    ['org.gnome.shell.extensions.ding', 'show-home', 'true'],
+    ['org.gnome.shell.extensions.ding', 'show-trash', 'true'],
+    ['org.gnome.shell.extensions.ding', 'show-volumes', 'false'],
+    ['org.gnome.shell.extensions.ding', 'show-network-volumes', 'false'],
 
     // ##########################################################################
     // Gnome keybindings
@@ -74,6 +97,87 @@ function applySettings(dir) {
     }
 
     Gio.Settings.sync();
+    setTimezone(TIMEZONE);
+}
+
+function setTimezone(timezone) {
+    // The timezone is system-wide, so it lives in systemd-timedated rather than
+    // gsettings. Ubuntu's polkit rules let sudo users change it without a prompt.
+    try {
+        const timedate = Gio.DBusProxy.new_for_bus_sync(Gio.BusType.SYSTEM, Gio.DBusProxyFlags.NONE, null,
+            'org.freedesktop.timedate1', '/org/freedesktop/timedate1', 'org.freedesktop.timedate1', null);
+        if (timedate.get_cached_property('Timezone')?.unpack() === timezone)
+            return;
+
+        timedate.call_sync('SetTimezone', new GLib.Variant('(sb)', [timezone, false]), Gio.DBusCallFlags.NONE, -1, null);
+    } catch (e) {
+        console.error(`${UUID}: failed to set timezone ${timezone}: ${e.message}`);
+    }
+}
+
+// Top bar clock, e.g. "Ke 30.09.2026 - 16.06:41". GNOME has no setting for a
+// custom format, so overwrite the label each time the shell's clock ticks. Our
+// handler is connected after the shell's text binding, so it runs last.
+function formatClock() {
+    const now = GLib.DateTime.new_now_local();
+    return `${WEEKDAYS[now.get_day_of_week() - 1]} ${now.format('%d.%m.%Y - %H.%M:%S')}`;
+}
+
+// i3-style workspace buttons in place of the Activities dots. Clicking a number
+// switches to that workspace; clicking the current one opens the overview.
+function createWorkspaceButtons() {
+    const manager = global.workspace_manager;
+    const box = new St.BoxLayout({style_class: 'dotfiles-workspaces', reactive: true});
+
+    const rebuild = () => {
+        box.destroy_all_children();
+        for (let i = 0; i < manager.n_workspaces; i++) {
+            const button = new St.Button({label: `${i + 1}`, style_class: 'dotfiles-workspace'});
+            button.connect('clicked', () => {
+                if (i === manager.get_active_workspace_index())
+                    Main.overview.toggle();
+                else
+                    manager.get_workspace_by_index(i).activate(global.get_current_time());
+            });
+            box.add_child(button);
+        }
+        update();
+    };
+    const update = () => box.get_children().forEach((button, i) => {
+        button.checked = i === manager.get_active_workspace_index();
+    });
+
+    manager.connectObject(
+        'notify::n-workspaces', rebuild,
+        'active-workspace-changed', update,
+        box);
+    box.connect('scroll-event', (_actor, event) => Main.wm.handleWorkspaceScroll(event));
+    rebuild();
+    return box;
+}
+
+// App launchers next to the workspace buttons. Clicking always opens a new
+// window, even when the app is already running.
+function createAppButtons() {
+    const appSystem = Shell.AppSystem.get_default();
+    const box = new St.BoxLayout({style_class: 'dotfiles-apps'});
+
+    for (const id of APPS) {
+        const app = appSystem.lookup_app(id);
+        if (!app) {
+            console.warn(`${UUID}: skipping missing app ${id}`);
+            continue;
+        }
+
+        const button = new St.Button({
+            style_class: 'dotfiles-app',
+            child: new St.Icon({gicon: app.get_icon(), style_class: 'dotfiles-app-icon'}),
+            accessible_name: app.get_name(),
+        });
+        button.connect('clicked', () => app.open_new_window(-1));
+        box.add_child(button);
+    }
+    return box;
 }
 
 function wallpaperSettings(dir) {
@@ -101,9 +205,30 @@ if (!Extension)
 export default class DotfilesExtension extends (Extension ?? Object) {
     enable() {
         applySettings(this.dir);
+
+        const dateMenu = Main.panel.statusArea.dateMenu;
+        const update = () => dateMenu._clockDisplay.set_text(formatClock());
+        this._clockId = dateMenu._clock.connect('notify::clock', update);
+        update();
+
+        Main.panel.statusArea.activities.container.hide();
+        this._workspaces = createWorkspaceButtons();
+        Main.panel._leftBox.insert_child_at_index(this._workspaces, 0);
+        this._apps = createAppButtons();
+        Main.panel._leftBox.insert_child_at_index(this._apps, 1);
     }
 
     disable() {
-        // Settings are persistent preferences; nothing to undo.
+        // Settings are persistent preferences; only the panel changes need undoing.
+        const dateMenu = Main.panel.statusArea.dateMenu;
+        dateMenu._clock.disconnect(this._clockId);
+        dateMenu._clockDisplay.set_text(dateMenu._clock.clock);
+        this._clockId = null;
+
+        this._workspaces.destroy();
+        this._workspaces = null;
+        this._apps.destroy();
+        this._apps = null;
+        Main.panel.statusArea.activities.container.show();
     }
 }
