@@ -70,13 +70,15 @@
 }
 
 /* Blurred popups: dark grey, see-through so the blur shows. Top bar menus
-   are a little darker than notification popups and app folders. */
+   are a little darker than notification popups, app folders and the log out /
+   restart / shut down dialog. */
 .popup-menu-content.dotfiles-blurred {
     background-color: rgba(30, 30, 34, 0.88);
 }
 
 .notification-banner.dotfiles-blurred,
-.dotfiles-blurred .app-folder-dialog {
+.dotfiles-blurred .app-folder-dialog,
+.dotfiles-blurred .modal-dialog {
     background-color: rgba(40, 40, 44, 0.8);
 }
 

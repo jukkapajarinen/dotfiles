@@ -1,6 +1,5 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
-import GObject from 'gi://GObject';
 
 // Inside GNOME Shell this is an extension. Outside it (`gjs -m extension.js`,
 // used by INSTALL.sh) the Shell modules are missing and the settings are applied
@@ -17,6 +16,8 @@ const AppDisplay = Extension ? await import('resource:///org/gnome/shell/ui/appD
 const Clutter = Extension ? (await import('gi://Clutter')).default : null;
 const Cogl = Extension ? (await import('gi://Cogl')).default : null;
 const Workspace = Extension ? await import('resource:///org/gnome/shell/ui/workspace.js') : null;
+const ModalDialog = Extension ? await import('resource:///org/gnome/shell/ui/modalDialog.js') : null;
+const EndSessionDialog = Extension ? await import('resource:///org/gnome/shell/ui/endSessionDialog.js') : null;
 const Graphene = Extension ? (await import('gi://Graphene')).default : null;
 
 const UUID = 'dotfiles@jukkapajarinen.com';
@@ -36,7 +37,7 @@ const FOLDER_SHADE_LIGHTER = 25;
 const WORKSPACE_PREVIEW_RADIUS = 12;
 
 // Confetti thrown by double-clicking empty top bar space.
-const CONFETTI_PIECES = 400;
+const CONFETTI_PIECES = 300;
 const CONFETTI_DURATION = 3000; // ms
 const CONFETTI_COLORS = [
     [249, 65, 68], [248, 150, 30], [249, 199, 79], [144, 190, 109],
@@ -64,8 +65,8 @@ const CUSTOM_KEYBINDINGS_PATH = '/org/gnome/settings-daemon/plugins/media-keys/c
 const SETTINGS = [
     ['org.gnome.desktop.input-sources', 'sources', "[('xkb', 'fi+mac')]"],
     ['org.gnome.shell', 'disabled-extensions', "['ubuntu-dock@ubuntu.com']"],
-    // No saved custom order, so the app grid is always sorted alphabetically.
     ['org.gnome.shell', 'app-picker-layout', '[]'],
+    ['org.gnome.shell', 'favorite-apps', '[]'],
     ['org.gnome.desktop.interface', 'color-scheme', "'prefer-dark'"],
     ['org.gnome.desktop.interface', 'gtk-theme', "'Yaru-blue-dark'"],
     ['org.gnome.desktop.interface', 'icon-theme', "'Yaru-blue-dark'"],
@@ -85,6 +86,7 @@ const SETTINGS = [
     ['org.gnome.shell.extensions.ding', 'show-trash', 'true'],
     ['org.gnome.shell.extensions.ding', 'show-volumes', 'false'],
     ['org.gnome.shell.extensions.ding', 'show-network-volumes', 'false'],
+    ['org.gtk.gtk4.Settings.FileChooser', 'show-hidden', 'true'],
 
     // ##########################################################################
     // Gnome keybindings
@@ -156,7 +158,8 @@ function formatClock() {
 }
 
 // i3-style workspace buttons in place of the Activities dots. Clicking a number
-// switches to that workspace; clicking the current one opens the overview.
+// switches to that workspace; clicking the current one opens the overview, and
+// clicking the top-left corner opens the app grid.
 function createWorkspaceButtons() {
     const manager = global.workspace_manager;
     const box = new St.BoxLayout({style_class: 'dotfiles-workspaces', reactive: true});
@@ -184,6 +187,17 @@ function createWorkspaceButtons() {
         'active-workspace-changed', update,
         box);
     box.connect('scroll-event', (_actor, event) => Main.wm.handleWorkspaceScroll(event));
+
+    // Clicking the top-left corner, left of the first number, toggles the app
+    // grid. Target phase, so clicks on the numbers themselves don't count.
+    const corner = new Clutter.ClickGesture();
+    corner.connect('recognize', () => {
+        const [boxX] = box.get_transformed_position();
+        if (corner.get_coords_abs().x < boxX + (box.get_first_child()?.x ?? 0))
+            toggleAppGrid();
+    });
+    box.add_action_full('dotfiles-corner', Clutter.EventPhase.TARGET, corner);
+
     rebuild();
     return box;
 }
@@ -266,8 +280,8 @@ function createOverviewBackground() {
     return group;
 }
 
-// Top bar menus, notification popups and app folders blur what is behind
-// them too. The shell creates these on demand, so blur each one as it first
+// Top bar menus, notification popups, app folders and the log out / restart /
+// shut down dialog blur what is behind them too. The shell creates these on demand, so blur each one as it first
 // appears. Returns a function that undoes it.
 function blurPopups() {
     const blurred = new Set();
@@ -310,12 +324,22 @@ function blurPopups() {
         shade(this, lighter ? FOLDER_SHADE_LIGHTER : FOLDER_SHADE);
     };
 
+    // The end session dialog is a full-screen layer holding the shade and the
+    // dialog box, so blurring the layer blurs the whole screen behind it.
+    const modalOpen = ModalDialog.ModalDialog.prototype.open;
+    ModalDialog.ModalDialog.prototype.open = function (...args) {
+        if (this instanceof EndSessionDialog.EndSessionDialog)
+            blur(this);
+        return modalOpen.apply(this, args);
+    };
+
     const bannerBin = Main.messageTray._bannerBin;
     const bannerId = bannerBin.connect('child-added', (_bin, banner) => blur(banner));
 
     return () => {
         PopupMenu.PopupMenu.prototype.open = menuOpen;
         Object.assign(folder, {popup, _zoomAndFadeIn: zoomAndFadeIn, _setLighterBackground: setLighterBackground});
+        ModalDialog.ModalDialog.prototype.open = modalOpen;
         bannerBin.disconnect(bannerId);
         blurred.forEach(actor => {
             actor.remove_effect_by_name('dotfiles-blur');
@@ -352,10 +376,7 @@ function roundWorkspacePreviews() {
 }
 
 // Double-clicking empty top bar space throws confetti over all screens for
-// CONFETTI_DURATION, with celebration.wav. The gesture runs in the target phase, so clicks on top
-// bar buttons don't count. The top bar's own gesture (dragging a maximized
-// window down) claims every press, so the two are allowed to run side by
-// side. Returns a function that undoes it.
+// CONFETTI_DURATION, with celebration.wav. Returns a function that undoes it.
 function setupConfetti(dir) {
     const sound = dir.get_child('celebration.wav');
     let confetti = null;
@@ -365,8 +386,11 @@ function setupConfetti(dir) {
         if (timeoutId)
             GLib.source_remove(timeoutId);
         timeoutId = 0;
-        confetti?.destroy();
-        confetti = null;
+        if (confetti) {
+            confetti.destroy();
+            confetti = null;
+            global.compositor.enable_unredirect();
+        }
     };
 
     const celebrate = () => {
@@ -376,6 +400,10 @@ function setupConfetti(dir) {
         const {width, height} = global.stage;
         const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
         confetti = new Clutter.Actor({width, height});
+        // A fullscreen window skips the compositor and goes straight to the
+        // screen, which leaves no shell drawing on top of it. Composite while
+        // the confetti falls so it shows over e.g. fullscreen Chrome.
+        global.compositor.disable_unredirect();
         Main.layoutManager.uiGroup.add_child(confetti);
         global.display.get_sound_player().play_from_file(sound, 'Confetti', null);
 
@@ -395,15 +423,28 @@ function setupConfetti(dir) {
             confetti.add_child(piece);
 
             // Staggered start, and every piece is off screen when time is up.
+            // Move with translation rather than x/y: changing the position
+            // re-lays out the whole confetti layer every frame, translation
+            // only changes how the piece is drawn.
             const delay = Math.random() * CONFETTI_DURATION / 3;
             piece.ease({
-                x: x + (Math.random() - 0.5) * 300 * scaleFactor,
-                y: height + size * 2,
+                translation_x: (Math.random() - 0.5) * 300 * scaleFactor,
+                translation_y: height + size * 2 - piece.y,
                 rotation_angle_z: piece.rotation_angle_z + (Math.random() - 0.5) * 1080,
-                rotation_angle_x: (Math.random() - 0.5) * 1080,
                 delay,
                 duration: CONFETTI_DURATION - delay,
                 mode: Clutter.AnimationMode.EASE_IN_QUAD,
+            });
+            // Tumble by squashing the height back and forth, a flat stand-in
+            // for spinning around the x axis: 3D rotation gives the pieces
+            // depth, and they break into white blocks over fullscreen windows.
+            piece.ease({
+                scale_y: -1,
+                delay,
+                duration: 150 + Math.random() * 350,
+                mode: Clutter.AnimationMode.EASE_IN_OUT_SINE,
+                repeatCount: -1,
+                autoReverse: true,
             });
         }
 
@@ -414,14 +455,35 @@ function setupConfetti(dir) {
         });
     };
 
-    const gesture = new Clutter.ClickGesture({n_clicks_required: 2});
-    gesture.connect('recognize', celebrate);
-    gesture.can_not_cancel(Main.panel._clickGesture);
-    Main.panel._clickGesture.can_not_cancel(gesture);
-    Main.panel.add_action_full('dotfiles-confetti', Clutter.EventPhase.TARGET, gesture);
+    // Count clicks ourselves, watching presses before the top bar's own
+    // gesture sees them: with a maximized window that gesture starts a window
+    // move, which takes over input and swallows a gesture's second click.
+    let last = null;
+    const pressId = Main.panel.connect('captured-event::button', (_panel, event) => {
+        if (event.type() !== Clutter.EventType.BUTTON_PRESS || event.get_button() !== Clutter.BUTTON_PRIMARY)
+            return Clutter.EVENT_PROPAGATE;
+
+        // Only presses on the top bar itself, not on its buttons.
+        const [x, y] = event.get_coords();
+        if (global.stage.get_actor_at_pos(Clutter.PickMode.REACTIVE, x, y) !== Main.panel) {
+            last = null;
+            return Clutter.EVENT_PROPAGATE;
+        }
+
+        const settings = Clutter.Settings.get_default();
+        const time = event.get_time();
+        if (last && time - last.time <= settings.double_click_time &&
+            Math.hypot(x - last.x, y - last.y) <= settings.double_click_distance) {
+            last = null;
+            celebrate();
+        } else {
+            last = {time, x, y};
+        }
+        return Clutter.EVENT_PROPAGATE;
+    });
 
     return () => {
-        Main.panel.remove_action(gesture);
+        Main.panel.disconnect(pressId);
         stop();
     };
 }
@@ -470,11 +532,6 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         // height 0 frees its space, and the clip and opacity hide what is left.
         Main.overview.dash.set({height: 0, opacity: 0, clip_to_allocation: true});
 
-        // Super opens the app grid instead of the overview: pause the shell's
-        // own Super handler and add ours.
-        GObject.signal_handlers_block_matched(global.display, {signalId: 'overlay-key'});
-        this._overlayKeyId = global.display.connect('overlay-key', toggleAppGrid);
-
         this._panelBlur = blurEffect(Shell.BlurMode.BACKGROUND);
         Main.panel.add_effect(this._panelBlur);
         this._overviewBackground = createOverviewBackground();
@@ -496,10 +553,6 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         this._apps = null;
         Main.panel.statusArea.activities.container.show();
         Main.overview.dash.set({height: -1, opacity: 255, clip_to_allocation: false});
-
-        global.display.disconnect(this._overlayKeyId);
-        this._overlayKeyId = null;
-        GObject.signal_handlers_unblock_matched(global.display, {signalId: 'overlay-key'});
 
         Main.panel.remove_effect(this._panelBlur);
         this._panelBlur = null;
