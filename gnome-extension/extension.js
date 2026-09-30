@@ -10,10 +10,38 @@ const {Extension} = await import('resource:///org/gnome/shell/extensions/extensi
 const Main = Extension ? await import('resource:///org/gnome/shell/ui/main.js') : null;
 const St = Extension ? (await import('gi://St')).default : null;
 const Shell = Extension ? (await import('gi://Shell')).default : null;
+const Meta = Extension ? (await import('gi://Meta')).default : null;
+const Background = Extension ? await import('resource:///org/gnome/shell/ui/background.js') : null;
+const PopupMenu = Extension ? await import('resource:///org/gnome/shell/ui/popupMenu.js') : null;
+const AppDisplay = Extension ? await import('resource:///org/gnome/shell/ui/appDisplay.js') : null;
+const Clutter = Extension ? (await import('gi://Clutter')).default : null;
+const Cogl = Extension ? (await import('gi://Cogl')).default : null;
+const Workspace = Extension ? await import('resource:///org/gnome/shell/ui/workspace.js') : null;
+const Graphene = Extension ? (await import('gi://Graphene')).default : null;
 
 const UUID = 'dotfiles@jukkapajarinen.com';
 const TIMEZONE = 'Europe/Helsinki';
 const WEEKDAYS = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
+
+// Blur strength and dimming, blur-my-shell's defaults.
+const BLUR_RADIUS = 30;
+const BLUR_BRIGHTNESS = 0.6;
+
+// Black shade over the blur behind an open app folder (0-255), and while an
+// icon is dragged out of it. The shell's own shades are 204 and 85.
+const FOLDER_SHADE = 77;
+const FOLDER_SHADE_LIGHTER = 25;
+
+// Visible corner radius of workspace previews in the overview and app grid.
+const WORKSPACE_PREVIEW_RADIUS = 12;
+
+// Confetti thrown by double-clicking empty top bar space.
+const CONFETTI_PIECES = 400;
+const CONFETTI_DURATION = 3000; // ms
+const CONFETTI_COLORS = [
+    [249, 65, 68], [248, 150, 30], [249, 199, 79], [144, 190, 109],
+    [67, 170, 139], [53, 132, 228], [155, 89, 182], [255, 255, 255],
+];
 
 // Launchers shown right of the workspace buttons, as desktop file IDs, in the
 // order they appear in the top bar.
@@ -124,7 +152,7 @@ function setTimezone(timezone) {
 // handler is connected after the shell's text binding, so it runs last.
 function formatClock() {
     const now = GLib.DateTime.new_now_local();
-    return `${WEEKDAYS[now.get_day_of_week() - 1]} ${now.format('%d.%m.%Y - %H.%M:%S')}`;
+    return `${WEEKDAYS[now.get_day_of_week() - 1]} ${now.format('%d.%m.%Y – %H.%M:%S')}`;
 }
 
 // i3-style workspace buttons in place of the Activities dots. Clicking a number
@@ -206,6 +234,198 @@ function toggleAppGrid() {
         showAppsButton.checked = true;
 }
 
+// Simplified blur-my-shell: the top bar blurs whatever is behind it, and the
+// overview and app grid sit on a blurred copy of the wallpaper.
+function blurEffect(mode) {
+    return new Shell.BlurEffect({mode, radius: BLUR_RADIUS, brightness: BLUR_BRIGHTNESS});
+}
+
+function createOverviewBackground() {
+    const group = new Meta.BackgroundGroup();
+    let managers = [];
+
+    const rebuild = () => {
+        managers.forEach(manager => manager.destroy());
+        managers = Main.layoutManager.monitors.map((_monitor, monitorIndex) => {
+            const manager = new Background.BackgroundManager({container: group, monitorIndex});
+            // The manager swaps in a new actor when the wallpaper changes. Its
+            // wallpaper starts dimmed to 0.5; undo that so only the blur dims.
+            const blur = () => {
+                manager.backgroundActor.content.brightness = 1;
+                manager.backgroundActor.add_effect(blurEffect(Shell.BlurMode.ACTOR));
+            };
+            manager.connect('changed', blur);
+            blur();
+            return manager;
+        });
+    };
+
+    Main.layoutManager.connectObject('monitors-changed', rebuild, group);
+    group.connect('destroy', () => managers.forEach(manager => manager.destroy()));
+    rebuild();
+    return group;
+}
+
+// Top bar menus, notification popups and app folders blur what is behind
+// them too. The shell creates these on demand, so blur each one as it first
+// appears. Returns a function that undoes it.
+function blurPopups() {
+    const blurred = new Set();
+    const blur = actor => {
+        if (blurred.has(actor))
+            return;
+        actor.add_effect_with_name('dotfiles-blur', blurEffect(Shell.BlurMode.BACKGROUND));
+        actor.add_style_class_name('dotfiles-blurred');
+        blurred.add(actor);
+        actor.connect('destroy', () => blurred.delete(actor));
+    };
+
+    const menuOpen = PopupMenu.PopupMenu.prototype.open;
+    PopupMenu.PopupMenu.prototype.open = function (...args) {
+        if (this.sourceActor && Main.panel.contains(this.sourceActor))
+            blur(this.box);
+        return menuOpen.apply(this, args);
+    };
+
+    // An open folder covers the screen and shades everything behind it almost
+    // black. Blur that whole area instead, and re-aim the shell's shade fades
+    // at a light tint right after it starts them.
+    const folder = AppDisplay.AppFolderDialog.prototype;
+    const {popup, _zoomAndFadeIn: zoomAndFadeIn, _setLighterBackground: setLighterBackground} = folder;
+    const shade = (dialog, alpha) => dialog.ease({
+        background_color: new Cogl.Color({red: 0, green: 0, blue: 0, alpha}),
+        duration: 200, // the shell's FOLDER_DIALOG_ANIMATION_TIME
+        mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+    });
+    folder.popup = function (...args) {
+        blur(this);
+        return popup.apply(this, args);
+    };
+    folder._zoomAndFadeIn = function (...args) {
+        zoomAndFadeIn.apply(this, args);
+        shade(this, FOLDER_SHADE);
+    };
+    folder._setLighterBackground = function (lighter) {
+        setLighterBackground.call(this, lighter);
+        shade(this, lighter ? FOLDER_SHADE_LIGHTER : FOLDER_SHADE);
+    };
+
+    const bannerBin = Main.messageTray._bannerBin;
+    const bannerId = bannerBin.connect('child-added', (_bin, banner) => blur(banner));
+
+    return () => {
+        PopupMenu.PopupMenu.prototype.open = menuOpen;
+        Object.assign(folder, {popup, _zoomAndFadeIn: zoomAndFadeIn, _setLighterBackground: setLighterBackground});
+        bannerBin.disconnect(bannerId);
+        blurred.forEach(actor => {
+            actor.remove_effect_by_name('dotfiles-blur');
+            actor.remove_style_class_name('dotfiles-blurred');
+        });
+    };
+}
+
+// Workspace previews round their wallpaper at 30px in full-screen size, so
+// the small previews above the app grid end up almost square. Scale the radius
+// up by how much the preview is shrunk, keeping the shell's value as the
+// minimum. Returns a function that undoes it.
+function roundWorkspacePreviews() {
+    const background = Workspace.WorkspaceBackground.prototype;
+    const updateBorderRadius = background._updateBorderRadius;
+
+    background._updateBorderRadius = function () {
+        updateBorderRadius.call(this);
+        // The preview size changes without a state change (window picker to
+        // app grid), so also follow the size.
+        this._dotfilesSizeId ??= this.connect('notify::width', () => this._updateBorderRadius());
+
+        const content = this._bgManager.backgroundActor.content;
+        const monitor = Main.layoutManager.monitors[this._monitorIndex];
+        const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
+        const shrink = this.width > 0 ? monitor.width / this.width : 1;
+        const radius = WORKSPACE_PREVIEW_RADIUS * scaleFactor * shrink * this._stateAdjustment.value;
+        content.rounded_clip_radius = Math.max(content.rounded_clip_radius, radius);
+    };
+
+    return () => {
+        background._updateBorderRadius = updateBorderRadius;
+    };
+}
+
+// Double-clicking empty top bar space throws confetti over all screens for
+// CONFETTI_DURATION, with celebration.wav. The gesture runs in the target phase, so clicks on top
+// bar buttons don't count. The top bar's own gesture (dragging a maximized
+// window down) claims every press, so the two are allowed to run side by
+// side. Returns a function that undoes it.
+function setupConfetti(dir) {
+    const sound = dir.get_child('celebration.wav');
+    let confetti = null;
+    let timeoutId = 0;
+
+    const stop = () => {
+        if (timeoutId)
+            GLib.source_remove(timeoutId);
+        timeoutId = 0;
+        confetti?.destroy();
+        confetti = null;
+    };
+
+    const celebrate = () => {
+        if (confetti)
+            return;
+
+        const {width, height} = global.stage;
+        const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
+        confetti = new Clutter.Actor({width, height});
+        Main.layoutManager.uiGroup.add_child(confetti);
+        global.display.get_sound_player().play_from_file(sound, 'Confetti', null);
+
+        for (let i = 0; i < CONFETTI_PIECES; i++) {
+            const [red, green, blue] = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+            const size = (6 + Math.random() * 6) * scaleFactor;
+            const x = Math.random() * width;
+            const piece = new Clutter.Actor({
+                x,
+                y: -size * 2 - Math.random() * height * 0.2,
+                width: size,
+                height: size * 2.5,
+                pivot_point: new Graphene.Point({x: 0.5, y: 0.5}),
+                rotation_angle_z: Math.random() * 360,
+                background_color: new Cogl.Color({red, green, blue, alpha: 255}),
+            });
+            confetti.add_child(piece);
+
+            // Staggered start, and every piece is off screen when time is up.
+            const delay = Math.random() * CONFETTI_DURATION / 3;
+            piece.ease({
+                x: x + (Math.random() - 0.5) * 300 * scaleFactor,
+                y: height + size * 2,
+                rotation_angle_z: piece.rotation_angle_z + (Math.random() - 0.5) * 1080,
+                rotation_angle_x: (Math.random() - 0.5) * 1080,
+                delay,
+                duration: CONFETTI_DURATION - delay,
+                mode: Clutter.AnimationMode.EASE_IN_QUAD,
+            });
+        }
+
+        timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, CONFETTI_DURATION, () => {
+            timeoutId = 0;
+            stop();
+            return GLib.SOURCE_REMOVE;
+        });
+    };
+
+    const gesture = new Clutter.ClickGesture({n_clicks_required: 2});
+    gesture.connect('recognize', celebrate);
+    gesture.can_not_cancel(Main.panel._clickGesture);
+    Main.panel._clickGesture.can_not_cancel(gesture);
+    Main.panel.add_action_full('dotfiles-confetti', Clutter.EventPhase.TARGET, gesture);
+
+    return () => {
+        Main.panel.remove_action(gesture);
+        stop();
+    };
+}
+
 function wallpaperSettings(dir) {
     // The extension directory is symlinked from the dotfiles repo, so resolve
     // the link to find images/ in the repo root.
@@ -234,7 +454,9 @@ export default class DotfilesExtension extends (Extension ?? Object) {
 
         const dateMenu = Main.panel.statusArea.dateMenu;
         const update = () => dateMenu._clockDisplay.set_text(formatClock());
-        this._clockId = dateMenu._clock.connect('notify::clock', update);
+        // Tied to the label, so the handler goes away if the shell destroys the
+        // label first (on logout).
+        dateMenu._clock.connectObject('notify::clock', update, dateMenu._clockDisplay);
         update();
 
         Main.panel.statusArea.activities.container.hide();
@@ -243,34 +465,51 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         this._apps = createAppButtons();
         Main.panel._leftBox.insert_child_at_index(this._apps, 1);
 
-        // Hide the favourites dash in the overview. Height 0 stops the overview
-        // from still reserving space for it.
-        Main.overview.dash.hide();
-        Main.overview.dash.height = 0;
+        // Hide the favourites dash in the overview. It stays "visible" because a
+        // hidden dash never styles its icons and then errors when resizing them;
+        // height 0 frees its space, and the clip and opacity hide what is left.
+        Main.overview.dash.set({height: 0, opacity: 0, clip_to_allocation: true});
 
         // Super opens the app grid instead of the overview: pause the shell's
         // own Super handler and add ours.
         GObject.signal_handlers_block_matched(global.display, {signalId: 'overlay-key'});
         this._overlayKeyId = global.display.connect('overlay-key', toggleAppGrid);
+
+        this._panelBlur = blurEffect(Shell.BlurMode.BACKGROUND);
+        Main.panel.add_effect(this._panelBlur);
+        this._overviewBackground = createOverviewBackground();
+        Main.layoutManager.overviewGroup.insert_child_at_index(this._overviewBackground, 0);
+        this._unblurPopups = blurPopups();
+        this._unroundWorkspacePreviews = roundWorkspacePreviews();
+        this._removeConfetti = setupConfetti(this.dir);
     }
 
     disable() {
         // Settings are persistent preferences; only the panel changes need undoing.
         const dateMenu = Main.panel.statusArea.dateMenu;
-        dateMenu._clock.disconnect(this._clockId);
+        dateMenu._clock.disconnectObject(dateMenu._clockDisplay);
         dateMenu._clockDisplay.set_text(dateMenu._clock.clock);
-        this._clockId = null;
 
         this._workspaces.destroy();
         this._workspaces = null;
         this._apps.destroy();
         this._apps = null;
         Main.panel.statusArea.activities.container.show();
-        Main.overview.dash.height = -1;
-        Main.overview.dash.show();
+        Main.overview.dash.set({height: -1, opacity: 255, clip_to_allocation: false});
 
         global.display.disconnect(this._overlayKeyId);
         this._overlayKeyId = null;
         GObject.signal_handlers_unblock_matched(global.display, {signalId: 'overlay-key'});
+
+        Main.panel.remove_effect(this._panelBlur);
+        this._panelBlur = null;
+        this._overviewBackground.destroy();
+        this._overviewBackground = null;
+        this._unblurPopups();
+        this._unblurPopups = null;
+        this._unroundWorkspacePreviews();
+        this._unroundWorkspacePreviews = null;
+        this._removeConfetti();
+        this._removeConfetti = null;
     }
 }
