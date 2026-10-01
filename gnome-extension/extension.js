@@ -207,8 +207,9 @@ function createWorkspaceButtons() {
     box.connect('destroy', cancelOverview);
 
     // Right-clicking a number opens a menu to pick its mode. Both modes are
-    // always listed; the current one is dotted and greyed out.
-    const menuManager = new PopupMenu.PopupMenuManager(box);
+    // always listed; the current one is dotted and greyed out. The menus join
+    // the top bar's own, so with any top bar menu open, moving the pointer
+    // onto a number switches to its menu, and from there on to the next.
     const createModeMenu = (button, i) => {
         const menu = new PopupMenu.PopupMenu(button, 0.5, St.Side.TOP);
         const items = [true, false].map(tiling => {
@@ -231,7 +232,7 @@ function createWorkspaceButtons() {
         menu.actor.add_style_class_name('panel-menu');
         menu.actor.hide();
         Main.uiGroup.add_child(menu.actor);
-        menuManager.addMenu(menu);
+        Main.panel.menuManager.addMenu(menu);
         button.connect('destroy', () => menu.destroy());
         return menu;
     };
@@ -736,6 +737,7 @@ const STOPWATCHES = 1;
 const STOPWATCH_FILE = GLib.build_filenamev([GLib.get_user_state_dir(), UUID, 'stopwatches.json']);
 const STOPWATCH_SAVE_INTERVAL = 5; // seconds, while running
 const STOPWATCH_HISTORY_AGE = 24 * 60 * 60; // seconds
+const COPIED_NOTE_TIME = 2000; // ms
 
 // Drop the measurements that ended longer ago than that.
 function pruneStopwatchHistory(history) {
@@ -821,6 +823,7 @@ function createStopwatch(index) {
         currentItem.visible = used;
         currentItem.label.text = `${label.text}  |  ${stopwatchHours(elapsed())} h  |  ${running ? 'In Progress' : 'Paused'}`;
         measurementsSeparator.visible = used || state.history.length > 0;
+        setActionSensitive(clearAction, state.history.length > 0);
         for (const [name, on] of [['running', running], ['unused', !running && !state.elapsed]]) {
             if (on)
                 label.add_style_class_name(`dotfiles-stopwatch-${name}`);
@@ -907,9 +910,42 @@ function createStopwatch(index) {
     // Measurements: the time now, kept up to date while it runs, then the
     // times at the Ends of the last 24 hours with when they ended, newest first, e.g.
     // "01:15:00 | 1.5 h | 30.09.2026 – 14.05:09". Clicking one copies its hours.
-    const copyHours = time => St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, stopwatchHours(time));
+    // Copying says so for a moment, in a tooltip under the stopwatch.
+    let copiedNote = null;
+    let copiedTimeoutId = 0;
+    const hideCopiedNote = () => {
+        if (copiedTimeoutId)
+            GLib.source_remove(copiedTimeoutId);
+        copiedTimeoutId = 0;
+        copiedNote?.destroy();
+        copiedNote = null;
+    };
+    const copyHours = time => {
+        St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, stopwatchHours(time));
+        hideCopiedNote();
+        copiedNote = showTooltip('Copied to clipboard', button.get_transformed_position()[0], button.get_transformed_size()[0]);
+        copiedTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, COPIED_NOTE_TIME, () => {
+            copiedTimeoutId = 0;
+            hideCopiedNote();
+            return GLib.SOURCE_REMOVE;
+        });
+    };
     const measurementsSeparator = new PopupMenu.PopupSeparatorMenuItem('Measurements');
     button.menu.addMenuItem(measurementsSeparator);
+    // Clear all, at the right end of that heading, forgets the ended ones.
+    const clearAction = new St.Button({
+        label: 'Clear all',
+        style_class: 'button dotfiles-stopwatch-clear',
+        can_focus: true,
+        y_align: Clutter.ActorAlign.CENTER,
+    });
+    clearAction.connect('clicked', () => {
+        state.history = [];
+        showHistory();
+        update();
+        saveStopwatches();
+    });
+    measurementsSeparator.add_child(clearAction);
     const currentItem = button.menu.addAction('', () => copyHours(elapsed()));
     const historySection = new PopupMenu.PopupMenuSection();
     button.menu.addMenuItem(historySection);
@@ -935,6 +971,7 @@ function createStopwatch(index) {
     button.connect('destroy', () => {
         if (timeoutId)
             GLib.source_remove(timeoutId);
+        hideCopiedNote();
         saveStopwatches();
     });
     tick();
@@ -1464,21 +1501,15 @@ function setupConfetti(dir) {
     };
 }
 
-// The top bar has an empty strip at each end, EDGE_WIDTH wide (the stylesheet
-// leaves the room), which the pointer lands on when thrown into a top corner
-// of the screen. Clicking the left one toggles the app grid, clicking the
-// right one locks the screen, like Super+L.
+// The top bar has an empty strip at its left end, EDGE_WIDTH wide (the
+// stylesheet leaves the room), which the pointer lands on when thrown into
+// the top-left corner of the screen. Clicking it toggles the app grid.
 const EDGE_WIDTH = 1;
 const EDGES = [
     {
         text: 'Show Apps',
         start: () => Main.panel.get_transformed_position()[0],
         activate: () => toggleAppGrid(),
-    },
-    {
-        text: 'Lock Screen',
-        start: () => Main.panel.get_transformed_position()[0] + Main.panel.width - edgeWidth(),
-        activate: () => Main.screenShield.lock(true),
     },
 ];
 
@@ -1510,7 +1541,7 @@ function setupEdgeClicks() {
     return () => Main.panel.disconnect(pressId);
 }
 
-// Tooltips for the top bar's two clickable edges. They aren't buttons of
+// Tooltips for the top bar's clickable edges. They aren't buttons of
 // their own, so follow the pointer over the top bar; once it is on an edge,
 // keep checking it is still there, as leaving the bar sends no more motion.
 // Returns a function that undoes it.

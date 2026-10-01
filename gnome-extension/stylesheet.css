@@ -68,15 +68,11 @@
     height: 2.64em;
 }
 
-/* An empty 1px strip at each end of the top bar: the pointer lands there when
-   thrown into a top corner of the screen, and the extension takes clicks on
-   them (app grid on the left, lock screen on the right). */
+/* An empty 1px strip at the left end of the top bar: the pointer lands there
+   when thrown into the top-left corner of the screen, and the extension takes
+   clicks on it to open the app grid. */
 #panelLeft {
     margin-left: 1px;
-}
-
-#panelRight {
-    margin-right: 1px;
 }
 
 /* Top bar and its menus: dark but see-through, so the blur behind shows.
@@ -250,4 +246,10 @@
 /* The stopwatch menu's row of Start, Pause and End buttons. */
 .dotfiles-stopwatch-actions {
     spacing: 6px;
+}
+
+/* The small Clear all button at the end of its Measurements heading. */
+.dotfiles-stopwatch-clear {
+    padding: 2px 10px;
+    font-size: 0.9em;
 }
