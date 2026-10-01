@@ -221,3 +221,22 @@
     border: 2px solid -st-accent-color;
     border-radius: 12px;
 }
+
+/* Top bar stopwatches: digits of equal width so the time doesn't jiggle. An
+   unused one is dimmed, a running one is the lightened accent blue. */
+.dotfiles-stopwatch {
+    font-feature-settings: "tnum";
+}
+
+.dotfiles-stopwatch-unused {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.dotfiles-stopwatch-running {
+    color: st-mix(-st-accent-color, white, 65%);
+}
+
+/* The stopwatch menu's row of Start, Pause and End buttons. */
+.dotfiles-stopwatch-actions {
+    spacing: 6px;
+}

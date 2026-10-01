@@ -14,6 +14,7 @@ const Shell = Extension ? (await import('gi://Shell')).default : null;
 const Meta = Extension ? (await import('gi://Meta')).default : null;
 const Background = Extension ? await import('resource:///org/gnome/shell/ui/background.js') : null;
 const PopupMenu = Extension ? await import('resource:///org/gnome/shell/ui/popupMenu.js') : null;
+const PanelMenu = Extension ? await import('resource:///org/gnome/shell/ui/panelMenu.js') : null;
 const AppDisplay = Extension ? await import('resource:///org/gnome/shell/ui/appDisplay.js') : null;
 const Clutter = Extension ? (await import('gi://Clutter')).default : null;
 const Cogl = Extension ? (await import('gi://Cogl')).default : null;
@@ -58,7 +59,6 @@ const APPS = [
     'google-chrome.desktop',
     'org.gnome.Nautilus.desktop',
     'org.gnome.Calculator.desktop',
-    'org.gnome.clocks.desktop',
     'kitty.desktop',
     'com.microsoft.VSCode.desktop',
     'org.keepassxc.KeePassXC.desktop',
@@ -171,7 +171,8 @@ function formatClock() {
 // i3-style workspace buttons in place of the Activities dots. Clicking a number
 // switches to that workspace; clicking the current one opens the overview,
 // double-clicking a number switches that workspace between tiling mode and
-// default mode, and clicking the top-left corner opens the app grid. Numbers
+// default mode, as does its right-click menu, and clicking the top-left corner
+// opens the app grid. Numbers
 // of other workspaces that have windows are blue. Numbers of workspaces in
 // tiling mode get a dotted border, and their dots in the
 // popup shown when switching workspaces with the keyboard become squares.
@@ -206,6 +207,36 @@ function createWorkspaceButtons() {
     };
     box.connect('destroy', cancelOverview);
 
+    // Right-clicking a number opens a menu to pick its mode. Both modes are
+    // always listed; the current one is dotted and greyed out.
+    const menuManager = new PopupMenu.PopupMenuManager(box);
+    const createModeMenu = (button, i) => {
+        const menu = new PopupMenu.PopupMenu(button, 0.5, St.Side.TOP);
+        const items = [true, false].map(tiling => {
+            const item = menu.addAction(tiling ? 'Tiling mode' : 'Default mode', () => {
+                const workspace = manager.get_workspace_by_index(i);
+                if (tiler.isTiling(workspace) !== tiling)
+                    tiler.toggle(workspace);
+            });
+            return [item, tiling];
+        });
+        menu.connect('open-state-changed', (_menu, open) => {
+            if (!open)
+                return;
+            const current = tiler.isTiling(manager.get_workspace_by_index(i));
+            for (const [item, tiling] of items) {
+                item.setSensitive(tiling !== current);
+                item.setOrnament(tiling === current ? PopupMenu.Ornament.DOT : PopupMenu.Ornament.NONE);
+            }
+        });
+        menu.actor.add_style_class_name('panel-menu');
+        menu.actor.hide();
+        Main.uiGroup.add_child(menu.actor);
+        menuManager.addMenu(menu);
+        button.connect('destroy', () => menu.destroy());
+        return menu;
+    };
+
     const rebuild = () => {
         box.destroy_all_children();
         for (let i = 0; i < manager.n_workspaces; i++) {
@@ -216,12 +247,25 @@ function createWorkspaceButtons() {
                 y_align: Clutter.ActorAlign.CENTER,
             }));
             content.add_child(createDottedBorder());
-            const button = new St.Button({child: content, style_class: 'dotfiles-workspace', accessible_name: `${i + 1}`});
+            const button = new St.Button({
+                child: content,
+                style_class: 'dotfiles-workspace',
+                accessible_name: `${i + 1}`,
+                button_mask: St.ButtonMask.ONE | St.ButtonMask.THREE,
+            });
+            const menu = createModeMenu(button, i);
             addTooltip(button, () => {
                 const mode = tiler.isTiling(manager.get_workspace_by_index(i)) ? 'tiling' : 'default';
                 return `Workspace ${i + 1} – ${mode} mode`;
-            });
-            button.connect('clicked', () => {
+            }, menu);
+            button.connect('clicked', (_button, clickedButton) => {
+                if (clickedButton === Clutter.BUTTON_SECONDARY) {
+                    cancelOverview();
+                    menu.toggle();
+                    return;
+                }
+                menu.close();
+
                 const time = global.get_current_time();
                 const {double_click_time: doubleClickTime} = Clutter.Settings.get_default();
                 const doubleClick = lastClick?.index === i && time - lastClick.time <= doubleClickTime;
@@ -676,6 +720,224 @@ function createDottedBorder() {
     return border;
 }
 
+// Stopwatches at the far right of the top bar.
+const STOPWATCHES = 1;
+
+// Each stopwatch's time so far in microseconds, and when it was last started
+// if it is running. Kept outside the extension so they keep counting through
+// it being disabled and re-enabled, which the shell does around the lock screen.
+// The times are also saved to a file, so after a logout or reboot each
+// stopwatch comes back paused at the time it had. Each also keeps a history of
+// the times it had when it was ended in the last 24 hours, newest first:
+// {elapsed, at}, with at the end's time in Unix seconds.
+const STOPWATCH_FILE = GLib.build_filenamev([GLib.get_user_state_dir(), UUID, 'stopwatches.json']);
+const STOPWATCH_SAVE_INTERVAL = 5; // seconds, while running
+const STOPWATCH_HISTORY_AGE = 24 * 60 * 60; // seconds
+
+// Drop the measurements that ended longer ago than that.
+function pruneStopwatchHistory(history) {
+    const oldest = Math.floor(GLib.get_real_time() / 1e6) - STOPWATCH_HISTORY_AGE;
+    return history.filter(entry => entry.at >= oldest);
+}
+
+function stopwatchElapsed(state) {
+    return state.elapsed + (state.startedAt === null ? 0 : GLib.get_monotonic_time() - state.startedAt);
+}
+
+// A time in microseconds as hh:mm:ss.
+function formatStopwatchTime(elapsed) {
+    const seconds = Math.floor(elapsed / 1e6);
+    const pad = number => `${number}`.padStart(2, '0');
+    return `${pad(Math.floor(seconds / 3600))}:${pad(Math.floor(seconds / 60) % 60)}:${pad(seconds % 60)}`;
+}
+
+// A time in hours to the nearest half, e.g. 0.5, 1 or 1.5, for a timesheet.
+// Exact quarters round up, and any time at all counts as 0.5.
+function stopwatchHours(elapsed) {
+    return `${Math.max(1, Math.round(elapsed / (30 * 60 * 1e6))) / 2}`;
+}
+
+function loadStopwatches() {
+    let saved = [];
+    try {
+        const [, contents] = GLib.file_get_contents(STOPWATCH_FILE);
+        saved = JSON.parse(new TextDecoder().decode(contents));
+    } catch {
+        // No file yet, or an unreadable one: start from zero.
+    }
+    // Before the history, the file was just the list of times.
+    const times = Array.isArray(saved) ? saved : saved?.times ?? [];
+    const histories = Array.isArray(saved) ? [] : saved?.history ?? [];
+    return Array.from({length: STOPWATCHES}, (_value, i) => ({
+        elapsed: Number.isFinite(times[i]) && times[i] > 0 ? times[i] : 0,
+        startedAt: null,
+        history: pruneStopwatchHistory((Array.isArray(histories[i]) ? histories[i] : [])
+            .filter(entry => Number.isFinite(entry?.elapsed) && Number.isFinite(entry?.at))),
+    }));
+}
+
+function saveStopwatches() {
+    try {
+        GLib.mkdir_with_parents(GLib.path_get_dirname(STOPWATCH_FILE), 0o700);
+        GLib.file_set_contents(STOPWATCH_FILE, JSON.stringify({
+            times: stopwatches.map(stopwatchElapsed),
+            history: stopwatches.map(state => state.history),
+        }));
+    } catch (e) {
+        console.error(`${UUID}: failed to save stopwatches: ${e.message}`);
+    }
+}
+
+const stopwatches = Extension ? loadStopwatches() : [];
+
+// A stopwatch in the top bar: click to start or pause it, right-click for a
+// menu with a row of buttons to start, pause or end it; ending stores its
+// time and zeroes it.
+// The menu also lists its measurements, the time now and the times at its
+// last Ends; clicking one copies it in hours.
+function createStopwatch(index) {
+    const state = stopwatches[index];
+    const name = STOPWATCHES > 1 ? `Stopwatch ${index + 1}` : 'Stopwatch';
+    const button = new PanelMenu.Button(0.5, name);
+    const label = new St.Label({style_class: 'dotfiles-stopwatch', y_align: Clutter.ActorAlign.CENTER});
+    button.add_child(label);
+    let timeoutId = 0;
+
+    const elapsed = () => stopwatchElapsed(state);
+
+    // Always hh:mm:ss. Running is blue, paused is white and an unused one is
+    // dimmed.
+    const update = () => {
+        label.text = formatStopwatchTime(elapsed());
+
+        const running = state.startedAt !== null;
+        setActionSensitive(startAction, !running);
+        setActionSensitive(pauseAction, running);
+        const used = running || state.elapsed > 0;
+        setActionSensitive(endAction, used);
+        currentItem.visible = used;
+        currentItem.label.text = `${label.text}  |  ${stopwatchHours(elapsed())} h  |  ${running ? 'In Progress' : 'Paused'}`;
+        measurementsSeparator.visible = used || state.history.length > 0;
+        for (const [name, on] of [['running', running], ['unused', !running && !state.elapsed]]) {
+            if (on)
+                label.add_style_class_name(`dotfiles-stopwatch-${name}`);
+            else
+                label.remove_style_class_name(`dotfiles-stopwatch-${name}`);
+        }
+        // The current measurement in the menu is blue while running as well.
+        if (running)
+            currentItem.label.add_style_class_name('dotfiles-stopwatch-running');
+        else
+            currentItem.label.remove_style_class_name('dotfiles-stopwatch-running');
+    };
+
+    // While it runs, redraw just after each whole second passes, and save the
+    // time every few seconds: a shutdown gives no chance to.
+    const tick = () => {
+        if (timeoutId)
+            GLib.source_remove(timeoutId);
+        timeoutId = 0;
+        update();
+        if (state.startedAt === null)
+            return;
+        if (Math.floor(elapsed() / 1e6) % STOPWATCH_SAVE_INTERVAL === 0)
+            saveStopwatches();
+        const untilNextSecond = 1000 - Math.floor(elapsed() / 1000) % 1000;
+        timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, untilNextSecond + 10, () => {
+            timeoutId = 0;
+            tick();
+            return GLib.SOURCE_REMOVE;
+        });
+    };
+
+    // The button's own gesture opens the menu on any click.
+    button._clickGesture.set_enabled(false);
+    const startPause = () => {
+        if (state.startedAt === null) {
+            state.startedAt = GLib.get_monotonic_time();
+        } else {
+            state.elapsed = elapsed();
+            state.startedAt = null;
+        }
+        tick();
+        saveStopwatches();
+    };
+    const click = new Clutter.ClickGesture({required_button: Clutter.BUTTON_PRIMARY});
+    click.connect('recognize', () => {
+        button.menu.close();
+        startPause();
+    });
+    button.add_action(click);
+    const openMenu = new Clutter.ClickGesture({required_button: Clutter.BUTTON_SECONDARY});
+    openMenu.connect('recognize', () => button.menu.toggle());
+    button.add_action(openMenu);
+
+    // End stores the time as a measurement and goes back to zero.
+    const end = () => {
+        state.history.unshift({elapsed: elapsed(), at: Math.floor(GLib.get_real_time() / 1e6)});
+        state.elapsed = 0;
+        state.startedAt = null;
+        showHistory();
+        tick();
+        saveStopwatches();
+    };
+
+    // Start, Pause and End side by side in one row, each a third of it. All
+    // always there; the ones that don't apply right now are greyed out. The
+    // menu stays open, so the measurements below show what they did.
+    const actionsItem = new PopupMenu.PopupBaseMenuItem({reactive: false, can_focus: false});
+    const actions = new St.BoxLayout({style_class: 'dotfiles-stopwatch-actions', x_expand: true});
+    actions.layout_manager.homogeneous = true;
+    actionsItem.add_child(actions);
+    button.menu.addMenuItem(actionsItem);
+    const addAction = (text, callback) => {
+        const action = new St.Button({label: text, style_class: 'button', x_expand: true, can_focus: true});
+        action.connect('clicked', callback);
+        actions.add_child(action);
+        return action;
+    };
+    const setActionSensitive = (action, sensitive) => action.set({reactive: sensitive, can_focus: sensitive});
+    const startAction = addAction('Start', startPause);
+    const pauseAction = addAction('Pause', startPause);
+    const endAction = addAction('End', end);
+
+    // Measurements: the time now, kept up to date while it runs, then the
+    // times at the Ends of the last 24 hours with when they ended, newest first, e.g.
+    // "01:15:00 | 1.5 h | 30.09.2026 – 14.05:09". Clicking one copies its hours.
+    const copyHours = time => St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, stopwatchHours(time));
+    const measurementsSeparator = new PopupMenu.PopupSeparatorMenuItem('Measurements');
+    button.menu.addMenuItem(measurementsSeparator);
+    const currentItem = button.menu.addAction('', () => copyHours(elapsed()));
+    const historySection = new PopupMenu.PopupMenuSection();
+    button.menu.addMenuItem(historySection);
+    const showHistory = () => {
+        state.history = pruneStopwatchHistory(state.history);
+        historySection.removeAll();
+        for (const entry of state.history) {
+            const when = GLib.DateTime.new_from_unix_local(entry.at).format('%d.%m.%Y – %H.%M:%S');
+            const text = `${formatStopwatchTime(entry.elapsed)}  |  ${stopwatchHours(entry.elapsed)} h  |  ${when}`;
+            historySection.addAction(text, () => copyHours(entry.elapsed));
+        }
+    };
+    showHistory();
+    // Also each time the menu opens, so ones that got too old are gone.
+    button.menu.connect('open-state-changed', (_menu, open) => {
+        if (open) {
+            showHistory();
+            update();
+        }
+    });
+
+    addTooltip(button, () => `${name} – click to start or pause, right-click for menu`, button.menu);
+    button.connect('destroy', () => {
+        if (timeoutId)
+            GLib.source_remove(timeoutId);
+        saveStopwatches();
+    });
+    tick();
+    return button;
+}
+
 // Show desktop, in the top bar's right side between app indicators and the
 // shell's own indicators: minimizes the current workspace's windows, and when
 // none are left showing, a second click brings back the ones it minimized.
@@ -716,7 +978,8 @@ function createShowDesktopButton() {
 }
 
 // An app grid button and app launchers next to the workspace buttons.
-// Clicking a launcher always opens a new window, even when the app is running.
+// Clicking a launcher always opens a new window, even when the app is running,
+// and closes the overview or app grid if it is open.
 function createAppButtons() {
     const appSystem = Shell.AppSystem.get_default();
     const box = new St.BoxLayout({style_class: 'dotfiles-apps'});
@@ -743,7 +1006,11 @@ function createAppButtons() {
             child: new St.Icon({gicon: app.get_icon(), style_class: 'dotfiles-app-icon'}),
             accessible_name: app.get_name(),
         });
-        button.connect('clicked', () => app.open_new_window(-1));
+        // From the overview or app grid, close it so the new window shows.
+        button.connect('clicked', () => {
+            Main.overview.hide();
+            app.open_new_window(-1);
+        });
         addTooltip(button, () => app.get_name());
         box.add_child(button);
     }
@@ -1241,6 +1508,11 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         const shellIndicators = Main.sessionMode.panel.right.map(name => Main.panel.statusArea[name]?.container);
         const firstShellIndicator = Main.panel._rightBox.get_children().find(child => shellIndicators.includes(child));
         Main.panel._rightBox.insert_child_below(this._showDesktop, firstShellIndicator ?? null);
+        this._stopwatches = stopwatches.map((_state, i) => {
+            const stopwatch = createStopwatch(i);
+            Main.panel.addToStatusArea(`dotfiles-stopwatch-${i + 1}`, stopwatch, -1, 'right');
+            return stopwatch;
+        });
 
         // Hide the favourites dash in the overview. It stays "visible" because a
         // hidden dash never styles its icons and then errors when resizing them;
@@ -1274,6 +1546,8 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         this._apps = null;
         this._showDesktop.destroy();
         this._showDesktop = null;
+        this._stopwatches.forEach(stopwatch => stopwatch.destroy());
+        this._stopwatches = null;
         this._removeTooltips.forEach(remove => remove());
         this._removeTooltips = null;
         Main.panel.statusArea.activities.container.show();
