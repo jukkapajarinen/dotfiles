@@ -59,7 +59,7 @@ $ln "$scriptDir/kitty.conf" "$homeDir/.config/kitty/kitty.conf";
 $ln "$scriptDir/starship.toml" "$homeDir/.config/starship.toml";
 $ln "$scriptDir/vimrc" "$homeDir/.vimrc";
 $ln "$scriptDir/vimrc" "$homeDir/.config/nvim/init.vim";
-$ln "$scriptDir/gnome-extension" "$homeDir/.local/share/gnome-shell/extensions/dotfiles@jukkapajarinen.com";
+$ln "$scriptDir/gnome++" "$homeDir/.local/share/gnome-shell/extensions/gnome++@jukkapajarinen.com";
 $ln "$scriptDir/vscode-settings.json" "$homeDir/.config/Code/User/settings.json";
 $ln "$scriptDir/vscode-keybindings.json" "$homeDir/.config/Code/User/keybindings.json";
 $ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/Code/User/extensions.txt";
@@ -67,7 +67,7 @@ $ln "$scriptDir/kbd/Xmodmap" "$homeDir/.Xmodmap";
 sudo $ln "$scriptDir/kbd/fi_mac_with_euro" "/usr/share/X11/xkb/symbols/fi";
 
 # Linux enable or disable Gnome extension (applies Gnome settings on login)
-extension="dotfiles@jukkapajarinen.com";
+extension="gnome++@jukkapajarinen.com";
 enabled="$(gsettings get org.gnome.shell enabled-extensions)";
 enabled="${enabled#@as }";
 if ask "Enable Gnome settings extension?"; then
@@ -76,7 +76,7 @@ if ask "Enable Gnome settings extension?"; then
     [[ $enabled == "[]" ]] && enabled="['$extension']" || enabled="${enabled%]}, '$extension']";
     gsettings set org.gnome.shell enabled-extensions "$enabled";
   fi
-  gjs -m "$scriptDir/gnome-extension/extension.js";
+  gjs -m "$scriptDir/gnome++/extension.js";
 else
   echo -e "$arrow Disable Gnome extension.";
   if ! gnome-extensions disable "$extension" 2>/dev/null; then

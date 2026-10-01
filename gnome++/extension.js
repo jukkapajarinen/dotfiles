@@ -3,6 +3,8 @@ import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Cairo from 'cairo';
 
+import config from './settings.js';
+
 // Inside GNOME Shell this is an extension. Outside it (`gjs -m extension.js`,
 // used by INSTALL.sh) the Shell modules are missing and the settings are applied
 // straight away to the current session.
@@ -15,10 +17,11 @@ const Meta = Extension ? (await import('gi://Meta')).default : null;
 const Background = Extension ? await import('resource:///org/gnome/shell/ui/background.js') : null;
 const PopupMenu = Extension ? await import('resource:///org/gnome/shell/ui/popupMenu.js') : null;
 const PanelMenu = Extension ? await import('resource:///org/gnome/shell/ui/panelMenu.js') : null;
+const DND = Extension ? await import('resource:///org/gnome/shell/ui/dnd.js') : null;
 const AppDisplay = Extension ? await import('resource:///org/gnome/shell/ui/appDisplay.js') : null;
+const AppFavorites = Extension ? await import('resource:///org/gnome/shell/ui/appFavorites.js') : null;
 const Clutter = Extension ? (await import('gi://Clutter')).default : null;
 const Cogl = Extension ? (await import('gi://Cogl')).default : null;
-const Workspace = Extension ? await import('resource:///org/gnome/shell/ui/workspace.js') : null;
 const ModalDialog = Extension ? await import('resource:///org/gnome/shell/ui/modalDialog.js') : null;
 const EndSessionDialog = Extension ? await import('resource:///org/gnome/shell/ui/endSessionDialog.js') : null;
 const OsdWindow = Extension ? await import('resource:///org/gnome/shell/ui/osdWindow.js') : null;
@@ -26,43 +29,7 @@ const SwitcherPopup = Extension ? await import('resource:///org/gnome/shell/ui/s
 const Graphene = Extension ? (await import('gi://Graphene')).default : null;
 const WorkspaceSwitcherPopup = Extension ? await import('resource:///org/gnome/shell/ui/workspaceSwitcherPopup.js') : null;
 
-const UUID = 'dotfiles@jukkapajarinen.com';
-const TIMEZONE = 'Europe/Helsinki';
-const WEEKDAYS = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
-
-// Blur strength and dimming, blur-my-shell's defaults.
-const BLUR_RADIUS = 30;
-const BLUR_BRIGHTNESS = 0.6;
-
-// Black shade over the blur behind an open app folder (0-255), and while an
-// icon is dragged out of it. The shell's own shades are 204 and 85.
-const FOLDER_SHADE = 77;
-const FOLDER_SHADE_LIGHTER = 25;
-
-// Visible corner radius of workspace previews in the overview and app grid.
-const WORKSPACE_PREVIEW_RADIUS = 12;
-
-// Gap around and between windows tiled by double-clicking a workspace number.
-const TILE_GAP = 8;
-
-// Confetti thrown by double-clicking empty top bar space.
-const CONFETTI_PIECES = 300;
-const CONFETTI_DURATION = 3000; // ms
-const CONFETTI_COLORS = [
-    [249, 65, 68], [248, 150, 30], [249, 199, 79], [144, 190, 109],
-    [67, 170, 139], [53, 132, 228], [155, 89, 182], [255, 255, 255],
-];
-
-// Launchers shown right of the workspace buttons, as desktop file IDs, in the
-// order they appear in the top bar.
-const APPS = [
-    'google-chrome.desktop',
-    'org.gnome.Nautilus.desktop',
-    'org.gnome.Calculator.desktop',
-    'kitty.desktop',
-    'com.microsoft.VSCode.desktop',
-    'org.keepassxc.KeePassXC.desktop',
-];
+const UUID = 'gnome++@jukkapajarinen.com';
 
 const CUSTOM_KEYBINDING_SCHEMA = 'org.gnome.settings-daemon.plugins.media-keys.custom-keybinding';
 const CUSTOM_KEYBINDINGS_PATH = '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings';
@@ -75,7 +42,6 @@ const SETTINGS = [
     // Ubuntu's tiling assistant would clash with the extension's own tiling mode.
     ['org.gnome.shell', 'disabled-extensions', "['ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']"],
     ['org.gnome.shell', 'app-picker-layout', '[]'],
-    ['org.gnome.shell', 'favorite-apps', '[]'],
     ['org.gnome.desktop.interface', 'color-scheme', "'prefer-dark'"],
     ['org.gnome.desktop.interface', 'gtk-theme', "'Yaru-blue-dark'"],
     ['org.gnome.desktop.interface', 'icon-theme', "'Yaru-blue-dark'"],
@@ -142,10 +108,12 @@ function applySettings(dir) {
     }
 
     Gio.Settings.sync();
-    setTimezone(TIMEZONE);
 }
 
 function setTimezone(timezone) {
+    if (!timezone)
+        return;
+
     // The timezone is system-wide, so it lives in systemd-timedated rather than
     // gsettings. Ubuntu's polkit rules let sudo users change it without a prompt.
     try {
@@ -165,7 +133,7 @@ function setTimezone(timezone) {
 // handler is connected after the shell's text binding, so it runs last.
 function formatClock() {
     const now = GLib.DateTime.new_now_local();
-    return `${WEEKDAYS[now.get_day_of_week() - 1]} ${now.format('%d.%m.%Y – %H.%M:%S')}`;
+    return [config.weekdays[now.get_day_of_week() - 1], now.format(config.clockFormat)].filter(text => text).join(' ');
 }
 
 // i3-style workspace buttons in place of the Activities dots. Clicking a number
@@ -177,7 +145,7 @@ function formatClock() {
 // popup shown when switching workspaces with the keyboard become squares.
 function createWorkspaceButtons() {
     const manager = global.workspace_manager;
-    const box = new St.BoxLayout({style_class: 'dotfiles-workspaces', reactive: true});
+    const box = new St.BoxLayout({style_class: 'gnomeplusplus-workspaces', reactive: true});
     const tiler = new Tiler(() => update());
 
     const popup = WorkspaceSwitcherPopup.MonitorWorkspaceSwitcherPopup.prototype;
@@ -186,7 +154,7 @@ function createWorkspaceButtons() {
         redisplay.apply(this, args);
         this._list.get_children().forEach((indicator, i) => {
             if (tiler.isTiling(manager.get_workspace_by_index(i)))
-                indicator.add_style_class_name('dotfiles-tiling');
+                indicator.add_style_class_name('gnomeplusplus-tiling');
         });
     };
 
@@ -195,23 +163,16 @@ function createWorkspaceButtons() {
         popup.redisplay = redisplay;
     });
 
-    // A click on the current number waits out the double-click time before
-    // opening the overview, so a double-click doesn't flash it.
+    // A click on the current number toggles the overview right away, without
+    // waiting out the double-click time; a double-click toggles it back.
     let lastClick = null;
-    let overviewTimeoutId = 0;
-    const cancelOverview = () => {
-        if (overviewTimeoutId)
-            GLib.source_remove(overviewTimeoutId);
-        overviewTimeoutId = 0;
-    };
-    box.connect('destroy', cancelOverview);
 
     // Right-clicking a number opens a menu to pick its mode. Both modes are
     // always listed; the current one is dotted and greyed out. The menus join
     // the top bar's own, so with any top bar menu open, moving the pointer
     // onto a number switches to its menu, and from there on to the next.
     const createModeMenu = (button, i) => {
-        const menu = new PopupMenu.PopupMenu(button, 0.5, St.Side.TOP);
+        const menu = createPanelMenu(button);
         const items = [true, false].map(tiling => {
             const item = menu.addAction(tiling ? 'Tiling mode' : 'Default mode', () => {
                 const workspace = manager.get_workspace_by_index(i);
@@ -229,11 +190,6 @@ function createWorkspaceButtons() {
                 item.setOrnament(tiling === current ? PopupMenu.Ornament.DOT : PopupMenu.Ornament.NONE);
             }
         });
-        menu.actor.add_style_class_name('panel-menu');
-        menu.actor.hide();
-        Main.uiGroup.add_child(menu.actor);
-        Main.panel.menuManager.addMenu(menu);
-        button.connect('destroy', () => menu.destroy());
         return menu;
     };
 
@@ -249,7 +205,7 @@ function createWorkspaceButtons() {
             content.add_child(createDottedBorder());
             const button = new St.Button({
                 child: content,
-                style_class: 'dotfiles-workspace',
+                style_class: 'gnomeplusplus-workspace',
                 accessible_name: `${i + 1}`,
                 button_mask: St.ButtonMask.ONE | St.ButtonMask.THREE,
             });
@@ -260,7 +216,6 @@ function createWorkspaceButtons() {
             }, menu);
             button.connect('clicked', (_button, clickedButton) => {
                 if (clickedButton === Clutter.BUTTON_SECONDARY) {
-                    cancelOverview();
                     menu.toggle();
                     return;
                 }
@@ -269,17 +224,17 @@ function createWorkspaceButtons() {
                 const time = global.get_current_time();
                 const {double_click_time: doubleClickTime} = Clutter.Settings.get_default();
                 const doubleClick = lastClick?.index === i && time - lastClick.time <= doubleClickTime;
-                lastClick = doubleClick ? null : {index: i, time};
+                const current = i === manager.get_active_workspace_index();
+                // Only a first click on the current number toggled the overview.
+                const toggledOverview = doubleClick && lastClick.toggledOverview;
+                lastClick = doubleClick ? null : {index: i, time, toggledOverview: current};
 
-                cancelOverview();
                 if (doubleClick) {
-                    tiler.toggle(manager.get_workspace_by_index(i));
-                } else if (i === manager.get_active_workspace_index()) {
-                    overviewTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, doubleClickTime, () => {
-                        overviewTimeoutId = 0;
+                    if (toggledOverview)
                         Main.overview.toggle();
-                        return GLib.SOURCE_REMOVE;
-                    });
+                    tiler.toggle(manager.get_workspace_by_index(i));
+                } else if (current) {
+                    Main.overview.toggle();
                 } else {
                     manager.get_workspace_by_index(i).activate(time);
                 }
@@ -300,9 +255,9 @@ function createWorkspaceButtons() {
         const occupied = global.display.get_tab_list(Meta.TabList.NORMAL, workspace)
             .some(window => !window.is_on_all_workspaces());
         if (occupied && !button.checked)
-            button.add_style_class_name('dotfiles-occupied');
+            button.add_style_class_name('gnomeplusplus-occupied');
         else
-            button.remove_style_class_name('dotfiles-occupied');
+            button.remove_style_class_name('gnomeplusplus-occupied');
     });
 
     manager.connectObject(
@@ -318,6 +273,17 @@ function createWorkspaceButtons() {
 const MOVE_GRAB_OPS = Extension
     ? [Meta.GrabOp.MOVING, Meta.GrabOp.MOVING_UNCONSTRAINED, Meta.GrabOp.KEYBOARD_MOVING]
     : [];
+
+// A menu under a top bar button, joined to the top bar's own menus.
+function createPanelMenu(button) {
+    const menu = new PopupMenu.PopupMenu(button, 0.5, St.Side.TOP);
+    menu.actor.add_style_class_name('panel-menu');
+    menu.actor.hide();
+    Main.uiGroup.add_child(menu.actor);
+    Main.panel.menuManager.addMenu(menu);
+    button.connect('destroy', () => menu.destroy());
+    return menu;
+}
 
 // Workspaces in tiling mode, with their tiled windows in order. Kept outside
 // the extension so the modes survive it being disabled and re-enabled, which
@@ -481,7 +447,7 @@ class Tiler {
 
         // Tint the tile under the pointer, above its window but below the
         // dragged one.
-        this._dropTint = new St.Widget({style_class: 'dotfiles-tile-drop', visible: false});
+        this._dropTint = new St.Widget({style_class: 'gnomeplusplus-tile-drop', visible: false});
         global.window_group.add_child(this._dropTint);
         this._dragged = window;
         window.connectObject('position-changed', () => {
@@ -565,7 +531,8 @@ class Tiler {
                 continue;
 
             const {x, y, width, height} = workspace.get_work_area_for_monitor(monitor);
-            const area = {x: x + TILE_GAP, y: y + TILE_GAP, width: width - 2 * TILE_GAP, height: height - 2 * TILE_GAP};
+            const gap = config.tileGap;
+            const area = {x: x + gap, y: y + gap, width: width - 2 * gap, height: height - 2 * gap};
             splitArea(area, monitorWindows.length).forEach((rect, i) => {
                 const window = monitorWindows[i];
                 // Half-screen edge tiling counts as maximized vertically.
@@ -604,16 +571,17 @@ function splitArea(area, count) {
 
     const vertical = area.width >= area.height;
     const size = vertical ? area.width : area.height;
-    const half = Math.floor((size - TILE_GAP) / 2);
+    const gap = config.tileGap;
+    const half = Math.floor((size - gap) / 2);
     const first = {...area}, rest = {...area};
     if (vertical) {
         first.width = half;
-        rest.x += half + TILE_GAP;
-        rest.width -= half + TILE_GAP;
+        rest.x += half + gap;
+        rest.width -= half + gap;
     } else {
         first.height = half;
-        rest.y += half + TILE_GAP;
-        rest.height -= half + TILE_GAP;
+        rest.y += half + gap;
+        rest.height -= half + gap;
     }
     return [first, ...splitArea(rest, count - 1)];
 }
@@ -622,11 +590,14 @@ function splitArea(area, count) {
 // the theme's style for the dash's app names. getText is asked each time, so
 // the text can change. For a button that opens a menu, pass the menu: the
 // tooltip stays away while it is open. Returns a function that removes it.
-const TOOLTIP_DELAY = 400; // ms
 
 // Fades a tooltip in, centred under the stretch of the top bar that starts at
 // x and is width wide, kept on the screen. Returns it; destroy it to hide it.
+// Returns nothing when tooltips are switched off.
 function showTooltip(text, x, width) {
+    if (!config.tooltips)
+        return null;
+
     const tooltip = new St.Label({style_class: 'dash-label', text, opacity: 0});
     Main.uiGroup.add_child(tooltip);
 
@@ -670,7 +641,7 @@ function addTooltip(button, getText, menu = null) {
         button.connect('notify::hover', () => {
             hide();
             if (button.hover && !menu?.isOpen) {
-                timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, TOOLTIP_DELAY, () => {
+                timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, config.tooltipDelay, () => {
                     timeoutId = 0;
                     show();
                     return GLib.SOURCE_REMOVE;
@@ -724,10 +695,7 @@ function createDottedBorder() {
     return border;
 }
 
-// Stopwatches at the far right of the top bar.
-const STOPWATCHES = 1;
-
-// Each stopwatch's time so far in microseconds, and when it was last started
+// Stopwatches at the far right of the top bar. Each stopwatch's time so far in microseconds, and when it was last started
 // if it is running. Kept outside the extension so they keep counting through
 // it being disabled and re-enabled, which the shell does around the lock screen.
 // The times are also saved to a file, so after a logout or reboot each
@@ -735,13 +703,10 @@ const STOPWATCHES = 1;
 // the times it had when it was ended in the last 24 hours, newest first:
 // {elapsed, at}, with at the end's time in Unix seconds.
 const STOPWATCH_FILE = GLib.build_filenamev([GLib.get_user_state_dir(), UUID, 'stopwatches.json']);
-const STOPWATCH_SAVE_INTERVAL = 5; // seconds, while running
-const STOPWATCH_HISTORY_AGE = 24 * 60 * 60; // seconds
-const COPIED_NOTE_TIME = 2000; // ms
 
 // Drop the measurements that ended longer ago than that.
 function pruneStopwatchHistory(history) {
-    const oldest = Math.floor(GLib.get_real_time() / 1e6) - STOPWATCH_HISTORY_AGE;
+    const oldest = Math.floor(GLib.get_real_time() / 1e6) - config.stopwatchHistoryAge;
     return history.filter(entry => entry.at >= oldest);
 }
 
@@ -773,7 +738,7 @@ function loadStopwatches() {
     // Before the history, the file was just the list of times.
     const times = Array.isArray(saved) ? saved : saved?.times ?? [];
     const histories = Array.isArray(saved) ? [] : saved?.history ?? [];
-    return Array.from({length: STOPWATCHES}, (_value, i) => ({
+    return Array.from({length: config.stopwatchCount}, (_value, i) => ({
         elapsed: Number.isFinite(times[i]) && times[i] > 0 ? times[i] : 0,
         startedAt: null,
         history: pruneStopwatchHistory((Array.isArray(histories[i]) ? histories[i] : [])
@@ -802,9 +767,9 @@ const stopwatches = Extension ? loadStopwatches() : [];
 // last Ends; clicking one copies it in hours.
 function createStopwatch(index) {
     const state = stopwatches[index];
-    const name = STOPWATCHES > 1 ? `Stopwatch ${index + 1}` : 'Stopwatch';
+    const name = config.stopwatchCount > 1 ? `Stopwatch ${index + 1}` : 'Stopwatch';
     const button = new PanelMenu.Button(0.5, name);
-    const label = new St.Label({style_class: 'dotfiles-stopwatch', y_align: Clutter.ActorAlign.CENTER});
+    const label = new St.Label({style_class: 'gnomeplusplus-stopwatch', y_align: Clutter.ActorAlign.CENTER});
     button.add_child(label);
     let timeoutId = 0;
 
@@ -826,15 +791,15 @@ function createStopwatch(index) {
         setActionSensitive(clearAction, state.history.length > 0);
         for (const [name, on] of [['running', running], ['unused', !running && !state.elapsed]]) {
             if (on)
-                label.add_style_class_name(`dotfiles-stopwatch-${name}`);
+                label.add_style_class_name(`gnomeplusplus-stopwatch-${name}`);
             else
-                label.remove_style_class_name(`dotfiles-stopwatch-${name}`);
+                label.remove_style_class_name(`gnomeplusplus-stopwatch-${name}`);
         }
         // The current measurement in the menu is blue while running as well.
         if (running)
-            currentItem.label.add_style_class_name('dotfiles-stopwatch-running');
+            currentItem.label.add_style_class_name('gnomeplusplus-stopwatch-running');
         else
-            currentItem.label.remove_style_class_name('dotfiles-stopwatch-running');
+            currentItem.label.remove_style_class_name('gnomeplusplus-stopwatch-running');
     };
 
     // While it runs, redraw just after each whole second passes, and save the
@@ -846,7 +811,7 @@ function createStopwatch(index) {
         update();
         if (state.startedAt === null)
             return;
-        if (Math.floor(elapsed() / 1e6) % STOPWATCH_SAVE_INTERVAL === 0)
+        if (Math.floor(elapsed() / 1e6) % config.stopwatchSaveInterval === 0)
             saveStopwatches();
         const untilNextSecond = 1000 - Math.floor(elapsed() / 1000) % 1000;
         timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, untilNextSecond + 10, () => {
@@ -892,7 +857,7 @@ function createStopwatch(index) {
     // always there; the ones that don't apply right now are greyed out. The
     // menu stays open, so the measurements below show what they did.
     const actionsItem = new PopupMenu.PopupBaseMenuItem({reactive: false, can_focus: false});
-    const actions = new St.BoxLayout({style_class: 'dotfiles-stopwatch-actions', x_expand: true});
+    const actions = new St.BoxLayout({style_class: 'gnomeplusplus-stopwatch-actions', x_expand: true});
     actions.layout_manager.homogeneous = true;
     actionsItem.add_child(actions);
     button.menu.addMenuItem(actionsItem);
@@ -924,7 +889,7 @@ function createStopwatch(index) {
         St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, stopwatchHours(time));
         hideCopiedNote();
         copiedNote = showTooltip('Copied to clipboard', button.get_transformed_position()[0], button.get_transformed_size()[0]);
-        copiedTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, COPIED_NOTE_TIME, () => {
+        copiedTimeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, config.copiedNoteTime, () => {
             copiedTimeoutId = 0;
             hideCopiedNote();
             return GLib.SOURCE_REMOVE;
@@ -935,7 +900,7 @@ function createStopwatch(index) {
     // Clear all, at the right end of that heading, forgets the ended ones.
     const clearAction = new St.Button({
         label: 'Clear all',
-        style_class: 'button dotfiles-stopwatch-clear',
+        style_class: 'button gnomeplusplus-stopwatch-clear',
         can_focus: true,
         y_align: Clutter.ActorAlign.CENTER,
     });
@@ -1017,44 +982,172 @@ function createShowDesktopButton() {
     return button;
 }
 
-// An app grid button and app launchers next to the workspace buttons.
+// An app grid button and app launchers next to the workspace buttons. The
+// launchers are the apps pinned to the (hidden) dash, so an app's "Pin to Dash"
+// adds it. So does dropping it from the app grid among the launchers; dragging
+// a launcher moves it, and its right-click menu unpins it.
 // Clicking a launcher always opens a new window, even when the app is running,
 // and closes the overview or app grid if it is open.
 function createAppButtons() {
-    const appSystem = Shell.AppSystem.get_default();
-    const box = new St.BoxLayout({style_class: 'dotfiles-apps'});
-
-    const apps = APPS.map(id => {
-        const app = appSystem.lookup_app(id);
-        if (!app)
-            console.warn(`${UUID}: skipping missing app ${id}`);
-        return app;
-    }).filter(app => app);
+    const favorites = AppFavorites.getAppFavorites();
+    const laters = global.compositor.get_laters();
+    const box = new St.BoxLayout({style_class: 'gnomeplusplus-apps'});
+    let launchers = []; // {id, button} of the pinned apps, in order
+    let laterId = 0;
 
     const allApps = new St.Button({
-        style_class: 'dotfiles-app',
-        child: new St.Icon({icon_name: 'view-app-grid-symbolic', style_class: 'dotfiles-app-icon'}),
+        style_class: 'gnomeplusplus-app',
+        child: new St.Icon({icon_name: 'view-app-grid-symbolic', style_class: 'gnomeplusplus-app-icon'}),
         accessible_name: 'Show Apps',
     });
     allApps.connect('clicked', toggleAppGrid);
     addTooltip(allApps, () => 'Show Apps');
     box.add_child(allApps);
 
-    for (const app of apps) {
-        const button = new St.Button({
-            style_class: 'dotfiles-app',
-            child: new St.Icon({gicon: app.get_icon(), style_class: 'dotfiles-app-icon'}),
-            accessible_name: app.get_name(),
+    // Shows where a dragged app would land.
+    const placeholder = new St.Widget({style_class: 'gnomeplusplus-app-placeholder'});
+    let placeholderPosition = -1;
+    const removePlaceholder = () => {
+        if (placeholder.get_parent())
+            box.remove_child(placeholder);
+        placeholderPosition = -1;
+    };
+
+    // Changing the pinned apps rebuilds the launchers, so wait until the menu
+    // item or drag that asked for it is done with them.
+    const changeLater = change => {
+        if (laterId)
+            laters.remove(laterId);
+        laterId = laters.add(Meta.LaterType.BEFORE_REDRAW, () => {
+            laterId = 0;
+            change();
+            return GLib.SOURCE_REMOVE;
         });
+    };
+
+    const createLauncher = app => {
+        const createIcon = () => new St.Icon({gicon: app.get_icon(), style_class: 'gnomeplusplus-app-icon'});
+        const button = new St.Button({
+            style_class: 'gnomeplusplus-app',
+            child: createIcon(),
+            accessible_name: app.get_name(),
+            button_mask: St.ButtonMask.ONE | St.ButtonMask.THREE,
+        });
+        const menu = createPanelMenu(button);
+        menu.addAction('Unpin', () => changeLater(() => favorites.removeFavorite(app.get_id())));
         // From the overview or app grid, close it so the new window shows.
-        button.connect('clicked', () => {
+        button.connect('clicked', (_button, clickedButton) => {
+            if (clickedButton === Clutter.BUTTON_SECONDARY) {
+                menu.toggle();
+                return;
+            }
+            menu.close();
             Main.overview.hide();
             app.open_new_window(-1);
         });
-        addTooltip(button, () => app.get_name());
-        box.add_child(button);
-    }
+        addTooltip(button, () => app.get_name(), menu);
 
+        // The button stays in place, dimmed, while a copy of its icon is dragged.
+        button._delegate = {app, getDragActor: createIcon, getDragActorSource: () => button};
+        const draggable = DND.makeDraggable(button, {timeoutThreshold: 200});
+        const endDrag = () => {
+            button.opacity = 255;
+            removePlaceholder();
+        };
+        draggable.connect('drag-begin', () => {
+            menu.close();
+            button.opacity = 100;
+        });
+        draggable.connect('drag-cancelled', endDrag);
+        draggable.connect('drag-end', endDrag);
+        return button;
+    };
+
+    const rebuild = () => {
+        removePlaceholder();
+        launchers.forEach(({button}) => button.destroy());
+        launchers = [];
+        for (const app of favorites.getFavorites()) {
+            const button = createLauncher(app);
+            launchers.push({id: app.get_id(), button});
+            box.add_child(button);
+        }
+    };
+
+    // The app of a dragged app grid icon or launcher.
+    const getDraggedApp = source => {
+        const app = source?.app;
+        return app instanceof Shell.App && !app.is_window_backed() ? app : null;
+    };
+
+    // The launchers left of x, which is relative to the box.
+    const getLaunchersBefore = x => launchers.filter(({button}) => {
+        const {x1, x2} = button.get_allocation_box();
+        return (x1 + x2) / 2 < x;
+    });
+
+    box._delegate = {
+        handleDragOver(source, _actor, x) {
+            const app = getDraggedApp(source);
+            if (!app)
+                return DND.DragMotionResult.NO_DROP;
+
+            const position = getLaunchersBefore(x).length;
+            if (position !== placeholderPosition) {
+                // Skip the app grid button. The index is the one after taking
+                // the placeholder out, as is the position.
+                if (placeholder.get_parent())
+                    box.set_child_at_index(placeholder, position + 1);
+                else
+                    box.insert_child_at_index(placeholder, position + 1);
+                placeholderPosition = position;
+            }
+            return favorites.isFavorite(app.get_id()) ? DND.DragMotionResult.MOVE_DROP : DND.DragMotionResult.COPY_DROP;
+        },
+
+        acceptDrop(source, _actor, x) {
+            const id = getDraggedApp(source)?.get_id();
+            if (!id)
+                return false;
+
+            // Its place among the other pinned apps.
+            const position = getLaunchersBefore(x).filter(launcher => launcher.id !== id).length;
+            removePlaceholder();
+            changeLater(() => {
+                if (favorites.isFavorite(id))
+                    favorites.moveFavoriteToPos(id, position);
+                else
+                    favorites.addFavoriteAtPos(id, position);
+            });
+            return true;
+        },
+    };
+
+    // Drop the placeholder when the drag leaves the launchers or ends there
+    // without a drop.
+    const dragMonitor = {
+        dragMotion: ({targetActor}) => {
+            if (!box.contains(targetActor))
+                removePlaceholder();
+            return DND.DragMotionResult.CONTINUE;
+        },
+    };
+    DND.addDragMonitor(dragMonitor);
+    Main.overview.connectObject(
+        'item-drag-end', removePlaceholder,
+        'item-drag-cancelled', removePlaceholder,
+        box);
+    favorites.connectObject('changed', () => rebuild(), box);
+
+    box.connect('destroy', () => {
+        DND.removeDragMonitor(dragMonitor);
+        if (laterId)
+            laters.remove(laterId);
+        removePlaceholder();
+        placeholder.destroy();
+    });
+
+    rebuild();
     return box;
 }
 
@@ -1073,7 +1166,7 @@ function toggleAppGrid() {
 // Simplified blur-my-shell: the top bar blurs whatever is behind it, and the
 // overview and app grid sit on a blurred copy of the wallpaper.
 function blurEffect(mode) {
-    return new Shell.BlurEffect({mode, radius: BLUR_RADIUS, brightness: BLUR_BRIGHTNESS});
+    return new Shell.BlurEffect({mode, radius: config.blurRadius, brightness: config.blurBrightness});
 }
 
 // A blurred copy of one monitor's wallpaper, added to group.
@@ -1122,7 +1215,7 @@ if (edge.x < radius && edge.y < radius)
 `;
 
 const CornerEffect = Extension ? GObject.registerClass(
-class DotfilesCornerEffect extends Shell.GLSLEffect {
+class GnomePlusPlusCornerEffect extends Shell.GLSLEffect {
     vfunc_build_pipeline() {
         this.add_glsl_snippet(Cogl.SnippetHook.FRAGMENT, CORNER_DECLARATIONS, CORNER_CODE, false);
     }
@@ -1199,7 +1292,7 @@ function roundedWallpaperBlur(target) {
         const themeRadius = target.get_theme_node().get_border_radius(St.Corner.TOPLEFT) * width / (target.width || 1);
         const radius = Math.min(themeRadius, width / 2, height / 2);
         if (radius !== shownRadius) {
-            backdrop.get_effect('dotfiles-corners').setRadius(radius);
+            backdrop.get_effect('gnomeplusplus-corners').setRadius(radius);
             shownRadius = radius;
         }
     };
@@ -1209,7 +1302,7 @@ function roundedWallpaperBlur(target) {
             return;
         backdrop = new Clutter.Actor({clip_to_allocation: true});
         backdrop.connect('destroy', onBackdropDestroyed);
-        backdrop.add_effect_with_name('dotfiles-corners', new CornerEffect());
+        backdrop.add_effect_with_name('gnomeplusplus-corners', new CornerEffect());
         wallpaper = new Meta.BackgroundGroup();
         backdrop.add_child(wallpaper);
         Main.uiGroup.add_child(backdrop);
@@ -1244,13 +1337,13 @@ function blurPopups() {
         if (rounded) {
             undo = roundedWallpaperBlur(actor);
         } else {
-            actor.add_effect_with_name('dotfiles-blur', blurEffect(Shell.BlurMode.BACKGROUND));
-            undo = () => actor.remove_effect_by_name('dotfiles-blur');
+            actor.add_effect_with_name('gnomeplusplus-blur', blurEffect(Shell.BlurMode.BACKGROUND));
+            undo = () => actor.remove_effect_by_name('gnomeplusplus-blur');
         }
-        actor.add_style_class_name('dotfiles-blurred');
+        actor.add_style_class_name('gnomeplusplus-blurred');
         blurred.set(actor, () => {
             undo();
-            actor.remove_style_class_name('dotfiles-blurred');
+            actor.remove_style_class_name('gnomeplusplus-blurred');
         });
         actor.connect('destroy', () => blurred.delete(actor));
     };
@@ -1276,11 +1369,11 @@ function blurPopups() {
     });
     // The blur grows in as the folder zooms open and fades out as it closes.
     const easeBlur = (dialog, radius, brightness) => {
-        if (!dialog.get_effect('dotfiles-blur'))
+        if (!dialog.get_effect('gnomeplusplus-blur'))
             return;
         const params = {duration: FOLDER_ANIMATION_TIME, mode: Clutter.AnimationMode.EASE_OUT_QUAD};
-        dialog.ease_property('@effects.dotfiles-blur.radius', radius, params);
-        dialog.ease_property('@effects.dotfiles-blur.brightness', brightness, params);
+        dialog.ease_property('@effects.gnomeplusplus-blur.radius', radius, params);
+        dialog.ease_property('@effects.gnomeplusplus-blur.brightness', brightness, params);
     };
     folder.popup = function (...args) {
         blur(this);
@@ -1288,9 +1381,9 @@ function blurPopups() {
     };
     folder._zoomAndFadeIn = function (...args) {
         zoomAndFadeIn.apply(this, args);
-        shade(this, FOLDER_SHADE);
-        this.get_effect('dotfiles-blur')?.set({radius: 0, brightness: 1});
-        easeBlur(this, BLUR_RADIUS, BLUR_BRIGHTNESS);
+        shade(this, config.folderShade);
+        this.get_effect('gnomeplusplus-blur')?.set({radius: 0, brightness: 1});
+        easeBlur(this, config.blurRadius, config.blurBrightness);
     };
     folder._zoomAndFadeOut = function (...args) {
         zoomAndFadeOut.apply(this, args);
@@ -1298,7 +1391,7 @@ function blurPopups() {
     };
     folder._setLighterBackground = function (lighter) {
         setLighterBackground.call(this, lighter);
-        shade(this, lighter ? FOLDER_SHADE_LIGHTER : FOLDER_SHADE);
+        shade(this, lighter ? config.folderShadeLighter : config.folderShade);
     };
 
     // The end session dialog is a full-screen layer holding the shade and the
@@ -1357,39 +1450,40 @@ function blurPopups() {
     };
 }
 
-// Workspace previews round their wallpaper at 30px in full-screen size, so
-// the small previews above the app grid end up almost square. Scale the radius
-// up by how much the preview is shrunk, keeping the shell's value as the
-// minimum. Returns a function that undoes it.
-function roundWorkspacePreviews() {
-    const background = Workspace.WorkspaceBackground.prototype;
-    const updateBorderRadius = background._updateBorderRadius;
+// The app grid leaves out the apps pinned to the dash, and unpins one that is
+// dropped on the grid. Keep the pins from it, so that every app is always in
+// the grid, pinned or not.
+function showPinnedAppsInGrid() {
+    const favorites = AppFavorites.getAppFavorites();
+    const methods = [
+        [AppDisplay.AppDisplay.prototype, '_loadApps'],
+        [AppDisplay.AppDisplay.prototype, '_onDragBegin'],
+        [AppDisplay.AppDisplay.prototype, 'acceptDrop'],
+        [AppDisplay.FolderView.prototype, '_loadApps'],
+    ].map(([prototype, name]) => [prototype, name, prototype[name]]);
 
-    background._updateBorderRadius = function () {
-        updateBorderRadius.call(this);
-        // The preview size changes without a state change (window picker to
-        // app grid), so also follow the size.
-        this._dotfilesSizeId ??= this.connect('notify::width', () => this._updateBorderRadius());
-        // Off the stage, e.g. while the shell builds it, reading the width
-        // needs a theme it doesn't have yet.
-        if (!this.get_stage())
-            return;
-
-        const content = this._bgManager.backgroundActor.content;
-        const monitor = Main.layoutManager.monitors[this._monitorIndex];
-        const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
-        const shrink = this.width > 0 ? monitor.width / this.width : 1;
-        const radius = WORKSPACE_PREVIEW_RADIUS * scaleFactor * shrink * this._stateAdjustment.value;
-        content.rounded_clip_radius = Math.max(content.rounded_clip_radius, radius);
-    };
+    for (const [prototype, name, method] of methods) {
+        prototype[name] = function (...args) {
+            favorites.isFavorite = () => false;
+            try {
+                return method.apply(this, args);
+            } finally {
+                delete favorites.isFavorite;
+            }
+        };
+    }
+    // Reload the grid and its folders.
+    favorites.emit('changed');
 
     return () => {
-        background._updateBorderRadius = updateBorderRadius;
+        for (const [prototype, name, method] of methods)
+            prototype[name] = method;
+        favorites.emit('changed');
     };
 }
 
 // Double-clicking empty top bar space throws confetti over all screens for
-// CONFETTI_DURATION, with celebration.wav. Returns a function that undoes it.
+// a while, with celebration.wav. Returns a function that undoes it.
 function setupConfetti(dir) {
     const sound = dir.get_child('celebration.wav');
     let confetti = null;
@@ -1420,8 +1514,8 @@ function setupConfetti(dir) {
         Main.layoutManager.uiGroup.add_child(confetti);
         global.display.get_sound_player().play_from_file(sound, 'Confetti', null);
 
-        for (let i = 0; i < CONFETTI_PIECES; i++) {
-            const [red, green, blue] = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+        for (let i = 0; i < config.confettiPieces; i++) {
+            const [red, green, blue] = config.confettiColors[Math.floor(Math.random() * config.confettiColors.length)];
             const size = (6 + Math.random() * 6) * scaleFactor;
             const x = Math.random() * width;
             const piece = new Clutter.Actor({
@@ -1439,13 +1533,13 @@ function setupConfetti(dir) {
             // Move with translation rather than x/y: changing the position
             // re-lays out the whole confetti layer every frame, translation
             // only changes how the piece is drawn.
-            const delay = Math.random() * CONFETTI_DURATION / 3;
+            const delay = Math.random() * config.confettiDuration / 3;
             piece.ease({
                 translation_x: (Math.random() - 0.5) * 300 * scaleFactor,
                 translation_y: height + size * 2 - piece.y,
                 rotation_angle_z: piece.rotation_angle_z + (Math.random() - 0.5) * 1080,
                 delay,
-                duration: CONFETTI_DURATION - delay,
+                duration: config.confettiDuration - delay,
                 mode: Clutter.AnimationMode.EASE_IN_QUAD,
             });
             // Tumble by squashing the height back and forth, a flat stand-in
@@ -1461,7 +1555,7 @@ function setupConfetti(dir) {
             });
         }
 
-        timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, CONFETTI_DURATION, () => {
+        timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, config.confettiDuration, () => {
             timeoutId = 0;
             stop();
             return GLib.SOURCE_REMOVE;
@@ -1567,7 +1661,7 @@ function setupEdgeTooltips() {
         hovered = edge;
         pointerOnEdge = true;
         hideButtonTooltips.forEach(hide => hide());
-        timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, TOOLTIP_DELAY, () => {
+        timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, config.tooltipDelay, () => {
             timeoutId = 0;
             tooltip = showTooltip(edge.text, edge.start(), edgeWidth());
             return GLib.SOURCE_REMOVE;
@@ -1628,95 +1722,100 @@ function wallpaperSettings(dir) {
     ];
 }
 
-if (!Extension)
+if (!Extension) {
     applySettings(Gio.File.new_for_uri(import.meta.url).get_parent());
+    setTimezone(config.timezone);
+}
 
-export default class DotfilesExtension extends (Extension ?? Object) {
+export default class GnomePlusPlusExtension extends (Extension ?? Object) {
+    // Sets up the features that are switched on in settings.js, each leaving
+    // behind a function that undoes it.
     enable() {
         applySettings(this.dir);
+        setTimezone(config.timezone);
 
-        const dateMenu = Main.panel.statusArea.dateMenu;
+        const undo = this._undo = [];
+        const {dateMenu, quickSettings} = Main.panel.statusArea;
+
         const update = () => dateMenu._clockDisplay.set_text(formatClock());
         // Tied to the label, so the handler goes away if the shell destroys the
         // label first (on logout).
         dateMenu._clock.connectObject('notify::clock', update, dateMenu._clockDisplay);
         update();
-
-        Main.panel.statusArea.activities.container.hide();
-        this._workspaces = createWorkspaceButtons();
-        Main.panel._leftBox.insert_child_at_index(this._workspaces, 0);
-        this._apps = createAppButtons();
-        Main.panel._leftBox.insert_child_at_index(this._apps, 1);
-        const {quickSettings} = Main.panel.statusArea;
-        this._removeTooltips = [
-            addTooltip(dateMenu, () => 'Calendar and Notifications', dateMenu.menu),
-            addTooltip(quickSettings, () => 'Quick Settings', quickSettings.menu),
-        ];
-        this._showDesktop = createShowDesktopButton();
-        const shellIndicators = Main.sessionMode.panel.right.map(name => Main.panel.statusArea[name]?.container);
-        const firstShellIndicator = Main.panel._rightBox.get_children().find(child => shellIndicators.includes(child));
-        Main.panel._rightBox.insert_child_below(this._showDesktop, firstShellIndicator ?? null);
-        this._stopwatches = stopwatches.map((_state, i) => {
-            const stopwatch = createStopwatch(i);
-            Main.panel.addToStatusArea(`dotfiles-stopwatch-${i + 1}`, stopwatch, -1, 'right');
-            return stopwatch;
+        undo.push(() => {
+            dateMenu._clock.disconnectObject(dateMenu._clockDisplay);
+            dateMenu._clockDisplay.set_text(dateMenu._clock.clock);
         });
+
+        if (config.workspaceButtons) {
+            const {container: activities} = Main.panel.statusArea.activities;
+            const workspaces = createWorkspaceButtons();
+            activities.hide();
+            Main.panel._leftBox.insert_child_at_index(workspaces, 0);
+            undo.push(() => {
+                workspaces.destroy();
+                activities.show();
+            });
+        }
+
+        const apps = createAppButtons();
+        Main.panel._leftBox.insert_child_at_index(apps, 1);
+        undo.push(() => apps.destroy());
+
+        undo.push(
+            addTooltip(dateMenu, () => 'Calendar and Notifications', dateMenu.menu),
+            addTooltip(quickSettings, () => 'Quick Settings', quickSettings.menu));
+
+        if (config.showDesktopButton) {
+            const showDesktop = createShowDesktopButton();
+            const shellIndicators = Main.sessionMode.panel.right.map(name => Main.panel.statusArea[name]?.container);
+            const firstShellIndicator = Main.panel._rightBox.get_children().find(child => shellIndicators.includes(child));
+            Main.panel._rightBox.insert_child_below(showDesktop, firstShellIndicator ?? null);
+            undo.push(() => showDesktop.destroy());
+        }
+
+        if (config.stopwatch) {
+            stopwatches.forEach((_state, i) => {
+                const stopwatch = createStopwatch(i);
+                Main.panel.addToStatusArea(`gnomeplusplus-stopwatch-${i + 1}`, stopwatch, -1, 'right');
+                undo.push(() => stopwatch.destroy());
+            });
+        }
 
         // Hide the favourites dash in the overview. It stays "visible" because a
         // hidden dash never styles its icons and then errors when resizing them;
         // height 0 frees its space, and the clip and opacity hide what is left.
         Main.overview.dash.set({height: 0, opacity: 0, clip_to_allocation: true});
+        undo.push(() => Main.overview.dash.set({height: -1, opacity: 255, clip_to_allocation: false}));
 
-        // The overview already sits on a blurred wallpaper, so the top bar
-        // doesn't blur it again.
-        this._panelBlur = blurEffect(Shell.BlurMode.BACKGROUND);
-        Main.panel.add_effect(this._panelBlur);
-        Main.overview.connectObject(
-            'shown', () => (this._panelBlur.enabled = false),
-            'hiding', () => (this._panelBlur.enabled = true),
-            this);
-        this._overviewBackground = createOverviewBackground();
-        Main.layoutManager.overviewGroup.insert_child_at_index(this._overviewBackground, 0);
-        this._unblurPopups = blurPopups();
-        this._unroundWorkspacePreviews = roundWorkspacePreviews();
-        this._removeConfetti = setupConfetti(this.dir);
-        this._removeEdgeClicks = setupEdgeClicks();
-        this._removeEdgeTooltips = setupEdgeTooltips();
+        if (config.blur) {
+            // The overview already sits on a blurred wallpaper, so the top bar
+            // doesn't blur it again.
+            const panelBlur = blurEffect(Shell.BlurMode.BACKGROUND);
+            Main.panel.add_effect(panelBlur);
+            Main.overview.connectObject(
+                'shown', () => (panelBlur.enabled = false),
+                'hiding', () => (panelBlur.enabled = true),
+                this);
+            const overviewBackground = createOverviewBackground();
+            Main.layoutManager.overviewGroup.insert_child_at_index(overviewBackground, 0);
+            undo.push(() => {
+                Main.overview.disconnectObject(this);
+                Main.panel.remove_effect(panelBlur);
+                overviewBackground.destroy();
+            }, blurPopups());
+        }
+
+        undo.push(showPinnedAppsInGrid());
+        if (config.confetti)
+            undo.push(setupConfetti(this.dir));
+        if (config.edgeClick)
+            undo.push(setupEdgeClicks(), setupEdgeTooltips());
     }
 
     disable() {
         // Settings are persistent preferences; only the panel changes need undoing.
-        const dateMenu = Main.panel.statusArea.dateMenu;
-        dateMenu._clock.disconnectObject(dateMenu._clockDisplay);
-        dateMenu._clockDisplay.set_text(dateMenu._clock.clock);
-
-        this._workspaces.destroy();
-        this._workspaces = null;
-        this._apps.destroy();
-        this._apps = null;
-        this._showDesktop.destroy();
-        this._showDesktop = null;
-        this._stopwatches.forEach(stopwatch => stopwatch.destroy());
-        this._stopwatches = null;
-        this._removeTooltips.forEach(remove => remove());
-        this._removeTooltips = null;
-        Main.panel.statusArea.activities.container.show();
-        Main.overview.dash.set({height: -1, opacity: 255, clip_to_allocation: false});
-
-        Main.overview.disconnectObject(this);
-        Main.panel.remove_effect(this._panelBlur);
-        this._panelBlur = null;
-        this._overviewBackground.destroy();
-        this._overviewBackground = null;
-        this._unblurPopups();
-        this._unblurPopups = null;
-        this._unroundWorkspacePreviews();
-        this._unroundWorkspacePreviews = null;
-        this._removeConfetti();
-        this._removeConfetti = null;
-        this._removeEdgeClicks();
-        this._removeEdgeClicks = null;
-        this._removeEdgeTooltips();
-        this._removeEdgeTooltips = null;
+        this._undo.reverse().forEach(undo => undo());
+        this._undo = null;
     }
 }

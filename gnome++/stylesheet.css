@@ -1,12 +1,12 @@
 /* i3-style workspace buttons: slightly rounded boxes coloured with the system
    accent (Yaru blue) and Yaru's bold white top bar text. Hover and press use
    the same white overlays as Yaru's own top bar buttons. */
-.dotfiles-workspaces {
+.gnomeplusplus-workspaces {
     spacing: 2px;
     padding: 0 4px;
 }
 
-.dotfiles-workspace {
+.gnomeplusplus-workspace {
     transition-duration: 150ms;
     /* Square: the 2.64em top bar minus 0.25em above and below. */
     width: 2.14em;
@@ -18,32 +18,32 @@
     font-weight: bold;
 }
 
-.dotfiles-workspace:hover {
+.gnomeplusplus-workspace:hover {
     box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.17);
 }
 
-.dotfiles-workspace:active {
+.gnomeplusplus-workspace:active {
     box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.28);
 }
 
-.dotfiles-workspace:checked {
+.gnomeplusplus-workspace:checked {
     background-color: -st-accent-color;
 }
 
 /* A workspace other than the current one that has windows: the accent blue,
    lightened to read on the dark box. */
-.dotfiles-workspace.dotfiles-occupied {
+.gnomeplusplus-workspace.gnomeplusplus-occupied {
     color: st-mix(-st-accent-color, white, 65%);
 }
 
 /* App grid button and launchers right of the workspaces, same boxes without
    the accent and 20% bigger than the workspace boxes. */
-.dotfiles-apps {
+.gnomeplusplus-apps {
     spacing: 2px;
     padding: 0 4px 0 8px;
 }
 
-.dotfiles-app {
+.gnomeplusplus-app {
     transition-duration: 150ms;
     padding: 0 6px;
     margin: 5px 0;
@@ -51,15 +51,23 @@
     background-color: transparent;
 }
 
-.dotfiles-app:hover {
+.gnomeplusplus-app:hover {
     background-color: rgba(255, 255, 255, 0.17);
 }
 
-.dotfiles-app:active {
+.gnomeplusplus-app:active {
     background-color: rgba(255, 255, 255, 0.28);
 }
 
-.dotfiles-app-icon {
+/* Where a dragged app would land, as wide as a launcher. */
+.gnomeplusplus-app-placeholder {
+    width: 31px;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.17);
+}
+
+.gnomeplusplus-app-icon {
     icon-size: 19px;
 }
 
@@ -86,21 +94,21 @@
    are a little darker than notification popups, volume and brightness popups,
    switchers, dialogs, app folders and the log out / restart / shut down
    dialog. */
-.popup-menu-content.dotfiles-blurred {
+.popup-menu-content.gnomeplusplus-blurred {
     background-color: rgba(30, 30, 34, 0.88);
 }
 
-.notification-banner.dotfiles-blurred,
-.osd-window.dotfiles-blurred,
-.switcher-list.dotfiles-blurred,
-.workspace-switcher.dotfiles-blurred,
-.modal-dialog.dotfiles-blurred,
-.dotfiles-blurred .app-folder-dialog,
-.dotfiles-blurred .modal-dialog {
+.notification-banner.gnomeplusplus-blurred,
+.osd-window.gnomeplusplus-blurred,
+.switcher-list.gnomeplusplus-blurred,
+.workspace-switcher.gnomeplusplus-blurred,
+.modal-dialog.gnomeplusplus-blurred,
+.gnomeplusplus-blurred .app-folder-dialog,
+.gnomeplusplus-blurred .modal-dialog {
     background-color: rgba(40, 40, 44, 0.8);
 }
 
-.notification-banner.dotfiles-blurred:hover {
+.notification-banner.gnomeplusplus-blurred:hover {
     background-color: rgba(54, 54, 58, 0.85);
 }
 
@@ -218,12 +226,12 @@
 
 /* Workspaces in tiling mode show as squares, not dots, in the popup shown
    when switching workspaces with the keyboard. */
-.ws-switcher-indicator.dotfiles-tiling {
+.ws-switcher-indicator.gnomeplusplus-tiling {
     border-radius: 2px;
 }
 
 /* The tile a dragged window would swap into, in the accent blue. */
-.dotfiles-tile-drop {
+.gnomeplusplus-tile-drop {
     background-color: st-transparentize(-st-accent-color, 0.7);
     border: 2px solid -st-accent-color;
     border-radius: 12px;
@@ -231,25 +239,25 @@
 
 /* Top bar stopwatches: digits of equal width so the time doesn't jiggle. An
    unused one is dimmed, a running one is the lightened accent blue. */
-.dotfiles-stopwatch {
+.gnomeplusplus-stopwatch {
     font-feature-settings: "tnum";
 }
 
-.dotfiles-stopwatch-unused {
+.gnomeplusplus-stopwatch-unused {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.dotfiles-stopwatch-running {
+.gnomeplusplus-stopwatch-running {
     color: st-mix(-st-accent-color, white, 65%);
 }
 
 /* The stopwatch menu's row of Start, Pause and End buttons. */
-.dotfiles-stopwatch-actions {
+.gnomeplusplus-stopwatch-actions {
     spacing: 6px;
 }
 
 /* The small Clear all button at the end of its Measurements heading. */
-.dotfiles-stopwatch-clear {
+.gnomeplusplus-stopwatch-clear {
     padding: 2px 10px;
     font-size: 0.9em;
 }

@@ -1,0 +1,7 @@
+{
+  "uuid": "gnome++@jukkapajarinen.com",
+  "name": "Gnome++",
+  "description": "Gnome++: GNOME the way it should be.",
+  "shell-version": ["45", "46", "47", "48", "49", "50"],
+  "url": "https://github.com/jukkapajarinen/dotfiles/tree/master/gnome++"
+}
