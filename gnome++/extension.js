@@ -41,7 +41,6 @@ const SETTINGS = [
     ['org.gnome.desktop.input-sources', 'sources', "[('xkb', 'fi+mac')]"],
     // Ubuntu's tiling assistant would clash with the extension's own tiling mode.
     ['org.gnome.shell', 'disabled-extensions', "['ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']"],
-    ['org.gnome.shell', 'app-picker-layout', '[]'],
     ['org.gnome.desktop.interface', 'color-scheme', "'prefer-dark'"],
     ['org.gnome.desktop.interface', 'gtk-theme', "'Yaru-blue-dark'"],
     ['org.gnome.desktop.interface', 'icon-theme', "'Yaru-blue-dark'"],
@@ -1482,6 +1481,50 @@ function showPinnedAppsInGrid() {
     };
 }
 
+// The app grid follows its saved layout and puts the apps that turn up later
+// at the end, and is in name order only as long as nothing is saved. Place
+// its icons, and those in its folders, by name whatever the layout says.
+function sortAppGrid() {
+    const favorites = AppFavorites.getAppFavorites();
+    const grid = AppDisplay.AppDisplay.prototype;
+    const folder = AppDisplay.FolderView.prototype;
+    const {_loadApps: loadApps, _getItemPosition: getItemPosition} = grid;
+    const {_loadApps: loadFolderApps} = folder;
+    // Each grid's icon ids in name order.
+    const order = new WeakMap();
+
+    grid._loadApps = function (...args) {
+        const icons = loadApps.apply(this, args);
+        order.set(this, icons
+            .filter(icon => icon !== this._placeholder)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map(icon => icon.id));
+        return icons;
+    };
+    // An icon dragged in from the dash stays where it is held.
+    grid._getItemPosition = function (item) {
+        const index = item === this._placeholder ? -1 : order.get(this)?.indexOf(item.id) ?? -1;
+        if (index === -1)
+            return getItemPosition.call(this, item);
+        const {itemsPerPage} = this._grid;
+        return [Math.floor(index / itemsPerPage), index % itemsPerPage];
+    };
+    // A folder places its icons in the order of its app list.
+    folder._loadApps = function (...args) {
+        const icons = loadFolderApps.apply(this, args);
+        this._apps.sort((a, b) => a.get_name().localeCompare(b.get_name()));
+        return icons;
+    };
+    // Reload the grid and its folders.
+    favorites.emit('changed');
+
+    return () => {
+        Object.assign(grid, {_loadApps: loadApps, _getItemPosition: getItemPosition});
+        folder._loadApps = loadFolderApps;
+        favorites.emit('changed');
+    };
+}
+
 // Double-clicking empty top bar space throws confetti over all screens for
 // a while, with celebration.wav. Returns a function that undoes it.
 function setupConfetti(dir) {
@@ -1806,7 +1849,7 @@ export default class GnomePlusPlusExtension extends (Extension ?? Object) {
             }, blurPopups());
         }
 
-        undo.push(showPinnedAppsInGrid());
+        undo.push(sortAppGrid(), showPinnedAppsInGrid());
         if (config.confetti)
             undo.push(setupConfetti(this.dir));
         if (config.edgeClick)
