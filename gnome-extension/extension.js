@@ -652,6 +652,7 @@ function createDottedBorder() {
 // Show desktop, in the top bar's right side between app indicators and the
 // shell's own indicators: minimizes the current workspace's windows, and when
 // none are left showing, a second click brings back the ones it minimized.
+// From the overview or app grid it always closes them onto the bare desktop.
 function createShowDesktopButton() {
     let minimized = [];
     const button = new St.Button({
@@ -665,7 +666,14 @@ function createShowDesktopButton() {
         // Most recently used first.
         const windows = global.display.get_tab_list(Meta.TabList.NORMAL, workspace);
         const showing = windows.filter(window => !window.minimized && window.can_minimize());
-        if (showing.length) {
+        if (Main.overview.visible) {
+            // Minimize first, so the overview closes straight onto the desktop.
+            if (showing.length) {
+                showing.forEach(window => window.minimize());
+                minimized = showing;
+            }
+            Main.overview.hide();
+        } else if (showing.length) {
             showing.forEach(window => window.minimize());
             minimized = showing;
         } else {
