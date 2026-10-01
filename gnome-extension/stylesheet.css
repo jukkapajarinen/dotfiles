@@ -30,6 +30,12 @@
     background-color: -st-accent-color;
 }
 
+/* A workspace other than the current one that has windows: the accent blue,
+   lightened to read on the dark box. */
+.dotfiles-workspace.dotfiles-occupied {
+    color: st-mix(-st-accent-color, white, 65%);
+}
+
 /* App grid button and launchers right of the workspaces, same boxes without
    the accent and 20% bigger than the workspace boxes. */
 .dotfiles-apps {

@@ -172,7 +172,8 @@ function formatClock() {
 // switches to that workspace; clicking the current one opens the overview,
 // double-clicking a number switches that workspace between tiling mode and
 // default mode, and clicking the top-left corner opens the app grid. Numbers
-// of workspaces in tiling mode get a dotted border, and their dots in the
+// of other workspaces that have windows are blue. Numbers of workspaces in
+// tiling mode get a dotted border, and their dots in the
 // popup shown when switching workspaces with the keyboard become squares.
 function createWorkspaceButtons() {
     const manager = global.workspace_manager;
@@ -239,13 +240,25 @@ function createWorkspaceButtons() {
                     manager.get_workspace_by_index(i).activate(time);
                 }
             });
+            manager.get_workspace_by_index(i).connectObject(
+                'window-added', () => update(),
+                'window-removed', () => update(),
+                button);
             box.add_child(button);
         }
         update();
     };
     const update = () => box.get_children().forEach((button, i) => {
+        const workspace = manager.get_workspace_by_index(i);
         button.checked = i === manager.get_active_workspace_index();
-        button.child.last_child.visible = tiler.isTiling(manager.get_workspace_by_index(i));
+        button.child.last_child.visible = tiler.isTiling(workspace);
+        // Other workspaces that have windows get a blue number.
+        const occupied = global.display.get_tab_list(Meta.TabList.NORMAL, workspace)
+            .some(window => !window.is_on_all_workspaces());
+        if (occupied && !button.checked)
+            button.add_style_class_name('dotfiles-occupied');
+        else
+            button.remove_style_class_name('dotfiles-occupied');
     });
 
     manager.connectObject(
@@ -395,7 +408,12 @@ class Tiler {
             const workspace = window.get_workspace();
             if (!this._workspaces.has(workspace))
                 return;
-            this._add(workspace, window, true);
+            // What kind of window it is can also settle late, e.g. a dialog
+            // being tied to its parent.
+            if (isTileable(window))
+                this._add(workspace, window, true);
+            else
+                this._remove(workspace, window);
             if (this._workspaces.get(workspace).windows.includes(window) &&
                 window.maximized_horizontally && window.maximized_vertically)
                 window.unmaximize();
@@ -504,8 +522,8 @@ class Tiler {
             return;
 
         state.rects.clear();
-        const windows = state.windows.filter(window => !window.minimized && !window.is_fullscreen() &&
-            !(window.maximized_horizontally && window.maximized_vertically));
+        const windows = state.windows.filter(window => isTileable(window) && !window.minimized &&
+            !window.is_fullscreen() && !(window.maximized_horizontally && window.maximized_vertically));
 
         for (let monitor = 0; monitor < global.display.get_n_monitors(); monitor++) {
             const monitorWindows = windows.filter(window => window.get_monitor() === monitor);
@@ -532,7 +550,16 @@ function isTileable(window) {
     const resizable = window.allows_resize() || window.is_fullscreen() ||
         window.maximized_horizontally || window.maximized_vertically;
     return window.get_window_type() === Meta.WindowType.NORMAL && !window.get_transient_for() &&
-        !window.is_on_all_workspaces() && !window.is_skip_taskbar() && resizable;
+        !window.is_on_all_workspaces() && !window.is_skip_taskbar() && resizable && !isDialogLike(window);
+}
+
+// System dialogs an app opens through the desktop portal, e.g. the file
+// chooser, come up as ordinary windows, not always tied to the app's window.
+// The file chooser is a window of Files that isn't one of its registered app
+// windows; the same goes for other GTK apps' free-standing dialogs.
+function isDialogLike(window) {
+    return window.get_wm_class()?.startsWith('xdg-desktop-portal') ||
+        Boolean(window.get_gtk_application_id() && !window.get_gtk_window_object_path());
 }
 
 // Split an area into count rectangles: the first takes half of it, cut along
