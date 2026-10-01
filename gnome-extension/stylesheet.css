@@ -68,6 +68,17 @@
     height: 2.64em;
 }
 
+/* An empty 1px strip at each end of the top bar: the pointer lands there when
+   thrown into a top corner of the screen, and the extension takes clicks on
+   them (app grid on the left, lock screen on the right). */
+#panelLeft {
+    margin-left: 1px;
+}
+
+#panelRight {
+    margin-right: 1px;
+}
+
 /* Top bar and its menus: dark but see-through, so the blur behind shows.
    Yaru forces a solid top bar colour with !important, so this needs it too. */
 #panel,

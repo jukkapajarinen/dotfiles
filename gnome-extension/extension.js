@@ -171,8 +171,7 @@ function formatClock() {
 // i3-style workspace buttons in place of the Activities dots. Clicking a number
 // switches to that workspace; clicking the current one opens the overview,
 // double-clicking a number switches that workspace between tiling mode and
-// default mode, as does its right-click menu, and clicking the top-left corner
-// opens the app grid. Numbers
+// default mode, as does its right-click menu. Numbers
 // of other workspaces that have windows are blue. Numbers of workspaces in
 // tiling mode get a dotted border, and their dots in the
 // popup shown when switching workspaces with the keyboard become squares.
@@ -310,16 +309,6 @@ function createWorkspaceButtons() {
         'active-workspace-changed', update,
         box);
     box.connect('scroll-event', (_actor, event) => Main.wm.handleWorkspaceScroll(event));
-
-    // Clicking the top-left corner, left of the first number, toggles the app
-    // grid. Target phase, so clicks on the numbers themselves don't count.
-    const corner = new Clutter.ClickGesture();
-    corner.connect('recognize', () => {
-        const [boxX] = box.get_transformed_position();
-        if (corner.get_coords_abs().x < boxX + (box.get_first_child()?.x ?? 0))
-            toggleAppGrid();
-    });
-    box.add_action_full('dotfiles-corner', Clutter.EventPhase.TARGET, corner);
 
     rebuild();
     return box;
@@ -634,6 +623,29 @@ function splitArea(area, count) {
 // tooltip stays away while it is open. Returns a function that removes it.
 const TOOLTIP_DELAY = 400; // ms
 
+// Fades a tooltip in, centred under the stretch of the top bar that starts at
+// x and is width wide, kept on the screen. Returns it; destroy it to hide it.
+function showTooltip(text, x, width) {
+    const tooltip = new St.Label({style_class: 'dash-label', text, opacity: 0});
+    Main.uiGroup.add_child(tooltip);
+
+    const [, panelY] = Main.panel.get_transformed_position();
+    const monitor = Main.layoutManager.findMonitorForActor(Main.panel);
+    const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
+    const margin = 6 * scaleFactor;
+    const tooltipX = Math.min(
+        Math.max(x + (width - tooltip.width) / 2, monitor.x + margin),
+        monitor.x + monitor.width - tooltip.width - margin);
+    tooltip.set_position(Math.round(tooltipX), Math.round(panelY + Main.panel.height + margin));
+    tooltip.ease({opacity: 255, duration: 150, mode: Clutter.AnimationMode.EASE_OUT_QUAD});
+    return tooltip;
+}
+
+// While the pointer is on one of the top bar's clickable edges, its tooltip
+// shows and the buttons' ones stay away.
+let pointerOnEdge = false;
+const hideButtonTooltips = new Set();
+
 function addTooltip(button, getText, menu = null) {
     let tooltip = null;
     let timeoutId = 0;
@@ -647,22 +659,11 @@ function addTooltip(button, getText, menu = null) {
     };
 
     const show = () => {
-        tooltip = new St.Label({style_class: 'dash-label', text: getText(), opacity: 0});
-        Main.uiGroup.add_child(tooltip);
-
-        // Centred under the button, below the top bar, kept on its screen.
-        const [x] = button.get_transformed_position();
-        const [width] = button.get_transformed_size();
-        const [, panelY] = Main.panel.get_transformed_position();
-        const monitor = Main.layoutManager.findMonitorForActor(button);
-        const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
-        const margin = 6 * scaleFactor;
-        const tooltipX = Math.min(
-            Math.max(x + (width - tooltip.width) / 2, monitor.x + margin),
-            monitor.x + monitor.width - tooltip.width - margin);
-        tooltip.set_position(Math.round(tooltipX), Math.round(panelY + Main.panel.height + margin));
-        tooltip.ease({opacity: 255, duration: 150, mode: Clutter.AnimationMode.EASE_OUT_QUAD});
+        if (pointerOnEdge)
+            return;
+        tooltip = showTooltip(getText(), button.get_transformed_position()[0], button.get_transformed_size()[0]);
     };
+    hideButtonTooltips.add(hide);
 
     const ids = [
         button.connect('notify::hover', () => {
@@ -681,11 +682,13 @@ function addTooltip(button, getText, menu = null) {
         ids.push(button.connect('clicked', hide));
     const menuId = menu?.connect('open-state-changed', hide);
 
+    button.connect('destroy', () => hideButtonTooltips.delete(hide));
     return () => {
         ids.forEach(id => button.disconnect(id));
         if (menuId)
             menu.disconnect(menuId);
         hide();
+        hideButtonTooltips.delete(hide);
     };
 }
 
@@ -928,7 +931,7 @@ function createStopwatch(index) {
         }
     });
 
-    addTooltip(button, () => `${name} – click to start or pause, right-click for menu`, button.menu);
+    addTooltip(button, () => name, button.menu);
     button.connect('destroy', () => {
         if (timeoutId)
             GLib.source_remove(timeoutId);
@@ -1461,6 +1464,120 @@ function setupConfetti(dir) {
     };
 }
 
+// The top bar has an empty strip at each end, EDGE_WIDTH wide (the stylesheet
+// leaves the room), which the pointer lands on when thrown into a top corner
+// of the screen. Clicking the left one toggles the app grid, clicking the
+// right one locks the screen, like Super+L.
+const EDGE_WIDTH = 1;
+const EDGES = [
+    {
+        text: 'Show Apps',
+        start: () => Main.panel.get_transformed_position()[0],
+        activate: () => toggleAppGrid(),
+    },
+    {
+        text: 'Lock Screen',
+        start: () => Main.panel.get_transformed_position()[0] + Main.panel.width - edgeWidth(),
+        activate: () => Main.screenShield.lock(true),
+    },
+];
+
+function edgeWidth() {
+    return EDGE_WIDTH * St.ThemeContext.get_for_stage(global.stage).scaleFactor;
+}
+
+// The edge at a point of the screen, if any.
+function edgeAt(x, y) {
+    const [, panelY] = Main.panel.get_transformed_position();
+    if (y < panelY || y >= panelY + Main.panel.height)
+        return null;
+    return EDGES.find(edge => x >= edge.start() && x < edge.start() + edgeWidth()) ?? null;
+}
+
+// Returns a function that undoes it.
+function setupEdgeClicks() {
+    const pressId = Main.panel.connect('captured-event::button', (_panel, event) => {
+        if (event.type() !== Clutter.EventType.BUTTON_PRESS || event.get_button() !== Clutter.BUTTON_PRIMARY)
+            return Clutter.EVENT_PROPAGATE;
+
+        const edge = edgeAt(...event.get_coords());
+        if (!edge)
+            return Clutter.EVENT_PROPAGATE;
+        edge.activate();
+        return Clutter.EVENT_STOP;
+    });
+
+    return () => Main.panel.disconnect(pressId);
+}
+
+// Tooltips for the top bar's two clickable edges. They aren't buttons of
+// their own, so follow the pointer over the top bar; once it is on an edge,
+// keep checking it is still there, as leaving the bar sends no more motion.
+// Returns a function that undoes it.
+function setupEdgeTooltips() {
+    let hovered = null;
+    let tooltip = null;
+    let timeoutId = 0;
+    let pollId = 0;
+
+    const leave = () => {
+        for (const id of [timeoutId, pollId]) {
+            if (id)
+                GLib.source_remove(id);
+        }
+        timeoutId = pollId = 0;
+        tooltip?.destroy();
+        tooltip = hovered = null;
+        pointerOnEdge = false;
+    };
+
+    const enter = edge => {
+        leave();
+        hovered = edge;
+        pointerOnEdge = true;
+        hideButtonTooltips.forEach(hide => hide());
+        timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, TOOLTIP_DELAY, () => {
+            timeoutId = 0;
+            tooltip = showTooltip(edge.text, edge.start(), edgeWidth());
+            return GLib.SOURCE_REMOVE;
+        });
+        // Check against where the edge is now: the top bar has no size for a
+        // moment while the shell lays itself out again, e.g. as the app grid
+        // opens, which would look like the pointer having left.
+        const [left, right] = [edge.start(), edge.start() + edgeWidth()];
+        const [, top] = Main.panel.get_transformed_position();
+        const bottom = top + Main.panel.height;
+        pollId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
+            const [x, y] = global.get_pointer();
+            if (x >= left && x < right && y >= top && y < bottom)
+                return GLib.SOURCE_CONTINUE;
+            pollId = 0;
+            leave();
+            return GLib.SOURCE_REMOVE;
+        });
+    };
+
+    const eventId = Main.panel.connect('captured-event', (_panel, event) => {
+        if (event.type() === Clutter.EventType.MOTION) {
+            const edge = edgeAt(...event.get_coords());
+            if (edge !== hovered) {
+                if (edge)
+                    enter(edge);
+                else
+                    leave();
+            }
+        } else if (event.type() === Clutter.EventType.BUTTON_PRESS) {
+            leave();
+        }
+        return Clutter.EVENT_PROPAGATE;
+    });
+
+    return () => {
+        Main.panel.disconnect(eventId);
+        leave();
+    };
+}
+
 function wallpaperSettings(dir) {
     // The extension directory is symlinked from the dotfiles repo, so resolve
     // the link to find images/ in the repo root.
@@ -1532,6 +1649,8 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         this._unblurPopups = blurPopups();
         this._unroundWorkspacePreviews = roundWorkspacePreviews();
         this._removeConfetti = setupConfetti(this.dir);
+        this._removeEdgeClicks = setupEdgeClicks();
+        this._removeEdgeTooltips = setupEdgeTooltips();
     }
 
     disable() {
@@ -1564,5 +1683,9 @@ export default class DotfilesExtension extends (Extension ?? Object) {
         this._unroundWorkspacePreviews = null;
         this._removeConfetti();
         this._removeConfetti = null;
+        this._removeEdgeClicks();
+        this._removeEdgeClicks = null;
+        this._removeEdgeTooltips();
+        this._removeEdgeTooltips = null;
     }
 }
