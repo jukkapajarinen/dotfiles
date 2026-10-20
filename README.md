@@ -1,12 +1,12 @@
 # Jukka's dotfiles 💎
 
-My dotfiles and scripts for MacOS and Linux. Dotfiles are symlinked to appropriate directories by handy installation scripts.
+My dotfiles and scripts for MacOS, Linux and Windows. Dotfiles are symlinked to appropriate directories by handy installation scripts.
 
 Please check the installation scripts before usage. You may accidentally override things you don't want to!
 
 Custom keyboard configurations readme is [here](./kbd/xd60_v3_QMK_README.md).
 
-## Installation
+## Installation Linux
 
 - Clone this repository to any location in your filesystem.  (E.g. **~/**)
 - Change directory to the previously **cloned** `dotfiles` directory
@@ -14,6 +14,13 @@ Custom keyboard configurations readme is [here](./kbd/xd60_v3_QMK_README.md).
   - *Supported option is `--yes` to answer `Y` to all questions and overwrite existing files.*
   - *Don't use **sudo!** (installer will ask for sudo password, if needed.)*
   - *Installer will ask your permission `[Y/n]` to start the installation.*
+
+### Installation Windows
+
+- Launch `INSTALL.ps1` in **PowerShell** instead: `powershell -ExecutionPolicy Bypass -File .\INSTALL.ps1`
+  - *Supported option is `-Yes` (or `--yes`) to answer `Y` to all questions and overwrite existing files.*
+  - *Installs only the Windows-applicable dotfiles: git, starship, vim/neovim and VS Code.*
+  - *Files are symlinked when Developer Mode is on (or when run as admin), otherwise copied.*
 
 ## TL;DR;
 
