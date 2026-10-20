@@ -86,6 +86,20 @@ Link "$scriptDir\vscode-settings.json" "$env:APPDATA\Code\User\settings.json";
 Link "$scriptDir\vscode-keybindings.json" "$env:APPDATA\Code\User\keybindings.json";
 Link "$scriptDir\vscode-extensions.txt" "$env:APPDATA\Code\User\extensions.txt";
 
+# Windows set the desktop wallpaper (Fill style, like Gnome's zoom)
+if (Ask "Set desktop wallpaper?") {
+  Arrow "Set desktop wallpaper.";
+  $desktop = "HKCU:\Control Panel\Desktop";
+  Set-ItemProperty -Path $desktop -Name WallpaperStyle -Value "10";
+  Set-ItemProperty -Path $desktop -Name TileWallpaper -Value "0";
+  Add-Type -Namespace Win32 -Name Wallpaper -MemberDefinition @"
+[DllImport("user32.dll", CharSet = CharSet.Unicode)]
+public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+"@;
+  # SPI_SETDESKWALLPAPER, SPIF_UPDATEINIFILE | SPIF_SENDCHANGE
+  [Win32.Wallpaper]::SystemParametersInfo(0x0014, 0, "$scriptDir\images\Wallpaper.png", 0x03) | Out-Null;
+}
+
 # Windows install VS Code extensions
 if ((Get-Command code -ErrorAction SilentlyContinue) -and (Ask "Install VS Code extensions?")) {
   Arrow "Install VS Code extensions.";

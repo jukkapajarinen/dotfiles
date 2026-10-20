@@ -66,6 +66,15 @@ $ln "$scriptDir/vscode-extensions.txt" "$homeDir/.config/Code/User/extensions.tx
 $ln "$scriptDir/kbd/Xmodmap" "$homeDir/.Xmodmap";
 sudo $ln "$scriptDir/kbd/fi_mac_with_euro" "/usr/share/X11/xkb/symbols/fi";
 
+# Linux set the desktop wallpaper (the Gnome extension sets the same keys)
+if ask "Set desktop wallpaper?"; then
+  echo -e "$arrow Set desktop wallpaper.";
+  wallpaper="file://${scriptDir// /%20}/images/Wallpaper.png";
+  gsettings set org.gnome.desktop.background picture-uri "$wallpaper";
+  gsettings set org.gnome.desktop.background picture-uri-dark "$wallpaper";
+  gsettings set org.gnome.desktop.background picture-options "zoom";
+fi
+
 # Linux enable or disable Gnome extension (applies Gnome settings on login)
 extension="gnome++@jukkapajarinen.com";
 enabled="$(gsettings get org.gnome.shell enabled-extensions)";
