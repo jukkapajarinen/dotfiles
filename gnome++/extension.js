@@ -269,9 +269,15 @@ function createWorkspaceButtons() {
     return box;
 }
 
-const MOVE_GRAB_OPS = Extension
-    ? [Meta.GrabOp.MOVING, Meta.GrabOp.MOVING_UNCONSTRAINED, Meta.GrabOp.KEYBOARD_MOVING]
-    : [];
+// Mutter's grab ops are bit flags: a window base, keyboard and unconstrained
+// flags, and the edges a resize pulls on (none when that's not known yet, as
+// with a keyboard resize before the first key).
+const GRAB_KEYBOARD = 0x100, GRAB_UNCONSTRAINED = 0x400;
+const GRAB_WEST = 0x1000, GRAB_EAST = 0x2000, GRAB_SOUTH = 0x4000, GRAB_NORTH = 0x8000;
+
+function isMoveGrab(op) {
+    return (op & ~(GRAB_KEYBOARD | GRAB_UNCONSTRAINED)) === Meta.GrabOp.MOVING;
+}
 
 // A menu under a top bar button, joined to the top bar's own menus.
 function createPanelMenu(button) {
@@ -284,7 +290,8 @@ function createPanelMenu(button) {
     return menu;
 }
 
-// Workspaces in tiling mode, with their tiled windows in order. Kept outside
+// Workspaces in tiling mode, with their tiled windows in order and split
+// ratios. Kept outside
 // the extension so the modes survive it being disabled and re-enabled, which
 // the shell does around the lock screen.
 const tiledWorkspaces = new Map();
@@ -294,12 +301,14 @@ const tiledWorkspaces = new Map();
 // split along the longer side, and the rest are tiled into the other half the
 // same way. New windows go first, into the left half. Dropping a dragged
 // window onto another tile swaps the two, and the tile it would land on is
-// tinted blue during the drag. A fullscreen or maximized window
+// tinted blue during the drag. Resizing a tiled window moves the splits along
+// the edges it was resized by, so its neighbours resize with it, and the tiles
+// keep those sizes. A fullscreen or maximized window
 // goes back into its tile when another tiled window on its screen is focused.
 class Tiler {
     constructor(onChange) {
         this._onChange = onChange;
-        this._workspaces = new Map(); // workspace -> {windows, rects}
+        this._workspaces = new Map(); // workspace -> state, see _start
         this._queued = new Set();
         this._idleId = 0;
         this._grabbing = false;
@@ -310,10 +319,26 @@ class Tiler {
             'notify::focus-window', () => this._onFocus(global.display.focus_window),
             'grab-op-begin', (_display, window, op) => this._onGrabBegin(window, op),
             'grab-op-end', (_display, window, op) => this._onGrabEnd(window, op),
+            // Monitors or the top bar changing size move the tiles.
+            'workareas-changed', () => this._workspaces.forEach((_state, workspace) => this._queue(workspace)),
             this);
+        global.workspace_manager.connectObject('workspace-removed', () => this._forgetRemoved(), this);
 
-        for (const [workspace, windows] of tiledWorkspaces)
-            this._start(workspace, windows);
+        this._forgetRemoved();
+        for (const [workspace, saved] of tiledWorkspaces)
+            this._start(workspace, saved.windows, saved.ratios);
+    }
+
+    // Workspaces that are gone, also while the extension was disabled.
+    _forgetRemoved() {
+        const existing = global.workspace_manager.get_workspaces();
+        for (const workspace of [...tiledWorkspaces.keys()]) {
+            if (existing.includes(workspace))
+                continue;
+            if (this._workspaces.has(workspace))
+                this._stop(workspace);
+            tiledWorkspaces.delete(workspace);
+        }
     }
 
     isTiling(workspace) {
@@ -334,19 +359,22 @@ class Tiler {
 
     destroy() {
         global.display.disconnectObject(this);
+        global.workspace_manager.disconnectObject(this);
         this._hideDropTint();
+        this._endResize();
         if (this._idleId)
             GLib.source_remove(this._idleId);
-        for (const [workspace, state] of this._workspaces) {
-            tiledWorkspaces.set(workspace, state.windows);
+        for (const workspace of [...this._workspaces.keys()])
             this._stop(workspace);
-        }
     }
 
-    _start(workspace, windows) {
-        const state = {windows: [], rects: new Map()};
+    // rects: each tiled window's tile. tiles: each monitor's tiled area, its
+    // windows in order and its splits. ratios: each monitor's split ratios,
+    // kept when the windows change.
+    _start(workspace, windows, ratios = new Map()) {
+        const state = {windows: [], rects: new Map(), tiles: new Map(), ratios};
         this._workspaces.set(workspace, state);
-        tiledWorkspaces.set(workspace, state.windows);
+        tiledWorkspaces.set(workspace, state);
         windows.forEach(window => this._add(workspace, window, false));
         // Windows that came to the workspace while the extension was disabled.
         global.display.get_tab_list(Meta.TabList.NORMAL, workspace)
@@ -380,6 +408,8 @@ class Tiler {
             'notify::fullscreen', () => this._queue(workspace),
             'notify::maximized-horizontally', () => this._queue(workspace),
             'notify::maximized-vertically', () => this._queue(workspace),
+            // Showing on all workspaces takes it out of the tiles.
+            'notify::on-all-workspaces', () => this._queue(workspace),
             this);
         this._queue(workspace);
     }
@@ -440,9 +470,18 @@ class Tiler {
 
     _onGrabBegin(window, op) {
         this._grabbing = true;
-        const state = this._workspaces.get(window?.get_workspace());
-        if (!state?.windows.includes(window) || !MOVE_GRAB_OPS.includes(op))
+        // In case an earlier grab never said it ended.
+        this._hideDropTint();
+        this._endResize();
+        const workspace = window?.get_workspace();
+        const state = this._workspaces.get(workspace);
+        if (!state?.windows.includes(window))
             return;
+        if (!isMoveGrab(op)) {
+            if (state.rects.has(window))
+                this._beginResize(workspace, state, window, op);
+            return;
+        }
 
         // Tint the tile under the pointer, above its window but below the
         // dragged one.
@@ -474,9 +513,72 @@ class Tiler {
             x >= rect.x && x < rect.x + rect.width && y >= rect.y && y < rect.y + rect.height)?.[0];
     }
 
+    // Follow a tiled window being resized, moving its neighbours along.
+    _beginResize(workspace, state, window, op) {
+        this._resizing = {window, op, start: window.get_frame_rect()};
+        window.connectObject('size-changed', () => {
+            this._resizeSplits(state, window, this._resizing);
+            this._layout(workspace, window);
+        }, this._resizing);
+    }
+
+    _endResize() {
+        this._resizing?.window.disconnectObject(this._resizing);
+        this._resizing = null;
+    }
+
+    // Move the splits along the edges the window is being resized by: those
+    // the grab pulls on, or when it doesn't say, those that moved since start.
+    // A window's frame needn't fill its tile exactly, e.g. a terminal's that
+    // grows a character at a time, so only an edge being pulled moves a split.
+    // A tile's right or bottom edge is its own split, when it isn't the last
+    // tile; its left or top edge is the nearest earlier split that way.
+    _resizeSplits(state, window, {op, start}) {
+        const monitor = [...state.tiles].find(([, tiles]) => tiles.windows.includes(window))?.[0];
+        if (monitor === undefined)
+            return;
+
+        const tiles = state.tiles.get(monitor);
+        const index = tiles.windows.indexOf(window);
+        if (!state.ratios.has(monitor))
+            state.ratios.set(monitor, []);
+        const ratios = state.ratios.get(monitor);
+        const frame = window.get_frame_rect();
+        const gap = config.tileGap;
+        const setRatio = (i, first) => {
+            const {area, vertical} = tiles.splits[i];
+            const size = (vertical ? area.width : area.height) - gap;
+            ratios[i] = Math.min(Math.max(first / size, MIN_SPLIT_RATIO), 1 - MIN_SPLIT_RATIO);
+            // Splits after this one cut what is left of it.
+            tiles.splits = splitArea(tiles.area, tiles.windows.length, ratios).splits;
+        };
+        const earlier = vertical => tiles.splits.findLastIndex((split, i) => i < index && split.vertical === vertical);
+        const pulled = (flag, now, before) => (op & 0xf000 ? Boolean(op & flag) : now !== before);
+
+        if (pulled(GRAB_WEST, frame.x, start.x) && earlier(true) >= 0) {
+            const i = earlier(true);
+            setRatio(i, frame.x - gap - tiles.splits[i].area.x);
+        }
+        if (pulled(GRAB_NORTH, frame.y, start.y) && earlier(false) >= 0) {
+            const i = earlier(false);
+            setRatio(i, frame.y - gap - tiles.splits[i].area.y);
+        }
+        const own = tiles.splits[index];
+        if (own?.vertical && pulled(GRAB_EAST, frame.x + frame.width, start.x + start.width))
+            setRatio(index, frame.x + frame.width - own.area.x);
+        if (own && !own.vertical && pulled(GRAB_SOUTH, frame.y + frame.height, start.y + start.height))
+            setRatio(index, frame.y + frame.height - own.area.y);
+    }
+
     _onGrabEnd(window, op) {
         this._grabbing = false;
         this._hideDropTint();
+        if (this._resizing?.window === window) {
+            const state = this._workspaces.get(window.get_workspace());
+            if (state)
+                this._resizeSplits(state, window, this._resizing);
+        }
+        this._endResize();
         const workspace = window?.get_workspace();
         const state = this._workspaces.get(workspace);
         if (!state?.windows.includes(window)) {
@@ -484,7 +586,7 @@ class Tiler {
             return;
         }
 
-        if (MOVE_GRAB_OPS.includes(op)) {
+        if (isMoveGrab(op)) {
             const target = this._dropTarget(state, window);
             if (target) {
                 const {windows} = state;
@@ -492,7 +594,8 @@ class Tiler {
                 [windows[from], windows[to]] = [target, window];
             }
         }
-        // Anything dragged or resized snaps back into its tile.
+        // Anything dragged snaps back into its tile, and a resized window
+        // into its resized one.
         this._queue(workspace);
     }
 
@@ -515,12 +618,14 @@ class Tiler {
     }
 
     // Minimized, fullscreen and fully maximized windows stay out of the tiles.
-    _layout(workspace) {
+    // A window being resized is left where it is.
+    _layout(workspace, resizing = null) {
         const state = this._workspaces.get(workspace);
         if (!state)
             return;
 
         state.rects.clear();
+        state.tiles.clear();
         const windows = state.windows.filter(window => isTileable(window) && !window.minimized &&
             !window.is_fullscreen() && !(window.maximized_horizontally && window.maximized_vertically));
 
@@ -532,13 +637,17 @@ class Tiler {
             const {x, y, width, height} = workspace.get_work_area_for_monitor(monitor);
             const gap = config.tileGap;
             const area = {x: x + gap, y: y + gap, width: width - 2 * gap, height: height - 2 * gap};
-            splitArea(area, monitorWindows.length).forEach((rect, i) => {
+            const {rects, splits} = splitArea(area, monitorWindows.length, state.ratios.get(monitor) ?? []);
+            state.tiles.set(monitor, {area, windows: monitorWindows, splits});
+            rects.forEach((rect, i) => {
                 const window = monitorWindows[i];
+                state.rects.set(window, rect);
+                if (window === resizing)
+                    return;
                 // Half-screen edge tiling counts as maximized vertically.
                 if (window.maximized_horizontally || window.maximized_vertically)
                     window.unmaximize();
                 window.move_resize_frame(true, rect.x, rect.y, rect.width, rect.height);
-                state.rects.set(window, rect);
             });
         }
     }
@@ -562,27 +671,36 @@ function isDialogLike(window) {
         Boolean(window.get_gtk_application_id() && !window.get_gtk_window_object_path());
 }
 
-// Split an area into count rectangles: the first takes half of it, cut along
-// the longer side, and the rest split the other half recursively.
-function splitArea(area, count) {
-    if (count === 1)
-        return [area];
+// The smallest share of a split either side can be resized down to.
+const MIN_SPLIT_RATIO = 0.1;
 
-    const vertical = area.width >= area.height;
-    const size = vertical ? area.width : area.height;
+// Split an area into count rectangles: the first takes part of it, cut along
+// the longer side, and the rest split the other part the same way. ratios[i]
+// is the first rectangle's share of the i-th split, half when unset. Returns
+// the rectangles and each split's area and direction.
+function splitArea(area, count, ratios) {
+    const rects = [], splits = [];
     const gap = config.tileGap;
-    const half = Math.floor((size - gap) / 2);
-    const first = {...area}, rest = {...area};
-    if (vertical) {
-        first.width = half;
-        rest.x += half + gap;
-        rest.width -= half + gap;
-    } else {
-        first.height = half;
-        rest.y += half + gap;
-        rest.height -= half + gap;
+    for (let i = 0; i < count - 1; i++) {
+        const vertical = area.width >= area.height;
+        const size = vertical ? area.width : area.height;
+        const first = Math.floor((size - gap) * (ratios[i] ?? 0.5));
+        const tile = {...area}, rest = {...area};
+        if (vertical) {
+            tile.width = first;
+            rest.x += first + gap;
+            rest.width -= first + gap;
+        } else {
+            tile.height = first;
+            rest.y += first + gap;
+            rest.height -= first + gap;
+        }
+        splits.push({area, vertical});
+        rects.push(tile);
+        area = rest;
     }
-    return [first, ...splitArea(rest, count - 1)];
+    rects.push(area);
+    return {rects, splits};
 }
 
 // A tooltip under a top bar button, shown after hovering it for a moment, in
@@ -1126,7 +1244,7 @@ function createAppButtons() {
     // without a drop.
     const dragMonitor = {
         dragMotion: ({targetActor}) => {
-            if (!box.contains(targetActor))
+            if (!targetActor || !box.contains(targetActor))
                 removePlaceholder();
             return DND.DragMotionResult.CONTINUE;
         },
@@ -1461,13 +1579,19 @@ function showPinnedAppsInGrid() {
         [AppDisplay.FolderView.prototype, '_loadApps'],
     ].map(([prototype, name]) => [prototype, name, prototype[name]]);
 
+    // These can run inside each other, e.g. dropping an icon out of a folder
+    // reloads the grid before the drop checks for a pin, so only the
+    // outermost one puts isFavorite back.
+    let depth = 0;
     for (const [prototype, name, method] of methods) {
         prototype[name] = function (...args) {
-            favorites.isFavorite = () => false;
+            if (depth++ === 0)
+                favorites.isFavorite = () => false;
             try {
                 return method.apply(this, args);
             } finally {
-                delete favorites.isFavorite;
+                if (--depth === 0)
+                    delete favorites.isFavorite;
             }
         };
     }
@@ -1613,9 +1737,11 @@ function setupConfetti(dir) {
         if (event.type() !== Clutter.EventType.BUTTON_PRESS || event.get_button() !== Clutter.BUTTON_PRIMARY)
             return Clutter.EVENT_PROPAGATE;
 
-        // Only presses on the top bar itself, not on its buttons.
+        // Only presses on the top bar itself, not on its buttons or its
+        // clickable edges.
         const [x, y] = event.get_coords();
-        if (global.stage.get_actor_at_pos(Clutter.PickMode.REACTIVE, x, y) !== Main.panel) {
+        if (global.stage.get_actor_at_pos(Clutter.PickMode.REACTIVE, x, y) !== Main.panel ||
+            (config.edgeClick && edgeAt(x, y))) {
             last = null;
             return Clutter.EVENT_PROPAGATE;
         }

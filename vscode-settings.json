@@ -381,5 +381,6 @@
     "welcomePage.buttonHoverBackground": "#09334e",
     "widget.border": "#262441",
     "widget.shadow": "#00000044"
-  }
+  },
+  "claudeCode.hideOnboarding": true
 }
