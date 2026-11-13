@@ -331,7 +331,8 @@ class Tiler {
 
     // Workspaces that are gone, also while the extension was disabled.
     _forgetRemoved() {
-        const existing = global.workspace_manager.get_workspaces();
+        const manager = global.workspace_manager;
+        const existing = Array.from({length: manager.n_workspaces}, (_value, i) => manager.get_workspace_by_index(i));
         for (const workspace of [...tiledWorkspaces.keys()]) {
             if (existing.includes(workspace))
                 continue;
@@ -812,7 +813,7 @@ function createDottedBorder() {
     return border;
 }
 
-// Stopwatches at the far right of the top bar. Each stopwatch's time so far in microseconds, and when it was last started
+// Stopwatches right of the clock in the middle of the top bar. Each stopwatch's time so far in microseconds, and when it was last started
 // if it is running. Kept outside the extension so they keep counting through
 // it being disabled and re-enabled, which the shell does around the lock screen.
 // The times are also saved to a file, so after a logout or reboot each
@@ -1946,7 +1947,9 @@ export default class GnomePlusPlusExtension extends (Extension ?? Object) {
         if (config.stopwatch) {
             stopwatches.forEach((_state, i) => {
                 const stopwatch = createStopwatch(i);
-                Main.panel.addToStatusArea(`gnomeplusplus-stopwatch-${i + 1}`, stopwatch, -1, 'right');
+                // Right after the clock, and after the stopwatches before it.
+                const position = Main.panel._centerBox.get_children().indexOf(dateMenu.container) + 1 + i;
+                Main.panel.addToStatusArea(`gnomeplusplus-stopwatch-${i + 1}`, stopwatch, position, 'center');
                 undo.push(() => stopwatch.destroy());
             });
         }

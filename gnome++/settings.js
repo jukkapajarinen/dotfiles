@@ -5,7 +5,7 @@ export default {
     workspaceButtons: true,
     // A button at the right of the top bar that minimizes the workspace's windows.
     showDesktopButton: true,
-    // A stopwatch at the far right of the top bar.
+    // A stopwatch right of the clock in the middle of the top bar.
     stopwatch: true,
     // Blur the wallpaper behind the top bar, overview, menus and dialogs.
     blur: true,
