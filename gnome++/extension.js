@@ -550,7 +550,7 @@ class Tiler {
             const {area, vertical} = tiles.splits[i];
             const size = (vertical ? area.width : area.height) - gap;
             ratios[i] = Math.min(Math.max(first / size, MIN_SPLIT_RATIO), 1 - MIN_SPLIT_RATIO);
-            // Splits after this one cut what is left of it.
+            // Splits after this one get their sizes from what is left of it.
             tiles.splits = splitArea(tiles.area, tiles.windows.length, ratios).splits;
         };
         const earlier = vertical => tiles.splits.findLastIndex((split, i) => i < index && split.vertical === vertical);
@@ -677,13 +677,22 @@ const MIN_SPLIT_RATIO = 0.1;
 
 // Split an area into count rectangles: the first takes part of it, cut along
 // the longer side, and the rest split the other part the same way. ratios[i]
-// is the first rectangle's share of the i-th split, half when unset. Returns
-// the rectangles and each split's area and direction.
+// is the first rectangle's share of the i-th split, half when unset. Which way
+// each split cuts is always that of the even halves, so resizing tiles only
+// changes their sizes, never how they are arranged. Returns the rectangles
+// and each split's area and direction.
 function splitArea(area, count, ratios) {
     const rects = [], splits = [];
     const gap = config.tileGap;
+    // What is left at each split with even halves, for its direction.
+    let shape = {width: area.width, height: area.height};
     for (let i = 0; i < count - 1; i++) {
-        const vertical = area.width >= area.height;
+        const vertical = shape.width >= shape.height;
+        if (vertical)
+            shape = {width: shape.width - Math.floor((shape.width - gap) / 2) - gap, height: shape.height};
+        else
+            shape = {width: shape.width, height: shape.height - Math.floor((shape.height - gap) / 2) - gap};
+
         const size = vertical ? area.width : area.height;
         const first = Math.floor((size - gap) * (ratios[i] ?? 0.5));
         const tile = {...area}, rest = {...area};
@@ -887,6 +896,7 @@ function createStopwatch(index) {
     const state = stopwatches[index];
     const name = config.stopwatchCount > 1 ? `Stopwatch ${index + 1}` : 'Stopwatch';
     const button = new PanelMenu.Button(0.5, name);
+    button.add_style_class_name('gnomeplusplus-stopwatch-button');
     const label = new St.Label({style_class: 'gnomeplusplus-stopwatch', y_align: Clutter.ActorAlign.CENTER});
     button.add_child(label);
     let timeoutId = 0;

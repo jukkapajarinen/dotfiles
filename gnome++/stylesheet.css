@@ -251,6 +251,13 @@
     color: st-mix(-st-accent-color, white, 65%);
 }
 
+/* Less room at its sides than other top bar buttons, so it sits close to the
+   clock, which already has room of its own. */
+#panel .panel-button.gnomeplusplus-stopwatch-button {
+    -natural-hpadding: 6px;
+    -minimum-hpadding: 6px;
+}
+
 /* The stopwatch menu's row of Start, Pause and End buttons. */
 .gnomeplusplus-stopwatch-actions {
     spacing: 6px;
