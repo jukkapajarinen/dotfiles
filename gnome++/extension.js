@@ -303,8 +303,9 @@ const tiledWorkspaces = new Map();
 // window onto another tile swaps the two, and the tile it would land on is
 // tinted blue during the drag. Resizing a tiled window moves the splits along
 // the edges it was resized by, so its neighbours resize with it, and the tiles
-// keep those sizes. A fullscreen or maximized window
-// goes back into its tile when another tiled window on its screen is focused.
+// keep those sizes. Switching it on brings fullscreen and maximized windows
+// into the tiles.
+// A fullscreen or maximized window goes back into its tile when another tiled window on its screen is focused.
 class Tiler {
     constructor(onChange) {
         this._onChange = onChange;
@@ -353,7 +354,17 @@ class Tiler {
             tiledWorkspaces.delete(workspace);
         } else {
             // Most recently used first, so the focused window gets the big tile.
-            this._start(workspace, global.display.get_tab_list(Meta.TabList.NORMAL, workspace));
+            const {windows} = this._start(workspace, global.display.get_tab_list(Meta.TabList.NORMAL, workspace));
+            // Fullscreen and maximized windows are brought into the tiles too.
+            // Not when the mode is restored on re-enable, e.g. after the lock
+            // screen, so a fullscreen video stays fullscreen then.
+            for (const window of windows) {
+                if (window.is_fullscreen())
+                    window.unmake_fullscreen();
+                // Also one going back to being maximized from before fullscreen.
+                if (window.maximized_horizontally && window.maximized_vertically)
+                    window.unmaximize();
+            }
         }
         this._onChange();
     }
